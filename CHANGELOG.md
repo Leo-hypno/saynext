@@ -4,6 +4,13 @@ All notable changes to SayNext are documented here.
 
 This project follows Semantic Versioning.
 
+## [0.1.2] - 2026-04-30
+
+### Fixed
+
+- Windows release no longer opens an extra command prompt window.
+- Closing an unrelated command prompt no longer force-quits SayNext on Windows.
+
 ## [0.1.1] - 2026-04-30
 
 ### Added
