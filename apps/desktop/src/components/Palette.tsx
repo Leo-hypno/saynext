@@ -28,10 +28,11 @@ type PaletteProps = {
   onFavoriteToggle: (promptId: string) => void;
   onSettingsOpen: () => void;
   onPackChange: (packId: string) => void;
-  onPointerActivity: () => void;
+  onPointerActivity: () => boolean;
   onQueryChange: (query: string) => void;
   onSelectedIndexChange: (index: number) => void;
   paletteFocusRequest: number;
+  shortcutLabel: string;
 };
 
 export function Palette({
@@ -56,7 +57,8 @@ export function Palette({
   onPointerActivity,
   onQueryChange,
   onSelectedIndexChange,
-  paletteFocusRequest
+  paletteFocusRequest,
+  shortcutLabel
 }: PaletteProps) {
   const paletteRef = useRef<HTMLElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
@@ -133,7 +135,7 @@ export function Palette({
               ))}
             </select>
           </label>
-          <span className="shortcut">Cmd/Ctrl + Shift + H</span>
+          <span className="shortcut">{shortcutLabel}</span>
           <button
             className="iconButton"
             onClick={onSettingsOpen}
@@ -203,8 +205,9 @@ export function Palette({
               key={prompt.id}
               onClick={() => onCopy(prompt)}
               onPointerEnter={() => {
-                onPointerActivity();
-                onSelectedIndexChange(index);
+                if (onPointerActivity()) {
+                  onSelectedIndexChange(index);
+                }
               }}
               role="option"
             >

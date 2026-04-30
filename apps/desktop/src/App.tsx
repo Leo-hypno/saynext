@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Palette } from "./components/Palette";
 import { SettingsPanel } from "./components/SettingsPanel";
 import {
@@ -29,9 +29,11 @@ import type { PromptPack, RescuePrompt } from "./types";
 const packs = [zhTwPackData, englishPackData] as PromptPack[];
 const defaultPackId = "beginner-rescue-zh-tw";
 const defaultCategoryId = "start";
+const pointerResumeDelayMs = 700;
 
 export function App() {
   const copyTimerRef = useRef<number | undefined>(undefined);
+  const lastKeyboardNavigationRef = useRef(0);
   const pendingUpdateRef = useRef<Update | null>(null);
   const [activePackId, setActivePackId] = useState(() =>
     readStoredString("saynext.activePackId", defaultPackId)
@@ -59,6 +61,7 @@ export function App() {
   const [recentIds, setRecentIds] = useState<string[]>(
     () => readStoredStringArray("saynext.recentIds")
   );
+  const platform = useMemo(getPlatformMeta, []);
 
   const pack = useMemo(
     () => packs.find((candidate) => candidate.id === activePackId) ?? packs[0],
@@ -79,6 +82,20 @@ export function App() {
       recentIds
     });
   }, [activeCategory, favorites, pack.prompts, query, recentIds]);
+
+  const enableKeyboardMode = useCallback(() => {
+    lastKeyboardNavigationRef.current = Date.now();
+    setKeyboardMode(true);
+  }, []);
+
+  const handlePointerActivity = useCallback(() => {
+    if (Date.now() - lastKeyboardNavigationRef.current < pointerResumeDelayMs) {
+      return false;
+    }
+
+    setKeyboardMode(false);
+    return true;
+  }, []);
 
   useEffect(() => {
     setSelectedIndex(0);
@@ -171,8 +188,9 @@ export function App() {
         if (isTextEditingTarget(event.target)) return;
 
         event.preventDefault();
-        setKeyboardMode(true);
+        enableKeyboardMode();
         setActiveCategory((current) => {
+          if (categoryIds.length === 0) return current;
           const currentIndex = Math.max(categoryIds.indexOf(current), 0);
           const direction = event.key === "ArrowRight" ? 1 : -1;
           const nextIndex =
@@ -183,7 +201,7 @@ export function App() {
 
       if (event.key === "ArrowDown") {
         event.preventDefault();
-        setKeyboardMode(true);
+        enableKeyboardMode();
         setSelectedIndex((index) =>
           visiblePrompts.length === 0 ? 0 : Math.min(index + 1, visiblePrompts.length - 1)
         );
@@ -191,7 +209,7 @@ export function App() {
 
       if (event.key === "ArrowUp") {
         event.preventDefault();
-        setKeyboardMode(true);
+        enableKeyboardMode();
         setSelectedIndex((index) => Math.max(index - 1, 0));
       }
 
@@ -200,7 +218,7 @@ export function App() {
         !isTextEditingTarget(event.target)
       ) {
         event.preventDefault();
-        setKeyboardMode(true);
+        enableKeyboardMode();
         setSelectedIndex(event.key === "Home" ? 0 : Math.max(visiblePrompts.length - 1, 0));
       }
 
@@ -209,7 +227,7 @@ export function App() {
         !isTextEditingTarget(event.target)
       ) {
         event.preventDefault();
-        setKeyboardMode(true);
+        enableKeyboardMode();
         setSelectedIndex((index) => {
           if (visiblePrompts.length === 0) return 0;
           const direction = event.key === "PageDown" ? 1 : -1;
@@ -228,7 +246,7 @@ export function App() {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [categoryIds, query, selectedIndex, settingsOpen, visiblePrompts]);
+  }, [categoryIds, enableKeyboardMode, query, selectedIndex, settingsOpen, visiblePrompts]);
 
   useEffect(() => {
     return () => {
@@ -359,7 +377,7 @@ export function App() {
         onFavoriteToggle={handleFavoriteToggle}
         onSettingsOpen={() => setSettingsOpen(true)}
         onPackChange={handlePackChange}
-        onPointerActivity={() => setKeyboardMode(false)}
+        onPointerActivity={handlePointerActivity}
         onQueryChange={setQuery}
         onSelectedIndexChange={setSelectedIndex}
         paletteFocusRequest={paletteFocusRequest}
@@ -373,6 +391,7 @@ export function App() {
         query={query}
         searchFocusRequest={searchFocusRequest}
         selectedIndex={selectedIndex}
+        shortcutLabel={platform.shortcutLabel}
       />
       {settingsOpen ? (
         <SettingsPanel
@@ -388,6 +407,8 @@ export function App() {
           onResetWindowPosition={() => void resetWindowPosition()}
           onUpdateCheck={handleUpdateCheck}
           onUpdateInstall={handleUpdateInstall}
+          platformName={platform.name}
+          shortcutLabel={platform.shortcutLabel}
         />
       ) : null}
     </div>
@@ -430,4 +451,16 @@ function isTextEditingTarget(target: EventTarget | null) {
     target instanceof HTMLSelectElement ||
     (target instanceof HTMLElement && target.isContentEditable)
   );
+}
+
+function getPlatformMeta() {
+  const platform = navigator.platform.toLowerCase();
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isMac = platform.includes("mac") || userAgent.includes("mac os");
+  const isWindows = platform.includes("win") || userAgent.includes("windows");
+
+  return {
+    name: isMac ? "macOS" : isWindows ? "Windows" : "桌面系統",
+    shortcutLabel: isMac ? "⌘ ⇧ H" : "Ctrl Shift H"
+  };
 }

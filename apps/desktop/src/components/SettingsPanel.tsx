@@ -15,6 +15,8 @@ type SettingsPanelProps = {
   onResetWindowPosition: () => void;
   onUpdateCheck: () => void;
   onUpdateInstall: () => void;
+  platformName: string;
+  shortcutLabel: string;
 };
 
 export function SettingsPanel({
@@ -29,7 +31,9 @@ export function SettingsPanel({
   onClose,
   onResetWindowPosition,
   onUpdateCheck,
-  onUpdateInstall
+  onUpdateInstall,
+  platformName,
+  shortcutLabel
 }: SettingsPanelProps) {
   const autostartUnavailable = autostartStatus === "checking" || autostartStatus === "unavailable";
   const autostartEnabled = autostartStatus === "enabled";
@@ -65,9 +69,9 @@ export function SettingsPanel({
           <div className="settingRow">
             <div>
               <strong>快捷鍵</strong>
-              <p>從任何 App 叫出 SayNext。</p>
+              <p>目前平台：{platformName}。操作邏輯與另一個桌面系統保持一致。</p>
             </div>
-            <kbd>Cmd/Ctrl + Shift + H</kbd>
+            <kbd>{shortcutLabel}</kbd>
           </div>
 
           <label className="settingRow">

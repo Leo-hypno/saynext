@@ -18,6 +18,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 button,
@@ -57,8 +58,9 @@ a:focus-visible {
 .paletteHeader {
   align-items: center;
   display: flex;
+  gap: 14px;
   justify-content: space-between;
-  padding: 16px 20px 10px;
+  padding: 14px 18px 9px;
 }
 
 .paletteTitle {
@@ -75,7 +77,7 @@ a:focus-visible {
 }
 
 h1 {
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1.2;
   margin: 0;
 }
@@ -85,6 +87,7 @@ h1 {
   border-radius: 8px;
   color: #4b5563;
   font-size: 12px;
+  font-weight: 700;
   padding: 6px 8px;
 }
 
@@ -93,6 +96,7 @@ h1 {
   cursor: default;
   display: flex;
   gap: 8px;
+  min-width: 0;
   user-select: auto;
 }
 
@@ -103,7 +107,7 @@ h1 {
   border-radius: 8px;
   color: #4b5563;
   cursor: pointer;
-  max-width: 190px;
+  max-width: min(190px, 34vw);
   overflow: hidden;
   padding: 6px 26px 6px 9px;
   text-overflow: ellipsis;
@@ -126,8 +130,8 @@ h1 {
   color: #6b7280;
   display: flex;
   gap: 10px;
-  margin: 0 18px 10px;
-  padding: 9px 11px;
+  margin: 0 16px 8px;
+  padding: 8px 10px;
 }
 
 .searchBox input {
@@ -154,7 +158,7 @@ h1 {
   display: flex;
   gap: 4px;
   overflow-x: auto;
-  padding: 0 18px 10px;
+  padding: 0 16px 8px;
   scrollbar-width: none;
 }
 
@@ -192,9 +196,10 @@ h1 {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   overflow-y: auto;
-  padding: 0 12px 10px;
+  overscroll-behavior: contain;
+  padding: 0 10px 8px;
 }
 
 .promptRow {
@@ -205,14 +210,18 @@ h1 {
   display: grid;
   gap: 8px;
   grid-template-columns: 30px 1fr 26px;
-  min-height: 56px;
-  padding: 7px 8px;
+  min-height: 52px;
+  padding: 6px 8px;
 }
 
 .promptRow:hover,
 .promptRow.selected {
   background: #f2f6fc;
   border-color: #d8e5f8;
+}
+
+.promptRow:active {
+  transform: translateY(1px);
 }
 
 .palette.keyboardMode .promptRow:hover:not(.selected) {
@@ -238,6 +247,10 @@ h1 {
   color: #1f6feb;
 }
 
+.iconButton:active {
+  transform: translateY(1px);
+}
+
 .settingsOverlay {
   align-items: center;
   background: rgba(15, 23, 42, 0.24);
@@ -246,6 +259,7 @@ h1 {
   justify-content: center;
   padding: 24px;
   position: fixed;
+  z-index: 10;
 }
 
 .settingsPanel {
@@ -416,8 +430,8 @@ kbd {
 .promptBody p {
   color: #202733;
   display: -webkit-box;
-  font-size: 13px;
-  line-height: 1.35;
+  font-size: 12.8px;
+  line-height: 1.32;
   margin: 0;
   overflow: hidden;
   -webkit-box-orient: vertical;
@@ -452,22 +466,47 @@ kbd {
   border-top: 1px solid #e5e9f0;
   color: #6b7280;
   display: flex;
+  flex-wrap: wrap;
   font-size: 12px;
-  gap: 10px;
-  min-height: 37px;
-  overflow: hidden;
-  padding: 10px 20px;
-  white-space: nowrap;
+  gap: 6px 10px;
+  min-height: 38px;
+  overflow: visible;
+  padding: 8px 16px;
 }
 
 .copyNotice {
   flex: 1;
   font-weight: 700;
-  min-width: 0;
+  min-width: 140px;
   overflow: hidden;
   text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .paletteHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .headerActions {
+    width: 100%;
+  }
+
+  .packSelect {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .packSelect select {
+    max-width: none;
+    width: 100%;
+  }
+
+  .shortcut {
+    display: none;
+  }
 }
 
 .copyNotice.success {
