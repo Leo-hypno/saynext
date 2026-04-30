@@ -32,6 +32,7 @@ type PaletteProps = {
   onQueryChange: (query: string) => void;
   onSelectedIndexChange: (index: number) => void;
   paletteFocusRequest: number;
+  searchShortcutLabel: string;
   shortcutLabel: string;
 };
 
@@ -58,6 +59,7 @@ export function Palette({
   onQueryChange,
   onSelectedIndexChange,
   paletteFocusRequest,
+  searchShortcutLabel,
   shortcutLabel
 }: PaletteProps) {
   const paletteRef = useRef<HTMLElement | null>(null);
@@ -153,7 +155,7 @@ export function Palette({
           ref={searchInputRef}
           value={query}
           onChange={(event) => onQueryChange(event.target.value)}
-          placeholder={`搜尋 ${packName}...  / 或 Ctrl/Cmd F`}
+          placeholder={`搜尋 ${packName}...  / 或 ${searchShortcutLabel}`}
           aria-label="Search rescue prompts"
         />
         {query.trim() ? <span className="searchScope">全部分類</span> : null}

@@ -156,10 +156,14 @@ export function App() {
           return;
         }
 
+        if (query) {
+          setQuery("");
+          setPaletteFocusRequest((request) => request + 1);
+          return;
+        }
+
         if (isTextEditingTarget(event.target)) {
-          if (query) {
-            setQuery("");
-          } else if (event.target instanceof HTMLElement) {
+          if (event.target instanceof HTMLElement) {
             event.target.blur();
             setPaletteFocusRequest((request) => request + 1);
           }
@@ -189,6 +193,9 @@ export function App() {
 
         event.preventDefault();
         enableKeyboardMode();
+        if (query) {
+          setQuery("");
+        }
         setActiveCategory((current) => {
           if (categoryIds.length === 0) return current;
           const currentIndex = Math.max(categoryIds.indexOf(current), 0);
@@ -294,6 +301,7 @@ export function App() {
 
   function handleCategoryChange(categoryId: string) {
     setKeyboardMode(false);
+    setQuery("");
     setActiveCategory(categoryId);
   }
 
@@ -391,6 +399,7 @@ export function App() {
         query={query}
         searchFocusRequest={searchFocusRequest}
         selectedIndex={selectedIndex}
+        searchShortcutLabel={platform.searchShortcutLabel}
         shortcutLabel={platform.shortcutLabel}
       />
       {settingsOpen ? (
@@ -461,6 +470,7 @@ function getPlatformMeta() {
 
   return {
     name: isMac ? "macOS" : isWindows ? "Windows" : "桌面系統",
+    searchShortcutLabel: isMac ? "⌘F" : "Ctrl F",
     shortcutLabel: isMac ? "⌘ ⇧ H" : "Ctrl Shift H"
   };
 }
