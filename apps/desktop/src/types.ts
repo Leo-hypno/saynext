@@ -6,9 +6,16 @@ export type Category = {
 export type RescuePrompt = {
   id: string;
   category: string;
+  source?: "built-in" | "custom";
   title: string;
   text: string;
   tags: string[];
+};
+
+export type CustomPromptDraft = {
+  title: string;
+  text: string;
+  tags: string;
 };
 
 export type PromptPack = {

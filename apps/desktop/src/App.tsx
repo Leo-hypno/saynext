@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ConfirmDialog } from "./components/ConfirmDialog";
+import { CustomPromptDialog } from "./components/CustomPromptDialog";
 import { Palette } from "./components/Palette";
 import { SettingsPanel } from "./components/SettingsPanel";
 import {
@@ -24,11 +26,12 @@ import { buildCategoryIds, getVisiblePrompts, recentCategoryId } from "./lib/pro
 import englishPackData from "../../../packs/en/beginner-rescue.json";
 import zhTwPackData from "../../../packs/zh-TW/beginner-rescue.json";
 import type { Update } from "@tauri-apps/plugin-updater";
-import type { PromptPack, RescuePrompt } from "./types";
+import type { CustomPromptDraft, PromptPack, RescuePrompt } from "./types";
 
 const packs = [zhTwPackData, englishPackData] as PromptPack[];
 const defaultPackId = "beginner-rescue-zh-tw";
 const defaultCategoryId = "start";
+const customCategoryId = "custom";
 const pointerResumeDelayMs = 700;
 
 export function App() {
@@ -45,6 +48,9 @@ export function App() {
   const [copiedPromptId, setCopiedPromptId] = useState<string | null>(null);
   const [copyNotice, setCopyNotice] = useState<CopyNotice | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [customPromptDialogOpen, setCustomPromptDialogOpen] = useState(false);
+  const [editingCustomPrompt, setEditingCustomPrompt] = useState<RescuePrompt | null>(null);
+  const [deletePromptId, setDeletePromptId] = useState<string | null>(null);
   const [searchFocusRequest, setSearchFocusRequest] = useState(0);
   const [paletteFocusRequest, setPaletteFocusRequest] = useState(0);
   const [autoHideAfterCopy, setAutoHideAfterCopy] = useState(
@@ -61,6 +67,9 @@ export function App() {
   const [recentIds, setRecentIds] = useState<string[]>(
     () => readStoredStringArray("saynext.recentIds")
   );
+  const [customPrompts, setCustomPrompts] = useState<RescuePrompt[]>(
+    () => readStoredCustomPrompts("saynext.customPrompts")
+  );
   const platform = useMemo(getPlatformMeta, []);
 
   const pack = useMemo(
@@ -68,20 +77,36 @@ export function App() {
     [activePackId]
   );
 
-  const categoryIds = useMemo(() => {
-    return buildCategoryIds(pack.categories);
+  const categories = useMemo(() => {
+    const [firstCategory, ...otherCategories] = pack.categories;
+    const customCategory = { id: customCategoryId, name: "我的句子" };
+    return firstCategory
+      ? [firstCategory, customCategory, ...otherCategories]
+      : [customCategory];
   }, [pack.categories]);
+
+  const prompts = useMemo(
+    () => [
+      ...pack.prompts.map((prompt) => ({ ...prompt, source: "built-in" as const })),
+      ...customPrompts
+    ],
+    [customPrompts, pack.prompts]
+  );
+
+  const categoryIds = useMemo(() => {
+    return buildCategoryIds(categories);
+  }, [categories]);
 
   const visiblePrompts = useMemo(() => {
     return getVisiblePrompts({
       activeCategory,
-      categories: pack.categories,
+      categories,
       favorites,
-      prompts: pack.prompts,
+      prompts,
       query,
       recentIds
     });
-  }, [activeCategory, favorites, pack.prompts, query, recentIds]);
+  }, [activeCategory, categories, favorites, prompts, query, recentIds]);
 
   const enableKeyboardMode = useCallback(() => {
     lastKeyboardNavigationRef.current = Date.now();
@@ -127,6 +152,10 @@ export function App() {
   }, [recentIds]);
 
   useEffect(() => {
+    localStorage.setItem("saynext.customPrompts", JSON.stringify(customPrompts));
+  }, [customPrompts]);
+
+  useEffect(() => {
     localStorage.setItem("saynext.autoHideAfterCopy", JSON.stringify(autoHideAfterCopy));
   }, [autoHideAfterCopy]);
 
@@ -156,6 +185,17 @@ export function App() {
           return;
         }
 
+        if (customPromptDialogOpen) {
+          setCustomPromptDialogOpen(false);
+          setEditingCustomPrompt(null);
+          return;
+        }
+
+        if (deletePromptId) {
+          setDeletePromptId(null);
+          return;
+        }
+
         if (query) {
           setQuery("");
           setPaletteFocusRequest((request) => request + 1);
@@ -171,7 +211,7 @@ export function App() {
         return;
       }
 
-      if (settingsOpen) return;
+      if (settingsOpen || customPromptDialogOpen || deletePromptId) return;
 
       if (
         event.key.toLowerCase() === "f" &&
@@ -253,7 +293,16 @@ export function App() {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [categoryIds, enableKeyboardMode, query, selectedIndex, settingsOpen, visiblePrompts]);
+  }, [
+    categoryIds,
+    customPromptDialogOpen,
+    deletePromptId,
+    enableKeyboardMode,
+    query,
+    selectedIndex,
+    settingsOpen,
+    visiblePrompts
+  ]);
 
   useEffect(() => {
     return () => {
@@ -303,6 +352,71 @@ export function App() {
     setKeyboardMode(false);
     setQuery("");
     setActiveCategory(categoryId);
+  }
+
+  function handleCustomPromptCreate() {
+    setEditingCustomPrompt(null);
+    setCustomPromptDialogOpen(true);
+  }
+
+  function handleCustomPromptEdit(prompt: RescuePrompt) {
+    setEditingCustomPrompt(prompt);
+    setCustomPromptDialogOpen(true);
+  }
+
+  function handleCustomPromptDelete(promptId: string) {
+    setDeletePromptId(promptId);
+  }
+
+  function confirmCustomPromptDelete() {
+    if (!deletePromptId) return;
+    const promptId = deletePromptId;
+    setDeletePromptId(null);
+    setCustomPrompts((prompts) => prompts.filter((prompt) => prompt.id !== promptId));
+    setFavorites((current) => {
+      const next = new Set(current);
+      next.delete(promptId);
+      return next;
+    });
+    setRecentIds((ids) => ids.filter((id) => id !== promptId));
+  }
+
+  function handleCustomPromptSave(draft: CustomPromptDraft) {
+    const title = draft.title.trim();
+    const text = draft.text.trim();
+    const tags = draft.tags
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter(Boolean);
+
+    if (!title || !text) return;
+
+    if (editingCustomPrompt) {
+      setCustomPrompts((prompts) =>
+        prompts.map((prompt) =>
+          prompt.id === editingCustomPrompt.id
+            ? { ...prompt, tags, text, title }
+            : prompt
+        )
+      );
+    } else {
+      setCustomPrompts((prompts) => [
+        {
+          category: customCategoryId,
+          id: `custom-${Date.now().toString(36)}`,
+          source: "custom",
+          tags,
+          text,
+          title
+        },
+        ...prompts
+      ]);
+      setActiveCategory(customCategoryId);
+      setQuery("");
+    }
+
+    setCustomPromptDialogOpen(false);
+    setEditingCustomPrompt(null);
   }
 
   function handleFavoriteToggle(promptId: string) {
@@ -375,13 +489,16 @@ export function App() {
       <Palette
         activeCategory={activeCategory}
         activePackId={pack.id}
-        categories={pack.categories}
+        categories={categories}
         copiedPromptId={copiedPromptId}
         copyNotice={copyNotice}
         favorites={favorites}
         keyboardMode={keyboardMode}
         onCategoryChange={handleCategoryChange}
         onCopy={handleCopy}
+        onCustomPromptCreate={handleCustomPromptCreate}
+        onCustomPromptDelete={handleCustomPromptDelete}
+        onCustomPromptEdit={handleCustomPromptEdit}
         onFavoriteToggle={handleFavoriteToggle}
         onSettingsOpen={() => setSettingsOpen(true)}
         onPackChange={handlePackChange}
@@ -420,6 +537,27 @@ export function App() {
           shortcutLabel={platform.shortcutLabel}
         />
       ) : null}
+      {deletePromptId ? (
+        <ConfirmDialog
+          body={`這會從本機移除「${
+            customPrompts.find((prompt) => prompt.id === deletePromptId)?.title ?? "這句話"
+          }」，也會從最近使用與收藏移除。`}
+          confirmLabel="刪除"
+          title="刪除自訂句子"
+          onCancel={() => setDeletePromptId(null)}
+          onConfirm={confirmCustomPromptDelete}
+        />
+      ) : null}
+      {customPromptDialogOpen ? (
+        <CustomPromptDialog
+          editingPrompt={editingCustomPrompt}
+          onClose={() => {
+            setCustomPromptDialogOpen(false);
+            setEditingCustomPrompt(null);
+          }}
+          onSave={handleCustomPromptSave}
+        />
+      ) : null}
     </div>
   );
 }
@@ -448,6 +586,35 @@ function readStoredStringArray(key: string) {
     return Array.isArray(value)
       ? value.filter((item): item is string => typeof item === "string")
       : [];
+  } catch {
+    return [];
+  }
+}
+
+function readStoredCustomPrompts(key: string): RescuePrompt[] {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) ?? "[]");
+    if (!Array.isArray(value)) return [];
+
+    return value
+      .filter((item) => {
+        return (
+          item &&
+          typeof item.id === "string" &&
+          typeof item.title === "string" &&
+          typeof item.text === "string"
+        );
+      })
+      .map((item) => ({
+        category: customCategoryId,
+        id: item.id,
+        source: "custom" as const,
+        tags: Array.isArray(item.tags)
+          ? item.tags.filter((tag: unknown): tag is string => typeof tag === "string")
+          : [],
+        text: item.text,
+        title: item.title
+      }));
   } catch {
     return [];
   }

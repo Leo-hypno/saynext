@@ -1,5 +1,15 @@
 import { useEffect, useRef } from "react";
-import { Check, Copy, Search, Settings, Star } from "lucide-react";
+import {
+  Check,
+  ChevronDown,
+  Copy,
+  Pencil,
+  Plus,
+  Search,
+  Settings,
+  Star,
+  Trash2
+} from "lucide-react";
 import type { Category, RescuePrompt } from "../types";
 
 type PaletteProps = {
@@ -25,6 +35,9 @@ type PaletteProps = {
   searchFocusRequest: number;
   onCategoryChange: (category: string) => void;
   onCopy: (prompt: RescuePrompt) => void;
+  onCustomPromptCreate: () => void;
+  onCustomPromptDelete: (promptId: string) => void;
+  onCustomPromptEdit: (prompt: RescuePrompt) => void;
   onFavoriteToggle: (promptId: string) => void;
   onSettingsOpen: () => void;
   onPackChange: (packId: string) => void;
@@ -52,6 +65,9 @@ export function Palette({
   searchFocusRequest,
   onCategoryChange,
   onCopy,
+  onCustomPromptCreate,
+  onCustomPromptDelete,
+  onCustomPromptEdit,
   onFavoriteToggle,
   onSettingsOpen,
   onPackChange,
@@ -123,21 +139,41 @@ export function Palette({
           <h1>AI 下一句</h1>
         </div>
         <div className="headerActions" onMouseDown={(event) => event.stopPropagation()}>
-          <label className="packSelect">
-            <span className="srOnly">Prompt pack</span>
-            <select
-              aria-label="Prompt pack"
-              value={activePackId}
-              onChange={(event) => onPackChange(event.target.value)}
-            >
+          <details className="packMenu">
+            <summary aria-label="Prompt pack">
+              <span>
+                <strong>{localeLabel(activePackId, packs)}</strong>
+                <small>{packName}</small>
+              </span>
+              <ChevronDown size={15} />
+            </summary>
+            <div className="packMenuPanel">
               {packs.map((pack) => (
-                <option key={pack.id} value={pack.id}>
-                  {pack.locale} · {pack.name}
-                </option>
+                <button
+                  className={pack.id === activePackId ? "active" : ""}
+                  key={pack.id}
+                  onClick={(event) => {
+                    event.currentTarget.closest("details")?.removeAttribute("open");
+                    onPackChange(pack.id);
+                  }}
+                  type="button"
+                >
+                  <strong>{languageName(pack.locale)}</strong>
+                  <span>{pack.name}</span>
+                </button>
               ))}
-            </select>
-          </label>
+            </div>
+          </details>
           <span className="shortcut">{shortcutLabel}</span>
+          <button
+            className="compactButton headerAddButton"
+            onClick={onCustomPromptCreate}
+            title="新增自訂句子"
+            type="button"
+          >
+            <Plus size={15} />
+            新增句子
+          </button>
           <button
             className="iconButton"
             onClick={onSettingsOpen}
@@ -191,6 +227,10 @@ export function Palette({
             {category.name}
           </button>
         ))}
+        <button className="addPromptTab" onClick={onCustomPromptCreate} type="button">
+          <Plus size={14} />
+          新增
+        </button>
       </nav>
 
       <section className="promptList" aria-label="Rescue prompts" role="listbox">
@@ -235,6 +275,32 @@ export function Palette({
                 <p>{prompt.text}</p>
               </div>
               <div className="copyState">
+                {prompt.source === "custom" ? (
+                  <>
+                    <button
+                      className="iconButton rowAction"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        onCustomPromptEdit(prompt);
+                      }}
+                      title="編輯"
+                      type="button"
+                    >
+                      <Pencil size={15} />
+                    </button>
+                    <button
+                      className="iconButton rowAction danger"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        onCustomPromptDelete(prompt.id);
+                      }}
+                      title="刪除"
+                      type="button"
+                    >
+                      <Trash2 size={15} />
+                    </button>
+                  </>
+                ) : null}
                 {copiedPromptId === prompt.id ? (
                   <Check size={18} />
                 ) : (
@@ -269,13 +335,28 @@ function categoryName(categories: Category[], categoryId: string) {
   return categories.find((category) => category.id === categoryId)?.name ?? categoryId;
 }
 
+function languageName(locale: string) {
+  if (locale === "zh-TW") return "繁體中文";
+  if (locale === "en") return "English";
+  return locale;
+}
+
+function localeLabel(activePackId: string, packs: PaletteProps["packs"]) {
+  const locale = packs.find((pack) => pack.id === activePackId)?.locale ?? "";
+  if (locale === "zh-TW") return "繁中";
+  if (locale === "en") return "EN";
+  return locale;
+}
+
 function emptyStateCopy(activeCategory: string, query: string) {
   if (query.trim()) return "換個關鍵字，或試試搜尋「計畫」、「下一步」、「檢查」。";
   if (activeCategory === "recent") return "複製幾句後，最近使用會出現在這裡。";
+  if (activeCategory === "custom") return "按右上角「新增句子」，建立自己的常用提示。";
   return "試試搜尋「聽不懂」、「計畫」或「不行」。";
 }
 
 function emptyStateTitle(activeCategory: string, query: string) {
   if (activeCategory === "recent" && !query.trim()) return "還沒有最近使用。";
+  if (activeCategory === "custom" && !query.trim()) return "還沒有自訂句子。";
   return "找不到符合的句子。";
 }
