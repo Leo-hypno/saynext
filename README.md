@@ -15,7 +15,12 @@ Get the latest installers from the GitHub Releases page:
 | Windows | `SayNext-0.1.1-windows-x64-nsis-setup.exe` |
 
 If Windows blocks the installer, choose "More info" then "Run anyway".
-If macOS blocks the app, open it from System Settings > Privacy & Security.
+If macOS says the app is damaged, run this once after moving SayNext to Applications:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/SayNext.app
+open /Applications/SayNext.app
+```
 
 When ChatGPT, Claude, Gemini, or any AI tool gives a confusing answer, refuses too early, or you simply do not know what to ask next, press a hotkey and pick a rescue prompt.
 
@@ -50,7 +55,7 @@ SayNext gives them short, human rescue prompts that keep the conversation moving
 
 SayNext is in early public release. macOS and Windows installers are available on GitHub Releases, and in-app updates are available starting from `v0.1.1`.
 
-Installers are not OS-code-signed yet, so macOS and Windows may show security warnings.
+Installers are not OS-code-signed yet, so macOS and Windows may show security warnings. On macOS, unsigned apps downloaded from a browser may appear as "damaged" until the quarantine flag is removed.
 
 ## How It Works
 
