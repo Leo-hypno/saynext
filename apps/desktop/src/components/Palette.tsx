@@ -318,6 +318,7 @@ export function Palette({
 
       <footer className="paletteFooter">
         <span>{uiCopy.footerCopy}</span>
+        <span>{uiCopy.footerFavorite}</span>
         <span>{uiCopy.footerSelect}</span>
         <span>{uiCopy.footerJump}</span>
         <span>{uiCopy.footerCategory}</span>

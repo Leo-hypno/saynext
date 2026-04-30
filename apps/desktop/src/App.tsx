@@ -272,6 +272,19 @@ export function App() {
         });
       }
 
+      if (
+        event.key.toLowerCase() === "f" &&
+        !event.metaKey &&
+        !event.ctrlKey &&
+        !event.altKey &&
+        !isTextEditingTarget(event.target) &&
+        visiblePrompts[selectedIndex]
+      ) {
+        event.preventDefault();
+        enableKeyboardMode();
+        handleFavoriteToggle(visiblePrompts[selectedIndex].id);
+      }
+
       if (event.key === "Enter" && visiblePrompts[selectedIndex]) {
         event.preventDefault();
         void handleCopy(visiblePrompts[selectedIndex]);
@@ -433,6 +446,10 @@ export function App() {
   }
 
   function handleFavoriteToggle(promptId: string) {
+    const promptTitle =
+      prompts.find((prompt) => prompt.id === promptId)?.title ?? uiCopy.categoryFavorites;
+    const wasFavorite = favorites.has(promptId);
+
     setFavorites((current) => {
       const next = new Set(current);
       if (next.has(promptId)) {
@@ -441,6 +458,12 @@ export function App() {
         next.add(promptId);
       }
       return next;
+    });
+    showNotice({
+      kind: "success",
+      text: wasFavorite
+        ? uiCopy.noticeFavoriteRemoved(promptTitle)
+        : uiCopy.noticeFavoriteAdded(promptTitle)
     });
   }
 

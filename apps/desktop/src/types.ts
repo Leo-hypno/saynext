@@ -44,6 +44,7 @@ export type UiCopy = {
   emptyRecentTitle: string;
   footerCategory: string;
   footerCopy: string;
+  footerFavorite: string;
   footerJump: string;
   footerSelect: string;
   labelContent: string;
@@ -55,6 +56,8 @@ export type UiCopy = {
   newCustomPrompt: string;
   noticeAdded: (title: string) => string;
   noticeDeleted: (title: string) => string;
+  noticeFavoriteAdded: (title: string) => string;
+  noticeFavoriteRemoved: (title: string) => string;
   noticeUpdated: (title: string) => string;
   placeholderContent: string;
   placeholderTags: string;
