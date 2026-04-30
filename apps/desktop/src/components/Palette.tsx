@@ -139,15 +139,14 @@ export function Palette({
           <h1>AI 下一句</h1>
         </div>
         <div className="headerActions" onMouseDown={(event) => event.stopPropagation()}>
-          <details className="packMenu">
-            <summary aria-label="Prompt pack">
+          <details className="languageMenu">
+            <summary aria-label="語言">
               <span>
-                <strong>{localeLabel(activePackId, packs)}</strong>
-                <small>{packName}</small>
+                <strong>{languageName(activeLocale(activePackId, packs))}</strong>
               </span>
               <ChevronDown size={15} />
             </summary>
-            <div className="packMenuPanel">
+            <div className="languageMenuPanel">
               {packs.map((pack) => (
                 <button
                   className={pack.id === activePackId ? "active" : ""}
@@ -159,7 +158,6 @@ export function Palette({
                   type="button"
                 >
                   <strong>{languageName(pack.locale)}</strong>
-                  <span>{pack.name}</span>
                 </button>
               ))}
             </div>
@@ -341,11 +339,8 @@ function languageName(locale: string) {
   return locale;
 }
 
-function localeLabel(activePackId: string, packs: PaletteProps["packs"]) {
-  const locale = packs.find((pack) => pack.id === activePackId)?.locale ?? "";
-  if (locale === "zh-TW") return "繁中";
-  if (locale === "en") return "EN";
-  return locale;
+function activeLocale(activePackId: string, packs: PaletteProps["packs"]) {
+  return packs.find((pack) => pack.id === activePackId)?.locale ?? "";
 }
 
 function emptyStateCopy(activeCategory: string, query: string) {

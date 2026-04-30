@@ -102,13 +102,13 @@ h1 {
   user-select: auto;
 }
 
-.packMenu {
+.languageMenu {
   flex: 0 1 210px;
   min-width: 0;
   position: relative;
 }
 
-.packMenu summary {
+.languageMenu summary {
   align-items: center;
   background: #f7f8fa;
   border: 1px solid #d8dee8;
@@ -124,34 +124,34 @@ h1 {
   padding: 5px 9px;
 }
 
-.packMenu summary::-webkit-details-marker {
+.languageMenu summary::-webkit-details-marker {
   display: none;
 }
 
-.packMenu summary span {
+.languageMenu summary span {
   display: grid;
   gap: 1px;
   min-width: 0;
 }
 
-.packMenu summary strong,
-.packMenu summary small {
+.languageMenu summary strong,
+.languageMenu summary small {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.packMenu summary strong {
+.languageMenu summary strong {
   font-size: 12px;
   line-height: 1.05;
 }
 
-.packMenu summary small {
+.languageMenu summary small {
   color: #667085;
   font-size: 11px;
 }
 
-.packMenuPanel {
+.languageMenuPanel {
   background: #ffffff;
   border: 1px solid #d8dee8;
   border-radius: 10px;
@@ -166,7 +166,7 @@ h1 {
   z-index: 20;
 }
 
-.packMenuPanel button {
+.languageMenuPanel button {
   background: transparent;
   border: 0;
   border-radius: 8px;
@@ -178,16 +178,16 @@ h1 {
   text-align: left;
 }
 
-.packMenuPanel button:hover,
-.packMenuPanel button.active {
+.languageMenuPanel button:hover,
+.languageMenuPanel button.active {
   background: #eef4ff;
 }
 
-.packMenuPanel button strong {
+.languageMenuPanel button strong {
   font-size: 13px;
 }
 
-.packMenuPanel button span {
+.languageMenuPanel button span {
   color: #667085;
   font-size: 12px;
 }
@@ -606,7 +606,7 @@ kbd {
     width: 100%;
   }
 
-  .packMenu {
+  .languageMenu {
     flex: 1;
     min-width: 0;
   }
@@ -703,33 +703,33 @@ kbd {
   }
 
   .shortcut,
-  .packMenu summary,
+  .languageMenu summary,
   .searchBox,
   .categoryTabs button {
     border-color: #343b46;
   }
 
-  .packMenu summary,
+  .languageMenu summary,
   .customPromptForm input,
   .customPromptForm textarea {
     background: #1d2229;
     color: #d7dce4;
   }
 
-  .packMenu summary small,
-  .packMenuPanel button span,
+  .languageMenu summary small,
+  .languageMenuPanel button span,
   .customPromptForm label span {
     color: #98a2b3;
   }
 
-  .packMenuPanel {
+  .languageMenuPanel {
     background: #171a1f;
     border-color: #343b46;
     box-shadow: 0 18px 44px rgba(0, 0, 0, 0.36);
   }
 
-  .packMenuPanel button:hover,
-  .packMenuPanel button.active {
+  .languageMenuPanel button:hover,
+  .languageMenuPanel button.active {
     background: #19324f;
   }
 
