@@ -5,15 +5,17 @@
 - macOS and Windows desktop app
 - Global hotkey
 - Floating palette
-- Search and categories
+- Context tabs
 - Click or Enter to copy
 - Native clipboard integration
 - Tray/menu bar integration
-- Hide after copy and close request
+- Tray/menu bar close behavior
 - Native window controls and remembered position
 - Minimal settings panel
 - Favorites
 - Recent prompt tab
+- Custom prompts
+- Manual appearance setting
 - Traditional Chinese and English packs
 - README, screenshots, and demo GIF
 - GitHub launch checklist
@@ -31,7 +33,6 @@
 - Custom hotkey settings
 - Add and edit prompts
 - Export personal pack
-- Better fuzzy search
 
 ## v1.0.0 Stable
 

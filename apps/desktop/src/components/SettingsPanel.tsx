@@ -60,7 +60,7 @@ export function SettingsPanel({
       >
         <header className="settingsHeader">
           <div>
-            <p className="eyebrow">Settings</p>
+            <p className="eyebrow">{uiCopy.settingsEyebrow}</p>
             <h2>{uiCopy.settingsTitle}</h2>
           </div>
           <button className="iconButton" onClick={onClose} title={uiCopy.settingsClose} type="button">

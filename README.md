@@ -33,9 +33,11 @@ SayNext gives them short, human rescue prompts that keep the conversation moving
 - Native macOS / Windows window controls
 - Click or press Enter to copy
 - Beginner-friendly rescue prompts
-- Search and category filters
+- Context tabs for common AI conversation moments
 - Next-step prompts for moving a conversation forward
 - Favorites and a recent prompt tab
+- Custom prompts with optional placement in built-in contexts
+- Manual light / dark / system appearance setting
 - Remembered window position
 - One-click reset to center from Settings
 - Offline-first
@@ -54,19 +56,18 @@ macOS builds are signed and notarized starting from `v0.1.3`. Windows builds are
 ## How It Works
 
 1. Press `Cmd/Ctrl + Shift + H` to show SayNext.
-2. Search or choose a category.
+2. Choose a context, or use recent, favorites, or your own prompts.
 3. Click a prompt, or use arrow keys and press Enter.
 4. Paste into ChatGPT, Claude, Gemini, or any AI chat box.
 
 SayNext stays local. It does not call an AI API and does not send analytics.
-Search runs across the whole active prompt pack, so you do not need to know which category a prompt belongs to.
 
 Keyboard flow:
 
 - `← / →`: switch categories
 - `↑ / ↓`: select a prompt
-- `/`: focus search
-- `Esc`: clear or leave search
+- `F`: favorite or unfavorite the selected prompt
+- `Esc`: close settings or leave text editing
 - `Enter`: copy the selected prompt
 
 ## Prompt Packs
@@ -160,10 +161,12 @@ npm run make:icon
 - [x] Tauri global hotkey wiring
 - [x] Clipboard integration
 - [x] Tray/menu bar integration
-- [x] Hide after copy and close request
+- [x] Tray/menu bar close behavior
 - [x] Native window controls and remembered position
 - [x] Minimal settings panel
 - [x] Settings persistence
+- [x] Custom prompts
+- [x] Manual appearance setting
 - [ ] Prompt pack loader from local folder
 - [x] macOS and Windows release builds
 - [x] In-app updater foundation
@@ -178,7 +181,6 @@ Good first contributions:
 - Add a new language prompt pack
 - Improve existing rescue prompts
 - Add accessibility labels
-- Improve fuzzy search
 - Test Windows tray behavior
 - Create screenshots or demo GIFs
 

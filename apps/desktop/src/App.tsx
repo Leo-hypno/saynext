@@ -608,15 +608,6 @@ function readStoredString(key: string, fallback: string) {
   return localStorage.getItem(key) ?? fallback;
 }
 
-function readStoredBoolean(key: string, fallback: boolean) {
-  try {
-    const value = localStorage.getItem(key);
-    return value === null ? fallback : Boolean(JSON.parse(value));
-  } catch {
-    return fallback;
-  }
-}
-
 function readStoredStringArray(key: string) {
   try {
     const value = JSON.parse(localStorage.getItem(key) ?? "[]");

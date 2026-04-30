@@ -6,7 +6,7 @@ SayNext is designed to earn stars by being immediately understandable, useful, a
 
 - [ ] Replace placeholder repository URLs with the real GitHub URL.
 - [ ] Add one clear screenshot of the palette.
-- [ ] Add one short demo GIF showing hotkey, search, copy, and paste.
+- [ ] Add one short demo GIF showing hotkey, context tabs, copy, and paste.
 - [ ] Confirm the app launches on macOS.
 - [ ] Confirm the app builds on Windows.
 - [ ] Run `npm run validate:packs`.
@@ -33,6 +33,8 @@ SayNext is designed to earn stars by being immediately understandable, useful, a
 - [ ] Reset window position from Settings.
 - [ ] Copy success and failure feedback.
 - [ ] Favorites and recent prompt tab.
+- [ ] Custom prompts.
+- [ ] Manual light / dark / system appearance setting.
 - [ ] Next-step prompts for moving stuck conversations forward.
 - [ ] Traditional Chinese and English packs.
 - [ ] Clear good-first-issue list.
@@ -42,7 +44,6 @@ SayNext is designed to earn stars by being immediately understandable, useful, a
 
 - Add Simplified Chinese prompt pack.
 - Add Japanese prompt pack.
-- Add better fuzzy search.
 - Test and polish Windows tray behavior.
 - Add import prompt pack flow.
 - Add custom hotkey setting.
@@ -61,6 +62,7 @@ Highlights:
 - Click or press Enter to copy
 - Traditional Chinese and English starter packs
 - Favorites and recent prompt tab
+- Custom prompts
 - Native window controls and remembered window position
 - Offline-first, no account, no tracking
 

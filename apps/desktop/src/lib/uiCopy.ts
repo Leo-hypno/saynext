@@ -2,7 +2,6 @@ import type { UiCopy } from "../types";
 
 const zhTw: UiCopy = {
   addCustomPrompt: "新增句子",
-  allCategories: "全部分類",
   appEyebrow: "SAYNEXT",
   appTitle: "AI 下一句",
   cancel: "取消",
@@ -17,8 +16,8 @@ const zhTw: UiCopy = {
   deleteCustomPromptBody: (title) =>
     `這會從本機移除「${title}」，也會從最近使用與收藏移除。`,
   editCustomPrompt: "編輯句子",
-  emptyCategoryCopy: "試試搜尋「聽不懂」、「計畫」或「不行」。",
-  emptyCategoryTitle: "找不到符合的句子。",
+  emptyCategoryCopy: "可以先切到其他情境，或新增自己的常用句子。",
+  emptyCategoryTitle: "這個情境目前沒有句子。",
   emptyCustomCopy: "按右上角「新增句子」，建立自己的常用提示。",
   emptyCustomTitle: "還沒有自訂句子。",
   emptyFavoritesCopy: "點句子旁邊的愛心後，它會出現在這裡。",
@@ -48,6 +47,7 @@ const zhTw: UiCopy = {
   placeholderTitle: "例如：請先拆任務",
   save: "儲存",
   settings: "開啟偏好設定",
+  settingsEyebrow: "設定",
   settingsAutostartChecking: "正在檢查目前狀態。",
   settingsAutostartDescription: "登入系統後自動常駐在 menu bar / tray。",
   settingsAutostartTitle: "開機自動啟動",
@@ -85,7 +85,6 @@ const zhTw: UiCopy = {
 
 const en: UiCopy = {
   addCustomPrompt: "Add prompt",
-  allCategories: "All",
   appEyebrow: "SAYNEXT",
   appTitle: "AI Next Prompt",
   cancel: "Cancel",
@@ -100,8 +99,8 @@ const en: UiCopy = {
   deleteCustomPromptBody: (title) =>
     `This removes "${title}" from this device, recent prompts, and favorites.`,
   editCustomPrompt: "Edit prompt",
-  emptyCategoryCopy: "Try searching for plan, next step, or check.",
-  emptyCategoryTitle: "No matching prompts.",
+  emptyCategoryCopy: "Switch to another context or add your own reusable prompt.",
+  emptyCategoryTitle: "No prompts in this context yet.",
   emptyCustomCopy: "Use Add prompt to create your own reusable prompt.",
   emptyCustomTitle: "No custom prompts yet.",
   emptyFavoritesCopy: "Mark prompts with the heart icon to collect them here.",
@@ -131,6 +130,7 @@ const en: UiCopy = {
   placeholderTitle: "Example: Break this down",
   save: "Save",
   settings: "Open settings",
+  settingsEyebrow: "Settings",
   settingsAutostartChecking: "Checking the current status.",
   settingsAutostartDescription: "Keep SayNext available from the menu bar / tray after login.",
   settingsAutostartTitle: "Launch at login",

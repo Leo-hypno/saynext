@@ -41,16 +41,5 @@ export function getVisiblePrompts({
   }
 
   const fallbackCategory = categories[0]?.id ?? "";
-  return sortPrompts(
-    prompts.filter((prompt) => prompt.category === (activeCategory || fallbackCategory)),
-    favorites
-  );
-}
-
-function sortPrompts(prompts: RescuePrompt[], favorites: Set<string>) {
-  return [...prompts].sort((a, b) => {
-    const favoriteDelta = Number(favorites.has(b.id)) - Number(favorites.has(a.id));
-    if (favoriteDelta !== 0) return favoriteDelta;
-    return 0;
-  });
+  return prompts.filter((prompt) => prompt.category === (activeCategory || fallbackCategory));
 }

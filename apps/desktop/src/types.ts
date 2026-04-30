@@ -23,7 +23,6 @@ export type ThemeMode = "system" | "light" | "dark";
 
 export type UiCopy = {
   addCustomPrompt: string;
-  allCategories: string;
   appEyebrow: string;
   appTitle: string;
   cancel: string;
@@ -68,6 +67,7 @@ export type UiCopy = {
   placeholderTitle: string;
   save: string;
   settings: string;
+  settingsEyebrow: string;
   settingsAutostartChecking: string;
   settingsAutostartDescription: string;
   settingsAutostartTitle: string;
