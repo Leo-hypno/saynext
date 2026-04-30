@@ -1,14 +1,14 @@
 {
   "id": "beginner-rescue-zh-tw",
   "name": "AI 新手救援句",
-  "description": "給 AI 新手在卡住、聽不懂、回答不好、不知道下一步時使用的救援句。",
+  "description": "給 AI 新手在卡住、聽不懂、想改善回答、不知道下一步時使用的救援句。",
   "locale": "zh-TW",
   "version": "0.1.0",
   "author": "SayNext contributors",
   "categories": [
     { "id": "start", "name": "開始問" },
     { "id": "confused", "name": "聽不懂" },
-    { "id": "improve", "name": "回答不好" },
+    { "id": "improve", "name": "改善回答" },
     { "id": "refused", "name": "AI 說不行" },
     { "id": "research", "name": "查資料" },
     { "id": "planning", "name": "規劃" },
