@@ -5,6 +5,7 @@ import zlib from "node:zlib";
 const size = 256;
 const outDir = path.join(process.cwd(), "apps/desktop/src-tauri/icons");
 const outFile = path.join(outDir, "icon.png");
+const icoFile = path.join(outDir, "icon.ico");
 
 fs.mkdirSync(outDir, { recursive: true });
 
@@ -38,6 +39,9 @@ const png = Buffer.concat([
 fs.writeFileSync(outFile, png);
 console.log(`Wrote ${path.relative(process.cwd(), outFile)}`);
 
+fs.writeFileSync(icoFile, icoFromPng(png, size, size));
+console.log(`Wrote ${path.relative(process.cwd(), icoFile)}`);
+
 function ihdr(width, height) {
   const data = Buffer.alloc(13);
   data.writeUInt32BE(width, 0);
@@ -59,6 +63,25 @@ function chunk(type, data) {
   crc.writeUInt32BE(crc32(Buffer.concat([typeBuffer, data])), 0);
 
   return Buffer.concat([length, typeBuffer, data, crc]);
+}
+
+function icoFromPng(png, width, height) {
+  const header = Buffer.alloc(6);
+  header.writeUInt16LE(0, 0);
+  header.writeUInt16LE(1, 2);
+  header.writeUInt16LE(1, 4);
+
+  const directory = Buffer.alloc(16);
+  directory[0] = width >= 256 ? 0 : width;
+  directory[1] = height >= 256 ? 0 : height;
+  directory[2] = 0;
+  directory[3] = 0;
+  directory.writeUInt16LE(1, 4);
+  directory.writeUInt16LE(32, 6);
+  directory.writeUInt32LE(png.length, 8);
+  directory.writeUInt32LE(header.length + directory.length, 12);
+
+  return Buffer.concat([header, directory, png]);
 }
 
 function crc32(buffer) {
@@ -100,4 +123,3 @@ function drawChevron(buffer, width) {
     }
   }
 }
-

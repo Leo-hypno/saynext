@@ -59,4 +59,4 @@ jobs:
           releaseDraft: true
           prerelease: ${{ contains(github.ref_name, '-') }}
           args: ${{ matrix.args }}
-          releaseAssetNamePattern: SayNext-[version]-[platform]-[arch]-[bundle][setup][ext]
+          assetNamePattern: SayNext-[version]-[platform]-[arch]-[bundle][setup][ext]
