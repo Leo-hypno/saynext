@@ -8,7 +8,7 @@ import {
   setAutostartEnabled,
   type AutostartStatus
 } from "./lib/autostart";
-import { copyText, hidePalette } from "./lib/clipboard";
+import { copyText } from "./lib/clipboard";
 import {
   resetWindowPosition,
   restoreWindowPosition,
@@ -58,9 +58,6 @@ export function App() {
   const [editingCustomPrompt, setEditingCustomPrompt] = useState<RescuePrompt | null>(null);
   const [deletePromptId, setDeletePromptId] = useState<string | null>(null);
   const [paletteFocusRequest, setPaletteFocusRequest] = useState(0);
-  const [autoHideAfterCopy, setAutoHideAfterCopy] = useState(
-    () => readStoredBoolean("saynext.autoHideAfterCopy", true)
-  );
   const [themeMode, setThemeMode] = useState<ThemeMode>(
     () => readStoredThemeMode("saynext.themeMode")
   );
@@ -168,10 +165,6 @@ export function App() {
   useEffect(() => {
     localStorage.setItem("saynext.customPrompts", JSON.stringify(customPrompts));
   }, [customPrompts]);
-
-  useEffect(() => {
-    localStorage.setItem("saynext.autoHideAfterCopy", JSON.stringify(autoHideAfterCopy));
-  }, [autoHideAfterCopy]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = themeMode;
@@ -359,10 +352,7 @@ export function App() {
       copyTimerRef.current = window.setTimeout(() => {
         setCopiedPromptId(null);
         setCopyNotice(null);
-        if (autoHideAfterCopy) {
-          void hidePalette();
-        }
-      }, autoHideAfterCopy ? 650 : copyNoticeDurationMs);
+      }, copyNoticeDurationMs);
     } catch {
       setCopiedPromptId(null);
       setCopyNotice({ kind: "error", text: "複製失敗，請再試一次。" });
@@ -562,14 +552,12 @@ export function App() {
       />
       {settingsOpen ? (
         <SettingsPanel
-          autoHideAfterCopy={autoHideAfterCopy}
           autostartStatus={autostartStatus}
           themeMode={themeMode}
           updateError={updateError}
           updateInfo={updateInfo}
           updateProgress={updateProgress}
           updateStatus={updateStatus}
-          onAutoHideAfterCopyChange={setAutoHideAfterCopy}
           onAutostartToggle={handleAutostartToggle}
           onClose={() => setSettingsOpen(false)}
           onResetWindowPosition={() => void resetWindowPosition()}

@@ -68,8 +68,6 @@ export type UiCopy = {
   placeholderTitle: string;
   save: string;
   settings: string;
-  settingsAutoHideDescription: string;
-  settingsAutoHideTitle: string;
   settingsAutostartChecking: string;
   settingsAutostartDescription: string;
   settingsAutostartTitle: string;

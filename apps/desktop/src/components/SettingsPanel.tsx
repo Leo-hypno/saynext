@@ -4,14 +4,12 @@ import type { UpdateInfo, UpdateProgress, UpdateStatus } from "../lib/updater";
 import type { ThemeMode, UiCopy } from "../types";
 
 type SettingsPanelProps = {
-  autoHideAfterCopy: boolean;
   autostartStatus: AutostartStatus;
   themeMode: ThemeMode;
   updateError: string | null;
   updateInfo: UpdateInfo | null;
   updateProgress: UpdateProgress | null;
   updateStatus: UpdateStatus;
-  onAutoHideAfterCopyChange: (enabled: boolean) => void;
   onAutostartToggle: (enabled: boolean) => void;
   onClose: () => void;
   onResetWindowPosition: () => void;
@@ -24,14 +22,12 @@ type SettingsPanelProps = {
 };
 
 export function SettingsPanel({
-  autoHideAfterCopy,
   autostartStatus,
   themeMode,
   updateError,
   updateInfo,
   updateProgress,
   updateStatus,
-  onAutoHideAfterCopyChange,
   onAutostartToggle,
   onClose,
   onResetWindowPosition,
@@ -116,18 +112,6 @@ export function SettingsPanel({
             </div>
             <kbd>{shortcutLabel}</kbd>
           </div>
-
-          <label className="settingRow">
-            <div>
-              <strong>{uiCopy.settingsAutoHideTitle}</strong>
-              <p>{uiCopy.settingsAutoHideDescription}</p>
-            </div>
-            <input
-              checked={autoHideAfterCopy}
-              onChange={(event) => onAutoHideAfterCopyChange(event.target.checked)}
-              type="checkbox"
-            />
-          </label>
 
           <label className="settingRow">
             <div>
