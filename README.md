@@ -6,13 +6,13 @@ An open-source desktop palette that helps you ask AI the next better question.
 
 Get the latest installers from the GitHub Releases page:
 
-**[Download SayNext v0.1.1](https://github.com/Leo-hypno/saynext/releases/latest)**
+**[Download SayNext v0.1.2](https://github.com/Leo-hypno/saynext/releases/latest)**
 
 | System | Download this file |
 | --- | --- |
-| Mac Apple Silicon | `SayNext-0.1.1-darwin-aarch64-dmg.dmg` |
-| Mac Intel | `SayNext-0.1.1-darwin-x64-dmg.dmg` |
-| Windows | `SayNext-0.1.1-windows-x64-nsis-setup.exe` |
+| Mac Apple Silicon | `SayNext-0.1.2-darwin-aarch64-dmg.dmg` |
+| Mac Intel | `SayNext-0.1.2-darwin-x64-dmg.dmg` |
+| Windows | `SayNext-0.1.2-windows-x64-nsis-setup.exe` |
 
 If Windows blocks the installer, choose "More info" then "Run anyway".
 If macOS says the app is damaged, run this once after moving SayNext to Applications:
@@ -140,7 +140,7 @@ npm run bundle
 Update SayNext's version before a release:
 
 ```bash
-npm run version:set -- 0.1.1
+npm run version:set -- 0.1.2
 ```
 
 Validate prompt packs only:
