@@ -43,6 +43,35 @@ const zhTw: UiCopy = {
   searchAriaLabel: "搜尋救援句",
   searchPlaceholder: (packName, shortcut) => `搜尋 ${packName}...  / 或 ${shortcut}`,
   settings: "開啟偏好設定",
+  settingsAutoHideDescription: "點選句型後，自動回到原本工作流程。",
+  settingsAutoHideTitle: "複製後自動收起",
+  settingsAutostartChecking: "正在檢查目前狀態。",
+  settingsAutostartDescription: "登入系統後自動常駐在 menu bar / tray。",
+  settingsAutostartTitle: "開機自動啟動",
+  settingsAutostartUnavailable: "Web preview 不支援，桌面版可使用。",
+  settingsClose: "關閉偏好設定",
+  settingsGithubDescription: "查看原始碼、下載版本與回報問題。",
+  settingsGithubTitle: "GitHub repository",
+  settingsNote:
+    "SayNext 是開源、離線優先的小工具，專為不知道下一句該怎麼問 AI 的人設計。",
+  settingsShortcutDescription: (platformName) =>
+    `目前平台：${platformName}。操作邏輯與另一個桌面系統保持一致。`,
+  settingsShortcutTitle: "快捷鍵",
+  settingsTitle: "偏好設定",
+  settingsUpdateAvailable: (version, currentVersion) =>
+    `找到 ${version}，目前版本是 ${currentVersion}。`,
+  settingsUpdateButtonCheck: "檢查",
+  settingsUpdateButtonInstall: "更新",
+  settingsUpdateChecking: "正在檢查 GitHub 上是否有新版本。",
+  settingsUpdateDescription: "從 GitHub Release 檢查新版並自動安裝。",
+  settingsUpdateDownloading: "正在下載並安裝更新。",
+  settingsUpdateDownloadingPercent: (percent) => `正在下載並安裝更新：${percent}%。`,
+  settingsUpdateError: "更新檢查失敗，請稍後再試。",
+  settingsUpdateNotAvailable: "目前已經是最新版本。",
+  settingsUpdateRestarting: "更新完成，正在重新啟動 SayNext。",
+  settingsUpdateTitle: "軟體更新",
+  settingsWindowResetDescription: "把 SayNext 移回螢幕中央。",
+  settingsWindowResetTitle: "重設視窗位置",
   unfavorite: "取消收藏"
 };
 
@@ -89,6 +118,35 @@ const en: UiCopy = {
   searchAriaLabel: "Search prompts",
   searchPlaceholder: (packName, shortcut) => `Search ${packName}...  / or ${shortcut}`,
   settings: "Open settings",
+  settingsAutoHideDescription: "After copying a prompt, return to your previous workflow.",
+  settingsAutoHideTitle: "Auto-hide after copy",
+  settingsAutostartChecking: "Checking the current status.",
+  settingsAutostartDescription: "Keep SayNext available from the menu bar / tray after login.",
+  settingsAutostartTitle: "Launch at login",
+  settingsAutostartUnavailable: "Not available in web preview. Use the desktop app.",
+  settingsClose: "Close settings",
+  settingsGithubDescription: "View source, download releases, and report issues.",
+  settingsGithubTitle: "GitHub repository",
+  settingsNote:
+    "SayNext is open-source, offline-first, and built for people who do not know what to ask AI next.",
+  settingsShortcutDescription: (platformName) =>
+    `Current platform: ${platformName}. The interaction model stays consistent across desktop systems.`,
+  settingsShortcutTitle: "Shortcut",
+  settingsTitle: "Settings",
+  settingsUpdateAvailable: (version, currentVersion) =>
+    `Version ${version} is available. Current version: ${currentVersion}.`,
+  settingsUpdateButtonCheck: "Check",
+  settingsUpdateButtonInstall: "Update",
+  settingsUpdateChecking: "Checking GitHub Releases for a new version.",
+  settingsUpdateDescription: "Check GitHub Releases and install updates automatically.",
+  settingsUpdateDownloading: "Downloading and installing the update.",
+  settingsUpdateDownloadingPercent: (percent) => `Downloading and installing: ${percent}%.`,
+  settingsUpdateError: "Update check failed. Please try again later.",
+  settingsUpdateNotAvailable: "You are already on the latest version.",
+  settingsUpdateRestarting: "Update complete. Restarting SayNext.",
+  settingsUpdateTitle: "Software update",
+  settingsWindowResetDescription: "Move SayNext back to the center of the screen.",
+  settingsWindowResetTitle: "Reset window position",
   unfavorite: "Remove favorite"
 };
 

@@ -577,6 +577,7 @@ export function App() {
           onUpdateInstall={handleUpdateInstall}
           platformName={platform.name}
           shortcutLabel={platform.shortcutLabel}
+          uiCopy={uiCopy}
         />
       ) : null}
       {deletePromptId ? (

@@ -183,7 +183,10 @@ export function Palette({
           <span className="shortcut">{shortcutLabel}</span>
           <button
             className="compactButton headerAddButton"
-            onClick={onCustomPromptCreate}
+            onClick={() => {
+              languageMenuRef.current?.removeAttribute("open");
+              onCustomPromptCreate();
+            }}
             title={uiCopy.addCustomPrompt}
             type="button"
           >
@@ -192,7 +195,10 @@ export function Palette({
           </button>
           <button
             className="iconButton"
-            onClick={onSettingsOpen}
+            onClick={() => {
+              languageMenuRef.current?.removeAttribute("open");
+              onSettingsOpen();
+            }}
             title={uiCopy.settings}
             type="button"
           >

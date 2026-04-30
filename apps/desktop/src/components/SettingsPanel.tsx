@@ -1,6 +1,7 @@
 import { Download, ExternalLink, RefreshCw, RotateCcw, X } from "lucide-react";
 import type { AutostartStatus } from "../lib/autostart";
 import type { UpdateInfo, UpdateProgress, UpdateStatus } from "../lib/updater";
+import type { UiCopy } from "../types";
 
 type SettingsPanelProps = {
   autoHideAfterCopy: boolean;
@@ -17,6 +18,7 @@ type SettingsPanelProps = {
   onUpdateInstall: () => void;
   platformName: string;
   shortcutLabel: string;
+  uiCopy: UiCopy;
 };
 
 export function SettingsPanel({
@@ -33,7 +35,8 @@ export function SettingsPanel({
   onUpdateCheck,
   onUpdateInstall,
   platformName,
-  shortcutLabel
+  shortcutLabel,
+  uiCopy
 }: SettingsPanelProps) {
   const autostartUnavailable = autostartStatus === "checking" || autostartStatus === "unavailable";
   const autostartEnabled = autostartStatus === "enabled";
@@ -50,7 +53,7 @@ export function SettingsPanel({
     <div className="settingsOverlay" role="presentation" onClick={onClose}>
       <section
         aria-modal="true"
-        aria-label="SayNext settings"
+        aria-label={uiCopy.settingsTitle}
         className="settingsPanel"
         onClick={(event) => event.stopPropagation()}
         role="dialog"
@@ -58,9 +61,9 @@ export function SettingsPanel({
         <header className="settingsHeader">
           <div>
             <p className="eyebrow">Settings</p>
-            <h2>偏好設定</h2>
+            <h2>{uiCopy.settingsTitle}</h2>
           </div>
-          <button className="iconButton" onClick={onClose} title="關閉偏好設定" type="button">
+          <button className="iconButton" onClick={onClose} title={uiCopy.settingsClose} type="button">
             <X size={18} />
           </button>
         </header>
@@ -68,16 +71,16 @@ export function SettingsPanel({
         <div className="settingsGroup">
           <div className="settingRow">
             <div>
-              <strong>快捷鍵</strong>
-              <p>目前平台：{platformName}。操作邏輯與另一個桌面系統保持一致。</p>
+              <strong>{uiCopy.settingsShortcutTitle}</strong>
+              <p>{uiCopy.settingsShortcutDescription(platformName)}</p>
             </div>
             <kbd>{shortcutLabel}</kbd>
           </div>
 
           <label className="settingRow">
             <div>
-              <strong>複製後自動收起</strong>
-              <p>點選句型後，自動回到原本工作流程。</p>
+              <strong>{uiCopy.settingsAutoHideTitle}</strong>
+              <p>{uiCopy.settingsAutoHideDescription}</p>
             </div>
             <input
               checked={autoHideAfterCopy}
@@ -88,8 +91,8 @@ export function SettingsPanel({
 
           <label className="settingRow">
             <div>
-              <strong>開機自動啟動</strong>
-              <p>{autostartCopy(autostartStatus)}</p>
+              <strong>{uiCopy.settingsAutostartTitle}</strong>
+              <p>{autostartCopy(autostartStatus, uiCopy)}</p>
             </div>
             <input
               checked={autostartEnabled}
@@ -101,8 +104,8 @@ export function SettingsPanel({
 
           <button className="settingRow settingButton" onClick={onResetWindowPosition} type="button">
             <div>
-              <strong>重設視窗位置</strong>
-              <p>把 SayNext 移回螢幕中央。</p>
+              <strong>{uiCopy.settingsWindowResetTitle}</strong>
+              <p>{uiCopy.settingsWindowResetDescription}</p>
             </div>
             <RotateCcw size={18} />
           </button>
@@ -111,13 +114,13 @@ export function SettingsPanel({
         <div className="settingsGroup">
           <div className="settingRow updateRow">
             <div>
-              <strong>軟體更新</strong>
-              <p>{updateCopy(updateStatus, updateInfo, updatePercent, updateError)}</p>
+              <strong>{uiCopy.settingsUpdateTitle}</strong>
+              <p>{updateCopy(updateStatus, updateInfo, updatePercent, updateError, uiCopy)}</p>
             </div>
             {updateStatus === "available" ? (
               <button className="compactButton primary" onClick={onUpdateInstall} type="button">
                 <Download size={15} />
-                更新
+                {uiCopy.settingsUpdateButtonInstall}
               </button>
             ) : (
               <button
@@ -127,7 +130,7 @@ export function SettingsPanel({
                 type="button"
               >
                 <RefreshCw className={updateBusy ? "spin" : undefined} size={15} />
-                檢查
+                {uiCopy.settingsUpdateButtonCheck}
               </button>
             )}
           </div>
@@ -139,44 +142,42 @@ export function SettingsPanel({
             target="_blank"
           >
             <div>
-              <strong>GitHub repository</strong>
-              <p>查看原始碼、下載版本與回報問題。</p>
+              <strong>{uiCopy.settingsGithubTitle}</strong>
+              <p>{uiCopy.settingsGithubDescription}</p>
             </div>
             <ExternalLink size={18} />
           </a>
-          <p className="settingsNote">
-            SayNext is open-source, offline-first, and built for people who do not know what
-            to ask AI next.
-          </p>
+          <p className="settingsNote">{uiCopy.settingsNote}</p>
         </div>
       </section>
     </div>
   );
 }
 
-function autostartCopy(status: AutostartStatus) {
-  if (status === "checking") return "正在檢查目前狀態。";
-  if (status === "unavailable") return "Web preview 不支援，桌面版可使用。";
-  return "登入系統後自動常駐在 menu bar / tray。";
+function autostartCopy(status: AutostartStatus, uiCopy: UiCopy) {
+  if (status === "checking") return uiCopy.settingsAutostartChecking;
+  if (status === "unavailable") return uiCopy.settingsAutostartUnavailable;
+  return uiCopy.settingsAutostartDescription;
 }
 
 function updateCopy(
   status: UpdateStatus,
   updateInfo: UpdateInfo | null,
   updatePercent: number | null,
-  error: string | null
+  error: string | null,
+  uiCopy: UiCopy
 ) {
-  if (status === "checking") return "正在檢查 GitHub 上是否有新版本。";
+  if (status === "checking") return uiCopy.settingsUpdateChecking;
   if (status === "available" && updateInfo) {
-    return `找到 ${updateInfo.version}，目前版本是 ${updateInfo.currentVersion}。`;
+    return uiCopy.settingsUpdateAvailable(updateInfo.version, updateInfo.currentVersion);
   }
-  if (status === "notAvailable") return "目前已經是最新版本。";
+  if (status === "notAvailable") return uiCopy.settingsUpdateNotAvailable;
   if (status === "downloading") {
     return updatePercent === null
-      ? "正在下載並安裝更新。"
-      : `正在下載並安裝更新：${updatePercent}%。`;
+      ? uiCopy.settingsUpdateDownloading
+      : uiCopy.settingsUpdateDownloadingPercent(updatePercent);
   }
-  if (status === "restarting") return "更新完成，正在重新啟動 SayNext。";
-  if (status === "error") return error ?? "更新檢查失敗，請稍後再試。";
-  return "從 GitHub Release 檢查新版並自動安裝。";
+  if (status === "restarting") return uiCopy.settingsUpdateRestarting;
+  if (status === "error") return error ?? uiCopy.settingsUpdateError;
+  return uiCopy.settingsUpdateDescription;
 }
