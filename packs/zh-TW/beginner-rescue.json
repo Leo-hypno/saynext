@@ -24,6 +24,8 @@
     { "id": "start-goals-limits", "category": "start", "title": "釐清條件", "text": "請先幫我釐清目標、限制、可用資源和成功標準。", "tags": ["beginner", "scope", "目標"] },
     { "id": "start-needed-info", "category": "start", "title": "需要哪些資訊", "text": "請告訴我，為了做得更準，我應該先提供哪些資訊。", "tags": ["beginner", "info", "補充"] },
     { "id": "start-rewrite-for-ai", "category": "start", "title": "改寫成 AI 指令", "text": "請把我的需求改寫成一個清楚、可執行、適合交給 AI 的指令。", "tags": ["beginner", "rewrite", "prompt"] },
+    { "id": "start-life-use-case", "category": "start", "title": "生活需求整理", "text": "我想用 AI 處理一件生活或工作上的事，請先幫我整理成清楚需求。", "tags": ["beginner", "life", "生活"] },
+    { "id": "start-document-help", "category": "start", "title": "文件怎麼開始", "text": "我有一份文件或一堆資料，請先問我用途，再建議怎麼整理。", "tags": ["beginner", "document", "文件"] },
 
     { "id": "confused-human-language", "category": "confused", "title": "講白話", "text": "請用中文和白話重新解釋，讓沒有背景知識的人也能理解。", "tags": ["beginner", "plain-language", "聽不懂"] },
     { "id": "confused-simpler", "category": "confused", "title": "更簡單", "text": "我真的不懂，請用更簡單的方式重新解釋，並先講我該記住的重點。", "tags": ["beginner", "explain", "看不懂"] },
@@ -32,6 +34,8 @@
     { "id": "confused-main-point", "category": "confused", "title": "先講重點", "text": "請先用 3 句話講重點，再補充必要細節。", "tags": ["beginner", "summary", "重點"] },
     { "id": "confused-middle-school", "category": "confused", "title": "新手也懂", "text": "請用完全新手也能懂的方式解釋，不要假設我已經知道背景知識。", "tags": ["beginner", "simple", "新手"] },
     { "id": "confused-no-jargon", "category": "confused", "title": "不要術語", "text": "請把專有名詞換成白話說法；必要術語請先解釋。", "tags": ["beginner", "jargon", "術語"] },
+    { "id": "confused-document-summary", "category": "confused", "title": "文件重點", "text": "請把這份文件用白話整理成重點，並標出我最需要注意的地方。", "tags": ["beginner", "document", "summary"] },
+    { "id": "confused-report-terms", "category": "confused", "title": "報告看不懂", "text": "請把這份報告中的專有名詞和關鍵數字，用一般人聽得懂的方式解釋。", "tags": ["beginner", "report", "explain"] },
 
     { "id": "improve-why-recommend", "category": "improve", "title": "你怎麼建議", "text": "請說明為什麼你這樣判斷，並給我你最建議的做法。", "tags": ["beginner", "recommend", "建議"] },
     { "id": "improve-rethink", "category": "improve", "title": "重新思考", "text": "這個答案不夠好，請重新檢查問題、換一個角度思考後再回答。", "tags": ["beginner", "retry", "重想"] },
@@ -40,6 +44,8 @@
     { "id": "improve-check-answer", "category": "improve", "title": "檢查回答", "text": "請檢查你剛剛的回答是否有錯誤、遺漏或不合理的假設。", "tags": ["beginner", "check", "錯誤"] },
     { "id": "improve-practical", "category": "improve", "title": "更可執行", "text": "請換成更實際、更可執行的答案，並告訴我第一步要做什麼。", "tags": ["beginner", "practical", "落地"] },
     { "id": "improve-professional", "category": "improve", "title": "專業標準", "text": "請用更專業的標準重新回答，並補上你會檢查的品質重點。", "tags": ["beginner", "quality", "專業"] },
+    { "id": "improve-report-better", "category": "improve", "title": "報告更好", "text": "請把這份報告改得更清楚、有條理，讓讀者一眼看懂重點。", "tags": ["beginner", "report", "writing"] },
+    { "id": "improve-document-structure", "category": "improve", "title": "整理架構", "text": "請重新安排這份內容的架構，讓段落順序更合理、標題更清楚。", "tags": ["beginner", "document", "structure"] },
 
     { "id": "refused-why-find-way", "category": "refused", "title": "請想辦法", "text": "請說明為什麼不行，並提出安全、可行、接近我目標的替代做法。", "tags": ["beginner", "refusal", "不能做"] },
     { "id": "refused-alternative", "category": "refused", "title": "替代方案", "text": "如果不能直接做到，請提出最接近目標的替代方案。", "tags": ["beginner", "alternative", "替代"] },
@@ -56,6 +62,8 @@
     { "id": "research-mainstream-minority", "category": "research", "title": "主流與少數意見", "text": "請整理目前主流做法和少數不同意見。", "tags": ["beginner", "views"] },
     { "id": "research-reliable", "category": "research", "title": "可靠來源", "text": "請優先使用官方文件、研究、專業機構或一手來源，不要只用一般網路文章。", "tags": ["beginner", "reliable", "來源"] },
     { "id": "research-actionable", "category": "research", "title": "摘要與建議", "text": "請把資料整理成重點摘要、風險提醒和可執行建議。", "tags": ["beginner", "action", "摘要"] },
+    { "id": "research-travel-options", "category": "research", "title": "旅遊資料", "text": "請幫我整理這個旅遊目的地的交通、住宿、景點、預算和注意事項。", "tags": ["beginner", "travel", "research"] },
+    { "id": "research-purchase-compare", "category": "research", "title": "生活比較", "text": "請比較幾個選項的價格、優缺點、適合對象和需要注意的風險。", "tags": ["beginner", "compare", "life"] },
 
     { "id": "planning-best-plan", "category": "planning", "title": "最佳計畫", "text": "幫我規劃一個清楚、可執行的最佳計畫；重要決策請用選擇題跟我確認。", "tags": ["beginner", "plan", "計畫"] },
     { "id": "planning-goals-risks", "category": "planning", "title": "目標風險步驟", "text": "請先列出目標、限制、風險和步驟。", "tags": ["beginner", "risk"] },
@@ -64,6 +72,9 @@
     { "id": "planning-milestones", "category": "planning", "title": "里程碑", "text": "請把這件事拆成清楚的里程碑。", "tags": ["beginner", "milestone"] },
     { "id": "planning-failure", "category": "planning", "title": "可能失敗", "text": "請指出這個計畫最可能失敗的地方。", "tags": ["beginner", "failure"] },
     { "id": "planning-priority", "category": "planning", "title": "優先順序", "text": "請幫我排出優先順序。", "tags": ["beginner", "priority"] },
+    { "id": "planning-travel-itinerary", "category": "planning", "title": "旅遊行程", "text": "請幫我規劃旅遊行程，依照天數、預算、交通時間和體力安排。", "tags": ["beginner", "travel", "itinerary"] },
+    { "id": "planning-report-outline", "category": "planning", "title": "報告大綱", "text": "請先幫我做一份報告大綱，包含章節、重點和每段要放的內容。", "tags": ["beginner", "report", "outline"] },
+    { "id": "planning-life-decision", "category": "planning", "title": "生活決策", "text": "請幫我把這個生活決策拆成選項、條件、風險和推薦做法。", "tags": ["beginner", "decision", "life"] },
 
     { "id": "execute-start", "category": "execute", "title": "開始執行", "text": "請依照目前計畫開始執行；若遇到關鍵決策，先用選擇題問我。", "tags": ["beginner", "execute", "開始"] },
     { "id": "execute-first-version", "category": "execute", "title": "先做第一版", "text": "請先做出可以檢查的第一版，不要一開始就追求完美。", "tags": ["beginner", "draft", "第一版"] },
@@ -72,6 +83,9 @@
     { "id": "execute-usable", "category": "execute", "title": "可使用版本", "text": "請直接給我可以使用的版本，不要只給方向或原則。", "tags": ["beginner", "usable", "完成"] },
     { "id": "execute-copyable", "category": "execute", "title": "可複製格式", "text": "請把內容整理成我可以複製使用的格式。", "tags": ["beginner", "format"] },
     { "id": "execute-do-not-advise", "category": "execute", "title": "不要只建議", "text": "請不要只給建議，請直接幫我完成。", "tags": ["beginner", "complete"] },
+    { "id": "execute-document-summary", "category": "execute", "title": "整理文件", "text": "請直接把這份內容整理成摘要、重點清單和待辦事項。", "tags": ["beginner", "document", "summary"] },
+    { "id": "execute-report-draft", "category": "execute", "title": "產出報告", "text": "請根據以上資料，先產出一版完整報告草稿。", "tags": ["beginner", "report", "draft"] },
+    { "id": "execute-travel-plan", "category": "execute", "title": "產出行程", "text": "請直接產出一份可使用的旅遊行程表，包含時間、地點、交通和備案。", "tags": ["beginner", "travel", "itinerary"] },
 
     { "id": "next-recommend-three", "category": "next", "title": "建議下一步", "text": "請根據目前狀態，建議最值得做的 3 個下一步，並說明優先順序。", "tags": ["beginner", "next", "priority"] },
     { "id": "next-pick-one", "category": "next", "title": "幫我選一個", "text": "請幫我判斷下一步最該先做哪一件事，並說明原因。", "tags": ["beginner", "next", "decision"] },
@@ -88,6 +102,8 @@
     { "id": "review-missing-conflict", "category": "review", "title": "遺漏矛盾", "text": "請檢查是否有遺漏、矛盾或不清楚的地方。", "tags": ["beginner", "missing"] },
     { "id": "review-user-view", "category": "review", "title": "使用者角度", "text": "請站在使用者角度檢查這份成果。", "tags": ["beginner", "user"] },
     { "id": "review-simplify", "category": "review", "title": "更精簡", "text": "請給我一版更精簡、更好理解的版本。", "tags": ["beginner", "simplify"] },
-    { "id": "review-deliverable", "category": "review", "title": "可交付", "text": "請幫我把它完善到可以交付，並列出最後還需要我確認的事項。", "tags": ["beginner", "deliver", "交付"] }
+    { "id": "review-deliverable", "category": "review", "title": "可交付", "text": "請幫我把它完善到可以交付，並列出最後還需要我確認的事項。", "tags": ["beginner", "deliver", "交付"] },
+    { "id": "review-report-reader", "category": "review", "title": "讀者檢查", "text": "請站在讀者角度檢查這份文件或報告，指出哪裡不清楚、太長或缺少證據。", "tags": ["beginner", "report", "reader"] },
+    { "id": "review-travel-risk", "category": "review", "title": "行程檢查", "text": "請檢查這份旅遊計畫是否太趕、交通是否合理、預算是否漏算。", "tags": ["beginner", "travel", "review"] }
   ]
 }
