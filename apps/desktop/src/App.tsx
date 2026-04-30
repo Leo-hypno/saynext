@@ -23,6 +23,7 @@ import {
   type UpdateStatus
 } from "./lib/updater";
 import { buildCategoryIds, getVisiblePrompts, recentCategoryId } from "./lib/promptView";
+import { getUiCopy } from "./lib/uiCopy";
 import englishPackData from "../../../packs/en/beginner-rescue.json";
 import zhTwPackData from "../../../packs/zh-TW/beginner-rescue.json";
 import type { Update } from "@tauri-apps/plugin-updater";
@@ -33,6 +34,7 @@ const defaultPackId = "beginner-rescue-zh-tw";
 const defaultCategoryId = "start";
 const customCategoryId = "custom";
 const pointerResumeDelayMs = 700;
+const copyNoticeDurationMs = 1800;
 
 export function App() {
   const copyTimerRef = useRef<number | undefined>(undefined);
@@ -77,14 +79,15 @@ export function App() {
     () => packs.find((candidate) => candidate.id === activePackId) ?? packs[0],
     [activePackId]
   );
+  const uiCopy = useMemo(() => getUiCopy(pack.locale), [pack.locale]);
 
   const categories = useMemo(() => {
     const [firstCategory, ...otherCategories] = pack.categories;
-    const customCategory = { id: customCategoryId, name: "我的句子" };
+    const customCategory = { id: customCategoryId, name: uiCopy.categoryCustom };
     return firstCategory
       ? [firstCategory, customCategory, ...otherCategories]
       : [customCategory];
-  }, [pack.categories]);
+  }, [pack.categories, uiCopy.categoryCustom]);
 
   const prompts = useMemo(
     () => [
@@ -122,6 +125,12 @@ export function App() {
     setKeyboardMode(false);
     return true;
   }, []);
+
+  useEffect(() => {
+    if (activePackId !== pack.id) {
+      setActivePackId(pack.id);
+    }
+  }, [activePackId, pack.id]);
 
   useEffect(() => {
     setSelectedIndex(0);
@@ -317,6 +326,10 @@ export function App() {
   }, []);
 
   function showNotice(notice: CopyNotice, duration = 1800) {
+    if (copyTimerRef.current) {
+      window.clearTimeout(copyTimerRef.current);
+      copyTimerRef.current = undefined;
+    }
     if (noticeTimerRef.current) {
       window.clearTimeout(noticeTimerRef.current);
     }
@@ -330,6 +343,10 @@ export function App() {
   async function handleCopy(prompt: RescuePrompt) {
     if (copyTimerRef.current) {
       window.clearTimeout(copyTimerRef.current);
+    }
+    if (noticeTimerRef.current) {
+      window.clearTimeout(noticeTimerRef.current);
+      noticeTimerRef.current = undefined;
     }
 
     try {
@@ -348,7 +365,7 @@ export function App() {
         if (autoHideAfterCopy) {
           void hidePalette();
         }
-      }, 650);
+      }, autoHideAfterCopy ? 650 : copyNoticeDurationMs);
     } catch {
       setCopiedPromptId(null);
       setCopyNotice({ kind: "error", text: "複製失敗，請再試一次。" });
@@ -357,6 +374,8 @@ export function App() {
   }
 
   function handlePackChange(packId: string) {
+    if (!packs.some((candidate) => candidate.id === packId)) return;
+
     setActivePackId(packId);
     const nextPack = packs.find((candidate) => candidate.id === packId);
     setActiveCategory(nextPack?.categories[0]?.id ?? defaultCategoryId);
@@ -387,7 +406,7 @@ export function App() {
     if (!deletePromptId) return;
     const promptId = deletePromptId;
     const promptTitle =
-      customPrompts.find((prompt) => prompt.id === promptId)?.title ?? "自訂句子";
+      customPrompts.find((prompt) => prompt.id === promptId)?.title ?? uiCopy.categoryCustom;
     setDeletePromptId(null);
     setCustomPrompts((prompts) => prompts.filter((prompt) => prompt.id !== promptId));
     setFavorites((current) => {
@@ -398,7 +417,7 @@ export function App() {
     setRecentIds((ids) => ids.filter((id) => id !== promptId));
     setQuery("");
     setActiveCategory(customCategoryId);
-    showNotice({ kind: "success", text: `已刪除：${promptTitle}` });
+    showNotice({ kind: "success", text: uiCopy.noticeDeleted(promptTitle) });
   }
 
   function handleCustomPromptSave(draft: CustomPromptDraft) {
@@ -419,12 +438,12 @@ export function App() {
             : prompt
         )
       );
-      showNotice({ kind: "success", text: `已更新：${title}` });
+      showNotice({ kind: "success", text: uiCopy.noticeUpdated(title) });
     } else {
       setCustomPrompts((prompts) => [
         {
           category: customCategoryId,
-          id: `custom-${Date.now().toString(36)}`,
+          id: createCustomPromptId(),
           source: "custom",
           tags,
           text,
@@ -434,7 +453,7 @@ export function App() {
       ]);
       setActiveCategory(customCategoryId);
       setQuery("");
-      showNotice({ kind: "success", text: `已新增：${title}` });
+      showNotice({ kind: "success", text: uiCopy.noticeAdded(title) });
     }
 
     setCustomPromptDialogOpen(false);
@@ -540,6 +559,7 @@ export function App() {
         selectedIndex={selectedIndex}
         searchShortcutLabel={platform.searchShortcutLabel}
         shortcutLabel={platform.shortcutLabel}
+        uiCopy={uiCopy}
       />
       {settingsOpen ? (
         <SettingsPanel
@@ -561,11 +581,14 @@ export function App() {
       ) : null}
       {deletePromptId ? (
         <ConfirmDialog
-          body={`這會從本機移除「${
-            customPrompts.find((prompt) => prompt.id === deletePromptId)?.title ?? "這句話"
-          }」，也會從最近使用與收藏移除。`}
-          confirmLabel="刪除"
-          title="刪除自訂句子"
+          body={uiCopy.deleteCustomPromptBody(
+            customPrompts.find((prompt) => prompt.id === deletePromptId)?.title ??
+              uiCopy.categoryCustom
+          )}
+          confirmLabel={uiCopy.delete}
+          title={uiCopy.deleteCustomPrompt}
+          cancelLabel={uiCopy.cancel}
+          confirmEyebrow={uiCopy.confirm}
           onCancel={() => setDeletePromptId(null)}
           onConfirm={confirmCustomPromptDelete}
         />
@@ -573,6 +596,7 @@ export function App() {
       {customPromptDialogOpen ? (
         <CustomPromptDialog
           editingPrompt={editingCustomPrompt}
+          uiCopy={uiCopy}
           onClose={() => {
             setCustomPromptDialogOpen(false);
             setEditingCustomPrompt(null);
@@ -617,6 +641,7 @@ function readStoredCustomPrompts(key: string): RescuePrompt[] {
   try {
     const value = JSON.parse(localStorage.getItem(key) ?? "[]");
     if (!Array.isArray(value)) return [];
+    const seenIds = new Set<string>();
 
     return value
       .filter((item) => {
@@ -626,6 +651,11 @@ function readStoredCustomPrompts(key: string): RescuePrompt[] {
           typeof item.title === "string" &&
           typeof item.text === "string"
         );
+      })
+      .filter((item) => {
+        if (seenIds.has(item.id)) return false;
+        seenIds.add(item.id);
+        return true;
       })
       .map((item) => ({
         category: customCategoryId,
@@ -640,6 +670,10 @@ function readStoredCustomPrompts(key: string): RescuePrompt[] {
   } catch {
     return [];
   }
+}
+
+function createCustomPromptId() {
+  return `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
 function isTextEditingTarget(target: EventTarget | null) {

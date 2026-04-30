@@ -10,7 +10,7 @@ import {
   Star,
   Trash2
 } from "lucide-react";
-import type { Category, RescuePrompt } from "../types";
+import type { Category, RescuePrompt, UiCopy } from "../types";
 
 type PaletteProps = {
   activePackId: string;
@@ -47,6 +47,7 @@ type PaletteProps = {
   paletteFocusRequest: number;
   searchShortcutLabel: string;
   shortcutLabel: string;
+  uiCopy: UiCopy;
 };
 
 export function Palette({
@@ -76,7 +77,8 @@ export function Palette({
   onSelectedIndexChange,
   paletteFocusRequest,
   searchShortcutLabel,
-  shortcutLabel
+  shortcutLabel,
+  uiCopy
 }: PaletteProps) {
   const paletteRef = useRef<HTMLElement | null>(null);
   const languageMenuRef = useRef<HTMLDetailsElement | null>(null);
@@ -156,7 +158,7 @@ export function Palette({
         </div>
         <div className="headerActions" onMouseDown={(event) => event.stopPropagation()}>
           <details className="languageMenu" ref={languageMenuRef}>
-            <summary aria-label="語言">
+            <summary aria-label={uiCopy.language}>
               <span>
                 <strong>{languageName(activeLocale(activePackId, packs))}</strong>
               </span>
@@ -182,16 +184,16 @@ export function Palette({
           <button
             className="compactButton headerAddButton"
             onClick={onCustomPromptCreate}
-            title="新增自訂句子"
+            title={uiCopy.addCustomPrompt}
             type="button"
           >
             <Plus size={15} />
-            新增句子
+            {uiCopy.addCustomPrompt}
           </button>
           <button
             className="iconButton"
             onClick={onSettingsOpen}
-            title="開啟偏好設定"
+            title={uiCopy.settings}
             type="button"
           >
             <Settings size={17} />
@@ -205,10 +207,10 @@ export function Palette({
           ref={searchInputRef}
           value={query}
           onChange={(event) => onQueryChange(event.target.value)}
-          placeholder={`搜尋 ${packName}...  / 或 ${searchShortcutLabel}`}
-          aria-label="Search rescue prompts"
+          placeholder={uiCopy.searchPlaceholder(packName, searchShortcutLabel)}
+          aria-label={uiCopy.searchAriaLabel}
         />
-        {query.trim() ? <span className="searchScope">全部分類</span> : null}
+        {query.trim() ? <span className="searchScope">{uiCopy.allCategories}</span> : null}
       </label>
 
       <nav className="categoryTabs" aria-label="Prompt categories">
@@ -225,10 +227,10 @@ export function Palette({
         <button
           className={!searching && activeCategory === "recent" ? "active" : ""}
           onClick={() => onCategoryChange("recent")}
-          title="最近"
+          title={uiCopy.categoryRecent}
           type="button"
         >
-          最近
+          {uiCopy.categoryRecent}
         </button>
         {categories.slice(1).map((category) => (
           <button
@@ -246,8 +248,8 @@ export function Palette({
       <section className="promptList" aria-label="Rescue prompts" role="listbox">
         {prompts.length === 0 ? (
           <div className="emptyState">
-            <p>{emptyStateTitle(activeCategory, query)}</p>
-            <span>{emptyStateCopy(activeCategory, query)}</span>
+            <p>{emptyStateTitle(activeCategory, query, uiCopy)}</p>
+            <span>{emptyStateCopy(activeCategory, query, uiCopy)}</span>
           </div>
         ) : (
           prompts.map((prompt, index) => (
@@ -269,7 +271,7 @@ export function Palette({
                   event.stopPropagation();
                   onFavoriteToggle(prompt.id);
                 }}
-                title={favorites.has(prompt.id) ? "取消收藏" : "收藏"}
+                title={favorites.has(prompt.id) ? uiCopy.unfavorite : uiCopy.favorite}
                 type="button"
               >
                 <Star
@@ -293,7 +295,7 @@ export function Palette({
                         event.stopPropagation();
                         onCustomPromptEdit(prompt);
                       }}
-                      title="編輯"
+                      title={uiCopy.editCustomPrompt}
                       type="button"
                     >
                       <Pencil size={15} />
@@ -304,7 +306,7 @@ export function Palette({
                         event.stopPropagation();
                         onCustomPromptDelete(prompt.id);
                       }}
-                      title="刪除"
+                      title={uiCopy.delete}
                       type="button"
                     >
                       <Trash2 size={15} />
@@ -323,12 +325,12 @@ export function Palette({
       </section>
 
       <footer className="paletteFooter">
-        <span>Enter 複製</span>
-        <span>Esc 關閉搜尋</span>
-        <span>↑↓ 選取</span>
-        <span>Home/End 跳轉</span>
-        <span>←→ 分類</span>
-        <span>/ 搜尋</span>
+        <span>{uiCopy.footerCopy}</span>
+        <span>{uiCopy.footerSearchClose}</span>
+        <span>{uiCopy.footerSelect}</span>
+        <span>{uiCopy.footerJump}</span>
+        <span>{uiCopy.footerCategory}</span>
+        <span>{uiCopy.footerSearch}</span>
         <span
           aria-live="polite"
           className={`copyNotice ${copyNotice?.kind ?? ""}`}
@@ -355,15 +357,15 @@ function activeLocale(activePackId: string, packs: PaletteProps["packs"]) {
   return packs.find((pack) => pack.id === activePackId)?.locale ?? "";
 }
 
-function emptyStateCopy(activeCategory: string, query: string) {
-  if (query.trim()) return "換個關鍵字，或試試搜尋「計畫」、「下一步」、「檢查」。";
-  if (activeCategory === "recent") return "複製幾句後，最近使用會出現在這裡。";
-  if (activeCategory === "custom") return "按右上角「新增句子」，建立自己的常用提示。";
-  return "試試搜尋「聽不懂」、「計畫」或「不行」。";
+function emptyStateCopy(activeCategory: string, query: string, uiCopy: UiCopy) {
+  if (query.trim()) return uiCopy.placeholderSearchSamples;
+  if (activeCategory === "recent") return uiCopy.emptyRecentCopy;
+  if (activeCategory === "custom") return uiCopy.emptyCustomCopy;
+  return uiCopy.emptyCategoryCopy;
 }
 
-function emptyStateTitle(activeCategory: string, query: string) {
-  if (activeCategory === "recent" && !query.trim()) return "還沒有最近使用。";
-  if (activeCategory === "custom" && !query.trim()) return "還沒有自訂句子。";
-  return "找不到符合的句子。";
+function emptyStateTitle(activeCategory: string, query: string, uiCopy: UiCopy) {
+  if (activeCategory === "recent" && !query.trim()) return uiCopy.emptyRecentTitle;
+  if (activeCategory === "custom" && !query.trim()) return uiCopy.emptyCustomTitle;
+  return uiCopy.emptyCategoryTitle;
 }
