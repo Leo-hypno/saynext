@@ -4,6 +4,17 @@ All notable changes to SayNext are documented here.
 
 This project follows Semantic Versioning.
 
+## [0.1.3] - 2026-04-30
+
+### Added
+
+- macOS release workflow now supports Developer ID signing and notarization.
+
+### Changed
+
+- Download documentation now points to the `v0.1.3` installers.
+- Release notes now distinguish signed macOS builds from unsigned Windows builds.
+
 ## [0.1.2] - 2026-04-30
 
 ### Fixed

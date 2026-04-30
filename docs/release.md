@@ -67,13 +67,14 @@ The workflow creates a draft GitHub Release. Review the generated installers, up
 
 ## Current Signing Status
 
-The first open-source releases can be unsigned for OS-level code signing, but users may see operating-system security warnings.
+macOS builds are Developer ID signed and notarized starting from `v0.1.3`.
+
+Windows builds are not code-signed yet, so users may see Windows SmartScreen warnings.
 
 The Tauri updater has its own signing requirement and cannot install unsigned updates.
 
 Before a wider public launch:
 
-- Configure Apple Developer ID signing and notarization for macOS. See [Apple Developer ID Signing](apple-signing.md).
 - Configure a Windows code signing certificate.
 - Keep the Tauri updater private key backed up securely.
 

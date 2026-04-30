@@ -6,21 +6,15 @@ An open-source desktop palette that helps you ask AI the next better question.
 
 Get the latest installers from the GitHub Releases page:
 
-**[Download SayNext v0.1.2](https://github.com/Leo-hypno/saynext/releases/latest)**
+**[Download SayNext v0.1.3](https://github.com/Leo-hypno/saynext/releases/latest)**
 
 | System | Download this file |
 | --- | --- |
-| Mac Apple Silicon | `SayNext-0.1.2-darwin-aarch64-dmg.dmg` |
-| Mac Intel | `SayNext-0.1.2-darwin-x64-dmg.dmg` |
-| Windows | `SayNext-0.1.2-windows-x64-nsis-setup.exe` |
+| Mac Apple Silicon | `SayNext-0.1.3-darwin-aarch64-dmg.dmg` |
+| Mac Intel | `SayNext-0.1.3-darwin-x64-dmg.dmg` |
+| Windows | `SayNext-0.1.3-windows-x64-nsis-setup.exe` |
 
 If Windows blocks the installer, choose "More info" then "Run anyway".
-If macOS says the app is damaged, run this once after moving SayNext to Applications:
-
-```bash
-xattr -dr com.apple.quarantine /Applications/SayNext.app
-open /Applications/SayNext.app
-```
 
 When ChatGPT, Claude, Gemini, or any AI tool gives a confusing answer, refuses too early, or you simply do not know what to ask next, press a hotkey and pick a rescue prompt.
 
@@ -55,7 +49,7 @@ SayNext gives them short, human rescue prompts that keep the conversation moving
 
 SayNext is in early public release. macOS and Windows installers are available on GitHub Releases, and in-app updates are available starting from `v0.1.1`.
 
-Installers are not OS-code-signed yet, so macOS and Windows may show security warnings. On macOS, unsigned apps downloaded from a browser may appear as "damaged" until the quarantine flag is removed.
+macOS builds are signed and notarized starting from `v0.1.3`. Windows builds are not code-signed yet, so Windows may show a SmartScreen warning.
 
 ## How It Works
 
@@ -140,7 +134,7 @@ npm run bundle
 Update SayNext's version before a release:
 
 ```bash
-npm run version:set -- 0.1.2
+npm run version:set -- 0.1.3
 ```
 
 Validate prompt packs only:
