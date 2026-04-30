@@ -34,9 +34,21 @@ Useful areas:
 - Tauri global shortcut integration
 - Clipboard integration
 - Prompt pack loading
-- Search quality
 - Accessibility
 - Cross-platform testing
+- Release and installer testing
+
+## Good First Issues
+
+Non-code contributions are welcome:
+
+- Add or improve a prompt pack
+- Translate prompts, docs, or UI copy
+- Create screenshots or a short demo GIF
+- Test the Windows installer
+- Improve accessibility labels
+
+Suggested labels and repo topics live in [GitHub Repository Setup](docs/github-repo-setup.md).
 
 ## Pull Requests
 
@@ -46,4 +58,3 @@ Please include:
 - Why it helps
 - Screenshots or GIFs for UI changes
 - Manual test notes for desktop behavior
-

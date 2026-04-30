@@ -5,7 +5,7 @@ SayNext is designed to earn stars by being immediately understandable, useful, a
 ## Before First Public Push
 
 - [ ] Replace placeholder repository URLs with the real GitHub URL.
-- [ ] Add one clear screenshot of the palette.
+- [x] Add one clear screenshot of the palette.
 - [ ] Add one short demo GIF showing hotkey, context tabs, copy, and paste.
 - [ ] Confirm the app launches on macOS.
 - [ ] Confirm the app builds on Windows.
@@ -37,8 +37,8 @@ SayNext is designed to earn stars by being immediately understandable, useful, a
 - [ ] Manual light / dark / system appearance setting.
 - [ ] Next-step prompts for moving stuck conversations forward.
 - [ ] Traditional Chinese and English packs.
-- [ ] Clear good-first-issue list.
-- [ ] Screenshots that show real prompts, not empty UI.
+- [x] Clear good-first-issue list.
+- [x] Screenshots that show real prompts, not empty UI.
 
 ## First Issues To Open
 
