@@ -32,7 +32,7 @@ import { getUiCopy } from "./lib/uiCopy";
 import englishPackData from "../../../packs/en/beginner-rescue.json";
 import zhTwPackData from "../../../packs/zh-TW/beginner-rescue.json";
 import type { Update } from "@tauri-apps/plugin-updater";
-import type { CustomPromptDraft, PromptPack, RescuePrompt } from "./types";
+import type { CustomPromptDraft, PromptPack, RescuePrompt, ThemeMode } from "./types";
 
 const packs = [zhTwPackData, englishPackData] as PromptPack[];
 const defaultPackId = "beginner-rescue-zh-tw";
@@ -60,6 +60,9 @@ export function App() {
   const [paletteFocusRequest, setPaletteFocusRequest] = useState(0);
   const [autoHideAfterCopy, setAutoHideAfterCopy] = useState(
     () => readStoredBoolean("saynext.autoHideAfterCopy", true)
+  );
+  const [themeMode, setThemeMode] = useState<ThemeMode>(
+    () => readStoredThemeMode("saynext.themeMode")
   );
   const [autostartStatus, setAutostartStatus] = useState<AutostartStatus>("checking");
   const [updateStatus, setUpdateStatus] = useState<UpdateStatus>("idle");
@@ -169,6 +172,11 @@ export function App() {
   useEffect(() => {
     localStorage.setItem("saynext.autoHideAfterCopy", JSON.stringify(autoHideAfterCopy));
   }, [autoHideAfterCopy]);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = themeMode;
+    localStorage.setItem("saynext.themeMode", themeMode);
+  }, [themeMode]);
 
   useEffect(() => {
     void getAutostartStatus().then(setAutostartStatus);
@@ -521,7 +529,7 @@ export function App() {
   }
 
   return (
-    <div className="appShell">
+    <div className="appShell" data-theme={themeMode}>
       <Palette
         activeCategory={activeCategory}
         activePackId={pack.id}
@@ -556,6 +564,7 @@ export function App() {
         <SettingsPanel
           autoHideAfterCopy={autoHideAfterCopy}
           autostartStatus={autostartStatus}
+          themeMode={themeMode}
           updateError={updateError}
           updateInfo={updateInfo}
           updateProgress={updateProgress}
@@ -564,6 +573,7 @@ export function App() {
           onAutostartToggle={handleAutostartToggle}
           onClose={() => setSettingsOpen(false)}
           onResetWindowPosition={() => void resetWindowPosition()}
+          onThemeModeChange={setThemeMode}
           onUpdateCheck={handleUpdateCheck}
           onUpdateInstall={handleUpdateInstall}
           platformName={platform.name}
@@ -628,6 +638,11 @@ function readStoredStringArray(key: string) {
   } catch {
     return [];
   }
+}
+
+function readStoredThemeMode(key: string): ThemeMode {
+  const value = readStoredString(key, "system");
+  return value === "light" || value === "dark" || value === "system" ? value : "system";
 }
 
 function readStoredCustomPrompts(key: string): RescuePrompt[] {

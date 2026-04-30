@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -8,6 +8,14 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+:root[data-theme="system"] {
+  color-scheme: light dark;
 }
 
 * {
@@ -432,6 +440,45 @@ h1 {
   width: 18px;
 }
 
+.themeSetting {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.segmentedControl {
+  background: #f7f8fa;
+  border: 1px solid #d8dee8;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3px;
+  padding: 3px;
+  width: 100%;
+}
+
+.segmentedControl button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  color: #4b5563;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 6px;
+  justify-content: center;
+  min-height: 32px;
+  padding: 6px 8px;
+  white-space: nowrap;
+}
+
+.segmentedControl button.active {
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(21, 29, 40, 0.12);
+  color: #1f6feb;
+  font-weight: 800;
+}
+
 .compactButton {
   align-items: center;
   background: #f7f8fa;
@@ -698,140 +745,272 @@ kbd {
   color: #c7352f;
 }
 
+:root[data-theme="dark"] {
+  background: #111418;
+  color: #f5f7fa;
+}
+
+:root[data-theme="dark"] .palette {
+  background: rgba(23, 26, 31, 0.96);
+  border-color: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+}
+
+:root[data-theme="dark"] .shortcut,
+:root[data-theme="dark"] .languageMenu summary,
+:root[data-theme="dark"] .personalTabs button,
+:root[data-theme="dark"] .categoryTabs button {
+  border-color: #343b46;
+}
+
+:root[data-theme="dark"] .languageMenu summary,
+:root[data-theme="dark"] .customPromptForm input,
+:root[data-theme="dark"] .customPromptForm textarea,
+:root[data-theme="dark"] .customPromptForm select,
+:root[data-theme="dark"] .segmentedControl {
+  background: #1d2229;
+  color: #d7dce4;
+}
+
+:root[data-theme="dark"] .languageMenu summary em,
+:root[data-theme="dark"] .customPromptForm label span {
+  color: #98a2b3;
+}
+
+:root[data-theme="dark"] .languageMenuPanel,
+:root[data-theme="dark"] .settingsPanel {
+  background: #171a1f;
+  border-color: #343b46;
+}
+
+:root[data-theme="dark"] .languageMenuPanel {
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.36);
+}
+
+:root[data-theme="dark"] .languageMenuPanel button:hover,
+:root[data-theme="dark"] .languageMenuPanel button.active,
+:root[data-theme="dark"] .compactButton:hover:not(:disabled) {
+  background: #19324f;
+}
+
+:root[data-theme="dark"] .personalTabs button,
+:root[data-theme="dark"] .settingRow:hover,
+:root[data-theme="dark"] kbd,
+:root[data-theme="dark"] .compactButton {
+  background: #1d2229;
+}
+
+:root[data-theme="dark"] .personalTabs button.active,
+:root[data-theme="dark"] .personalTabs button:hover,
+:root[data-theme="dark"] .promptRow:hover,
+:root[data-theme="dark"] .promptRow.selected {
+  background: #202a36;
+  border-color: #31445d;
+}
+
+:root[data-theme="dark"] .palette.keyboardMode .promptRow:hover:not(.selected) {
+  background: transparent;
+  border-color: transparent;
+}
+
+:root[data-theme="dark"] .categoryTabs button.active,
+:root[data-theme="dark"] .segmentedControl button.active {
+  background: #19324f;
+  border-color: #2e5f98;
+  color: #9fceff;
+}
+
+:root[data-theme="dark"] .promptBody p,
+:root[data-theme="dark"] .emptyState p {
+  color: #f5f7fa;
+}
+
+:root[data-theme="dark"] .iconButton:hover {
+  background: #283241;
+}
+
+:root[data-theme="dark"] .rowAction.danger:hover {
+  background: #41272a;
+  color: #ff928b;
+}
+
+:root[data-theme="dark"] .paletteFooter,
+:root[data-theme="dark"] .settingsHeader {
+  border-color: #2a3038;
+}
+
+:root[data-theme="dark"] .settingsOverlay {
+  background: rgba(0, 0, 0, 0.36);
+}
+
+:root[data-theme="dark"] kbd,
+:root[data-theme="dark"] .compactButton,
+:root[data-theme="dark"] .segmentedControl {
+  border-color: #343b46;
+}
+
+:root[data-theme="dark"] kbd,
+:root[data-theme="dark"] .compactButton,
+:root[data-theme="dark"] .segmentedControl button {
+  color: #d7dce4;
+}
+
+:root[data-theme="dark"] .compactButton:hover:not(:disabled) {
+  border-color: #2e5f98;
+  color: #9fceff;
+}
+
+:root[data-theme="dark"] .compactButton.danger,
+:root[data-theme="dark"] .compactButton.danger:hover {
+  background: #c7352f;
+  border-color: #c7352f;
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .confirmBody p {
+  color: #d7dce4;
+}
+
+:root[data-theme="dark"] .copyNotice.success {
+  color: #6ee7a8;
+}
+
+:root[data-theme="dark"] .copyNotice.error {
+  color: #ff928b;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root[data-theme="system"] {
     background: #111418;
     color: #f5f7fa;
   }
 
-  .palette {
+  :root[data-theme="system"] .palette {
     background: rgba(23, 26, 31, 0.96);
     border-color: rgba(255, 255, 255, 0.09);
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
   }
 
-  .shortcut,
-  .languageMenu summary,
-  .personalTabs button,
-  .categoryTabs button {
+  :root[data-theme="system"] .shortcut,
+  :root[data-theme="system"] .languageMenu summary,
+  :root[data-theme="system"] .personalTabs button,
+  :root[data-theme="system"] .categoryTabs button {
     border-color: #343b46;
   }
 
-  .languageMenu summary,
-  .customPromptForm input,
-  .customPromptForm textarea,
-  .customPromptForm select {
+  :root[data-theme="system"] .languageMenu summary,
+  :root[data-theme="system"] .customPromptForm input,
+  :root[data-theme="system"] .customPromptForm textarea,
+  :root[data-theme="system"] .customPromptForm select,
+  :root[data-theme="system"] .segmentedControl {
     background: #1d2229;
     color: #d7dce4;
   }
 
-  .languageMenu summary em {
+  :root[data-theme="system"] .languageMenu summary em,
+  :root[data-theme="system"] .customPromptForm label span {
     color: #98a2b3;
   }
 
-  .customPromptForm label span {
-    color: #98a2b3;
-  }
-
-  .languageMenuPanel {
+  :root[data-theme="system"] .languageMenuPanel,
+  :root[data-theme="system"] .settingsPanel {
     background: #171a1f;
     border-color: #343b46;
+  }
+
+  :root[data-theme="system"] .languageMenuPanel {
     box-shadow: 0 18px 44px rgba(0, 0, 0, 0.36);
   }
 
-  .languageMenuPanel button:hover,
-  .languageMenuPanel button.active {
+  :root[data-theme="system"] .languageMenuPanel button:hover,
+  :root[data-theme="system"] .languageMenuPanel button.active,
+  :root[data-theme="system"] .compactButton:hover:not(:disabled) {
     background: #19324f;
   }
 
-  .personalTabs button {
+  :root[data-theme="system"] .personalTabs button,
+  :root[data-theme="system"] .settingRow:hover,
+  :root[data-theme="system"] kbd,
+  :root[data-theme="system"] .compactButton {
     background: #1d2229;
   }
 
-  .personalTabs button.active,
-  .personalTabs button:hover,
-  .promptRow:hover,
-  .promptRow.selected {
+  :root[data-theme="system"] .personalTabs button.active,
+  :root[data-theme="system"] .personalTabs button:hover,
+  :root[data-theme="system"] .promptRow:hover,
+  :root[data-theme="system"] .promptRow.selected {
     background: #202a36;
     border-color: #31445d;
   }
 
-  .palette.keyboardMode .promptRow:hover:not(.selected) {
+  :root[data-theme="system"] .palette.keyboardMode .promptRow:hover:not(.selected) {
     background: transparent;
     border-color: transparent;
   }
 
-  .categoryTabs button.active {
+  :root[data-theme="system"] .categoryTabs button.active,
+  :root[data-theme="system"] .segmentedControl button.active {
     background: #19324f;
     border-color: #2e5f98;
     color: #9fceff;
   }
 
-  .promptBody p,
-  .emptyState p {
+  :root[data-theme="system"] .promptBody p,
+  :root[data-theme="system"] .emptyState p {
     color: #f5f7fa;
   }
 
-  .iconButton:hover {
+  :root[data-theme="system"] .iconButton:hover {
     background: #283241;
   }
 
-  .rowAction.danger:hover {
+  :root[data-theme="system"] .rowAction.danger:hover {
     background: #41272a;
     color: #ff928b;
   }
 
-  .paletteFooter {
+  :root[data-theme="system"] .paletteFooter,
+  :root[data-theme="system"] .settingsHeader {
     border-color: #2a3038;
   }
 
-  .settingsOverlay {
+  :root[data-theme="system"] .settingsOverlay {
     background: rgba(0, 0, 0, 0.36);
   }
 
-  .settingsPanel {
-    background: #171a1f;
+  :root[data-theme="system"] kbd,
+  :root[data-theme="system"] .compactButton,
+  :root[data-theme="system"] .segmentedControl {
     border-color: #343b46;
   }
 
-  .settingsHeader {
-    border-color: #2a3038;
-  }
-
-  .settingRow:hover,
-  kbd,
-  .compactButton {
-    background: #1d2229;
-  }
-
-  kbd,
-  .compactButton {
-    border-color: #343b46;
+  :root[data-theme="system"] kbd,
+  :root[data-theme="system"] .compactButton,
+  :root[data-theme="system"] .segmentedControl button {
     color: #d7dce4;
   }
 
-  .compactButton:hover:not(:disabled) {
-    background: #19324f;
+  :root[data-theme="system"] .compactButton:hover:not(:disabled) {
     border-color: #2e5f98;
     color: #9fceff;
   }
 
-  .compactButton.danger,
-  .compactButton.danger:hover {
+  :root[data-theme="system"] .compactButton.danger,
+  :root[data-theme="system"] .compactButton.danger:hover {
     background: #c7352f;
     border-color: #c7352f;
     color: #ffffff;
   }
 
-  .confirmBody p {
+  :root[data-theme="system"] .confirmBody p {
     color: #d7dce4;
   }
 
-  .copyNotice.success {
+  :root[data-theme="system"] .copyNotice.success {
     color: #6ee7a8;
   }
 
-  .copyNotice.error {
+  :root[data-theme="system"] .copyNotice.error {
     color: #ff928b;
   }
 }

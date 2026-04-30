@@ -19,6 +19,8 @@ export type CustomPromptDraft = {
   tags: string;
 };
 
+export type ThemeMode = "system" | "light" | "dark";
+
 export type UiCopy = {
   addCustomPrompt: string;
   allCategories: string;
@@ -78,6 +80,11 @@ export type UiCopy = {
   settingsNote: string;
   settingsShortcutDescription: (platformName: string) => string;
   settingsShortcutTitle: string;
+  settingsThemeDark: string;
+  settingsThemeDescription: string;
+  settingsThemeLight: string;
+  settingsThemeSystem: string;
+  settingsThemeTitle: string;
   settingsTitle: string;
   settingsUpdateAvailable: (version: string, currentVersion: string) => string;
   settingsUpdateButtonCheck: string;

@@ -1,11 +1,12 @@
-import { Download, ExternalLink, RefreshCw, RotateCcw, X } from "lucide-react";
+import { Download, ExternalLink, Monitor, Moon, RefreshCw, RotateCcw, Sun, X } from "lucide-react";
 import type { AutostartStatus } from "../lib/autostart";
 import type { UpdateInfo, UpdateProgress, UpdateStatus } from "../lib/updater";
-import type { UiCopy } from "../types";
+import type { ThemeMode, UiCopy } from "../types";
 
 type SettingsPanelProps = {
   autoHideAfterCopy: boolean;
   autostartStatus: AutostartStatus;
+  themeMode: ThemeMode;
   updateError: string | null;
   updateInfo: UpdateInfo | null;
   updateProgress: UpdateProgress | null;
@@ -14,6 +15,7 @@ type SettingsPanelProps = {
   onAutostartToggle: (enabled: boolean) => void;
   onClose: () => void;
   onResetWindowPosition: () => void;
+  onThemeModeChange: (mode: ThemeMode) => void;
   onUpdateCheck: () => void;
   onUpdateInstall: () => void;
   platformName: string;
@@ -24,6 +26,7 @@ type SettingsPanelProps = {
 export function SettingsPanel({
   autoHideAfterCopy,
   autostartStatus,
+  themeMode,
   updateError,
   updateInfo,
   updateProgress,
@@ -32,6 +35,7 @@ export function SettingsPanel({
   onAutostartToggle,
   onClose,
   onResetWindowPosition,
+  onThemeModeChange,
   onUpdateCheck,
   onUpdateInstall,
   platformName,
@@ -69,6 +73,42 @@ export function SettingsPanel({
         </header>
 
         <div className="settingsGroup">
+          <div className="settingRow themeSetting">
+            <div>
+              <strong>{uiCopy.settingsThemeTitle}</strong>
+              <p>{uiCopy.settingsThemeDescription}</p>
+            </div>
+            <div className="segmentedControl" role="group" aria-label={uiCopy.settingsThemeTitle}>
+              <button
+                className={themeMode === "system" ? "active" : ""}
+                onClick={() => onThemeModeChange("system")}
+                title={uiCopy.settingsThemeSystem}
+                type="button"
+              >
+                <Monitor size={14} />
+                {uiCopy.settingsThemeSystem}
+              </button>
+              <button
+                className={themeMode === "light" ? "active" : ""}
+                onClick={() => onThemeModeChange("light")}
+                title={uiCopy.settingsThemeLight}
+                type="button"
+              >
+                <Sun size={14} />
+                {uiCopy.settingsThemeLight}
+              </button>
+              <button
+                className={themeMode === "dark" ? "active" : ""}
+                onClick={() => onThemeModeChange("dark")}
+                title={uiCopy.settingsThemeDark}
+                type="button"
+              >
+                <Moon size={14} />
+                {uiCopy.settingsThemeDark}
+              </button>
+            </div>
+          </div>
+
           <div className="settingRow">
             <div>
               <strong>{uiCopy.settingsShortcutTitle}</strong>

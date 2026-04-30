@@ -62,6 +62,11 @@ const zhTw: UiCopy = {
   settingsShortcutDescription: (platformName) =>
     `目前平台：${platformName}。操作邏輯與另一個桌面系統保持一致。`,
   settingsShortcutTitle: "快捷鍵",
+  settingsThemeDark: "深色",
+  settingsThemeDescription: "選擇 SayNext 使用淺色、深色，或跟隨系統外觀。",
+  settingsThemeLight: "淺色",
+  settingsThemeSystem: "跟隨系統",
+  settingsThemeTitle: "外觀",
   settingsTitle: "偏好設定",
   settingsUpdateAvailable: (version, currentVersion) =>
     `找到 ${version}，目前版本是 ${currentVersion}。`,
@@ -142,6 +147,11 @@ const en: UiCopy = {
   settingsShortcutDescription: (platformName) =>
     `Current platform: ${platformName}. The interaction model stays consistent across desktop systems.`,
   settingsShortcutTitle: "Shortcut",
+  settingsThemeDark: "Dark",
+  settingsThemeDescription: "Choose a light theme, dark theme, or follow the system appearance.",
+  settingsThemeLight: "Light",
+  settingsThemeSystem: "System",
+  settingsThemeTitle: "Appearance",
   settingsTitle: "Settings",
   settingsUpdateAvailable: (version, currentVersion) =>
     `Version ${version} is available. Current version: ${currentVersion}.`,
