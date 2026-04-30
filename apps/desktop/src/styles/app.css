@@ -134,8 +134,7 @@ h1 {
   min-width: 0;
 }
 
-.languageMenu summary strong,
-.languageMenu summary small {
+.languageMenu summary strong {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -144,11 +143,6 @@ h1 {
 .languageMenu summary strong {
   font-size: 12px;
   line-height: 1.05;
-}
-
-.languageMenu summary small {
-  color: #667085;
-  font-size: 11px;
 }
 
 .languageMenuPanel {
@@ -172,8 +166,7 @@ h1 {
   border-radius: 8px;
   color: inherit;
   cursor: pointer;
-  display: grid;
-  gap: 2px;
+  display: block;
   padding: 8px 9px;
   text-align: left;
 }
@@ -185,11 +178,6 @@ h1 {
 
 .languageMenuPanel button strong {
   font-size: 13px;
-}
-
-.languageMenuPanel button span {
-  color: #667085;
-  font-size: 12px;
 }
 
 .srOnly {
@@ -268,10 +256,6 @@ h1 {
 .categoryTabs button:hover {
   background: #f7f8fa;
   border-color: #d9e0ea;
-}
-
-.categoryTabs .addPromptTab {
-  gap: 4px;
 }
 
 .promptList {
@@ -716,8 +700,6 @@ kbd {
     color: #d7dce4;
   }
 
-  .languageMenu summary small,
-  .languageMenuPanel button span,
   .customPromptForm label span {
     color: #98a2b3;
   }

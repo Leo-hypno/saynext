@@ -36,6 +36,7 @@ const pointerResumeDelayMs = 700;
 
 export function App() {
   const copyTimerRef = useRef<number | undefined>(undefined);
+  const noticeTimerRef = useRef<number | undefined>(undefined);
   const lastKeyboardNavigationRef = useRef(0);
   const pendingUpdateRef = useRef<Update | null>(null);
   const [activePackId, setActivePackId] = useState(() =>
@@ -309,8 +310,22 @@ export function App() {
       if (copyTimerRef.current) {
         window.clearTimeout(copyTimerRef.current);
       }
+      if (noticeTimerRef.current) {
+        window.clearTimeout(noticeTimerRef.current);
+      }
     };
   }, []);
+
+  function showNotice(notice: CopyNotice, duration = 1800) {
+    if (noticeTimerRef.current) {
+      window.clearTimeout(noticeTimerRef.current);
+    }
+
+    setCopyNotice(notice);
+    noticeTimerRef.current = window.setTimeout(() => {
+      setCopyNotice(null);
+    }, duration);
+  }
 
   async function handleCopy(prompt: RescuePrompt) {
     if (copyTimerRef.current) {
@@ -371,6 +386,8 @@ export function App() {
   function confirmCustomPromptDelete() {
     if (!deletePromptId) return;
     const promptId = deletePromptId;
+    const promptTitle =
+      customPrompts.find((prompt) => prompt.id === promptId)?.title ?? "自訂句子";
     setDeletePromptId(null);
     setCustomPrompts((prompts) => prompts.filter((prompt) => prompt.id !== promptId));
     setFavorites((current) => {
@@ -379,6 +396,9 @@ export function App() {
       return next;
     });
     setRecentIds((ids) => ids.filter((id) => id !== promptId));
+    setQuery("");
+    setActiveCategory(customCategoryId);
+    showNotice({ kind: "success", text: `已刪除：${promptTitle}` });
   }
 
   function handleCustomPromptSave(draft: CustomPromptDraft) {
@@ -399,6 +419,7 @@ export function App() {
             : prompt
         )
       );
+      showNotice({ kind: "success", text: `已更新：${title}` });
     } else {
       setCustomPrompts((prompts) => [
         {
@@ -413,6 +434,7 @@ export function App() {
       ]);
       setActiveCategory(customCategoryId);
       setQuery("");
+      showNotice({ kind: "success", text: `已新增：${title}` });
     }
 
     setCustomPromptDialogOpen(false);

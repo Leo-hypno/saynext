@@ -79,6 +79,7 @@ export function Palette({
   shortcutLabel
 }: PaletteProps) {
   const paletteRef = useRef<HTMLElement | null>(null);
+  const languageMenuRef = useRef<HTMLDetailsElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const searching = Boolean(query.trim());
 
@@ -124,6 +125,21 @@ export function Palette({
       ?.scrollIntoView({ block: "nearest", inline: "nearest" });
   }, [activeCategory]);
 
+  useEffect(() => {
+    const closeLanguageMenu = (event: MouseEvent) => {
+      if (
+        languageMenuRef.current?.open &&
+        event.target instanceof Node &&
+        !languageMenuRef.current.contains(event.target)
+      ) {
+        languageMenuRef.current.open = false;
+      }
+    };
+
+    document.addEventListener("mousedown", closeLanguageMenu);
+    return () => document.removeEventListener("mousedown", closeLanguageMenu);
+  }, []);
+
   return (
     <main
       ref={paletteRef}
@@ -139,7 +155,7 @@ export function Palette({
           <h1>AI 下一句</h1>
         </div>
         <div className="headerActions" onMouseDown={(event) => event.stopPropagation()}>
-          <details className="languageMenu">
+          <details className="languageMenu" ref={languageMenuRef}>
             <summary aria-label="語言">
               <span>
                 <strong>{languageName(activeLocale(activePackId, packs))}</strong>
@@ -225,10 +241,6 @@ export function Palette({
             {category.name}
           </button>
         ))}
-        <button className="addPromptTab" onClick={onCustomPromptCreate} type="button">
-          <Plus size={14} />
-          新增
-        </button>
       </nav>
 
       <section className="promptList" aria-label="Rescue prompts" role="listbox">
