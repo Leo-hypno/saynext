@@ -22,7 +22,11 @@ import {
   type UpdateProgress,
   type UpdateStatus
 } from "./lib/updater";
-import { buildCategoryIds, getVisiblePrompts, recentCategoryId } from "./lib/promptView";
+import {
+  buildCategoryIds,
+  getVisiblePrompts,
+  recentCategoryId
+} from "./lib/promptView";
 import { getUiCopy } from "./lib/uiCopy";
 import englishPackData from "../../../packs/en/beginner-rescue.json";
 import zhTwPackData from "../../../packs/zh-TW/beginner-rescue.json";
@@ -31,7 +35,7 @@ import type { CustomPromptDraft, PromptPack, RescuePrompt } from "./types";
 
 const packs = [zhTwPackData, englishPackData] as PromptPack[];
 const defaultPackId = "beginner-rescue-zh-tw";
-const defaultCategoryId = "start";
+const defaultCategoryId = recentCategoryId;
 const customCategoryId = "custom";
 const pointerResumeDelayMs = 700;
 const copyNoticeDurationMs = 1800;
@@ -82,11 +86,8 @@ export function App() {
   const uiCopy = useMemo(() => getUiCopy(pack.locale), [pack.locale]);
 
   const categories = useMemo(() => {
-    const [firstCategory, ...otherCategories] = pack.categories;
     const customCategory = { id: customCategoryId, name: uiCopy.categoryCustom };
-    return firstCategory
-      ? [firstCategory, customCategory, ...otherCategories]
-      : [customCategory];
+    return [customCategory, ...pack.categories];
   }, [pack.categories, uiCopy.categoryCustom]);
 
   const prompts = useMemo(
@@ -111,6 +112,10 @@ export function App() {
       recentIds
     });
   }, [activeCategory, categories, favorites, prompts, query, recentIds]);
+
+  const recentPromptCount = useMemo(() => {
+    return recentIds.filter((id) => prompts.some((prompt) => prompt.id === id)).length;
+  }, [prompts, recentIds]);
 
   const enableKeyboardMode = useCallback(() => {
     lastKeyboardNavigationRef.current = Date.now();
@@ -377,8 +382,7 @@ export function App() {
     if (!packs.some((candidate) => candidate.id === packId)) return;
 
     setActivePackId(packId);
-    const nextPack = packs.find((candidate) => candidate.id === packId);
-    setActiveCategory(nextPack?.categories[0]?.id ?? defaultCategoryId);
+    setActiveCategory(recentCategoryId);
     setQuery("");
   }
 
@@ -535,6 +539,7 @@ export function App() {
         copyNotice={copyNotice}
         favorites={favorites}
         keyboardMode={keyboardMode}
+        recentCount={recentPromptCount}
         onCategoryChange={handleCategoryChange}
         onCopy={handleCopy}
         onCustomPromptCreate={handleCustomPromptCreate}

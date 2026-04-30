@@ -23,7 +23,9 @@ export type UiCopy = {
   allCategories: string;
   cancel: string;
   categoryCustom: string;
+  categoryFavorites: string;
   categoryRecent: string;
+  categoryRecentEmpty: string;
   close: string;
   confirm: string;
   delete: string;
@@ -35,6 +37,8 @@ export type UiCopy = {
   emptyCategoryTitle: string;
   emptyCustomCopy: string;
   emptyCustomTitle: string;
+  emptyFavoritesCopy: string;
+  emptyFavoritesTitle: string;
   emptyRecentCopy: string;
   emptyRecentTitle: string;
   footerCategory: string;

@@ -2,12 +2,10 @@ import type { Category, RescuePrompt } from "../types";
 import { searchPrompts } from "./search";
 
 export const recentCategoryId = "recent";
+export const favoritesCategoryId = "favorites";
 
 export function buildCategoryIds(categories: Category[]) {
-  const [firstCategory, ...otherCategories] = categories.map((category) => category.id);
-  const ids = firstCategory ? [firstCategory, recentCategoryId] : [recentCategoryId];
-  ids.push(...otherCategories);
-  return ids;
+  return [recentCategoryId, favoritesCategoryId, ...categories.map((category) => category.id)];
 }
 
 export function getVisiblePrompts({
@@ -34,6 +32,10 @@ export function getVisiblePrompts({
     return recentIds
       .map((id) => prompts.find((prompt) => prompt.id === id))
       .filter((prompt): prompt is RescuePrompt => Boolean(prompt));
+  }
+
+  if (activeCategory === favoritesCategoryId) {
+    return prompts.filter((prompt) => favorites.has(prompt.id));
   }
 
   const fallbackCategory = categories[0]?.id ?? "";

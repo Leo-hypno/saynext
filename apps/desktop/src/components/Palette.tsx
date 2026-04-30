@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import {
   Check,
   ChevronDown,
+  Clock,
   Copy,
   Pencil,
   Plus,
@@ -10,6 +11,7 @@ import {
   Star,
   Trash2
 } from "lucide-react";
+import { favoritesCategoryId, recentCategoryId } from "../lib/promptView";
 import type { Category, RescuePrompt, UiCopy } from "../types";
 
 type PaletteProps = {
@@ -31,6 +33,7 @@ type PaletteProps = {
   favorites: Set<string>;
   keyboardMode: boolean;
   query: string;
+  recentCount: number;
   selectedIndex: number;
   searchFocusRequest: number;
   onCategoryChange: (category: string) => void;
@@ -62,6 +65,7 @@ export function Palette({
   favorites,
   keyboardMode,
   query,
+  recentCount,
   selectedIndex,
   searchFocusRequest,
   onCategoryChange,
@@ -220,25 +224,25 @@ export function Palette({
       </label>
 
       <nav className="categoryTabs" aria-label="Prompt categories">
-        {categories[0] ? (
-          <button
-            className={!searching && activeCategory === categories[0].id ? "active" : ""}
-            onClick={() => onCategoryChange(categories[0].id)}
-            title={categories[0].name}
-            type="button"
-          >
-            {categories[0].name}
-          </button>
-        ) : null}
         <button
-          className={!searching && activeCategory === "recent" ? "active" : ""}
-          onClick={() => onCategoryChange("recent")}
-          title={uiCopy.categoryRecent}
+          className={!searching && activeCategory === recentCategoryId ? "active" : ""}
+          onClick={() => onCategoryChange(recentCategoryId)}
+          title={recentCount > 0 ? uiCopy.categoryRecent : uiCopy.categoryRecentEmpty}
           type="button"
         >
-          {uiCopy.categoryRecent}
+          {recentCount === 0 ? <Clock size={14} /> : null}
+          {recentCount > 0 ? uiCopy.categoryRecent : uiCopy.categoryRecentEmpty}
         </button>
-        {categories.slice(1).map((category) => (
+        <button
+          className={!searching && activeCategory === favoritesCategoryId ? "active" : ""}
+          onClick={() => onCategoryChange(favoritesCategoryId)}
+          title={uiCopy.categoryFavorites}
+          type="button"
+        >
+          <Star size={14} />
+          {uiCopy.categoryFavorites}
+        </button>
+        {categories.map((category) => (
           <button
             className={!searching && activeCategory === category.id ? "active" : ""}
             key={category.id}
@@ -365,13 +369,15 @@ function activeLocale(activePackId: string, packs: PaletteProps["packs"]) {
 
 function emptyStateCopy(activeCategory: string, query: string, uiCopy: UiCopy) {
   if (query.trim()) return uiCopy.placeholderSearchSamples;
-  if (activeCategory === "recent") return uiCopy.emptyRecentCopy;
+  if (activeCategory === recentCategoryId) return uiCopy.emptyRecentCopy;
+  if (activeCategory === favoritesCategoryId) return uiCopy.emptyFavoritesCopy;
   if (activeCategory === "custom") return uiCopy.emptyCustomCopy;
   return uiCopy.emptyCategoryCopy;
 }
 
 function emptyStateTitle(activeCategory: string, query: string, uiCopy: UiCopy) {
-  if (activeCategory === "recent" && !query.trim()) return uiCopy.emptyRecentTitle;
+  if (activeCategory === recentCategoryId && !query.trim()) return uiCopy.emptyRecentTitle;
+  if (activeCategory === favoritesCategoryId && !query.trim()) return uiCopy.emptyFavoritesTitle;
   if (activeCategory === "custom" && !query.trim()) return uiCopy.emptyCustomTitle;
   return uiCopy.emptyCategoryTitle;
 }
