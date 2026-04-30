@@ -73,7 +73,7 @@ The Tauri updater has its own signing requirement and cannot install unsigned up
 
 Before a wider public launch:
 
-- Configure Apple Developer ID signing and notarization for macOS.
+- Configure Apple Developer ID signing and notarization for macOS. See [Apple Developer ID Signing](apple-signing.md).
 - Configure a Windows code signing certificate.
 - Keep the Tauri updater private key backed up securely.
 
