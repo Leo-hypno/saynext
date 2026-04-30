@@ -1,25 +1,46 @@
-import { RotateCcw, X } from "lucide-react";
+import { Download, ExternalLink, RefreshCw, RotateCcw, X } from "lucide-react";
 import type { AutostartStatus } from "../lib/autostart";
+import type { UpdateInfo, UpdateProgress, UpdateStatus } from "../lib/updater";
 
 type SettingsPanelProps = {
   autoHideAfterCopy: boolean;
   autostartStatus: AutostartStatus;
+  updateError: string | null;
+  updateInfo: UpdateInfo | null;
+  updateProgress: UpdateProgress | null;
+  updateStatus: UpdateStatus;
   onAutoHideAfterCopyChange: (enabled: boolean) => void;
   onAutostartToggle: (enabled: boolean) => void;
   onClose: () => void;
   onResetWindowPosition: () => void;
+  onUpdateCheck: () => void;
+  onUpdateInstall: () => void;
 };
 
 export function SettingsPanel({
   autoHideAfterCopy,
   autostartStatus,
+  updateError,
+  updateInfo,
+  updateProgress,
+  updateStatus,
   onAutoHideAfterCopyChange,
   onAutostartToggle,
   onClose,
-  onResetWindowPosition
+  onResetWindowPosition,
+  onUpdateCheck,
+  onUpdateInstall
 }: SettingsPanelProps) {
   const autostartUnavailable = autostartStatus === "checking" || autostartStatus === "unavailable";
   const autostartEnabled = autostartStatus === "enabled";
+  const updateBusy =
+    updateStatus === "checking" ||
+    updateStatus === "downloading" ||
+    updateStatus === "restarting";
+  const updatePercent =
+    updateProgress?.total && updateProgress.total > 0
+      ? Math.min(100, Math.round((updateProgress.downloaded / updateProgress.total) * 100))
+      : null;
 
   return (
     <div className="settingsOverlay" role="presentation" onClick={onClose}>
@@ -84,12 +105,41 @@ export function SettingsPanel({
         </div>
 
         <div className="settingsGroup">
-          <div className="settingRow">
+          <div className="settingRow updateRow">
+            <div>
+              <strong>軟體更新</strong>
+              <p>{updateCopy(updateStatus, updateInfo, updatePercent, updateError)}</p>
+            </div>
+            {updateStatus === "available" ? (
+              <button className="compactButton primary" onClick={onUpdateInstall} type="button">
+                <Download size={15} />
+                更新
+              </button>
+            ) : (
+              <button
+                className="compactButton"
+                disabled={updateBusy}
+                onClick={onUpdateCheck}
+                type="button"
+              >
+                <RefreshCw className={updateBusy ? "spin" : undefined} size={15} />
+                檢查
+              </button>
+            )}
+          </div>
+
+          <a
+            className="settingRow settingButton"
+            href="https://github.com/Leo-hypno/saynext"
+            rel="noreferrer"
+            target="_blank"
+          >
             <div>
               <strong>GitHub repository</strong>
-              <p>公開倉庫建立後，這裡會放正式連結。</p>
+              <p>查看原始碼、下載版本與回報問題。</p>
             </div>
-          </div>
+            <ExternalLink size={18} />
+          </a>
           <p className="settingsNote">
             SayNext is open-source, offline-first, and built for people who do not know what
             to ask AI next.
@@ -104,4 +154,25 @@ function autostartCopy(status: AutostartStatus) {
   if (status === "checking") return "正在檢查目前狀態。";
   if (status === "unavailable") return "Web preview 不支援，桌面版可使用。";
   return "登入系統後自動常駐在 menu bar / tray。";
+}
+
+function updateCopy(
+  status: UpdateStatus,
+  updateInfo: UpdateInfo | null,
+  updatePercent: number | null,
+  error: string | null
+) {
+  if (status === "checking") return "正在檢查 GitHub 上是否有新版本。";
+  if (status === "available" && updateInfo) {
+    return `找到 ${updateInfo.version}，目前版本是 ${updateInfo.currentVersion}。`;
+  }
+  if (status === "notAvailable") return "目前已經是最新版本。";
+  if (status === "downloading") {
+    return updatePercent === null
+      ? "正在下載並安裝更新。"
+      : `正在下載並安裝更新：${updatePercent}%。`;
+  }
+  if (status === "restarting") return "更新完成，正在重新啟動 SayNext。";
+  if (status === "error") return error ?? "更新檢查失敗，請稍後再試。";
+  return "從 GitHub Release 檢查新版並自動安裝。";
 }

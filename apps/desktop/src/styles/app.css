@@ -302,7 +302,8 @@ h1 {
   cursor: pointer;
 }
 
-.settingButton > svg {
+.settingButton > svg,
+.updateRow > svg {
   color: #6b7280;
   flex: 0 0 auto;
 }
@@ -326,6 +327,56 @@ h1 {
   flex: 0 0 auto;
   height: 18px;
   width: 18px;
+}
+
+.compactButton {
+  align-items: center;
+  background: #f7f8fa;
+  border: 1px solid #d8dee8;
+  border-radius: 8px;
+  color: #344054;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 6px;
+  height: 32px;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.compactButton:hover:not(:disabled) {
+  background: #eef4ff;
+  border-color: #c7dcff;
+  color: #1557b0;
+}
+
+.compactButton.primary {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: #ffffff;
+}
+
+.compactButton.primary:hover {
+  background: #1557b0;
+  border-color: #1557b0;
+  color: #ffffff;
+}
+
+.compactButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 kbd {
@@ -505,13 +556,21 @@ kbd {
   }
 
   .settingRow:hover,
-  kbd {
+  kbd,
+  .compactButton {
     background: #1d2229;
   }
 
-  kbd {
+  kbd,
+  .compactButton {
     border-color: #343b46;
     color: #d7dce4;
+  }
+
+  .compactButton:hover:not(:disabled) {
+    background: #19324f;
+    border-color: #2e5f98;
+    color: #9fceff;
   }
 
   .copyNotice.success {

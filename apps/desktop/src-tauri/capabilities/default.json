@@ -9,6 +9,8 @@
     "core:window:allow-set-position",
     "clipboard-manager:allow-write-text",
     "global-shortcut:default",
-    "autostart:default"
+    "autostart:default",
+    "updater:default",
+    "process:allow-restart"
   ]
 }

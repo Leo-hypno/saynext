@@ -4,6 +4,19 @@ All notable changes to SayNext are documented here.
 
 This project follows Semantic Versioning.
 
+## [0.1.1] - 2026-04-30
+
+### Added
+
+- In-app update check and install flow in Settings.
+- Tauri updater and process plugins.
+- GitHub Release updater endpoint and updater artifact signing configuration.
+
+### Notes
+
+- Users on `0.1.0` must install `0.1.1` manually once because `0.1.0` did not include the updater.
+- Future releases can be installed from inside SayNext after the updater signing secret is configured.
+
 ## [0.1.0] - 2026-04-30
 
 ### Added
@@ -19,4 +32,3 @@ This project follows Semantic Versioning.
 
 - Installers are not signed yet.
 - Prompt packs are bundled at build time.
-- In-app auto update is planned but not enabled yet.

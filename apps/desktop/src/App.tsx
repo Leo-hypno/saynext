@@ -12,9 +12,18 @@ import {
   restoreWindowPosition,
   subscribeToWindowMoves
 } from "./lib/windowPosition";
+import {
+  checkForUpdate,
+  installUpdate,
+  toUpdateInfo,
+  type UpdateInfo,
+  type UpdateProgress,
+  type UpdateStatus
+} from "./lib/updater";
 import { buildCategoryIds, getVisiblePrompts, recentCategoryId } from "./lib/promptView";
 import englishPackData from "../../../packs/en/beginner-rescue.json";
 import zhTwPackData from "../../../packs/zh-TW/beginner-rescue.json";
+import type { Update } from "@tauri-apps/plugin-updater";
 import type { PromptPack, RescuePrompt } from "./types";
 
 const packs = [zhTwPackData, englishPackData] as PromptPack[];
@@ -23,6 +32,7 @@ const defaultCategoryId = "start";
 
 export function App() {
   const copyTimerRef = useRef<number | undefined>(undefined);
+  const pendingUpdateRef = useRef<Update | null>(null);
   const [activePackId, setActivePackId] = useState(() =>
     readStoredString("saynext.activePackId", defaultPackId)
   );
@@ -39,6 +49,10 @@ export function App() {
     () => readStoredBoolean("saynext.autoHideAfterCopy", true)
   );
   const [autostartStatus, setAutostartStatus] = useState<AutostartStatus>("checking");
+  const [updateStatus, setUpdateStatus] = useState<UpdateStatus>("idle");
+  const [updateInfo, setUpdateInfo] = useState<UpdateInfo | null>(null);
+  const [updateProgress, setUpdateProgress] = useState<UpdateProgress | null>(null);
+  const [updateError, setUpdateError] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<Set<string>>(
     () => new Set(readStoredStringArray("saynext.favorites"))
   );
@@ -287,6 +301,49 @@ export function App() {
     }
   }
 
+  async function handleUpdateCheck() {
+    pendingUpdateRef.current = null;
+    setUpdateInfo(null);
+    setUpdateProgress(null);
+    setUpdateError(null);
+    setUpdateStatus("checking");
+
+    try {
+      const update = await checkForUpdate();
+      if (!update) {
+        setUpdateStatus("notAvailable");
+        return;
+      }
+
+      pendingUpdateRef.current = update;
+      setUpdateInfo(toUpdateInfo(update));
+      setUpdateStatus("available");
+    } catch {
+      setUpdateStatus("error");
+      setUpdateError("目前無法檢查更新。請確認網路連線，或稍後再試。");
+    }
+  }
+
+  async function handleUpdateInstall() {
+    const update = pendingUpdateRef.current;
+    if (!update) {
+      await handleUpdateCheck();
+      return;
+    }
+
+    setUpdateStatus("downloading");
+    setUpdateError(null);
+    setUpdateProgress({ downloaded: 0 });
+
+    try {
+      await installUpdate(update, setUpdateProgress);
+      setUpdateStatus("restarting");
+    } catch {
+      setUpdateStatus("error");
+      setUpdateError("更新安裝失敗。請重新檢查更新，或到 GitHub 下載最新版本。");
+    }
+  }
+
   return (
     <div className="appShell">
       <Palette
@@ -321,10 +378,16 @@ export function App() {
         <SettingsPanel
           autoHideAfterCopy={autoHideAfterCopy}
           autostartStatus={autostartStatus}
+          updateError={updateError}
+          updateInfo={updateInfo}
+          updateProgress={updateProgress}
+          updateStatus={updateStatus}
           onAutoHideAfterCopyChange={setAutoHideAfterCopy}
           onAutostartToggle={handleAutostartToggle}
           onClose={() => setSettingsOpen(false)}
           onResetWindowPosition={() => void resetWindowPosition()}
+          onUpdateCheck={handleUpdateCheck}
+          onUpdateInstall={handleUpdateInstall}
         />
       ) : null}
     </div>

@@ -25,6 +25,31 @@ for (const relativePath of files) {
   console.log(`Updated ${relativePath} to ${version}`);
 }
 
+const cargoTomlPath = path.join(root, "apps/desktop/src-tauri/Cargo.toml");
+
+if (fs.existsSync(cargoTomlPath)) {
+  const cargoToml = fs.readFileSync(cargoTomlPath, "utf8");
+  fs.writeFileSync(
+    cargoTomlPath,
+    cargoToml.replace(/^version = ".*"$/m, `version = "${version}"`)
+  );
+  console.log(`Updated apps/desktop/src-tauri/Cargo.toml to ${version}`);
+}
+
+const cargoLockPath = path.join(root, "apps/desktop/src-tauri/Cargo.lock");
+
+if (fs.existsSync(cargoLockPath)) {
+  const cargoLock = fs.readFileSync(cargoLockPath, "utf8");
+  fs.writeFileSync(
+    cargoLockPath,
+    cargoLock.replace(
+      /(\[\[package\]\]\nname = "saynext"\nversion = ")[^"]+(")/,
+      `$1${version}$2`
+    )
+  );
+  console.log(`Updated apps/desktop/src-tauri/Cargo.lock to ${version}`);
+}
+
 const lockfilePath = path.join(root, "package-lock.json");
 
 if (fs.existsSync(lockfilePath)) {
