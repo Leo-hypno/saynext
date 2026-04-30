@@ -22,6 +22,8 @@ export type CustomPromptDraft = {
 export type UiCopy = {
   addCustomPrompt: string;
   allCategories: string;
+  appEyebrow: string;
+  appTitle: string;
   cancel: string;
   categoryCustom: string;
   categoryFavorites: string;

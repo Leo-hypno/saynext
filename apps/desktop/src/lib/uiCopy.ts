@@ -3,6 +3,8 @@ import type { UiCopy } from "../types";
 const zhTw: UiCopy = {
   addCustomPrompt: "新增句子",
   allCategories: "全部分類",
+  appEyebrow: "SAYNEXT",
+  appTitle: "AI 下一句",
   cancel: "取消",
   categoryCustom: "我的句子",
   categoryFavorites: "我的最愛",
@@ -81,6 +83,8 @@ const zhTw: UiCopy = {
 const en: UiCopy = {
   addCustomPrompt: "Add prompt",
   allCategories: "All",
+  appEyebrow: "SAYNEXT",
+  appTitle: "AI Next Prompt",
   cancel: "Cancel",
   categoryCustom: "My prompts",
   categoryFavorites: "Favorites",

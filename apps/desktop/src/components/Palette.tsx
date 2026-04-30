@@ -139,13 +139,14 @@ export function Palette({
     >
       <header className="paletteHeader">
         <div className="paletteTitle">
-          <p className="eyebrow">SayNext</p>
-          <h1>AI 下一句</h1>
+          <p className="eyebrow">{uiCopy.appEyebrow}</p>
+          <h1>{uiCopy.appTitle}</h1>
         </div>
         <div className="headerActions" onMouseDown={(event) => event.stopPropagation()}>
           <details className="languageMenu" ref={languageMenuRef}>
             <summary aria-label={uiCopy.language}>
-              <span>
+              <span className="languageSummaryText">
+                <em>{uiCopy.language}</em>
                 <strong>{languageName(activeLocale(activePackId, packs))}</strong>
               </span>
               <ChevronDown size={15} />

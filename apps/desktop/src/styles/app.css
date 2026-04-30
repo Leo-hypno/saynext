@@ -85,12 +85,19 @@ h1 {
 }
 
 .shortcut {
+  align-items: center;
   border: 1px solid #d8dee8;
   border-radius: 8px;
   color: #4b5563;
+  display: inline-flex;
+  flex: 0 0 auto;
   font-size: 12px;
   font-weight: 700;
+  height: 34px;
+  justify-content: center;
+  min-width: max-content;
   padding: 6px 8px;
+  white-space: nowrap;
 }
 
 .headerActions {
@@ -103,7 +110,7 @@ h1 {
 }
 
 .languageMenu {
-  flex: 0 1 210px;
+  flex: 0 0 220px;
   min-width: 0;
   position: relative;
 }
@@ -129,15 +136,26 @@ h1 {
 }
 
 .languageMenu summary span {
-  display: grid;
-  gap: 1px;
+  align-items: baseline;
+  display: flex;
+  gap: 7px;
   min-width: 0;
 }
 
+.languageMenu summary em,
 .languageMenu summary strong {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.languageMenu summary em {
+  color: #667085;
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .languageMenu summary strong {
@@ -705,6 +723,10 @@ kbd {
   .customPromptForm select {
     background: #1d2229;
     color: #d7dce4;
+  }
+
+  .languageMenu summary em {
+    color: #98a2b3;
   }
 
   .customPromptForm label span {
