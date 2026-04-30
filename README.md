@@ -2,6 +2,21 @@
 
 An open-source desktop palette that helps you ask AI the next better question.
 
+## Download
+
+Get the latest installers from the GitHub Releases page:
+
+**[Download SayNext v0.1.1](https://github.com/Leo-hypno/saynext/releases/latest)**
+
+| System | Download this file |
+| --- | --- |
+| Mac Apple Silicon | `SayNext-0.1.1-darwin-aarch64-dmg.dmg` |
+| Mac Intel | `SayNext-0.1.1-darwin-x64-dmg.dmg` |
+| Windows | `SayNext-0.1.1-windows-x64-nsis-setup.exe` |
+
+If Windows blocks the installer, choose "More info" then "Run anyway".
+If macOS blocks the app, open it from System Settings > Privacy & Security.
+
 When ChatGPT, Claude, Gemini, or any AI tool gives a confusing answer, refuses too early, or you simply do not know what to ask next, press a hotkey and pick a rescue prompt.
 
 > SayNext is not a prompt manager for people who already know what they want to ask.
@@ -33,7 +48,9 @@ SayNext gives them short, human rescue prompts that keep the conversation moving
 
 ## Project Status
 
-SayNext is in early MVP development. The desktop app can be run locally, copied prompts work, and the starter prompt packs are usable. Signed installers and automatic updates are not ready yet.
+SayNext is in early public release. macOS and Windows installers are available on GitHub Releases, and in-app updates are available starting from `v0.1.1`.
+
+Installers are not OS-code-signed yet, so macOS and Windows may show security warnings.
 
 ## How It Works
 
@@ -71,7 +88,9 @@ See [Prompt Pack Schema](docs/prompt-pack-schema.md).
 
 ## Release
 
-Preparing the first public GitHub release? See [GitHub Launch Checklist](docs/github-launch-checklist.md).
+Download the latest public release from [GitHub Releases](https://github.com/Leo-hypno/saynext/releases/latest).
+
+Preparing a future release? See [GitHub Launch Checklist](docs/github-launch-checklist.md).
 For versioning and GitHub Releases, see [Release Guide](docs/release.md).
 
 ## Development
@@ -147,7 +166,8 @@ npm run make:icon
 - [x] Minimal settings panel
 - [x] Settings persistence
 - [ ] Prompt pack loader from local folder
-- [ ] macOS and Windows release builds
+- [x] macOS and Windows release builds
+- [x] In-app updater foundation
 - [ ] Demo GIF and screenshots
 
 ## Contributing
