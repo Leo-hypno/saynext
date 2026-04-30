@@ -8,9 +8,9 @@ Latest release:
 
 | System | File |
 | --- | --- |
-| Mac Apple Silicon | `SayNext-0.1.3-darwin-aarch64-dmg.dmg` |
-| Mac Intel | `SayNext-0.1.3-darwin-x64-dmg.dmg` |
-| Windows | `SayNext-0.1.3-windows-x64-nsis-setup.exe` |
+| Mac Apple Silicon | `SayNext-0.1.4-darwin-aarch64-dmg.dmg` |
+| Mac Intel | `SayNext-0.1.4-darwin-x64-dmg.dmg` |
+| Windows | `SayNext-0.1.4-windows-x64-nsis-setup.exe` |
 
 ## Notes
 

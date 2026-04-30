@@ -4,6 +4,28 @@ All notable changes to SayNext are documented here.
 
 This project follows Semantic Versioning.
 
+## [0.1.4] - 2026-05-01
+
+### Added
+
+- Added a keyboard shortcut for favoriting the selected prompt.
+- Added custom prompts with placement in built-in contexts.
+- Added manual appearance selection for system, light, and dark modes.
+- Added everyday AI usage prompts for documents, reports, travel planning, and life decisions.
+- Added clearer localized header and language selector labels.
+
+### Changed
+
+- Simplified navigation around context tabs, recent prompts, favorites, and custom prompts.
+- Improved prompt list density, keyboard behavior, and settings panel polish.
+- Updated README and GitHub-facing docs to match the current product flow.
+- Kept prompt order stable when favoriting items inside normal context tabs.
+
+### Removed
+
+- Removed the search UI and outdated search documentation.
+- Removed the copy-after-auto-hide setting.
+
 ## [0.1.3] - 2026-04-30
 
 ### Added
