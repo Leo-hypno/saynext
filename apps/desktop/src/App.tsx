@@ -24,6 +24,7 @@ import {
 } from "./lib/updater";
 import {
   buildCategoryIds,
+  customCategoryId,
   getVisiblePrompts,
   recentCategoryId
 } from "./lib/promptView";
@@ -35,8 +36,7 @@ import type { CustomPromptDraft, PromptPack, RescuePrompt } from "./types";
 
 const packs = [zhTwPackData, englishPackData] as PromptPack[];
 const defaultPackId = "beginner-rescue-zh-tw";
-const defaultCategoryId = recentCategoryId;
-const customCategoryId = "custom";
+const defaultCategoryId = "start";
 const pointerResumeDelayMs = 700;
 const copyNoticeDurationMs = 1800;
 
@@ -48,7 +48,6 @@ export function App() {
   const [activePackId, setActivePackId] = useState(() =>
     readStoredString("saynext.activePackId", defaultPackId)
   );
-  const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(defaultCategoryId);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [keyboardMode, setKeyboardMode] = useState(false);
@@ -58,7 +57,6 @@ export function App() {
   const [customPromptDialogOpen, setCustomPromptDialogOpen] = useState(false);
   const [editingCustomPrompt, setEditingCustomPrompt] = useState<RescuePrompt | null>(null);
   const [deletePromptId, setDeletePromptId] = useState<string | null>(null);
-  const [searchFocusRequest, setSearchFocusRequest] = useState(0);
   const [paletteFocusRequest, setPaletteFocusRequest] = useState(0);
   const [autoHideAfterCopy, setAutoHideAfterCopy] = useState(
     () => readStoredBoolean("saynext.autoHideAfterCopy", true)
@@ -86,9 +84,8 @@ export function App() {
   const uiCopy = useMemo(() => getUiCopy(pack.locale), [pack.locale]);
 
   const categories = useMemo(() => {
-    const customCategory = { id: customCategoryId, name: uiCopy.categoryCustom };
-    return [customCategory, ...pack.categories];
-  }, [pack.categories, uiCopy.categoryCustom]);
+    return pack.categories;
+  }, [pack.categories]);
 
   const prompts = useMemo(
     () => [
@@ -108,10 +105,9 @@ export function App() {
       categories,
       favorites,
       prompts,
-      query,
       recentIds
     });
-  }, [activeCategory, categories, favorites, prompts, query, recentIds]);
+  }, [activeCategory, categories, favorites, prompts, recentIds]);
 
   const recentPromptCount = useMemo(() => {
     return recentIds.filter((id) => prompts.some((prompt) => prompt.id === id)).length;
@@ -139,7 +135,7 @@ export function App() {
 
   useEffect(() => {
     setSelectedIndex(0);
-  }, [activeCategory, activePackId, query]);
+  }, [activeCategory, activePackId]);
 
   useEffect(() => {
     setSelectedIndex((index) => {
@@ -211,12 +207,6 @@ export function App() {
           return;
         }
 
-        if (query) {
-          setQuery("");
-          setPaletteFocusRequest((request) => request + 1);
-          return;
-        }
-
         if (isTextEditingTarget(event.target)) {
           if (event.target instanceof HTMLElement) {
             event.target.blur();
@@ -228,29 +218,11 @@ export function App() {
 
       if (settingsOpen || customPromptDialogOpen || deletePromptId) return;
 
-      if (
-        event.key.toLowerCase() === "f" &&
-        (event.metaKey || event.ctrlKey)
-      ) {
-        event.preventDefault();
-        setSearchFocusRequest((request) => request + 1);
-        return;
-      }
-
-      if (event.key === "/" && !isTextEditingTarget(event.target)) {
-        event.preventDefault();
-        setSearchFocusRequest((request) => request + 1);
-        return;
-      }
-
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
         if (isTextEditingTarget(event.target)) return;
 
         event.preventDefault();
         enableKeyboardMode();
-        if (query) {
-          setQuery("");
-        }
         setActiveCategory((current) => {
           if (categoryIds.length === 0) return current;
           const currentIndex = Math.max(categoryIds.indexOf(current), 0);
@@ -313,7 +285,6 @@ export function App() {
     customPromptDialogOpen,
     deletePromptId,
     enableKeyboardMode,
-    query,
     selectedIndex,
     settingsOpen,
     visiblePrompts
@@ -382,13 +353,12 @@ export function App() {
     if (!packs.some((candidate) => candidate.id === packId)) return;
 
     setActivePackId(packId);
-    setActiveCategory(recentCategoryId);
-    setQuery("");
+    const nextPack = packs.find((candidate) => candidate.id === packId);
+    setActiveCategory(nextPack?.categories[0]?.id ?? defaultCategoryId);
   }
 
   function handleCategoryChange(categoryId: string) {
     setKeyboardMode(false);
-    setQuery("");
     setActiveCategory(categoryId);
   }
 
@@ -419,7 +389,6 @@ export function App() {
       return next;
     });
     setRecentIds((ids) => ids.filter((id) => id !== promptId));
-    setQuery("");
     setActiveCategory(customCategoryId);
     showNotice({ kind: "success", text: uiCopy.noticeDeleted(promptTitle) });
   }
@@ -438,7 +407,7 @@ export function App() {
       setCustomPrompts((prompts) =>
         prompts.map((prompt) =>
           prompt.id === editingCustomPrompt.id
-            ? { ...prompt, tags, text, title }
+            ? { ...prompt, category: draft.category || customCategoryId, tags, text, title }
             : prompt
         )
       );
@@ -446,7 +415,7 @@ export function App() {
     } else {
       setCustomPrompts((prompts) => [
         {
-          category: customCategoryId,
+          category: draft.category || customCategoryId,
           id: createCustomPromptId(),
           source: "custom",
           tags,
@@ -455,8 +424,7 @@ export function App() {
         },
         ...prompts
       ]);
-      setActiveCategory(customCategoryId);
-      setQuery("");
+      setActiveCategory(draft.category || customCategoryId);
       showNotice({ kind: "success", text: uiCopy.noticeAdded(title) });
     }
 
@@ -549,20 +517,15 @@ export function App() {
         onSettingsOpen={() => setSettingsOpen(true)}
         onPackChange={handlePackChange}
         onPointerActivity={handlePointerActivity}
-        onQueryChange={setQuery}
         onSelectedIndexChange={setSelectedIndex}
         paletteFocusRequest={paletteFocusRequest}
-        packName={pack.name}
         packs={packs.map((candidate) => ({
           id: candidate.id,
           locale: candidate.locale,
           name: candidate.name
         }))}
         prompts={visiblePrompts}
-        query={query}
-        searchFocusRequest={searchFocusRequest}
         selectedIndex={selectedIndex}
-        searchShortcutLabel={platform.searchShortcutLabel}
         shortcutLabel={platform.shortcutLabel}
         uiCopy={uiCopy}
       />
@@ -601,6 +564,7 @@ export function App() {
       ) : null}
       {customPromptDialogOpen ? (
         <CustomPromptDialog
+          categories={categories}
           editingPrompt={editingCustomPrompt}
           uiCopy={uiCopy}
           onClose={() => {
@@ -664,7 +628,7 @@ function readStoredCustomPrompts(key: string): RescuePrompt[] {
         return true;
       })
       .map((item) => ({
-        category: customCategoryId,
+        category: typeof item.category === "string" ? item.category : customCategoryId,
         id: item.id,
         source: "custom" as const,
         tags: Array.isArray(item.tags)
@@ -699,7 +663,6 @@ function getPlatformMeta() {
 
   return {
     name: isMac ? "macOS" : isWindows ? "Windows" : "桌面系統",
-    searchShortcutLabel: isMac ? "⌘F" : "Ctrl F",
     shortcutLabel: isMac ? "⌘ ⇧ H" : "Ctrl Shift H"
   };
 }

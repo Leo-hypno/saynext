@@ -188,36 +188,40 @@ h1 {
   width: 1px;
 }
 
-.searchBox {
+.personalTabs {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 0 16px 8px;
+  scrollbar-width: none;
+}
+
+.personalTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.personalTabs button {
   align-items: center;
   background: #f7f8fa;
   border: 1px solid #d9e0ea;
-  border-radius: 10px;
-  color: #6b7280;
-  display: flex;
-  gap: 10px;
-  margin: 0 16px 8px;
-  padding: 8px 10px;
-}
-
-.searchBox input {
-  background: transparent;
-  border: 0;
-  color: inherit;
-  flex: 1;
-  min-width: 0;
-  outline: 0;
-}
-
-.searchScope {
-  background: #eef4ff;
-  border: 1px solid #c7dcff;
-  border-radius: 7px;
-  color: #1557b0;
+  border-radius: 8px;
+  color: #4b5563;
+  cursor: pointer;
+  display: inline-flex;
   flex: 0 0 auto;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  padding: 3px 6px;
+  gap: 5px;
+  height: 30px;
+  padding: 0 9px;
+}
+
+.personalTabs button.active,
+.personalTabs button:hover {
+  background: #eef4ff;
+  border-color: #c7dcff;
+  color: #1557b0;
 }
 
 .categoryTabs {
@@ -644,7 +648,8 @@ kbd {
 }
 
 .customPromptForm input,
-.customPromptForm textarea {
+.customPromptForm textarea,
+.customPromptForm select {
   background: #f7f8fa;
   border: 1px solid #d8dee8;
   border-radius: 9px;
@@ -689,14 +694,15 @@ kbd {
 
   .shortcut,
   .languageMenu summary,
-  .searchBox,
+  .personalTabs button,
   .categoryTabs button {
     border-color: #343b46;
   }
 
   .languageMenu summary,
   .customPromptForm input,
-  .customPromptForm textarea {
+  .customPromptForm textarea,
+  .customPromptForm select {
     background: #1d2229;
     color: #d7dce4;
   }
@@ -716,16 +722,12 @@ kbd {
     background: #19324f;
   }
 
-  .searchBox {
+  .personalTabs button {
     background: #1d2229;
   }
 
-  .searchScope {
-    background: #19324f;
-    border-color: #2e5f98;
-    color: #9fceff;
-  }
-
+  .personalTabs button.active,
+  .personalTabs button:hover,
   .promptRow:hover,
   .promptRow.selected {
     background: #202a36;

@@ -4,20 +4,19 @@ import {
   ChevronDown,
   Clock,
   Copy,
+  FileText,
   Pencil,
   Plus,
-  Search,
   Settings,
   Star,
   Trash2
 } from "lucide-react";
-import { favoritesCategoryId, recentCategoryId } from "../lib/promptView";
+import { customCategoryId, favoritesCategoryId, recentCategoryId } from "../lib/promptView";
 import type { Category, RescuePrompt, UiCopy } from "../types";
 
 type PaletteProps = {
   activePackId: string;
   categories: Category[];
-  packName: string;
   packs: Array<{
     id: string;
     locale: string;
@@ -32,10 +31,8 @@ type PaletteProps = {
   } | null;
   favorites: Set<string>;
   keyboardMode: boolean;
-  query: string;
   recentCount: number;
   selectedIndex: number;
-  searchFocusRequest: number;
   onCategoryChange: (category: string) => void;
   onCopy: (prompt: RescuePrompt) => void;
   onCustomPromptCreate: () => void;
@@ -45,10 +42,8 @@ type PaletteProps = {
   onSettingsOpen: () => void;
   onPackChange: (packId: string) => void;
   onPointerActivity: () => boolean;
-  onQueryChange: (query: string) => void;
   onSelectedIndexChange: (index: number) => void;
   paletteFocusRequest: number;
-  searchShortcutLabel: string;
   shortcutLabel: string;
   uiCopy: UiCopy;
 };
@@ -56,7 +51,6 @@ type PaletteProps = {
 export function Palette({
   activePackId,
   categories,
-  packName,
   packs,
   prompts,
   activeCategory,
@@ -64,10 +58,8 @@ export function Palette({
   copyNotice,
   favorites,
   keyboardMode,
-  query,
   recentCount,
   selectedIndex,
-  searchFocusRequest,
   onCategoryChange,
   onCopy,
   onCustomPromptCreate,
@@ -77,17 +69,13 @@ export function Palette({
   onSettingsOpen,
   onPackChange,
   onPointerActivity,
-  onQueryChange,
   onSelectedIndexChange,
   paletteFocusRequest,
-  searchShortcutLabel,
   shortcutLabel,
   uiCopy
 }: PaletteProps) {
   const paletteRef = useRef<HTMLElement | null>(null);
   const languageMenuRef = useRef<HTMLDetailsElement | null>(null);
-  const searchInputRef = useRef<HTMLInputElement | null>(null);
-  const searching = Boolean(query.trim());
 
   useEffect(() => {
     paletteRef.current?.focus();
@@ -108,12 +96,6 @@ export function Palette({
   }, []);
 
   useEffect(() => {
-    if (searchFocusRequest > 0) {
-      searchInputRef.current?.focus();
-    }
-  }, [searchFocusRequest]);
-
-  useEffect(() => {
     if (paletteFocusRequest > 0) {
       paletteRef.current?.focus();
     }
@@ -127,7 +109,7 @@ export function Palette({
 
   useEffect(() => {
     paletteRef.current
-      ?.querySelector(".categoryTabs button.active")
+      ?.querySelector(".categoryTabs button.active, .personalTabs button.active")
       ?.scrollIntoView({ block: "nearest", inline: "nearest" });
   }, [activeCategory]);
 
@@ -211,30 +193,18 @@ export function Palette({
         </div>
       </header>
 
-      <label className="searchBox">
-        <Search size={18} aria-hidden="true" />
-        <input
-          ref={searchInputRef}
-          value={query}
-          onChange={(event) => onQueryChange(event.target.value)}
-          placeholder={uiCopy.searchPlaceholder(packName, searchShortcutLabel)}
-          aria-label={uiCopy.searchAriaLabel}
-        />
-        {query.trim() ? <span className="searchScope">{uiCopy.allCategories}</span> : null}
-      </label>
-
-      <nav className="categoryTabs" aria-label="Prompt categories">
+      <nav className="personalTabs" aria-label="Personal prompt shortcuts">
         <button
-          className={!searching && activeCategory === recentCategoryId ? "active" : ""}
+          className={activeCategory === recentCategoryId ? "active" : ""}
           onClick={() => onCategoryChange(recentCategoryId)}
           title={recentCount > 0 ? uiCopy.categoryRecent : uiCopy.categoryRecentEmpty}
           type="button"
         >
-          {recentCount === 0 ? <Clock size={14} /> : null}
+          <Clock size={14} />
           {recentCount > 0 ? uiCopy.categoryRecent : uiCopy.categoryRecentEmpty}
         </button>
         <button
-          className={!searching && activeCategory === favoritesCategoryId ? "active" : ""}
+          className={activeCategory === favoritesCategoryId ? "active" : ""}
           onClick={() => onCategoryChange(favoritesCategoryId)}
           title={uiCopy.categoryFavorites}
           type="button"
@@ -242,9 +212,21 @@ export function Palette({
           <Star size={14} />
           {uiCopy.categoryFavorites}
         </button>
+        <button
+          className={activeCategory === customCategoryId ? "active" : ""}
+          onClick={() => onCategoryChange(customCategoryId)}
+          title={uiCopy.categoryCustom}
+          type="button"
+        >
+          <FileText size={14} />
+          {uiCopy.categoryCustom}
+        </button>
+      </nav>
+
+      <nav className="categoryTabs" aria-label="Prompt categories">
         {categories.map((category) => (
           <button
-            className={!searching && activeCategory === category.id ? "active" : ""}
+            className={activeCategory === category.id ? "active" : ""}
             key={category.id}
             onClick={() => onCategoryChange(category.id)}
             title={category.name}
@@ -258,8 +240,8 @@ export function Palette({
       <section className="promptList" aria-label="Rescue prompts" role="listbox">
         {prompts.length === 0 ? (
           <div className="emptyState">
-            <p>{emptyStateTitle(activeCategory, query, uiCopy)}</p>
-            <span>{emptyStateCopy(activeCategory, query, uiCopy)}</span>
+            <p>{emptyStateTitle(activeCategory, uiCopy)}</p>
+            <span>{emptyStateCopy(activeCategory, uiCopy)}</span>
           </div>
         ) : (
           prompts.map((prompt, index) => (
@@ -292,7 +274,7 @@ export function Palette({
               <div className="promptBody">
                 <div className="promptMeta">
                   <strong>{prompt.title}</strong>
-                  <span>{categoryName(categories, prompt.category)}</span>
+                  <span>{categoryName(categories, prompt.category, uiCopy)}</span>
                 </div>
                 <p>{prompt.text}</p>
               </div>
@@ -336,11 +318,9 @@ export function Palette({
 
       <footer className="paletteFooter">
         <span>{uiCopy.footerCopy}</span>
-        <span>{uiCopy.footerSearchClose}</span>
         <span>{uiCopy.footerSelect}</span>
         <span>{uiCopy.footerJump}</span>
         <span>{uiCopy.footerCategory}</span>
-        <span>{uiCopy.footerSearch}</span>
         <span
           aria-live="polite"
           className={`copyNotice ${copyNotice?.kind ?? ""}`}
@@ -353,7 +333,8 @@ export function Palette({
   );
 }
 
-function categoryName(categories: Category[], categoryId: string) {
+function categoryName(categories: Category[], categoryId: string, uiCopy: UiCopy) {
+  if (categoryId === customCategoryId) return uiCopy.categoryCustom;
   return categories.find((category) => category.id === categoryId)?.name ?? categoryId;
 }
 
@@ -367,17 +348,16 @@ function activeLocale(activePackId: string, packs: PaletteProps["packs"]) {
   return packs.find((pack) => pack.id === activePackId)?.locale ?? "";
 }
 
-function emptyStateCopy(activeCategory: string, query: string, uiCopy: UiCopy) {
-  if (query.trim()) return uiCopy.placeholderSearchSamples;
+function emptyStateCopy(activeCategory: string, uiCopy: UiCopy) {
   if (activeCategory === recentCategoryId) return uiCopy.emptyRecentCopy;
   if (activeCategory === favoritesCategoryId) return uiCopy.emptyFavoritesCopy;
-  if (activeCategory === "custom") return uiCopy.emptyCustomCopy;
+  if (activeCategory === customCategoryId) return uiCopy.emptyCustomCopy;
   return uiCopy.emptyCategoryCopy;
 }
 
-function emptyStateTitle(activeCategory: string, query: string, uiCopy: UiCopy) {
-  if (activeCategory === recentCategoryId && !query.trim()) return uiCopy.emptyRecentTitle;
-  if (activeCategory === favoritesCategoryId && !query.trim()) return uiCopy.emptyFavoritesTitle;
-  if (activeCategory === "custom" && !query.trim()) return uiCopy.emptyCustomTitle;
+function emptyStateTitle(activeCategory: string, uiCopy: UiCopy) {
+  if (activeCategory === recentCategoryId) return uiCopy.emptyRecentTitle;
+  if (activeCategory === favoritesCategoryId) return uiCopy.emptyFavoritesTitle;
+  if (activeCategory === customCategoryId) return uiCopy.emptyCustomTitle;
   return uiCopy.emptyCategoryTitle;
 }

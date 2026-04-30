@@ -1,11 +1,16 @@
 import type { Category, RescuePrompt } from "../types";
-import { searchPrompts } from "./search";
 
 export const recentCategoryId = "recent";
 export const favoritesCategoryId = "favorites";
+export const customCategoryId = "custom";
 
 export function buildCategoryIds(categories: Category[]) {
-  return [recentCategoryId, favoritesCategoryId, ...categories.map((category) => category.id)];
+  return [
+    ...categories.map((category) => category.id),
+    recentCategoryId,
+    favoritesCategoryId,
+    customCategoryId
+  ];
 }
 
 export function getVisiblePrompts({
@@ -13,21 +18,14 @@ export function getVisiblePrompts({
   categories,
   favorites,
   prompts,
-  query,
   recentIds
 }: {
   activeCategory: string;
   categories: Category[];
   favorites: Set<string>;
   prompts: RescuePrompt[];
-  query: string;
   recentIds: string[];
 }) {
-  const normalizedQuery = query.trim();
-  if (normalizedQuery) {
-    return sortPrompts(searchPrompts(prompts, query, "all"), favorites);
-  }
-
   if (activeCategory === recentCategoryId) {
     return recentIds
       .map((id) => prompts.find((prompt) => prompt.id === id))
@@ -38,8 +36,15 @@ export function getVisiblePrompts({
     return prompts.filter((prompt) => favorites.has(prompt.id));
   }
 
+  if (activeCategory === customCategoryId) {
+    return prompts.filter((prompt) => prompt.source === "custom");
+  }
+
   const fallbackCategory = categories[0]?.id ?? "";
-  return sortPrompts(searchPrompts(prompts, query, activeCategory || fallbackCategory), favorites);
+  return sortPrompts(
+    prompts.filter((prompt) => prompt.category === (activeCategory || fallbackCategory)),
+    favorites
+  );
 }
 
 function sortPrompts(prompts: RescuePrompt[], favorites: Set<string>) {

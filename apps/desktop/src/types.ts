@@ -13,6 +13,7 @@ export type RescuePrompt = {
 };
 
 export type CustomPromptDraft = {
+  category: string;
   title: string;
   text: string;
   tags: string;
@@ -44,10 +45,9 @@ export type UiCopy = {
   footerCategory: string;
   footerCopy: string;
   footerJump: string;
-  footerSearch: string;
-  footerSearchClose: string;
   footerSelect: string;
   labelContent: string;
+  labelPlacement: string;
   labelTags: string;
   labelTitle: string;
   language: string;
@@ -57,12 +57,9 @@ export type UiCopy = {
   noticeDeleted: (title: string) => string;
   noticeUpdated: (title: string) => string;
   placeholderContent: string;
-  placeholderSearchSamples: string;
   placeholderTags: string;
   placeholderTitle: string;
   save: string;
-  searchAriaLabel: string;
-  searchPlaceholder: (packName: string, shortcut: string) => string;
   settings: string;
   settingsAutoHideDescription: string;
   settingsAutoHideTitle: string;

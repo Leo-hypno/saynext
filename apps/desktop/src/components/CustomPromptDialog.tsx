@@ -1,8 +1,10 @@
 import { Save, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { CustomPromptDraft, RescuePrompt, UiCopy } from "../types";
+import { customCategoryId } from "../lib/promptView";
+import type { Category, CustomPromptDraft, RescuePrompt, UiCopy } from "../types";
 
 type CustomPromptDialogProps = {
+  categories: Category[];
   editingPrompt: RescuePrompt | null;
   uiCopy: UiCopy;
   onClose: () => void;
@@ -10,12 +12,14 @@ type CustomPromptDialogProps = {
 };
 
 const emptyDraft: CustomPromptDraft = {
+  category: customCategoryId,
   tags: "",
   text: "",
   title: ""
 };
 
 export function CustomPromptDialog({
+  categories,
   editingPrompt,
   uiCopy,
   onClose,
@@ -27,6 +31,7 @@ export function CustomPromptDialog({
     setDraft(
       editingPrompt
         ? {
+            category: editingPrompt.category || customCategoryId,
             tags: editingPrompt.tags.join(", "),
             text: editingPrompt.text,
             title: editingPrompt.title
@@ -84,6 +89,21 @@ export function CustomPromptDialog({
               rows={6}
               value={draft.text}
             />
+          </label>
+
+          <label>
+            <span>{uiCopy.labelPlacement}</span>
+            <select
+              onChange={(event) => setDraft({ ...draft, category: event.target.value })}
+              value={draft.category}
+            >
+              <option value={customCategoryId}>{uiCopy.categoryCustom}</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
           </label>
 
           <label>
