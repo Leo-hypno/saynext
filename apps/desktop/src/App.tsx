@@ -45,6 +45,7 @@ export function App() {
   const copyTimerRef = useRef<number | undefined>(undefined);
   const noticeTimerRef = useRef<number | undefined>(undefined);
   const lastKeyboardNavigationRef = useRef(0);
+  const pendingSelectedPromptIdRef = useRef<string | null>(null);
   const pendingUpdateRef = useRef<Update | null>(null);
   const [activePackId, setActivePackId] = useState(() =>
     readStoredString("saynext.activePackId", defaultPackId)
@@ -153,10 +154,19 @@ export function App() {
 
   useEffect(() => {
     setSelectedIndex((index) => {
+      const pendingPromptId = pendingSelectedPromptIdRef.current;
+      if (pendingPromptId) {
+        pendingSelectedPromptIdRef.current = null;
+        const nextIndex = visiblePrompts.findIndex((prompt) => prompt.id === pendingPromptId);
+        if (nextIndex >= 0) {
+          return nextIndex;
+        }
+      }
+
       if (visiblePrompts.length === 0) return 0;
       return Math.min(index, visiblePrompts.length - 1);
     });
-  }, [visiblePrompts.length]);
+  }, [visiblePrompts]);
 
   useEffect(() => {
     if (categoryIds.length > 0 && !categoryIds.includes(activeCategory)) {
@@ -545,6 +555,7 @@ export function App() {
       prompts.find((prompt) => prompt.id === promptId)?.title ?? uiCopy.categoryFavorites;
     const wasFavorite = favorites.has(promptId);
 
+    pendingSelectedPromptIdRef.current = promptId;
     setFavorites((current) => {
       const next = new Set(current);
       if (next.has(promptId)) {
