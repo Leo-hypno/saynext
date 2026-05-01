@@ -257,6 +257,7 @@ h1 {
 }
 
 .downloadSection,
+.storySection,
 .librarySection,
 .flowSection,
 .useCases,
@@ -266,6 +267,8 @@ h1 {
 }
 
 .sectionIntro,
+.storyIntro,
+.storyGrid,
 .downloadGrid,
 .libraryGrid,
 .steps,
@@ -287,12 +290,65 @@ h2 {
 }
 
 .sectionIntro p,
+.storyCard p,
 .privacySection li,
 .caseGrid p,
 .steps p {
   color: var(--muted);
   font-size: 17px;
   line-height: 1.7;
+}
+
+.storySection {
+  background: #ffffff;
+}
+
+.storyIntro {
+  margin-bottom: 30px;
+}
+
+.storyIntro h2 {
+  max-width: 920px;
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.storyCard {
+  min-height: 250px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f8fbff;
+}
+
+.storyCard span {
+  display: inline-flex;
+  margin-bottom: 72px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.storyCard p {
+  margin-bottom: 0;
+  font-size: 18px;
+}
+
+.storyCardActive {
+  color: #ffffff;
+  background: #111827;
+  border-color: #111827;
+}
+
+.storyCardActive span,
+.storyCardActive p {
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .downloadSection {
@@ -514,6 +570,7 @@ footer a {
   }
 
   .downloadSection,
+  .storySection,
   .librarySection,
   .flowSection,
   .useCases,
@@ -523,6 +580,7 @@ footer a {
   }
 
   .downloadGrid,
+  .storyGrid,
   .libraryGrid,
   .steps,
   .caseGrid,
@@ -558,6 +616,11 @@ footer a {
 
   h2 {
     font-size: 30px;
+  }
+
+  .storyIntro h2 {
+    font-size: 28px;
+    line-height: 1.18;
   }
 
   .primaryButton,
