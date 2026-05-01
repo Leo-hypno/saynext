@@ -349,7 +349,7 @@ h1 {
 .sectionIntro,
 .storyIntro,
 .storyGrid,
-.downloadGrid,
+.downloadGroups,
 .demoFrame,
 .libraryGrid,
 .steps,
@@ -436,22 +436,62 @@ h2 {
   background: #f6f9fc;
 }
 
-.downloadGrid {
+.downloadGroups {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+  gap: 18px;
+}
+
+.downloadPlatform {
+  display: grid;
   gap: 16px;
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 18px 50px rgba(23, 32, 51, 0.05);
+}
+
+.downloadPlatformIntro span {
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.downloadPlatformIntro h3 {
+  margin: 6px 0 8px;
+  font-size: 24px;
+}
+
+.downloadPlatformIntro p,
+.downloadHelp {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.downloadOptions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.downloadPlatformWindows .downloadOptions {
+  grid-template-columns: 1fr;
 }
 
 .downloadCard {
   display: grid;
-  min-height: 164px;
-  align-content: start;
-  gap: 10px;
+  min-height: 128px;
+  align-content: space-between;
+  gap: 14px;
   padding: 22px;
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: 0 18px 50px rgba(23, 32, 51, 0.06);
 }
 
 .downloadCard:hover {
@@ -459,21 +499,47 @@ h2 {
   transform: translateY(-2px);
 }
 
-.downloadCard span {
+.downloadCardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.downloadCardHeader span {
   color: var(--muted);
   font-size: 14px;
   font-weight: 800;
 }
 
+.downloadCardHeader em {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 9px;
+  color: #0f5132;
+  background: #dff6e9;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+}
+
 .downloadCard strong {
   color: var(--accent-dark);
-  font-size: 26px;
+  font-size: 24px;
 }
 
 .downloadCard small {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.5;
+}
+
+.downloadHelp {
+  width: min(1120px, 100%);
+  margin: 18px auto 0;
 }
 
 .demoSection {
@@ -682,7 +748,7 @@ footer a {
   .sectionIntro,
   .storyIntro,
   .storyGrid,
-  .downloadGrid,
+  .downloadGroups,
   .demoFrame,
   .libraryGrid,
   .steps,
@@ -695,12 +761,16 @@ footer a {
     margin-left: 0;
   }
 
-  .downloadGrid,
+  .downloadGroups,
   .storyGrid,
   .libraryGrid,
   .steps,
   .caseGrid,
   .privacySection {
+    grid-template-columns: 1fr;
+  }
+
+  .downloadOptions {
     grid-template-columns: 1fr;
   }
 }
@@ -721,7 +791,7 @@ footer a {
   .sectionIntro,
   .storyIntro,
   .storyGrid,
-  .downloadGrid,
+  .downloadGroups,
   .demoFrame,
   .libraryGrid,
   .steps,

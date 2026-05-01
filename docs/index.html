@@ -98,38 +98,67 @@
           <h2 id="download-title" data-i18n="downloadTitle">選擇你的系統</h2>
           <p data-i18n="downloadLead">大多數使用者只需要下載下面其中一個檔案。</p>
         </div>
-        <div class="downloadGrid">
-          <a
-            class="downloadCard"
-            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-aarch64-dmg.dmg"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>Mac Apple Silicon</span>
-            <strong>Download DMG</strong>
-            <small data-i18n="appleSiliconNote">M1、M2、M3、M4 系列 Mac</small>
-          </a>
-          <a
-            class="downloadCard"
-            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-x64-dmg.dmg"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>Mac Intel</span>
-            <strong>Download DMG</strong>
-            <small data-i18n="intelNote">Intel 處理器 Mac</small>
-          </a>
-          <a
-            class="downloadCard"
-            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-windows-x64-nsis-setup.exe"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>Windows</span>
-            <strong>Download EXE</strong>
-            <small data-i18n="windowsNote">Windows 10 / 11</small>
-          </a>
+        <div class="downloadGroups">
+          <article class="downloadPlatform">
+            <div class="downloadPlatformIntro">
+              <span>Apple</span>
+              <h3 data-i18n="appleDownloadTitle">Apple 電腦</h3>
+              <p data-i18n="appleDownloadLead">先看你的 Mac 是 M 系列晶片，還是較舊的 Intel 處理器。</p>
+            </div>
+            <div class="downloadOptions">
+              <a
+                class="downloadCard"
+                href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-aarch64-dmg.dmg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="downloadCardHeader">
+                  <span>Mac Apple Silicon</span>
+                  <em data-i18n="recommendedBadge">建議</em>
+                </span>
+                <strong data-i18n="downloadDmg">下載 DMG</strong>
+                <small data-i18n="appleSiliconNote">M1-M5 系列 Mac</small>
+              </a>
+              <a
+                class="downloadCard"
+                href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-x64-dmg.dmg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="downloadCardHeader">
+                  <span>Mac Intel</span>
+                </span>
+                <strong data-i18n="downloadDmg">下載 DMG</strong>
+                <small data-i18n="intelNote">Intel 處理器 Mac</small>
+              </a>
+            </div>
+          </article>
+
+          <article class="downloadPlatform downloadPlatformWindows">
+            <div class="downloadPlatformIntro">
+              <span>Windows</span>
+              <h3 data-i18n="windowsDownloadTitle">Windows 電腦</h3>
+              <p data-i18n="windowsDownloadLead">一般使用者下載 EXE 安裝檔即可。</p>
+            </div>
+            <div class="downloadOptions">
+              <a
+                class="downloadCard"
+                href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-windows-x64-nsis-setup.exe"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="downloadCardHeader">
+                  <span>Windows</span>
+                </span>
+                <strong data-i18n="downloadExe">下載 EXE</strong>
+                <small data-i18n="windowsNote">Windows 10 / 11</small>
+              </a>
+            </div>
+          </article>
         </div>
+        <p class="downloadHelp" data-i18n="downloadHelp">
+          不確定 Mac 是哪一種？近年的 M1-M5 系列晶片請選 Apple Silicon；較舊的 Intel Mac 請選 Mac Intel。
+        </p>
       </section>
 
       <section class="demoSection" aria-labelledby="demo-title">
@@ -295,9 +324,17 @@
           storyAfter: "使用者不需要先學會提示工程，只要先有一句能貼上的話，對話就能重新往前走。",
           downloadTitle: "選擇你的系統",
           downloadLead: "大多數使用者只需要下載下面其中一個檔案。",
-          appleSiliconNote: "M1、M2、M3、M4 系列 Mac",
+          appleDownloadTitle: "Apple 電腦",
+          appleDownloadLead: "先看你的 Mac 是 M 系列晶片，還是較舊的 Intel 處理器。",
+          windowsDownloadTitle: "Windows 電腦",
+          windowsDownloadLead: "一般使用者下載 EXE 安裝檔即可。",
+          recommendedBadge: "建議",
+          downloadDmg: "下載 DMG",
+          downloadExe: "下載 EXE",
+          appleSiliconNote: "M1-M5 系列 Mac",
           intelNote: "Intel 處理器 Mac",
           windowsNote: "Windows 10 / 11",
+          downloadHelp: "不確定 Mac 是哪一種？近年的 M1-M5 系列晶片請選 Apple Silicon；較舊的 Intel Mac 請選 Mac Intel。",
           demoTitle: "打開、選一句、貼到 AI。",
           demoLead: "SayNext 的核心不是管理很多文字，而是在使用者卡住時給他一個可以立刻貼上的下一句。",
           libraryTitle: "把「不知道怎麼問」變成可以直接用的句子",
@@ -366,9 +403,17 @@
           storyAfter: "Users do not need to learn prompt engineering first. One copyable sentence can move the conversation forward.",
           downloadTitle: "Choose your system",
           downloadLead: "Most users only need one of the files below.",
-          appleSiliconNote: "M1, M2, M3, and M4 Macs",
+          appleDownloadTitle: "Apple computers",
+          appleDownloadLead: "Choose by whether your Mac uses an M-series chip or an older Intel processor.",
+          windowsDownloadTitle: "Windows computers",
+          windowsDownloadLead: "Most Windows users should download the EXE installer.",
+          recommendedBadge: "Recommended",
+          downloadDmg: "Download DMG",
+          downloadExe: "Download EXE",
+          appleSiliconNote: "M1-M5 Macs",
           intelNote: "Intel-based Macs",
           windowsNote: "Windows 10 / 11",
+          downloadHelp: "Not sure which Mac you have? Newer M1-M5 Macs use Apple Silicon. Older Intel Macs use Mac Intel.",
           demoTitle: "Open it, choose one line, paste into AI.",
           demoLead: "SayNext is not about managing a giant text library. It gives people one useful next line at the moment they get stuck.",
           libraryTitle: "Turn “I do not know what to ask” into ready-to-use prompts",
@@ -437,9 +482,17 @@
           storyAfter: "プロンプトエンジニアリングを先に学ぶ必要はありません。コピーできる一文があれば、会話はまた前に進みます。",
           downloadTitle: "あなたの環境を選ぶ",
           downloadLead: "ほとんどのユーザーは、下のファイルのうち1つだけをダウンロードすれば十分です。",
-          appleSiliconNote: "M1、M2、M3、M4 Mac",
+          appleDownloadTitle: "Apple コンピュータ",
+          appleDownloadLead: "Mac が M シリーズチップか、古い Intel プロセッサかで選んでください。",
+          windowsDownloadTitle: "Windows コンピュータ",
+          windowsDownloadLead: "通常の Windows ユーザーは EXE インストーラーをダウンロードしてください。",
+          recommendedBadge: "おすすめ",
+          downloadDmg: "DMG をダウンロード",
+          downloadExe: "EXE をダウンロード",
+          appleSiliconNote: "M1-M5 Mac",
           intelNote: "Intel 搭載 Mac",
           windowsNote: "Windows 10 / 11",
+          downloadHelp: "Mac の種類がわからない場合、最近の M1-M5 Mac は Apple Silicon、古い Intel 搭載 Mac は Mac Intel を選んでください。",
           demoTitle: "開いて、一文を選び、AI に貼り付ける。",
           demoLead: "SayNext は大量の文章を管理するためのものではありません。ユーザーが詰まった瞬間に、すぐ使える次の一文を渡します。",
           libraryTitle: "「何を聞けばいいかわからない」を、そのまま使える一文に",
