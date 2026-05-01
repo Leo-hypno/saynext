@@ -463,6 +463,14 @@ h1 {
   width: 100%;
 }
 
+.settingActions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
 .segmentedControl button {
   align-items: center;
   background: transparent;
@@ -595,6 +603,17 @@ kbd {
   font-size: 11px;
 }
 
+.promptMeta .customBadge {
+  background: #e8f1ff;
+  border: 1px solid #c7dcff;
+  border-radius: 999px;
+  color: #1557b0;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 3px 6px;
+}
+
 .promptBody p {
   color: #202733;
   display: -webkit-box;
@@ -612,6 +631,27 @@ kbd {
   display: flex;
   gap: 2px;
   justify-content: center;
+}
+
+.rowCategorySelect {
+  appearance: none;
+  background: #f7f8fa;
+  border: 1px solid #d8dee8;
+  border-radius: 7px;
+  color: #4b5563;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  height: 26px;
+  max-width: 92px;
+  min-width: 70px;
+  padding: 0 7px;
+  text-overflow: ellipsis;
+}
+
+.rowCategorySelect:hover {
+  border-color: #c7dcff;
+  color: #1557b0;
 }
 
 .rowAction {
@@ -807,6 +847,7 @@ kbd {
 :root[data-theme="dark"] .customPromptForm input,
 :root[data-theme="dark"] .customPromptForm textarea,
 :root[data-theme="dark"] .customPromptForm select,
+:root[data-theme="dark"] .rowCategorySelect,
 :root[data-theme="dark"] .segmentedControl {
   background: #1d2229;
   color: #d7dce4;
@@ -854,7 +895,8 @@ kbd {
 }
 
 :root[data-theme="dark"] .categoryTabs button.active,
-:root[data-theme="dark"] .segmentedControl button.active {
+:root[data-theme="dark"] .segmentedControl button.active,
+:root[data-theme="dark"] .promptMeta .customBadge {
   background: #19324f;
   border-color: #2e5f98;
   color: #9fceff;
@@ -885,6 +927,7 @@ kbd {
 
 :root[data-theme="dark"] kbd,
 :root[data-theme="dark"] .compactButton,
+:root[data-theme="dark"] .rowCategorySelect,
 :root[data-theme="dark"] .segmentedControl {
   border-color: #343b46;
 }
@@ -942,6 +985,7 @@ kbd {
   :root[data-theme="system"] .customPromptForm input,
   :root[data-theme="system"] .customPromptForm textarea,
   :root[data-theme="system"] .customPromptForm select,
+  :root[data-theme="system"] .rowCategorySelect,
   :root[data-theme="system"] .segmentedControl {
     background: #1d2229;
     color: #d7dce4;
@@ -989,7 +1033,8 @@ kbd {
   }
 
   :root[data-theme="system"] .categoryTabs button.active,
-  :root[data-theme="system"] .segmentedControl button.active {
+  :root[data-theme="system"] .segmentedControl button.active,
+  :root[data-theme="system"] .promptMeta .customBadge {
     background: #19324f;
     border-color: #2e5f98;
     color: #9fceff;
@@ -1020,6 +1065,7 @@ kbd {
 
   :root[data-theme="system"] kbd,
   :root[data-theme="system"] .compactButton,
+  :root[data-theme="system"] .rowCategorySelect,
   :root[data-theme="system"] .segmentedControl {
     border-color: #343b46;
   }

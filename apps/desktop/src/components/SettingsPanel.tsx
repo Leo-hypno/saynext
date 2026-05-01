@@ -1,4 +1,16 @@
-import { Download, ExternalLink, Monitor, Moon, RefreshCw, RotateCcw, Sun, X } from "lucide-react";
+import {
+  Download,
+  ExternalLink,
+  FileDown,
+  FileUp,
+  Monitor,
+  Moon,
+  RefreshCw,
+  RotateCcw,
+  Sun,
+  X
+} from "lucide-react";
+import { useRef } from "react";
 import type { AutostartStatus } from "../lib/autostart";
 import type { UpdateInfo, UpdateProgress, UpdateStatus } from "../lib/updater";
 import type { ThemeMode, UiCopy } from "../types";
@@ -12,6 +24,8 @@ type SettingsPanelProps = {
   updateStatus: UpdateStatus;
   onAutostartToggle: (enabled: boolean) => void;
   onClose: () => void;
+  onCustomPromptsExport: () => void;
+  onCustomPromptsImport: (file: File) => void;
   onResetWindowPosition: () => void;
   onThemeModeChange: (mode: ThemeMode) => void;
   onUpdateCheck: () => void;
@@ -30,6 +44,8 @@ export function SettingsPanel({
   updateStatus,
   onAutostartToggle,
   onClose,
+  onCustomPromptsExport,
+  onCustomPromptsImport,
   onResetWindowPosition,
   onThemeModeChange,
   onUpdateCheck,
@@ -38,6 +54,7 @@ export function SettingsPanel({
   shortcutLabel,
   uiCopy
 }: SettingsPanelProps) {
+  const importInputRef = useRef<HTMLInputElement>(null);
   const autostartUnavailable = autostartStatus === "checking" || autostartStatus === "unavailable";
   const autostartEnabled = autostartStatus === "enabled";
   const updateBusy =
@@ -133,6 +150,40 @@ export function SettingsPanel({
             </div>
             <RotateCcw size={18} />
           </button>
+
+          <div className="settingRow promptDataRow">
+            <div>
+              <strong>{uiCopy.settingsPromptDataTitle}</strong>
+              <p>{uiCopy.settingsPromptDataDescription}</p>
+            </div>
+            <div className="settingActions">
+              <button className="compactButton" onClick={onCustomPromptsExport} type="button">
+                <FileDown size={15} />
+                {uiCopy.settingsExportButton}
+              </button>
+              <button
+                className="compactButton"
+                onClick={() => importInputRef.current?.click()}
+                type="button"
+              >
+                <FileUp size={15} />
+                {uiCopy.settingsImportButton}
+              </button>
+              <input
+                ref={importInputRef}
+                accept="application/json,.json"
+                className="srOnly"
+                onChange={(event) => {
+                  const file = event.target.files?.[0];
+                  event.target.value = "";
+                  if (file) {
+                    onCustomPromptsImport(file);
+                  }
+                }}
+                type="file"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="settingsGroup">

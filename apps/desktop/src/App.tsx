@@ -389,6 +389,17 @@ export function App() {
     setCustomPromptDialogOpen(true);
   }
 
+  function handleCustomPromptMove(promptId: string, category: string) {
+    if (!categories.some((candidate) => candidate.id === category)) return;
+
+    const promptTitle =
+      customPrompts.find((prompt) => prompt.id === promptId)?.title ?? uiCopy.categoryCustom;
+    setCustomPrompts((prompts) =>
+      prompts.map((prompt) => (prompt.id === promptId ? { ...prompt, category } : prompt))
+    );
+    showNotice({ kind: "success", text: uiCopy.noticeUpdated(promptTitle) });
+  }
+
   function handleCustomPromptDelete(promptId: string) {
     setDeletePromptId(promptId);
   }
@@ -447,6 +458,53 @@ export function App() {
 
     setCustomPromptDialogOpen(false);
     setEditingCustomPrompt(null);
+  }
+
+  function handleCustomPromptsExport() {
+    const data = {
+      app: "SayNext",
+      exportedAt: new Date().toISOString(),
+      version: 1,
+      prompts: customPrompts.map(({ category, id, tags, text, title }) => ({
+        category,
+        id,
+        tags,
+        text,
+        title
+      }))
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = `saynext-prompts-${new Date().toISOString().slice(0, 10)}.json`;
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 0);
+    showNotice({ kind: "success", text: uiCopy.noticeExported(customPrompts.length) });
+  }
+
+  async function handleCustomPromptsImport(file: File) {
+    try {
+      const parsed = JSON.parse(await file.text()) as unknown;
+      const categoryIds = new Set(categories.map((category) => category.id));
+      const imported = normalizeCustomPrompts(getImportPromptItems(parsed), {
+        fallbackCategory: categories[0]?.id ?? defaultCategoryId,
+        validCategoryIds: categoryIds
+      });
+
+      if (imported.length === 0) {
+        showNotice({ kind: "error", text: uiCopy.noticeImportFailed });
+        return;
+      }
+
+      setCustomPrompts((current) => mergeCustomPrompts(current, imported));
+      setActiveCategory(customCategoryId);
+      showNotice({ kind: "success", text: uiCopy.noticeImported(imported.length) });
+    } catch {
+      showNotice({ kind: "error", text: uiCopy.noticeImportFailed });
+    }
   }
 
   function handleFavoriteToggle(promptId: string) {
@@ -540,6 +598,7 @@ export function App() {
         onCustomPromptCreate={handleCustomPromptCreate}
         onCustomPromptDelete={handleCustomPromptDelete}
         onCustomPromptEdit={handleCustomPromptEdit}
+        onCustomPromptMove={handleCustomPromptMove}
         onFavoriteToggle={handleFavoriteToggle}
         onSettingsOpen={() => setSettingsOpen(true)}
         onPackChange={handlePackChange}
@@ -566,6 +625,8 @@ export function App() {
           updateStatus={updateStatus}
           onAutostartToggle={handleAutostartToggle}
           onClose={() => setSettingsOpen(false)}
+          onCustomPromptsExport={handleCustomPromptsExport}
+          onCustomPromptsImport={(file) => void handleCustomPromptsImport(file)}
           onResetWindowPosition={() => void resetWindowPosition()}
           onThemeModeChange={setThemeMode}
           onUpdateCheck={handleUpdateCheck}
@@ -634,36 +695,84 @@ function readStoredThemeMode(key: string): ThemeMode {
 function readStoredCustomPrompts(key: string): RescuePrompt[] {
   try {
     const value = JSON.parse(localStorage.getItem(key) ?? "[]");
-    if (!Array.isArray(value)) return [];
-    const seenIds = new Set<string>();
-
-    return value
-      .filter((item) => {
-        return (
-          item &&
-          typeof item.id === "string" &&
-          typeof item.title === "string" &&
-          typeof item.text === "string"
-        );
-      })
-      .filter((item) => {
-        if (seenIds.has(item.id)) return false;
-        seenIds.add(item.id);
-        return true;
-      })
-      .map((item) => ({
-        category: typeof item.category === "string" ? item.category : customCategoryId,
-        id: item.id,
-        source: "custom" as const,
-        tags: Array.isArray(item.tags)
-          ? item.tags.filter((tag: unknown): tag is string => typeof tag === "string")
-          : [],
-        text: item.text,
-        title: item.title
-      }));
+    return normalizeCustomPrompts(value, { fallbackCategory: defaultCategoryId });
   } catch {
     return [];
   }
+}
+
+function getImportPromptItems(value: unknown) {
+  if (Array.isArray(value)) return value;
+  if (
+    value &&
+    typeof value === "object" &&
+    "prompts" in value &&
+    Array.isArray((value as { prompts?: unknown }).prompts)
+  ) {
+    return (value as { prompts: unknown[] }).prompts;
+  }
+  return [];
+}
+
+function normalizeCustomPrompts(
+  value: unknown,
+  options: { fallbackCategory: string; validCategoryIds?: Set<string> }
+): RescuePrompt[] {
+  if (!Array.isArray(value)) return [];
+  const seenIds = new Set<string>();
+
+  return value
+    .filter((item) => {
+      return (
+        item &&
+        typeof item === "object" &&
+        typeof (item as { id?: unknown }).id === "string" &&
+        typeof (item as { title?: unknown }).title === "string" &&
+        typeof (item as { text?: unknown }).text === "string" &&
+        (item as { id: string }).id.trim().length > 0 &&
+        (item as { title: string }).title.trim().length > 0 &&
+        (item as { text: string }).text.trim().length > 0
+      );
+    })
+    .filter((item) => {
+      const id = (item as { id: string }).id;
+      if (seenIds.has(id)) return false;
+      seenIds.add(id);
+      return true;
+    })
+    .map((item) => {
+      const prompt = item as {
+        category?: unknown;
+        id: string;
+        tags?: unknown;
+        text: string;
+        title: string;
+      };
+      const category =
+        typeof prompt.category === "string" &&
+        (!options.validCategoryIds || options.validCategoryIds.has(prompt.category))
+          ? prompt.category
+          : options.fallbackCategory;
+
+      return {
+        category,
+        id: prompt.id.trim(),
+        source: "custom" as const,
+        tags: Array.isArray(prompt.tags)
+          ? prompt.tags
+              .filter((tag: unknown): tag is string => typeof tag === "string")
+              .map((tag) => tag.trim())
+              .filter(Boolean)
+          : [],
+        text: prompt.text.trim(),
+        title: prompt.title.trim()
+      };
+    });
+}
+
+function mergeCustomPrompts(current: RescuePrompt[], imported: RescuePrompt[]) {
+  const importedIds = new Set(imported.map((prompt) => prompt.id));
+  return [...imported, ...current.filter((prompt) => !importedIds.has(prompt.id))];
 }
 
 function createCustomPromptId() {

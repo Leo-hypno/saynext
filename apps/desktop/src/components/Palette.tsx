@@ -38,6 +38,7 @@ type PaletteProps = {
   onCustomPromptCreate: () => void;
   onCustomPromptDelete: (promptId: string) => void;
   onCustomPromptEdit: (prompt: RescuePrompt) => void;
+  onCustomPromptMove: (promptId: string, category: string) => void;
   onFavoriteToggle: (promptId: string) => void;
   onSettingsOpen: () => void;
   onPackChange: (packId: string) => void;
@@ -65,6 +66,7 @@ export function Palette({
   onCustomPromptCreate,
   onCustomPromptDelete,
   onCustomPromptEdit,
+  onCustomPromptMove,
   onFavoriteToggle,
   onSettingsOpen,
   onPackChange,
@@ -275,6 +277,9 @@ export function Palette({
               <div className="promptBody">
                 <div className="promptMeta">
                   <strong>{prompt.title}</strong>
+                  {prompt.source === "custom" ? (
+                    <span className="customBadge">{uiCopy.customPromptBadge}</span>
+                  ) : null}
                   <span>{categoryName(categories, prompt.category, uiCopy)}</span>
                 </div>
                 <p>{prompt.text}</p>
@@ -282,6 +287,23 @@ export function Palette({
               <div className="copyState">
                 {prompt.source === "custom" ? (
                   <>
+                    <select
+                      aria-label={uiCopy.labelPlacement}
+                      className="rowCategorySelect"
+                      onClick={(event) => event.stopPropagation()}
+                      onChange={(event) => {
+                        event.stopPropagation();
+                        onCustomPromptMove(prompt.id, event.target.value);
+                      }}
+                      title={uiCopy.labelPlacement}
+                      value={prompt.category}
+                    >
+                      {categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </select>
                     <button
                       className="iconButton rowAction"
                       onClick={(event) => {

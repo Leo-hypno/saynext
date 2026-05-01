@@ -16,6 +16,7 @@ const zhTw: UiCopy = {
   deleteCustomPromptBody: (title) =>
     `這會從本機移除「${title}」，也會從最近使用與收藏移除。`,
   editCustomPrompt: "編輯句子",
+  customPromptBadge: "自訂",
   emptyCategoryCopy: "可以先切到其他情境，或新增自己的常用句子。",
   emptyCategoryTitle: "這個情境目前沒有句子。",
   emptyCustomCopy: "按右上角「新增句子」，建立自己的常用提示。",
@@ -42,6 +43,9 @@ const zhTw: UiCopy = {
   noticeFavoriteAdded: (title) => `已加入最愛：${title}`,
   noticeFavoriteRemoved: (title) => `已移出最愛：${title}`,
   noticeUpdated: (title) => `已更新：${title}`,
+  noticeImported: (count) => `已匯入 ${count} 個自訂句子`,
+  noticeImportFailed: "匯入失敗，請確認檔案格式。",
+  noticeExported: (count) => `已匯出 ${count} 個自訂句子`,
   placeholderContent: "請先把這件事拆成 3 到 5 個步驟，並告訴我第一步要做什麼。",
   placeholderTags: "planning, codex, writing",
   placeholderTitle: "例如：請先拆任務",
@@ -55,6 +59,10 @@ const zhTw: UiCopy = {
   settingsClose: "關閉偏好設定",
   settingsGithubDescription: "查看原始碼、下載版本與回報問題。",
   settingsGithubTitle: "GitHub repository",
+  settingsImportButton: "匯入",
+  settingsExportButton: "匯出",
+  settingsPromptDataDescription: "備份、換電腦，或分享你的自訂句子 JSON。",
+  settingsPromptDataTitle: "我的句子資料",
   settingsNote:
     "SayNext 是開源、離線優先的小工具，專為不知道下一句該怎麼問 AI 的人設計。",
   settingsShortcutDescription: (platformName) =>
@@ -99,6 +107,7 @@ const en: UiCopy = {
   deleteCustomPromptBody: (title) =>
     `This removes "${title}" from this device, recent prompts, and favorites.`,
   editCustomPrompt: "Edit prompt",
+  customPromptBadge: "Custom",
   emptyCategoryCopy: "Switch to another context or add your own reusable prompt.",
   emptyCategoryTitle: "No prompts in this context yet.",
   emptyCustomCopy: "Use Add prompt to create your own reusable prompt.",
@@ -125,6 +134,9 @@ const en: UiCopy = {
   noticeFavoriteAdded: (title) => `Added to favorites: ${title}`,
   noticeFavoriteRemoved: (title) => `Removed from favorites: ${title}`,
   noticeUpdated: (title) => `Updated: ${title}`,
+  noticeImported: (count) => `Imported ${count} custom prompts`,
+  noticeImportFailed: "Import failed. Check the file format.",
+  noticeExported: (count) => `Exported ${count} custom prompts`,
   placeholderContent: "Break this into 3 to 5 steps and tell me what to do first.",
   placeholderTags: "planning, codex, writing",
   placeholderTitle: "Example: Break this down",
@@ -138,6 +150,10 @@ const en: UiCopy = {
   settingsClose: "Close settings",
   settingsGithubDescription: "View source, download releases, and report issues.",
   settingsGithubTitle: "GitHub repository",
+  settingsImportButton: "Import",
+  settingsExportButton: "Export",
+  settingsPromptDataDescription: "Back up, move devices, or share your custom prompt JSON.",
+  settingsPromptDataTitle: "My prompt data",
   settingsNote:
     "SayNext is open-source, offline-first, and built for people who do not know what to ask AI next.",
   settingsShortcutDescription: (platformName) =>

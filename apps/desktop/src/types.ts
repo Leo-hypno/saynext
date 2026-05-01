@@ -36,6 +36,7 @@ export type UiCopy = {
   deleteCustomPrompt: string;
   deleteCustomPromptBody: (title: string) => string;
   editCustomPrompt: string;
+  customPromptBadge: string;
   favorite: string;
   emptyCategoryCopy: string;
   emptyCategoryTitle: string;
@@ -62,6 +63,9 @@ export type UiCopy = {
   noticeFavoriteAdded: (title: string) => string;
   noticeFavoriteRemoved: (title: string) => string;
   noticeUpdated: (title: string) => string;
+  noticeImported: (count: number) => string;
+  noticeImportFailed: string;
+  noticeExported: (count: number) => string;
   placeholderContent: string;
   placeholderTags: string;
   placeholderTitle: string;
@@ -75,6 +79,10 @@ export type UiCopy = {
   settingsClose: string;
   settingsGithubDescription: string;
   settingsGithubTitle: string;
+  settingsImportButton: string;
+  settingsExportButton: string;
+  settingsPromptDataDescription: string;
+  settingsPromptDataTitle: string;
   settingsNote: string;
   settingsShortcutDescription: (platformName: string) => string;
   settingsShortcutTitle: string;
