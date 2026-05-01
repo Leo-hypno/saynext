@@ -1,44 +1,47 @@
 import { Save, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { customCategoryId } from "../lib/promptView";
 import type { Category, CustomPromptDraft, RescuePrompt, UiCopy } from "../types";
 
 type CustomPromptDialogProps = {
   categories: Category[];
+  defaultCategory: string;
   editingPrompt: RescuePrompt | null;
   uiCopy: UiCopy;
   onClose: () => void;
   onSave: (draft: CustomPromptDraft) => void;
 };
 
-const emptyDraft: CustomPromptDraft = {
-  category: customCategoryId,
-  tags: "",
-  text: "",
-  title: ""
-};
-
 export function CustomPromptDialog({
   categories,
+  defaultCategory,
   editingPrompt,
   uiCopy,
   onClose,
   onSave
 }: CustomPromptDialogProps) {
-  const [draft, setDraft] = useState<CustomPromptDraft>(emptyDraft);
+  const [draft, setDraft] = useState<CustomPromptDraft>(() => createEmptyDraft(defaultCategory));
 
   useEffect(() => {
+    const categoryIds = new Set(categories.map((category) => category.id));
+    const safeDefaultCategory = categoryIds.has(defaultCategory)
+      ? defaultCategory
+      : categories[0]?.id ?? defaultCategory;
+    const editingCategory =
+      editingPrompt && categoryIds.has(editingPrompt.category)
+        ? editingPrompt.category
+        : safeDefaultCategory;
+
     setDraft(
       editingPrompt
         ? {
-            category: editingPrompt.category || customCategoryId,
+            category: editingCategory,
             tags: editingPrompt.tags.join(", "),
             text: editingPrompt.text,
             title: editingPrompt.title
           }
-        : emptyDraft
+        : createEmptyDraft(safeDefaultCategory)
     );
-  }, [editingPrompt]);
+  }, [categories, defaultCategory, editingPrompt]);
 
   const canSave = draft.title.trim().length > 0 && draft.text.trim().length > 0;
 
@@ -97,7 +100,6 @@ export function CustomPromptDialog({
               onChange={(event) => setDraft({ ...draft, category: event.target.value })}
               value={draft.category}
             >
-              <option value={customCategoryId}>{uiCopy.categoryCustom}</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
@@ -128,4 +130,13 @@ export function CustomPromptDialog({
       </section>
     </div>
   );
+}
+
+function createEmptyDraft(category: string): CustomPromptDraft {
+  return {
+    category,
+    tags: "",
+    text: "",
+    title: ""
+  };
 }

@@ -99,6 +99,12 @@ export function App() {
     return buildCategoryIds(categories);
   }, [categories]);
 
+  const customPromptDefaultCategory = useMemo(() => {
+    return categories.some((category) => category.id === activeCategory)
+      ? activeCategory
+      : categories[0]?.id ?? defaultCategoryId;
+  }, [activeCategory, categories]);
+
   const visiblePrompts = useMemo(() => {
     return getVisiblePrompts({
       activeCategory,
@@ -586,6 +592,7 @@ export function App() {
       {customPromptDialogOpen ? (
         <CustomPromptDialog
           categories={categories}
+          defaultCategory={customPromptDefaultCategory}
           editingPrompt={editingCustomPrompt}
           uiCopy={uiCopy}
           onClose={() => {
