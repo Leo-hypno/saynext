@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SayNext | AI 下一句提示工具</title>
+    <meta
+      name="description"
+      content="SayNext 是一個開源桌面小工具，幫助 AI 新手在卡住時找到下一句可以問的話。"
+    />
+    <link rel="stylesheet" href="./assets/site.css" />
+  </head>
+  <body>
+    <header class="siteHeader" aria-label="主導覽">
+      <a class="brand" href="#top" aria-label="SayNext 首頁">
+        <span class="brandMark">S</span>
+        <span>SayNext</span>
+      </a>
+      <nav>
+        <a href="#download">下載</a>
+        <a href="#flow">流程</a>
+        <a href="#open-source">開源</a>
+        <a href="https://github.com/Leo-hypno/saynext">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img
+          class="heroImage"
+          src="./assets/saynext-main-dark.png"
+          alt="SayNext 深色模式主畫面，顯示 AI 提示詞列表與分類標籤"
+        />
+        <div class="heroShade" aria-hidden="true"></div>
+        <div class="heroContent">
+          <p class="eyebrow">Open-source desktop palette</p>
+          <h1 id="hero-title">AI 卡住時，幫你找到下一句。</h1>
+          <p class="heroLead">
+            SayNext 是給 AI 新手的桌面小工具。按下快捷鍵，挑一句人話提示詞，貼進 ChatGPT、Claude、Gemini 或 Codex，讓對話繼續往前走。
+          </p>
+          <div class="heroActions" aria-label="主要操作">
+            <a class="primaryButton" href="#download">下載 SayNext</a>
+            <a class="secondaryButton" href="https://github.com/Leo-hypno/saynext">查看 GitHub</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="download" class="downloadSection" aria-labelledby="download-title">
+        <div class="sectionIntro">
+          <p class="eyebrow">Download</p>
+          <h2 id="download-title">選擇你的系統</h2>
+          <p>大多數使用者只需要下載下面其中一個檔案。</p>
+        </div>
+        <div class="downloadGrid">
+          <a
+            class="downloadCard"
+            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.4/SayNext-0.1.4-darwin-aarch64-dmg.dmg"
+          >
+            <span>Mac Apple Silicon</span>
+            <strong>Download DMG</strong>
+            <small>M1、M2、M3、M4 系列 Mac</small>
+          </a>
+          <a
+            class="downloadCard"
+            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.4/SayNext-0.1.4-darwin-x64-dmg.dmg"
+          >
+            <span>Mac Intel</span>
+            <strong>Download DMG</strong>
+            <small>Intel 處理器 Mac</small>
+          </a>
+          <a
+            class="downloadCard"
+            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.4/SayNext-0.1.4-windows-x64-nsis-setup.exe"
+          >
+            <span>Windows</span>
+            <strong>Download EXE</strong>
+            <small>Windows 10 / 11</small>
+          </a>
+        </div>
+      </section>
+
+      <section id="flow" class="flowSection" aria-labelledby="flow-title">
+        <div class="sectionIntro">
+          <p class="eyebrow">How it works</p>
+          <h2 id="flow-title">四步驟，讓 AI 對話重新動起來</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <span>01</span>
+            <strong>按下快捷鍵</strong>
+            <p>用 Cmd/Ctrl + Shift + H 叫出 SayNext。</p>
+          </li>
+          <li>
+            <span>02</span>
+            <strong>選一個情境</strong>
+            <p>開始問、聽不懂、規劃、執行、檢查完善。</p>
+          </li>
+          <li>
+            <span>03</span>
+            <strong>複製提示詞</strong>
+            <p>點一下或按 Enter，就會放進剪貼簿。</p>
+          </li>
+          <li>
+            <span>04</span>
+            <strong>貼到 AI 對話框</strong>
+            <p>讓 AI 追問、規劃、改寫、查資料或繼續執行。</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="useCases" aria-labelledby="usecases-title">
+        <div class="sectionIntro">
+          <p class="eyebrow">Use cases</p>
+          <h2 id="usecases-title">不只寫程式，也適合生活與工作</h2>
+        </div>
+        <div class="caseGrid">
+          <article>
+            <h3>整理文件</h3>
+            <p>不知道文件怎麼開始整理時，先請 AI 問用途、分類資料、建立摘要。</p>
+          </article>
+          <article>
+            <h3>產製報告</h3>
+            <p>把模糊需求改成清楚架構，請 AI 補問題、列大綱、檢查缺口。</p>
+          </article>
+          <article>
+            <h3>旅遊計畫</h3>
+            <p>讓 AI 先問預算、天數、偏好，再規劃路線與備案。</p>
+          </article>
+          <article>
+            <h3>Codex 協作</h3>
+            <p>把需求說清楚，要求 AI 規劃、執行、檢查，再逐步完善成果。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="privacySection" aria-labelledby="privacy-title">
+        <div>
+          <p class="eyebrow">Privacy</p>
+          <h2 id="privacy-title">安靜、離線、沒有帳號壓力</h2>
+        </div>
+        <ul>
+          <li>不需要 AI API key</li>
+          <li>不需要建立帳號</li>
+          <li>不追蹤使用者</li>
+          <li>提示詞以本機 JSON pack 維護</li>
+        </ul>
+      </section>
+
+      <section id="open-source" class="openSource" aria-labelledby="opensource-title">
+        <div class="sectionIntro">
+          <p class="eyebrow">Open source</p>
+          <h2 id="opensource-title">你不會寫程式，也能貢獻</h2>
+          <p>SayNext 的提示詞包是簡單 JSON。你可以新增語言、改善句子、補充生活情境，讓更多人第一次使用 AI 時不要放棄。</p>
+        </div>
+        <div class="heroActions">
+          <a class="primaryButton" href="https://github.com/Leo-hypno/saynext">Star on GitHub</a>
+          <a class="secondaryButton" href="https://github.com/Leo-hypno/saynext/blob/main/CONTRIBUTING.md">查看貢獻指南</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>SayNext</span>
+      <span>MIT License</span>
+      <a href="https://github.com/Leo-hypno/saynext/releases/latest">Latest release</a>
+    </footer>
+  </body>
+</html>
