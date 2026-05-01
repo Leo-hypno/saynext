@@ -11,16 +11,17 @@
     <link rel="stylesheet" href="./assets/site.css" />
   </head>
   <body>
-    <header class="siteHeader" aria-label="主導覽">
+    <header class="siteHeader" aria-label="主導覽" data-i18n-attr="aria-label:navLabel">
       <a class="brand" href="#top" aria-label="SayNext 首頁">
         <span class="brandMark">S</span>
         <span>SayNext</span>
       </a>
       <nav>
-        <a href="#download">下載</a>
-        <a href="#flow">流程</a>
-        <a href="#open-source">開源</a>
+        <a href="#download" data-i18n="navDownload">下載</a>
+        <a href="#flow" data-i18n="navFlow">流程</a>
+        <a href="#open-source" data-i18n="navOpenSource">開源</a>
         <a href="https://github.com/Leo-hypno/saynext" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <button class="languageToggle" type="button" data-language-toggle aria-label="Switch language">EN</button>
       </nav>
     </header>
 
@@ -39,23 +40,23 @@
             <span>Offline-first</span>
           </div>
           <p class="eyebrow">Prompt rescue palette</p>
-          <h1 id="hero-title">AI 卡住時，幫你找到下一句。</h1>
-          <p class="heroLead">
+          <h1 id="hero-title" data-i18n="heroTitle">AI 卡住時，幫你找到下一句。</h1>
+          <p class="heroLead" data-i18n="heroLead">
             SayNext 把常見 AI 對話時刻整理成可複製提示詞。按快捷鍵，選一句人話，貼進 ChatGPT、Claude、Gemini 或 Codex。
           </p>
           <div class="heroActions" aria-label="主要操作">
-            <a class="primaryButton" href="#download">下載 SayNext</a>
-            <a class="secondaryButton" href="https://github.com/Leo-hypno/saynext" target="_blank" rel="noopener noreferrer">查看 GitHub</a>
+            <a class="primaryButton" href="#download" data-i18n="heroDownload">下載 SayNext</a>
+            <a class="secondaryButton" href="https://github.com/Leo-hypno/saynext" target="_blank" rel="noopener noreferrer" data-i18n="heroGithub">查看 GitHub</a>
           </div>
           <div class="promptSurface" aria-label="提示詞範例">
             <span class="surfaceLabel">Built-in prompts</span>
-            <div class="promptLine">我想要……請先幫我整理需求，再問我還要補什麼。</div>
+            <div class="promptLine" data-i18n="promptLine">我想要……請先幫我整理需求，再問我還要補什麼。</div>
             <div class="promptChips" aria-hidden="true">
-              <span>開始問</span>
-              <span>聽不懂</span>
-              <span>規劃</span>
-              <span>執行</span>
-              <span>檢查完善</span>
+              <span data-i18n="chipStart">開始問</span>
+              <span data-i18n="chipConfused">聽不懂</span>
+              <span data-i18n="chipPlanning">規劃</span>
+              <span data-i18n="chipExecute">執行</span>
+              <span data-i18n="chipReview">檢查完善</span>
             </div>
           </div>
         </div>
@@ -64,20 +65,20 @@
       <section class="storySection" aria-labelledby="story-title">
         <div class="storyIntro">
           <p class="eyebrow">The stuck moment</p>
-          <h2 id="story-title">大多數人不是不會用 AI，是不知道下一句該怎麼說。</h2>
+          <h2 id="story-title" data-i18n="storyTitle">大多數人不是不會用 AI，是不知道下一句該怎麼說。</h2>
         </div>
         <div class="storyGrid">
           <article class="storyCard">
             <span>Before</span>
-            <p>AI 回答得很長、很硬，或直接說不行。新手通常會以為是自己不適合用 AI，然後關掉視窗。</p>
+            <p data-i18n="storyBefore">AI 回答得很長、很硬，或直接說不行。新手通常會以為是自己不適合用 AI，然後關掉視窗。</p>
           </article>
           <article class="storyCard storyCardActive">
             <span>SayNext</span>
-            <p>SayNext 把這些卡住時刻整理成短句：請 AI 追問、改用人話、提出替代方案、規劃下一步。</p>
+            <p data-i18n="storySayNext">SayNext 把這些卡住時刻整理成短句：請 AI 追問、改用人話、提出替代方案、規劃下一步。</p>
           </article>
           <article class="storyCard">
             <span>After</span>
-            <p>使用者不需要先學會提示工程，只要先有一句能貼上的話，對話就能重新往前走。</p>
+            <p data-i18n="storyAfter">使用者不需要先學會提示工程，只要先有一句能貼上的話，對話就能重新往前走。</p>
           </article>
         </div>
       </section>
@@ -85,8 +86,8 @@
       <section id="download" class="downloadSection" aria-labelledby="download-title">
         <div class="sectionIntro">
           <p class="eyebrow">Download</p>
-          <h2 id="download-title">選擇你的系統</h2>
-          <p>大多數使用者只需要下載下面其中一個檔案。</p>
+          <h2 id="download-title" data-i18n="downloadTitle">選擇你的系統</h2>
+          <p data-i18n="downloadLead">大多數使用者只需要下載下面其中一個檔案。</p>
         </div>
         <div class="downloadGrid">
           <a
@@ -97,7 +98,7 @@
           >
             <span>Mac Apple Silicon</span>
             <strong>Download DMG</strong>
-            <small>M1、M2、M3、M4 系列 Mac</small>
+            <small data-i18n="appleSiliconNote">M1、M2、M3、M4 系列 Mac</small>
           </a>
           <a
             class="downloadCard"
@@ -107,7 +108,7 @@
           >
             <span>Mac Intel</span>
             <strong>Download DMG</strong>
-            <small>Intel 處理器 Mac</small>
+            <small data-i18n="intelNote">Intel 處理器 Mac</small>
           </a>
           <a
             class="downloadCard"
@@ -117,7 +118,7 @@
           >
             <span>Windows</span>
             <strong>Download EXE</strong>
-            <small>Windows 10 / 11</small>
+            <small data-i18n="windowsNote">Windows 10 / 11</small>
           </a>
         </div>
       </section>
@@ -125,39 +126,39 @@
       <section class="librarySection" aria-labelledby="library-title">
         <div class="sectionIntro">
           <p class="eyebrow">Prompt library</p>
-          <h2 id="library-title">把「不知道怎麼問」變成可以直接用的句子</h2>
-          <p>SayNext 不是要你學會提示工程，而是把新手最容易卡住的幾個時刻先整理好。</p>
+          <h2 id="library-title" data-i18n="libraryTitle">把「不知道怎麼問」變成可以直接用的句子</h2>
+          <p data-i18n="libraryLead">SayNext 不是要你學會提示工程，而是把新手最容易卡住的幾個時刻先整理好。</p>
         </div>
         <div class="libraryGrid">
           <article>
             <span>01</span>
-            <h3>開始問</h3>
-            <p>把模糊想法整理成 AI 聽得懂的任務。</p>
+            <h3 data-i18n="libraryStartTitle">開始問</h3>
+            <p data-i18n="libraryStartBody">把模糊想法整理成 AI 聽得懂的任務。</p>
           </article>
           <article>
             <span>02</span>
-            <h3>聽不懂</h3>
-            <p>請 AI 換成人話、舉例、重新拆解。</p>
+            <h3 data-i18n="libraryConfusedTitle">聽不懂</h3>
+            <p data-i18n="libraryConfusedBody">請 AI 換成人話、舉例、重新拆解。</p>
           </article>
           <article>
             <span>03</span>
-            <h3>AI 說不行</h3>
-            <p>要求它說明限制，改找可行替代方案。</p>
+            <h3 data-i18n="libraryRefusedTitle">AI 說不行</h3>
+            <p data-i18n="libraryRefusedBody">要求它說明限制，改找可行替代方案。</p>
           </article>
           <article>
             <span>04</span>
-            <h3>查資料</h3>
-            <p>請 AI 參考外部做法，整理不同觀點。</p>
+            <h3 data-i18n="libraryResearchTitle">查資料</h3>
+            <p data-i18n="libraryResearchBody">請 AI 參考外部做法，整理不同觀點。</p>
           </article>
           <article>
             <span>05</span>
-            <h3>規劃</h3>
-            <p>把目標、步驟、風險和決策點列出來。</p>
+            <h3 data-i18n="libraryPlanningTitle">規劃</h3>
+            <p data-i18n="libraryPlanningBody">把目標、步驟、風險和決策點列出來。</p>
           </article>
           <article>
             <span>06</span>
-            <h3>下一步</h3>
-            <p>讓 AI 不只回答，而是推進到下一個動作。</p>
+            <h3 data-i18n="libraryNextTitle">下一步</h3>
+            <p data-i18n="libraryNextBody">讓 AI 不只回答，而是推進到下一個動作。</p>
           </article>
         </div>
       </section>
@@ -165,28 +166,28 @@
       <section id="flow" class="flowSection" aria-labelledby="flow-title">
         <div class="sectionIntro">
           <p class="eyebrow">How it works</p>
-          <h2 id="flow-title">四步驟，讓 AI 對話重新動起來</h2>
+          <h2 id="flow-title" data-i18n="flowTitle">四步驟，讓 AI 對話重新動起來</h2>
         </div>
         <ol class="steps">
           <li>
             <span>01</span>
-            <strong>按下快捷鍵</strong>
-            <p>用 Cmd/Ctrl + Shift + H 叫出 SayNext。</p>
+            <strong data-i18n="flowOneTitle">按下快捷鍵</strong>
+            <p data-i18n="flowOneBody">用 Cmd/Ctrl + Shift + H 叫出 SayNext。</p>
           </li>
           <li>
             <span>02</span>
-            <strong>選一個情境</strong>
-            <p>開始問、聽不懂、規劃、執行、檢查完善。</p>
+            <strong data-i18n="flowTwoTitle">選一個情境</strong>
+            <p data-i18n="flowTwoBody">開始問、聽不懂、規劃、執行、檢查完善。</p>
           </li>
           <li>
             <span>03</span>
-            <strong>複製提示詞</strong>
-            <p>點一下或按 Enter，就會放進剪貼簿。</p>
+            <strong data-i18n="flowThreeTitle">複製提示詞</strong>
+            <p data-i18n="flowThreeBody">點一下或按 Enter，就會放進剪貼簿。</p>
           </li>
           <li>
             <span>04</span>
-            <strong>貼到 AI 對話框</strong>
-            <p>讓 AI 追問、規劃、改寫、查資料或繼續執行。</p>
+            <strong data-i18n="flowFourTitle">貼到 AI 對話框</strong>
+            <p data-i18n="flowFourBody">讓 AI 追問、規劃、改寫、查資料或繼續執行。</p>
           </li>
         </ol>
       </section>
@@ -194,24 +195,24 @@
       <section class="useCases" aria-labelledby="usecases-title">
         <div class="sectionIntro">
           <p class="eyebrow">Use cases</p>
-          <h2 id="usecases-title">不只寫程式，也適合生活與工作</h2>
+          <h2 id="usecases-title" data-i18n="useCasesTitle">不只寫程式，也適合生活與工作</h2>
         </div>
         <div class="caseGrid">
           <article>
-            <h3>整理文件</h3>
-            <p>不知道文件怎麼開始整理時，先請 AI 問用途、分類資料、建立摘要。</p>
+            <h3 data-i18n="caseDocsTitle">整理文件</h3>
+            <p data-i18n="caseDocsBody">不知道文件怎麼開始整理時，先請 AI 問用途、分類資料、建立摘要。</p>
           </article>
           <article>
-            <h3>產製報告</h3>
-            <p>把模糊需求改成清楚架構，請 AI 補問題、列大綱、檢查缺口。</p>
+            <h3 data-i18n="caseReportsTitle">產製報告</h3>
+            <p data-i18n="caseReportsBody">把模糊需求改成清楚架構，請 AI 補問題、列大綱、檢查缺口。</p>
           </article>
           <article>
-            <h3>旅遊計畫</h3>
-            <p>讓 AI 先問預算、天數、偏好，再規劃路線與備案。</p>
+            <h3 data-i18n="caseTravelTitle">旅遊計畫</h3>
+            <p data-i18n="caseTravelBody">讓 AI 先問預算、天數、偏好，再規劃路線與備案。</p>
           </article>
           <article>
-            <h3>Codex 協作</h3>
-            <p>把需求說清楚，要求 AI 規劃、執行、檢查，再逐步完善成果。</p>
+            <h3 data-i18n="caseCodexTitle">Codex 協作</h3>
+            <p data-i18n="caseCodexBody">把需求說清楚，要求 AI 規劃、執行、檢查，再逐步完善成果。</p>
           </article>
         </div>
       </section>
@@ -219,25 +220,25 @@
       <section class="privacySection" aria-labelledby="privacy-title">
         <div>
           <p class="eyebrow">Privacy</p>
-          <h2 id="privacy-title">安靜、離線、沒有帳號壓力</h2>
+          <h2 id="privacy-title" data-i18n="privacyTitle">安靜、離線、沒有帳號壓力</h2>
         </div>
         <ul>
-          <li>不需要 AI API key</li>
-          <li>不需要建立帳號</li>
-          <li>不追蹤使用者</li>
-          <li>提示詞以本機 JSON pack 維護</li>
+          <li data-i18n="privacyApi">不需要 AI API key</li>
+          <li data-i18n="privacyAccount">不需要建立帳號</li>
+          <li data-i18n="privacyTracking">不追蹤使用者</li>
+          <li data-i18n="privacyJson">提示詞以本機 JSON pack 維護</li>
         </ul>
       </section>
 
       <section id="open-source" class="openSource" aria-labelledby="opensource-title">
         <div class="sectionIntro">
           <p class="eyebrow">Open source</p>
-          <h2 id="opensource-title">你不會寫程式，也能貢獻</h2>
-          <p>SayNext 的提示詞包是簡單 JSON。你可以新增語言、改善句子、補充生活情境，讓更多人第一次使用 AI 時不要放棄。</p>
+          <h2 id="opensource-title" data-i18n="openSourceTitle">你不會寫程式，也能貢獻</h2>
+          <p data-i18n="openSourceLead">SayNext 的提示詞包是簡單 JSON。你可以新增語言、改善句子、補充生活情境，讓更多人第一次使用 AI 時不要放棄。</p>
         </div>
         <div class="heroActions">
           <a class="primaryButton" href="https://github.com/Leo-hypno/saynext" target="_blank" rel="noopener noreferrer">Star on GitHub</a>
-          <a class="secondaryButton" href="https://github.com/Leo-hypno/saynext/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">查看貢獻指南</a>
+          <a class="secondaryButton" href="https://github.com/Leo-hypno/saynext/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" data-i18n="contributing">查看貢獻指南</a>
         </div>
       </section>
     </main>
@@ -247,5 +248,175 @@
       <span>MIT License</span>
       <a href="https://github.com/Leo-hypno/saynext/releases/latest" target="_blank" rel="noopener noreferrer">Latest release</a>
     </footer>
+    <script>
+      const translations = {
+        zh: {
+          pageTitle: "SayNext | AI 下一句提示工具",
+          pageDescription: "SayNext 是一個開源桌面小工具，幫助 AI 新手在卡住時找到下一句可以問的話。",
+          navLabel: "主導覽",
+          navDownload: "下載",
+          navFlow: "流程",
+          navOpenSource: "開源",
+          heroTitle: "AI 卡住時，幫你找到下一句。",
+          heroLead: "SayNext 把常見 AI 對話時刻整理成可複製提示詞。按快捷鍵，選一句人話，貼進 ChatGPT、Claude、Gemini 或 Codex。",
+          heroDownload: "下載 SayNext",
+          heroGithub: "查看 GitHub",
+          promptLine: "我想要……請先幫我整理需求，再問我還要補什麼。",
+          chipStart: "開始問",
+          chipConfused: "聽不懂",
+          chipPlanning: "規劃",
+          chipExecute: "執行",
+          chipReview: "檢查完善",
+          storyTitle: "大多數人不是不會用 AI，是不知道下一句該怎麼說。",
+          storyBefore: "AI 回答得很長、很硬，或直接說不行。新手通常會以為是自己不適合用 AI，然後關掉視窗。",
+          storySayNext: "SayNext 把這些卡住時刻整理成短句：請 AI 追問、改用人話、提出替代方案、規劃下一步。",
+          storyAfter: "使用者不需要先學會提示工程，只要先有一句能貼上的話，對話就能重新往前走。",
+          downloadTitle: "選擇你的系統",
+          downloadLead: "大多數使用者只需要下載下面其中一個檔案。",
+          appleSiliconNote: "M1、M2、M3、M4 系列 Mac",
+          intelNote: "Intel 處理器 Mac",
+          windowsNote: "Windows 10 / 11",
+          libraryTitle: "把「不知道怎麼問」變成可以直接用的句子",
+          libraryLead: "SayNext 不是要你學會提示工程，而是把新手最容易卡住的幾個時刻先整理好。",
+          libraryStartTitle: "開始問",
+          libraryStartBody: "把模糊想法整理成 AI 聽得懂的任務。",
+          libraryConfusedTitle: "聽不懂",
+          libraryConfusedBody: "請 AI 換成人話、舉例、重新拆解。",
+          libraryRefusedTitle: "AI 說不行",
+          libraryRefusedBody: "要求它說明限制，改找可行替代方案。",
+          libraryResearchTitle: "查資料",
+          libraryResearchBody: "請 AI 參考外部做法，整理不同觀點。",
+          libraryPlanningTitle: "規劃",
+          libraryPlanningBody: "把目標、步驟、風險和決策點列出來。",
+          libraryNextTitle: "下一步",
+          libraryNextBody: "讓 AI 不只回答，而是推進到下一個動作。",
+          flowTitle: "四步驟，讓 AI 對話重新動起來",
+          flowOneTitle: "按下快捷鍵",
+          flowOneBody: "用 Cmd/Ctrl + Shift + H 叫出 SayNext。",
+          flowTwoTitle: "選一個情境",
+          flowTwoBody: "開始問、聽不懂、規劃、執行、檢查完善。",
+          flowThreeTitle: "複製提示詞",
+          flowThreeBody: "點一下或按 Enter，就會放進剪貼簿。",
+          flowFourTitle: "貼到 AI 對話框",
+          flowFourBody: "讓 AI 追問、規劃、改寫、查資料或繼續執行。",
+          useCasesTitle: "不只寫程式，也適合生活與工作",
+          caseDocsTitle: "整理文件",
+          caseDocsBody: "不知道文件怎麼開始整理時，先請 AI 問用途、分類資料、建立摘要。",
+          caseReportsTitle: "產製報告",
+          caseReportsBody: "把模糊需求改成清楚架構，請 AI 補問題、列大綱、檢查缺口。",
+          caseTravelTitle: "旅遊計畫",
+          caseTravelBody: "讓 AI 先問預算、天數、偏好，再規劃路線與備案。",
+          caseCodexTitle: "Codex 協作",
+          caseCodexBody: "把需求說清楚，要求 AI 規劃、執行、檢查，再逐步完善成果。",
+          privacyTitle: "安靜、離線、沒有帳號壓力",
+          privacyApi: "不需要 AI API key",
+          privacyAccount: "不需要建立帳號",
+          privacyTracking: "不追蹤使用者",
+          privacyJson: "提示詞以本機 JSON pack 維護",
+          openSourceTitle: "你不會寫程式，也能貢獻",
+          openSourceLead: "SayNext 的提示詞包是簡單 JSON。你可以新增語言、改善句子、補充生活情境，讓更多人第一次使用 AI 時不要放棄。",
+          contributing: "查看貢獻指南"
+        },
+        en: {
+          pageTitle: "SayNext | The next prompt when AI gets stuck",
+          pageDescription: "SayNext is an open-source desktop palette that helps AI beginners find the next useful thing to ask.",
+          navLabel: "Main navigation",
+          navDownload: "Download",
+          navFlow: "Flow",
+          navOpenSource: "Open source",
+          heroTitle: "When AI gets stuck, SayNext gives you the next line.",
+          heroLead: "SayNext turns common AI conversation moments into copyable rescue prompts. Press a hotkey, pick a human sentence, and paste it into ChatGPT, Claude, Gemini, or Codex.",
+          heroDownload: "Download SayNext",
+          heroGithub: "View GitHub",
+          promptLine: "I want to... Help me clarify the request first, then ask what information you still need.",
+          chipStart: "Start",
+          chipConfused: "Confused",
+          chipPlanning: "Plan",
+          chipExecute: "Execute",
+          chipReview: "Review",
+          storyTitle: "Most people are not bad at using AI. They just do not know what to ask next.",
+          storyBefore: "AI answers too long, too stiff, or refuses too early. Beginners often assume they are the problem and close the window.",
+          storySayNext: "SayNext turns those stuck moments into short prompts: ask follow-up questions, explain plainly, suggest alternatives, and plan the next step.",
+          storyAfter: "Users do not need to learn prompt engineering first. One copyable sentence can move the conversation forward.",
+          downloadTitle: "Choose your system",
+          downloadLead: "Most users only need one of the files below.",
+          appleSiliconNote: "M1, M2, M3, and M4 Macs",
+          intelNote: "Intel-based Macs",
+          windowsNote: "Windows 10 / 11",
+          libraryTitle: "Turn “I do not know what to ask” into ready-to-use prompts",
+          libraryLead: "SayNext is not about making you learn prompt engineering. It prepares the moments where beginners most often get stuck.",
+          libraryStartTitle: "Getting started",
+          libraryStartBody: "Turn vague ideas into tasks AI can understand.",
+          libraryConfusedTitle: "I do not understand",
+          libraryConfusedBody: "Ask AI to use plain language, examples, and simpler steps.",
+          libraryRefusedTitle: "AI refuses",
+          libraryRefusedBody: "Ask it to explain the limit and suggest practical alternatives.",
+          libraryResearchTitle: "Research",
+          libraryResearchBody: "Ask AI to compare credible sources and different viewpoints.",
+          libraryPlanningTitle: "Planning",
+          libraryPlanningBody: "List goals, steps, risks, and decision points.",
+          libraryNextTitle: "Next step",
+          libraryNextBody: "Move beyond answers and push toward the next action.",
+          flowTitle: "Four steps to get the AI conversation moving again",
+          flowOneTitle: "Press the hotkey",
+          flowOneBody: "Open SayNext with Cmd/Ctrl + Shift + H.",
+          flowTwoTitle: "Pick a context",
+          flowTwoBody: "Start, confused, planning, execution, and review.",
+          flowThreeTitle: "Copy a prompt",
+          flowThreeBody: "Click once or press Enter to copy it to the clipboard.",
+          flowFourTitle: "Paste into AI chat",
+          flowFourBody: "Ask AI to clarify, plan, rewrite, research, or continue executing.",
+          useCasesTitle: "Not just coding. Useful for everyday life and work.",
+          caseDocsTitle: "Organizing documents",
+          caseDocsBody: "When you do not know where to start, ask AI to clarify purpose, group information, and create summaries.",
+          caseReportsTitle: "Creating reports",
+          caseReportsBody: "Turn vague needs into structure, questions, outlines, and gap checks.",
+          caseTravelTitle: "Travel planning",
+          caseTravelBody: "Ask AI to confirm budget, dates, preferences, then plan routes and backups.",
+          caseCodexTitle: "Codex collaboration",
+          caseCodexBody: "Clarify the request, ask AI to plan, execute, check, and improve the result step by step.",
+          privacyTitle: "Quiet, offline, and no account pressure",
+          privacyApi: "No AI API key required",
+          privacyAccount: "No account required",
+          privacyTracking: "No user tracking",
+          privacyJson: "Prompts are maintained as local JSON packs",
+          openSourceTitle: "You can contribute even if you do not write code",
+          openSourceLead: "SayNext prompt packs are simple JSON. You can add languages, improve prompts, and contribute real-life use cases so more people do not give up on AI.",
+          contributing: "View contributing guide"
+        }
+      };
+
+      const preferredLanguage =
+        localStorage.getItem("saynext.siteLanguage") ||
+        (navigator.language && navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en");
+      const toggle = document.querySelector("[data-language-toggle]");
+
+      function applyLanguage(language) {
+        const dictionary = translations[language] || translations.en;
+        document.documentElement.lang = language === "zh" ? "zh-Hant" : "en";
+        for (const element of document.querySelectorAll("[data-i18n]")) {
+          const key = element.getAttribute("data-i18n");
+          if (dictionary[key]) element.textContent = dictionary[key];
+        }
+        for (const element of document.querySelectorAll("[data-i18n-attr]")) {
+          for (const pair of element.getAttribute("data-i18n-attr").split(",")) {
+            const [attribute, key] = pair.split(":");
+            if (attribute && dictionary[key]) element.setAttribute(attribute, dictionary[key]);
+          }
+        }
+        if (toggle) {
+          toggle.textContent = language === "zh" ? "EN" : "繁中";
+          toggle.setAttribute("aria-label", language === "zh" ? "Switch to English" : "切換到繁體中文");
+        }
+        document.title = dictionary.pageTitle;
+        document.querySelector('meta[name="description"]')?.setAttribute("content", dictionary.pageDescription);
+        localStorage.setItem("saynext.siteLanguage", language);
+      }
+
+      applyLanguage(preferredLanguage);
+      toggle?.addEventListener("click", () => {
+        applyLanguage(document.documentElement.lang === "zh-Hant" ? "en" : "zh");
+      });
+    </script>
   </body>
 </html>
