@@ -44,7 +44,7 @@
         <div class="heroShade" aria-hidden="true"></div>
         <div class="heroContent">
           <div class="heroMeta" aria-label="產品狀態">
-            <span>v0.1.5</span>
+            <span>v0.1.7</span>
             <span>macOS + Windows</span>
             <span>Offline-first</span>
           </div>
@@ -101,7 +101,7 @@
         <div class="downloadGrid">
           <a
             class="downloadCard"
-            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.5/SayNext-0.1.5-darwin-aarch64-dmg.dmg"
+            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-aarch64-dmg.dmg"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -111,7 +111,7 @@
           </a>
           <a
             class="downloadCard"
-            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.5/SayNext-0.1.5-darwin-x64-dmg.dmg"
+            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-x64-dmg.dmg"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -121,7 +121,7 @@
           </a>
           <a
             class="downloadCard"
-            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.5/SayNext-0.1.5-windows-x64-nsis-setup.exe"
+            href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-windows-x64-nsis-setup.exe"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -129,6 +129,17 @@
             <strong>Download EXE</strong>
             <small data-i18n="windowsNote">Windows 10 / 11</small>
           </a>
+        </div>
+      </section>
+
+      <section class="demoSection" aria-labelledby="demo-title">
+        <div class="sectionIntro">
+          <p class="eyebrow">30-second flow</p>
+          <h2 id="demo-title" data-i18n="demoTitle">打開、選一句、貼到 AI。</h2>
+          <p data-i18n="demoLead">SayNext 的核心不是管理很多文字，而是在使用者卡住時給他一個可以立刻貼上的下一句。</p>
+        </div>
+        <div class="demoFrame">
+          <img src="./assets/saynext-demo.gif" alt="SayNext demo: open, copy, paste into an AI chat box" />
         </div>
       </section>
 
@@ -205,6 +216,7 @@
         <div class="sectionIntro">
           <p class="eyebrow">Use cases</p>
           <h2 id="usecases-title" data-i18n="useCasesTitle">不只寫程式，也適合生活與工作</h2>
+          <p data-i18n="useCasesLead">SayNext 是給「想用 AI 做事，但還不知道怎麼開口」的人，不限於工程師。</p>
         </div>
         <div class="caseGrid">
           <article>
@@ -247,6 +259,7 @@
         </div>
         <div class="heroActions">
           <a class="primaryButton" href="https://github.com/Leo-hypno/saynext" target="_blank" rel="noopener noreferrer">Star on GitHub</a>
+          <a class="secondaryButton" href="https://github.com/Leo-hypno/saynext/issues/new?template=prompt_pack.md" target="_blank" rel="noopener noreferrer" data-i18n="promptPackIssue">貢獻 Prompt Pack</a>
           <a class="secondaryButton" href="https://github.com/Leo-hypno/saynext/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" data-i18n="contributing">查看貢獻指南</a>
         </div>
       </section>
@@ -285,6 +298,8 @@
           appleSiliconNote: "M1、M2、M3、M4 系列 Mac",
           intelNote: "Intel 處理器 Mac",
           windowsNote: "Windows 10 / 11",
+          demoTitle: "打開、選一句、貼到 AI。",
+          demoLead: "SayNext 的核心不是管理很多文字，而是在使用者卡住時給他一個可以立刻貼上的下一句。",
           libraryTitle: "把「不知道怎麼問」變成可以直接用的句子",
           libraryLead: "SayNext 不是要你學會提示工程，而是把新手最容易卡住的幾個時刻先整理好。",
           libraryStartTitle: "開始問",
@@ -309,6 +324,7 @@
           flowFourTitle: "貼到 AI 對話框",
           flowFourBody: "讓 AI 追問、規劃、改寫、查資料或繼續執行。",
           useCasesTitle: "不只寫程式，也適合生活與工作",
+          useCasesLead: "SayNext 是給「想用 AI 做事，但還不知道怎麼開口」的人，不限於工程師。",
           caseDocsTitle: "整理文件",
           caseDocsBody: "不知道文件怎麼開始整理時，先請 AI 問用途、分類資料、建立摘要。",
           caseReportsTitle: "產製報告",
@@ -324,6 +340,7 @@
           privacyJson: "提示詞以本機 JSON pack 維護",
           openSourceTitle: "你不會寫程式，也能貢獻",
           openSourceLead: "SayNext 的提示詞包是簡單 JSON。你可以新增語言、改善句子、補充生活情境，讓更多人第一次使用 AI 時不要放棄。",
+          promptPackIssue: "貢獻 Prompt Pack",
           contributing: "查看貢獻指南"
         },
         en: {
@@ -352,6 +369,8 @@
           appleSiliconNote: "M1, M2, M3, and M4 Macs",
           intelNote: "Intel-based Macs",
           windowsNote: "Windows 10 / 11",
+          demoTitle: "Open it, choose one line, paste into AI.",
+          demoLead: "SayNext is not about managing a giant text library. It gives people one useful next line at the moment they get stuck.",
           libraryTitle: "Turn “I do not know what to ask” into ready-to-use prompts",
           libraryLead: "SayNext is not about making you learn prompt engineering. It prepares the moments where beginners most often get stuck.",
           libraryStartTitle: "Getting started",
@@ -376,6 +395,7 @@
           flowFourTitle: "Paste into AI chat",
           flowFourBody: "Ask AI to clarify, plan, rewrite, research, or continue executing.",
           useCasesTitle: "Not just coding. Useful for everyday life and work.",
+          useCasesLead: "SayNext is for people who want AI to help but do not yet know how to start the conversation.",
           caseDocsTitle: "Organizing documents",
           caseDocsBody: "When you do not know where to start, ask AI to clarify purpose, group information, and create summaries.",
           caseReportsTitle: "Creating reports",
@@ -391,6 +411,7 @@
           privacyJson: "Prompts are maintained as local JSON packs",
           openSourceTitle: "You can contribute even if you do not write code",
           openSourceLead: "SayNext prompt packs are simple JSON. You can add languages, improve prompts, and contribute real-life use cases so more people do not give up on AI.",
+          promptPackIssue: "Contribute a Prompt Pack",
           contributing: "View contributing guide"
         },
         ja: {
@@ -419,6 +440,8 @@
           appleSiliconNote: "M1、M2、M3、M4 Mac",
           intelNote: "Intel 搭載 Mac",
           windowsNote: "Windows 10 / 11",
+          demoTitle: "開いて、一文を選び、AI に貼り付ける。",
+          demoLead: "SayNext は大量の文章を管理するためのものではありません。ユーザーが詰まった瞬間に、すぐ使える次の一文を渡します。",
           libraryTitle: "「何を聞けばいいかわからない」を、そのまま使える一文に",
           libraryLead: "SayNext はプロンプトエンジニアリングを学ばせるためではなく、初心者がよく詰まる瞬間を先に用意するためのものです。",
           libraryStartTitle: "はじめる",
@@ -443,6 +466,7 @@
           flowFourTitle: "AI チャットに貼り付ける",
           flowFourBody: "AI に質問、計画、書き直し、調査、実行の続きを依頼します。",
           useCasesTitle: "コーディングだけでなく、仕事や生活にも",
+          useCasesLead: "SayNext は、AI に手伝ってほしいけれど最初の聞き方がわからない人のためのツールです。",
           caseDocsTitle: "文書整理",
           caseDocsBody: "どこから整理すればいいかわからない時、目的の確認、情報の分類、要約を AI に依頼できます。",
           caseReportsTitle: "レポート作成",
@@ -458,6 +482,7 @@
           privacyJson: "プロンプトはローカル JSON pack で管理",
           openSourceTitle: "コードを書けなくても貢献できます",
           openSourceLead: "SayNext のプロンプトパックはシンプルな JSON です。言語を追加したり、表現を改善したり、生活のユースケースを補うことで、より多くの人が AI を諦めずに済みます。",
+          promptPackIssue: "Prompt Pack を貢献する",
           contributing: "貢献ガイドを見る"
         }
       };

@@ -9,26 +9,43 @@ An open-source desktop palette that helps people ask AI the next better question
 [![Windows](https://img.shields.io/badge/Windows-supported-111827.svg)](https://github.com/Leo-hypno/saynext/releases/latest)
 [![Built with Tauri](https://img.shields.io/badge/built%20with-Tauri-24c8db.svg)](https://tauri.app/)
 
-When ChatGPT, Claude, Gemini, or any AI tool gives a confusing answer, refuses too early, or you simply do not know what to ask next, press a hotkey and pick a rescue prompt.
+When ChatGPT, Claude, Gemini, Codex, or any AI tool gives a confusing answer, refuses too early, or you simply do not know what to ask next, press a hotkey and pick a rescue prompt.
 
 > SayNext is not a prompt manager for people who already know what they want to ask.
 > It is built for the moment before that.
 
+## Download
+
+Most users only need one installer:
+
+| System | One-click download |
+| --- | --- |
+| Mac Apple Silicon | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-aarch64-dmg.dmg) |
+| Mac Intel | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-x64-dmg.dmg) |
+| Windows | [Download EXE](https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-windows-x64-nsis-setup.exe) |
+
+[Open the latest release page](https://github.com/Leo-hypno/saynext/releases/latest) if you need checksums, MSI, updater files, or older versions.
+
+macOS builds are signed and notarized. If Windows blocks the installer, choose "More info" then "Run anyway".
+
+## 30-Second Flow
+
 ![SayNext demo: open, copy, paste](docs/assets/saynext-demo.gif)
+
+1. Press `Cmd/Ctrl + Shift + H` to open SayNext.
+2. Pick the situation you are in: start, confused, planning, execution, review.
+3. Click a prompt, or press `Enter`, to copy it.
+4. Paste it into ChatGPT, Claude, Gemini, Codex, or any AI chat box.
 
 ![SayNext main palette](docs/assets/saynext-main-dark.png)
 
-## Download
+## Who It Is For
 
-**[Download the latest SayNext release](https://github.com/Leo-hypno/saynext/releases/latest)**
-
-| System | Download this file |
-| --- | --- |
-| Mac Apple Silicon | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.5/SayNext-0.1.5-darwin-aarch64-dmg.dmg) |
-| Mac Intel | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.5/SayNext-0.1.5-darwin-x64-dmg.dmg) |
-| Windows | [Download EXE](https://github.com/Leo-hypno/saynext/releases/download/v0.1.5/SayNext-0.1.5-windows-x64-nsis-setup.exe) |
-
-If Windows blocks the installer, choose "More info" then "Run anyway".
+- AI beginners who freeze after a confusing answer.
+- People using AI for documents, reports, travel plans, writing, learning, and daily work.
+- Codex users who want clearer instructions, planning prompts, execution prompts, and review prompts.
+- Teachers, coaches, teams, and communities that want beginner-friendly AI habits.
+- Contributors who want to improve prompt packs without touching app code.
 
 ## Why
 
@@ -110,6 +127,16 @@ Each pack is a simple JSON file, so non-programmers can contribute better transl
 
 See [Prompt Pack Schema](docs/prompt-pack-schema.md).
 
+## Contribute A Prompt Pack
+
+SayNext is especially friendly to non-code contributions:
+
+1. Open a [prompt pack issue](https://github.com/Leo-hypno/saynext/issues/new?template=prompt_pack.md).
+2. Suggest a new language, a better translation, or a real-life AI use case.
+3. Keep prompts short, human, and useful when someone is stuck.
+
+Prompt packs live in `packs/`, and the schema is documented in [docs/prompt-pack-schema.md](docs/prompt-pack-schema.md).
+
 ## Contributing
 
 Contributions are welcome, especially prompt packs. You do not need to write code to help.
@@ -136,7 +163,7 @@ For versioning and GitHub Releases, see [Release Guide](docs/release.md).
 
 Prerequisites:
 
-- Node.js 20+
+- Node.js 24+
 - npm
 - Rust toolchain, required for running Tauri
 
@@ -174,7 +201,7 @@ npm run bundle
 Update SayNext's version before a release:
 
 ```bash
-npm run version:set -- 0.1.5
+npm run version:set -- 0.1.7
 ```
 
 Validate prompt packs only:

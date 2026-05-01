@@ -336,6 +336,7 @@ h1 {
 }
 
 .downloadSection,
+.demoSection,
 .storySection,
 .librarySection,
 .flowSection,
@@ -349,6 +350,7 @@ h1 {
 .storyIntro,
 .storyGrid,
 .downloadGrid,
+.demoFrame,
 .libraryGrid,
 .steps,
 .caseGrid,
@@ -474,8 +476,26 @@ h2 {
   line-height: 1.5;
 }
 
-.librarySection {
+.demoSection {
   background: #ffffff;
+}
+
+.demoFrame {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #111827;
+  box-shadow: 0 24px 70px rgba(23, 32, 51, 0.12);
+}
+
+.demoFrame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.librarySection {
+  background: #f8fbff;
 }
 
 .libraryGrid {
@@ -649,6 +669,7 @@ footer a {
   }
 
   .downloadSection,
+  .demoSection,
   .storySection,
   .librarySection,
   .flowSection,
@@ -662,6 +683,7 @@ footer a {
   .storyIntro,
   .storyGrid,
   .downloadGrid,
+  .demoFrame,
   .libraryGrid,
   .steps,
   .caseGrid,
@@ -685,6 +707,7 @@ footer a {
 
 @media (max-width: 560px) {
   .downloadSection,
+  .demoSection,
   .storySection,
   .librarySection,
   .flowSection,
@@ -699,6 +722,7 @@ footer a {
   .storyIntro,
   .storyGrid,
   .downloadGrid,
+  .demoFrame,
   .libraryGrid,
   .steps,
   .caseGrid,
