@@ -7,8 +7,10 @@
   --paper: #ffffff;
   --accent: #2f80ed;
   --accent-dark: #155fbd;
+  --accent-soft: #e9f2ff;
   --green: #13795b;
   --gold: #a86d13;
+  --radius: 8px;
 }
 
 * {
@@ -27,6 +29,7 @@ body {
   color: var(--ink);
   background: var(--paper);
   letter-spacing: 0;
+  overflow-x: hidden;
 }
 
 a {
@@ -43,8 +46,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 68px;
-  padding: 0 32px;
+  min-height: 76px;
+  padding: 0 36px;
   color: #f6f8fb;
   background: rgba(11, 16, 24, 0.72);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -69,7 +72,7 @@ a {
   place-items: center;
   color: #ffffff;
   background: var(--accent);
-  border-radius: 8px;
+  border-radius: var(--radius);
 }
 
 .siteHeader nav a {
@@ -85,10 +88,10 @@ a {
 .hero {
   position: relative;
   display: grid;
-  min-height: 92vh;
+  min-height: 98vh;
   align-items: center;
   overflow: hidden;
-  padding: 128px 32px 96px;
+  padding: 132px 32px 84px;
   color: #ffffff;
 }
 
@@ -107,7 +110,7 @@ a {
   inset: 0;
   background:
     linear-gradient(90deg, rgba(8, 12, 18, 0.94), rgba(8, 12, 18, 0.74) 42%, rgba(8, 12, 18, 0.24)),
-    linear-gradient(0deg, rgba(8, 12, 18, 0.92), rgba(8, 12, 18, 0.08) 45%);
+    linear-gradient(0deg, rgba(8, 12, 18, 0.96), rgba(8, 12, 18, 0.08) 46%);
 }
 
 .heroContent {
@@ -126,6 +129,26 @@ a {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.heroMeta span {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 0 12px;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  font-weight: 750;
 }
 
 .hero .eyebrow {
@@ -149,10 +172,11 @@ h1 {
 }
 
 .heroLead {
-  max-width: 680px;
+  max-width: 720px;
   color: rgba(255, 255, 255, 0.84);
-  font-size: 20px;
-  line-height: 1.75;
+  font-size: 19px;
+  line-height: 1.72;
+  overflow-wrap: anywhere;
 }
 
 .heroActions {
@@ -169,7 +193,7 @@ h1 {
   justify-content: center;
   min-height: 48px;
   padding: 0 18px;
-  border-radius: 8px;
+  border-radius: var(--radius);
   font-weight: 800;
 }
 
@@ -188,7 +212,52 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.24);
 }
 
+.promptSurface {
+  width: min(700px, 100%);
+  margin-top: 28px;
+  padding: 16px;
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+}
+
+.surfaceLabel {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.promptLine {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.promptChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.promptChips span {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 13px;
+}
+
 .downloadSection,
+.librarySection,
 .flowSection,
 .useCases,
 .privacySection,
@@ -198,6 +267,7 @@ h1 {
 
 .sectionIntro,
 .downloadGrid,
+.libraryGrid,
 .steps,
 .caseGrid,
 .privacySection,
@@ -243,8 +313,8 @@ h2 {
   padding: 22px;
   background: #ffffff;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: 0 18px 50px rgba(23, 32, 51, 0.08);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 50px rgba(23, 32, 51, 0.06);
 }
 
 .downloadCard:hover {
@@ -269,6 +339,43 @@ h2 {
   line-height: 1.5;
 }
 
+.librarySection {
+  background: #ffffff;
+}
+
+.libraryGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.libraryGrid article {
+  min-height: 190px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+}
+
+.libraryGrid article span {
+  display: block;
+  margin-bottom: 30px;
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.libraryGrid h3 {
+  margin-bottom: 8px;
+  font-size: 19px;
+}
+
+.libraryGrid p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
 .steps {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -281,7 +388,7 @@ h2 {
 .caseGrid article {
   padding: 22px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--paper);
 }
 
@@ -335,7 +442,7 @@ h2 {
   color: rgba(255, 255, 255, 0.8);
   padding: 16px 18px;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 8px;
+  border-radius: var(--radius);
 }
 
 .openSource {
@@ -407,6 +514,7 @@ footer a {
   }
 
   .downloadSection,
+  .librarySection,
   .flowSection,
   .useCases,
   .privacySection,
@@ -415,6 +523,7 @@ footer a {
   }
 
   .downloadGrid,
+  .libraryGrid,
   .steps,
   .caseGrid,
   .privacySection {
@@ -431,6 +540,11 @@ footer a {
   .siteHeader nav a:nth-child(2),
   .siteHeader nav a:nth-child(3) {
     display: none;
+  }
+
+  .heroContent {
+    width: min(100%, 320px);
+    max-width: 320px;
   }
 
   .heroActions {
