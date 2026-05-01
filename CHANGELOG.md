@@ -4,6 +4,17 @@ All notable changes to SayNext are documented here.
 
 This project follows Semantic Versioning.
 
+## [0.1.7] - 2026-05-01
+
+### Changed
+
+- Replaced the placeholder multilingual prompt packs with fully localized prompt titles, prompt text, categories, descriptions, and tags.
+- Added localized app interface copy for Japanese, Korean, Spanish, French, German, and Brazilian Portuguese.
+
+### Fixed
+
+- Removed fake multilingual prompts that only prepended “respond in this language” instructions to English text.
+
 ## [0.1.6] - 2026-05-01
 
 ### Added
