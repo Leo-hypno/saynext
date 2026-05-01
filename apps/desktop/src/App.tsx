@@ -315,7 +315,11 @@ export function App() {
         handleFavoriteToggle(visiblePrompts[selectedIndex].id);
       }
 
-      if (event.key === "Enter" && visiblePrompts[selectedIndex]) {
+      if (
+        event.key === "Enter" &&
+        !isInteractiveTarget(event.target) &&
+        visiblePrompts[selectedIndex]
+      ) {
         event.preventDefault();
         void handleCopy(visiblePrompts[selectedIndex]);
       }
@@ -839,6 +843,17 @@ function isTextEditingTarget(target: EventTarget | null) {
     target instanceof HTMLTextAreaElement ||
     target instanceof HTMLSelectElement ||
     (target instanceof HTMLElement && target.isContentEditable)
+  );
+}
+
+function isInteractiveTarget(target: EventTarget | null) {
+  return (
+    isTextEditingTarget(target) ||
+    target instanceof HTMLButtonElement ||
+    target instanceof HTMLAnchorElement ||
+    target instanceof HTMLDetailsElement ||
+    (target instanceof HTMLElement &&
+      Boolean(target.closest("button, a, select, summary, details, [role='button']")))
   );
 }
 
