@@ -4,6 +4,24 @@ All notable changes to SayNext are documented here.
 
 This project follows Semantic Versioning.
 
+## [0.1.6] - 2026-05-01
+
+### Added
+
+- Added a first-run language selection screen with English as the default.
+- Added common prompt packs for Japanese, Korean, Spanish, French, German, and Brazilian Portuguese.
+- Added a multilingual GitHub Pages landing page with Traditional Chinese, English, and Japanese.
+
+### Changed
+
+- Improved the website language selector into a compact dropdown inspired by mature multilingual product sites.
+- Improved website language persistence and browser-language detection.
+
+### Fixed
+
+- Fixed language selector text clipping in the desktop app header.
+- Improved compact website language menu behavior on mobile.
+
 ## [0.1.5] - 2026-05-01
 
 ### Added
