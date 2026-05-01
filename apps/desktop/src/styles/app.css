@@ -70,10 +70,12 @@ a:focus-visible {
   display: flex;
   gap: 14px;
   justify-content: space-between;
+  min-width: 0;
   padding: 14px 18px 9px;
 }
 
 .paletteTitle {
+  flex: 0 1 auto;
   min-width: 0;
 }
 
@@ -112,13 +114,17 @@ h1 {
   align-items: center;
   cursor: default;
   display: flex;
+  flex: 1 1 auto;
   gap: 8px;
+  justify-content: flex-end;
+  max-width: 100%;
   min-width: 0;
   user-select: auto;
 }
 
 .languageMenu {
-  flex: 0 0 220px;
+  flex: 1 1 220px;
+  max-width: 440px;
   min-width: 0;
   position: relative;
 }
@@ -501,6 +507,7 @@ h1 {
   gap: 6px;
   height: 32px;
   justify-content: center;
+  min-width: 0;
   padding: 0 10px;
 }
 
@@ -540,6 +547,8 @@ h1 {
 
 .headerAddButton {
   height: 34px;
+  max-width: 156px;
+  white-space: nowrap;
 }
 
 .spin {
@@ -658,7 +667,34 @@ kbd {
   white-space: nowrap;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 760px) {
+  .paletteHeader {
+    gap: 10px;
+  }
+
+  .paletteTitle {
+    flex: 0 1 150px;
+  }
+
+  .headerActions {
+    gap: 6px;
+  }
+
+  .languageMenu {
+    flex-basis: 180px;
+  }
+
+  .shortcut {
+    display: none;
+  }
+
+  .headerAddButton {
+    max-width: 132px;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 560px) {
   .paletteHeader {
     align-items: flex-start;
     flex-direction: column;
@@ -671,10 +707,6 @@ kbd {
   .languageMenu {
     flex: 1;
     min-width: 0;
-  }
-
-  .shortcut {
-    display: none;
   }
 
   .headerAddButton {
