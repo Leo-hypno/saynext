@@ -21,6 +21,8 @@ export type CustomPromptDraft = {
 
 export type ThemeMode = "system" | "light" | "dark";
 
+export type UpdateErrorCode = "checkFailed" | "installFailed";
+
 export type UiCopy = {
   addCustomPrompt: string;
   appEyebrow: string;

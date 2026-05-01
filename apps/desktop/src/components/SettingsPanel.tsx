@@ -13,12 +13,12 @@ import {
 import { useRef } from "react";
 import type { AutostartStatus } from "../lib/autostart";
 import type { UpdateInfo, UpdateProgress, UpdateStatus } from "../lib/updater";
-import type { ThemeMode, UiCopy } from "../types";
+import type { ThemeMode, UiCopy, UpdateErrorCode } from "../types";
 
 type SettingsPanelProps = {
   autostartStatus: AutostartStatus;
   themeMode: ThemeMode;
-  updateError: string | null;
+  updateError: UpdateErrorCode | null;
   updateInfo: UpdateInfo | null;
   updateProgress: UpdateProgress | null;
   updateStatus: UpdateStatus;
@@ -239,7 +239,7 @@ function updateCopy(
   status: UpdateStatus,
   updateInfo: UpdateInfo | null,
   updatePercent: number | null,
-  error: string | null,
+  error: UpdateErrorCode | null,
   uiCopy: UiCopy
 ) {
   if (status === "checking") return uiCopy.settingsUpdateChecking;
@@ -253,6 +253,10 @@ function updateCopy(
       : uiCopy.settingsUpdateDownloadingPercent(updatePercent);
   }
   if (status === "restarting") return uiCopy.settingsUpdateRestarting;
-  if (status === "error") return error ?? uiCopy.settingsUpdateError;
+  if (status === "error") {
+    if (error === "checkFailed") return uiCopy.settingsUpdateCheckFailed;
+    if (error === "installFailed") return uiCopy.settingsUpdateInstallFailed;
+    return uiCopy.settingsUpdateError;
+  }
   return uiCopy.settingsUpdateDescription;
 }

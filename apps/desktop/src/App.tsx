@@ -32,7 +32,13 @@ import { getUiCopy } from "./lib/uiCopy";
 import englishPackData from "../../../packs/en/beginner-rescue.json";
 import zhTwPackData from "../../../packs/zh-TW/beginner-rescue.json";
 import type { Update } from "@tauri-apps/plugin-updater";
-import type { CustomPromptDraft, PromptPack, RescuePrompt, ThemeMode } from "./types";
+import type {
+  CustomPromptDraft,
+  PromptPack,
+  RescuePrompt,
+  ThemeMode,
+  UpdateErrorCode
+} from "./types";
 
 const packs = [zhTwPackData, englishPackData] as PromptPack[];
 const defaultPackId = "beginner-rescue-zh-tw";
@@ -67,7 +73,7 @@ export function App() {
   const [updateStatus, setUpdateStatus] = useState<UpdateStatus>("idle");
   const [updateInfo, setUpdateInfo] = useState<UpdateInfo | null>(null);
   const [updateProgress, setUpdateProgress] = useState<UpdateProgress | null>(null);
-  const [updateError, setUpdateError] = useState<string | null>(null);
+  const [updateError, setUpdateError] = useState<UpdateErrorCode | null>(null);
   const [favorites, setFavorites] = useState<Set<string>>(
     () => new Set(readStoredStringArray("saynext.favorites"))
   );
@@ -602,7 +608,7 @@ export function App() {
       setUpdateStatus("available");
     } catch {
       setUpdateStatus("error");
-      setUpdateError(uiCopy.settingsUpdateCheckFailed);
+      setUpdateError("checkFailed");
     }
   }
 
@@ -622,7 +628,7 @@ export function App() {
       setUpdateStatus("restarting");
     } catch {
       setUpdateStatus("error");
-      setUpdateError(uiCopy.settingsUpdateInstallFailed);
+      setUpdateError("installFailed");
     }
   }
 
