@@ -21,7 +21,16 @@
         <a href="#flow" data-i18n="navFlow">流程</a>
         <a href="#open-source" data-i18n="navOpenSource">開源</a>
         <a href="https://github.com/Leo-hypno/saynext" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <button class="languageToggle" type="button" data-language-toggle aria-label="Switch language">EN</button>
+        <details class="siteLanguage" data-language-menu>
+          <summary aria-label="Language">
+            <span data-language-current>中</span>
+          </summary>
+          <div class="siteLanguagePanel">
+            <button type="button" data-language-option="en"><span>EN</span><strong>English</strong></button>
+            <button type="button" data-language-option="ja"><span>あ</span><strong>日本語</strong></button>
+            <button type="button" data-language-option="zh"><span>中</span><strong>繁體中文</strong></button>
+          </div>
+        </details>
       </nav>
     </header>
 
@@ -383,17 +392,96 @@
           openSourceTitle: "You can contribute even if you do not write code",
           openSourceLead: "SayNext prompt packs are simple JSON. You can add languages, improve prompts, and contribute real-life use cases so more people do not give up on AI.",
           contributing: "View contributing guide"
+        },
+        ja: {
+          pageTitle: "SayNext | AI が止まった時の次の一言",
+          pageDescription: "SayNext は、AI 初心者が会話で迷った時に次に聞ける一文を見つけるためのオープンソースのデスクトップツールです。",
+          navLabel: "メインナビゲーション",
+          navDownload: "ダウンロード",
+          navFlow: "使い方",
+          navOpenSource: "オープンソース",
+          heroTitle: "AI が止まった時、次の一言を見つける。",
+          heroLead: "SayNext は、AI との会話でよく起きる「詰まった瞬間」をコピーできる短いプロンプトにします。ショートカットを押し、一文を選び、ChatGPT、Claude、Gemini、Codex に貼り付けるだけです。",
+          heroDownload: "SayNext をダウンロード",
+          heroGithub: "GitHub を見る",
+          promptLine: "私は……したいです。まず要望を整理し、足りない情報を質問してください。",
+          chipStart: "はじめる",
+          chipConfused: "わからない",
+          chipPlanning: "計画",
+          chipExecute: "実行",
+          chipReview: "確認と改善",
+          storyTitle: "多くの人は AI が使えないのではなく、次に何を聞けばいいかわからないだけです。",
+          storyBefore: "AI の回答が長すぎたり、硬すぎたり、すぐに断られたりすると、初心者は自分が向いていないと思って画面を閉じてしまいます。",
+          storySayNext: "SayNext はその瞬間を短い一文にします。AI に質問させる、やさしく説明させる、代替案を出させる、次の手順を計画させる。",
+          storyAfter: "プロンプトエンジニアリングを先に学ぶ必要はありません。コピーできる一文があれば、会話はまた前に進みます。",
+          downloadTitle: "あなたの環境を選ぶ",
+          downloadLead: "ほとんどのユーザーは、下のファイルのうち1つだけをダウンロードすれば十分です。",
+          appleSiliconNote: "M1、M2、M3、M4 Mac",
+          intelNote: "Intel 搭載 Mac",
+          windowsNote: "Windows 10 / 11",
+          libraryTitle: "「何を聞けばいいかわからない」を、そのまま使える一文に",
+          libraryLead: "SayNext はプロンプトエンジニアリングを学ばせるためではなく、初心者がよく詰まる瞬間を先に用意するためのものです。",
+          libraryStartTitle: "はじめる",
+          libraryStartBody: "曖昧な考えを、AI が理解できるタスクに整理します。",
+          libraryConfusedTitle: "わからない",
+          libraryConfusedBody: "AI にやさしい言葉、例、より小さな手順で説明させます。",
+          libraryRefusedTitle: "AI が断った時",
+          libraryRefusedBody: "制限を説明させ、現実的な代替案を探します。",
+          libraryResearchTitle: "調べる",
+          libraryResearchBody: "信頼できる情報源や複数の見方を比較させます。",
+          libraryPlanningTitle: "計画",
+          libraryPlanningBody: "目標、手順、リスク、判断点を整理します。",
+          libraryNextTitle: "次の一手",
+          libraryNextBody: "回答だけで終わらせず、次の行動へ進めます。",
+          flowTitle: "4ステップで AI との会話をもう一度動かす",
+          flowOneTitle: "ショートカットを押す",
+          flowOneBody: "Cmd/Ctrl + Shift + H で SayNext を開きます。",
+          flowTwoTitle: "場面を選ぶ",
+          flowTwoBody: "はじめる、わからない、計画、実行、確認と改善。",
+          flowThreeTitle: "プロンプトをコピー",
+          flowThreeBody: "クリック、または Enter でクリップボードにコピーします。",
+          flowFourTitle: "AI チャットに貼り付ける",
+          flowFourBody: "AI に質問、計画、書き直し、調査、実行の続きを依頼します。",
+          useCasesTitle: "コーディングだけでなく、仕事や生活にも",
+          caseDocsTitle: "文書整理",
+          caseDocsBody: "どこから整理すればいいかわからない時、目的の確認、情報の分類、要約を AI に依頼できます。",
+          caseReportsTitle: "レポート作成",
+          caseReportsBody: "曖昧な要望を構成、質問、アウトライン、抜け漏れ確認に変えます。",
+          caseTravelTitle: "旅行計画",
+          caseTravelBody: "予算、日数、好みを確認してから、ルートと代替案を計画させます。",
+          caseCodexTitle: "Codex との協作",
+          caseCodexBody: "要望を明確にし、計画、実行、確認、改善を段階的に進めます。",
+          privacyTitle: "静かで、オフライン優先。アカウントの負担もありません。",
+          privacyApi: "AI API key は不要",
+          privacyAccount: "アカウント作成は不要",
+          privacyTracking: "ユーザー追跡なし",
+          privacyJson: "プロンプトはローカル JSON pack で管理",
+          openSourceTitle: "コードを書けなくても貢献できます",
+          openSourceLead: "SayNext のプロンプトパックはシンプルな JSON です。言語を追加したり、表現を改善したり、生活のユースケースを補うことで、より多くの人が AI を諦めずに済みます。",
+          contributing: "貢献ガイドを見る"
         }
       };
 
+      const languageMeta = {
+        en: { html: "en", label: "EN" },
+        ja: { html: "ja", label: "あ" },
+        zh: { html: "zh-Hant", label: "中" }
+      };
       const preferredLanguage =
         localStorage.getItem("saynext.siteLanguage") ||
-        (navigator.language && navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en");
-      const toggle = document.querySelector("[data-language-toggle]");
+        (navigator.language && navigator.language.toLowerCase().startsWith("zh")
+          ? "zh"
+          : navigator.language && navigator.language.toLowerCase().startsWith("ja")
+            ? "ja"
+            : "en");
+      const languageMenu = document.querySelector("[data-language-menu]");
+      const currentLanguage = document.querySelector("[data-language-current]");
+      const languageOptions = document.querySelectorAll("[data-language-option]");
 
       function applyLanguage(language) {
         const dictionary = translations[language] || translations.en;
-        document.documentElement.lang = language === "zh" ? "zh-Hant" : "en";
+        const meta = languageMeta[language] || languageMeta.en;
+        document.documentElement.lang = meta.html;
         for (const element of document.querySelectorAll("[data-i18n]")) {
           const key = element.getAttribute("data-i18n");
           if (dictionary[key]) element.textContent = dictionary[key];
@@ -404,9 +492,11 @@
             if (attribute && dictionary[key]) element.setAttribute(attribute, dictionary[key]);
           }
         }
-        if (toggle) {
-          toggle.textContent = language === "zh" ? "EN" : "繁中";
-          toggle.setAttribute("aria-label", language === "zh" ? "Switch to English" : "切換到繁體中文");
+        if (currentLanguage) {
+          currentLanguage.textContent = meta.label;
+        }
+        for (const option of languageOptions) {
+          option.classList.toggle("active", option.dataset.languageOption === language);
         }
         document.title = dictionary.pageTitle;
         document.querySelector('meta[name="description"]')?.setAttribute("content", dictionary.pageDescription);
@@ -414,8 +504,16 @@
       }
 
       applyLanguage(preferredLanguage);
-      toggle?.addEventListener("click", () => {
-        applyLanguage(document.documentElement.lang === "zh-Hant" ? "en" : "zh");
+      for (const option of languageOptions) {
+        option.addEventListener("click", () => {
+          applyLanguage(option.dataset.languageOption);
+          languageMenu?.removeAttribute("open");
+        });
+      }
+      document.addEventListener("click", (event) => {
+        if (languageMenu?.open && !languageMenu.contains(event.target)) {
+          languageMenu.removeAttribute("open");
+        }
       });
     </script>
   </body>

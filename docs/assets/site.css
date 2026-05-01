@@ -85,21 +85,83 @@ a {
   color: #ffffff;
 }
 
-.languageToggle {
+.siteLanguage {
+  position: relative;
+  z-index: 30;
+}
+
+.siteLanguage summary {
+  display: grid;
+  min-width: 42px;
   min-height: 34px;
+  place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 999px;
-  padding: 0 12px;
   color: #ffffff;
   background: rgba(255, 255, 255, 0.1);
   cursor: pointer;
-  font: inherit;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 900;
+  list-style: none;
 }
 
-.languageToggle:hover {
+.siteLanguage summary::-webkit-details-marker {
+  display: none;
+}
+
+.siteLanguage summary:hover {
   background: rgba(255, 255, 255, 0.18);
+}
+
+.siteLanguage summary:focus-visible,
+.siteLanguagePanel button:focus-visible {
+  outline: 2px solid rgba(125, 181, 255, 0.9);
+  outline-offset: 3px;
+}
+
+.siteLanguagePanel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  display: grid;
+  width: 190px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.96);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.26);
+}
+
+.siteLanguagePanel button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 10px;
+  color: rgba(246, 248, 251, 0.86);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.siteLanguagePanel button:hover,
+.siteLanguagePanel button.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.siteLanguagePanel button span {
+  width: 28px;
+  color: #7db5ff;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.siteLanguagePanel button strong {
+  font-size: 14px;
 }
 
 .hero {
@@ -654,6 +716,11 @@ footer a {
   .siteHeader nav a:nth-child(2),
   .siteHeader nav a:nth-child(3) {
     display: none;
+  }
+
+  .siteLanguagePanel {
+    right: -8px;
+    width: min(190px, calc(100vw - 32px));
   }
 
   .heroContent {
