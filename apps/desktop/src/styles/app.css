@@ -212,6 +212,40 @@ h1 {
   font-size: 13px;
 }
 
+.onboardingPanel {
+  align-items: center;
+  background: #eef6ff;
+  border: 1px solid #c7dcff;
+  border-radius: 10px;
+  color: #203047;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  margin: 0 16px 10px;
+  padding: 10px 12px;
+}
+
+.onboardingPanel strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.onboardingPanel ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 20px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.onboardingPanel li {
+  color: #4b647f;
+  font-size: 12px;
+  line-height: 1.35;
+  padding-left: 2px;
+}
+
 .srOnly {
   height: 1px;
   margin: -1px;
@@ -732,6 +766,15 @@ kbd {
     max-width: 132px;
     padding: 0 8px;
   }
+
+  .onboardingPanel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .onboardingPanel ol {
+    display: grid;
+  }
 }
 
 @media (max-width: 560px) {
@@ -838,12 +881,14 @@ kbd {
 
 :root[data-theme="dark"] .shortcut,
 :root[data-theme="dark"] .languageMenu summary,
+:root[data-theme="dark"] .onboardingPanel,
 :root[data-theme="dark"] .personalTabs button,
 :root[data-theme="dark"] .categoryTabs button {
   border-color: #343b46;
 }
 
 :root[data-theme="dark"] .languageMenu summary,
+:root[data-theme="dark"] .onboardingPanel,
 :root[data-theme="dark"] .customPromptForm input,
 :root[data-theme="dark"] .customPromptForm textarea,
 :root[data-theme="dark"] .customPromptForm select,
@@ -854,6 +899,7 @@ kbd {
 }
 
 :root[data-theme="dark"] .languageMenu summary em,
+:root[data-theme="dark"] .onboardingPanel li,
 :root[data-theme="dark"] .customPromptForm label span {
   color: #98a2b3;
 }
@@ -903,7 +949,8 @@ kbd {
 }
 
 :root[data-theme="dark"] .promptBody p,
-:root[data-theme="dark"] .emptyState p {
+:root[data-theme="dark"] .emptyState p,
+:root[data-theme="dark"] .onboardingPanel strong {
   color: #f5f7fa;
 }
 
@@ -976,12 +1023,14 @@ kbd {
 
   :root[data-theme="system"] .shortcut,
   :root[data-theme="system"] .languageMenu summary,
+  :root[data-theme="system"] .onboardingPanel,
   :root[data-theme="system"] .personalTabs button,
   :root[data-theme="system"] .categoryTabs button {
     border-color: #343b46;
   }
 
   :root[data-theme="system"] .languageMenu summary,
+  :root[data-theme="system"] .onboardingPanel,
   :root[data-theme="system"] .customPromptForm input,
   :root[data-theme="system"] .customPromptForm textarea,
   :root[data-theme="system"] .customPromptForm select,
@@ -992,6 +1041,7 @@ kbd {
   }
 
   :root[data-theme="system"] .languageMenu summary em,
+  :root[data-theme="system"] .onboardingPanel li,
   :root[data-theme="system"] .customPromptForm label span {
     color: #98a2b3;
   }
@@ -1041,7 +1091,8 @@ kbd {
   }
 
   :root[data-theme="system"] .promptBody p,
-  :root[data-theme="system"] .emptyState p {
+  :root[data-theme="system"] .emptyState p,
+  :root[data-theme="system"] .onboardingPanel strong {
     color: #f5f7fa;
   }
 

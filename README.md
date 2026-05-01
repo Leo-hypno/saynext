@@ -14,6 +14,8 @@ When ChatGPT, Claude, Gemini, or any AI tool gives a confusing answer, refuses t
 > SayNext is not a prompt manager for people who already know what they want to ask.
 > It is built for the moment before that.
 
+![SayNext demo: open, copy, paste](docs/assets/saynext-demo.gif)
+
 ![SayNext main palette](docs/assets/saynext-main-dark.png)
 
 ## Download
@@ -59,6 +61,8 @@ SayNext stays local. It does not call an AI API and does not send analytics.
 - Built with Tauri, React, and TypeScript
 
 ## Demo
+
+The core flow is simple: open SayNext, click a prompt, paste it into ChatGPT, Claude, Gemini, or Codex.
 
 See [docs/demo.md](docs/demo.md) for the product flow, screenshot plan, and assets used by the GitHub homepage.
 
@@ -191,8 +195,9 @@ npm run make:icon
 - [x] macOS and Windows release builds
 - [x] In-app updater foundation
 - [x] README screenshot
+- [x] Demo GIF
+- [x] First-run onboarding tips
 - [ ] Prompt pack loader from local folder
-- [ ] Demo GIF
 
 ## License
 

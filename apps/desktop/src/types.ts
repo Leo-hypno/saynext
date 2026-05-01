@@ -58,6 +58,11 @@ export type UiCopy = {
   language: string;
   myPromptsEyebrow: string;
   newCustomPrompt: string;
+  onboardingDismiss: string;
+  onboardingStepCopy: string;
+  onboardingStepHotkey: (shortcutLabel: string) => string;
+  onboardingStepPaste: string;
+  onboardingTitle: string;
   noticeAdded: (title: string) => string;
   noticeDeleted: (title: string) => string;
   noticeFavoriteAdded: (title: string) => string;

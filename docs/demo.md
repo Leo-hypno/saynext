@@ -13,23 +13,32 @@ This page collects the product visuals and demo flow used by the GitHub README.
 
 ![SayNext main palette](assets/saynext-main-dark.png)
 
+## Demo GIF
+
+![SayNext demo: open, copy, paste](assets/saynext-demo.gif)
+
+Regenerate it with:
+
+```bash
+swift scripts/generate-demo-gif.swift docs/assets/saynext-demo.gif
+```
+
 ## Screenshot Checklist
 
 - [x] Main prompt palette
+- [x] Demo GIF showing hotkey, copy, and paste
 - [ ] Settings panel
 - [ ] Light mode
 - [ ] Custom prompt dialog
 - [ ] Favorite prompt flow
-- [ ] Demo GIF showing hotkey, copy, and paste
 
-## Suggested Demo GIF
+## Demo Notes
 
 Keep the GIF short, ideally 6 to 10 seconds:
 
 1. Press the hotkey.
-2. Switch one context tab.
-3. Favorite a prompt.
-4. Press `Enter` to copy.
-5. Paste into an AI chat box.
+2. Pick one prompt.
+3. Copy it.
+4. Paste into an AI chat box.
 
 Avoid showing private browser tabs, account names, or real user data.

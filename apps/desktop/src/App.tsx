@@ -39,6 +39,7 @@ const defaultPackId = "beginner-rescue-zh-tw";
 const defaultCategoryId = "start";
 const pointerResumeDelayMs = 700;
 const copyNoticeDurationMs = 1800;
+const onboardingDismissedKey = "saynext.onboardingDismissed";
 
 export function App() {
   const copyTimerRef = useRef<number | undefined>(undefined);
@@ -74,6 +75,9 @@ export function App() {
   );
   const [customPrompts, setCustomPrompts] = useState<RescuePrompt[]>(
     () => readStoredCustomPrompts("saynext.customPrompts")
+  );
+  const [onboardingVisible, setOnboardingVisible] = useState(
+    () => localStorage.getItem(onboardingDismissedKey) !== "true"
   );
   const platform = useMemo(getPlatformMeta, []);
 
@@ -398,6 +402,11 @@ export function App() {
     setActiveCategory(categoryId);
   }
 
+  function handleOnboardingDismiss() {
+    localStorage.setItem(onboardingDismissedKey, "true");
+    setOnboardingVisible(false);
+  }
+
   function handleCustomPromptCreate() {
     setEditingCustomPrompt(null);
     setCustomPromptDialogOpen(true);
@@ -612,6 +621,7 @@ export function App() {
         copyNotice={copyNotice}
         favorites={favorites}
         keyboardMode={keyboardMode}
+        onboardingVisible={onboardingVisible}
         recentCount={recentPromptCount}
         onCategoryChange={handleCategoryChange}
         onCopy={handleCopy}
@@ -620,6 +630,7 @@ export function App() {
         onCustomPromptEdit={handleCustomPromptEdit}
         onCustomPromptMove={handleCustomPromptMove}
         onFavoriteToggle={handleFavoriteToggle}
+        onOnboardingDismiss={handleOnboardingDismiss}
         onSettingsOpen={() => setSettingsOpen(true)}
         onPackChange={handlePackChange}
         onPointerActivity={handlePointerActivity}

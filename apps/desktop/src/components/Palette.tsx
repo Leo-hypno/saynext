@@ -31,6 +31,7 @@ type PaletteProps = {
   } | null;
   favorites: Set<string>;
   keyboardMode: boolean;
+  onboardingVisible: boolean;
   recentCount: number;
   selectedIndex: number;
   onCategoryChange: (category: string) => void;
@@ -40,6 +41,7 @@ type PaletteProps = {
   onCustomPromptEdit: (prompt: RescuePrompt) => void;
   onCustomPromptMove: (promptId: string, category: string) => void;
   onFavoriteToggle: (promptId: string) => void;
+  onOnboardingDismiss: () => void;
   onSettingsOpen: () => void;
   onPackChange: (packId: string) => void;
   onPointerActivity: () => boolean;
@@ -59,6 +61,7 @@ export function Palette({
   copyNotice,
   favorites,
   keyboardMode,
+  onboardingVisible,
   recentCount,
   selectedIndex,
   onCategoryChange,
@@ -68,6 +71,7 @@ export function Palette({
   onCustomPromptEdit,
   onCustomPromptMove,
   onFavoriteToggle,
+  onOnboardingDismiss,
   onSettingsOpen,
   onPackChange,
   onPointerActivity,
@@ -195,6 +199,26 @@ export function Palette({
           </button>
         </div>
       </header>
+
+      {onboardingVisible ? (
+        <section className="onboardingPanel" aria-label={uiCopy.onboardingTitle}>
+          <div>
+            <strong>{uiCopy.onboardingTitle}</strong>
+            <ol>
+              <li>{uiCopy.onboardingStepHotkey(shortcutLabel)}</li>
+              <li>{uiCopy.onboardingStepCopy}</li>
+              <li>{uiCopy.onboardingStepPaste}</li>
+            </ol>
+          </div>
+          <button
+            className="compactButton"
+            onClick={onOnboardingDismiss}
+            type="button"
+          >
+            {uiCopy.onboardingDismiss}
+          </button>
+        </section>
+      ) : null}
 
       <nav className="personalTabs" aria-label="Personal prompt shortcuts">
         <button
