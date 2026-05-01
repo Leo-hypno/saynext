@@ -549,8 +549,8 @@ footer a {
   }
 
   .hero {
-    min-height: 88vh;
-    padding: 112px 20px 70px;
+    min-height: auto;
+    padding: 104px 20px 56px;
   }
 
   .heroContent {
@@ -579,6 +579,21 @@ footer a {
     padding: 64px 20px;
   }
 
+  .sectionIntro,
+  .storyIntro,
+  .storyGrid,
+  .downloadGrid,
+  .libraryGrid,
+  .steps,
+  .caseGrid,
+  .privacySection,
+  .openSource {
+    width: calc(100vw - 40px);
+    max-width: calc(100vw - 40px);
+    margin-right: 0;
+    margin-left: 0;
+  }
+
   .downloadGrid,
   .storyGrid,
   .libraryGrid,
@@ -590,6 +605,30 @@ footer a {
 }
 
 @media (max-width: 560px) {
+  .downloadSection,
+  .storySection,
+  .librarySection,
+  .flowSection,
+  .useCases,
+  .privacySection,
+  .openSource {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .sectionIntro,
+  .storyIntro,
+  .storyGrid,
+  .downloadGrid,
+  .libraryGrid,
+  .steps,
+  .caseGrid,
+  .privacySection,
+  .openSource {
+    width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+  }
+
   .brandMark {
     width: 30px;
     height: 30px;
@@ -616,11 +655,31 @@ footer a {
 
   h2 {
     font-size: 30px;
+    overflow-wrap: anywhere;
+    word-break: break-all;
   }
 
   .storyIntro h2 {
     font-size: 28px;
     line-height: 1.18;
+  }
+
+  .storyCard {
+    width: 100%;
+    min-height: 0;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  .storyCard p {
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+
+  .storyCard span {
+    margin-bottom: 28px;
   }
 
   .primaryButton,
