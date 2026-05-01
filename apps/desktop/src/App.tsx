@@ -95,6 +95,10 @@ export function App() {
     [customPrompts, pack.prompts]
   );
 
+  const builtInPromptIds = useMemo(() => {
+    return new Set(pack.prompts.map((prompt) => prompt.id));
+  }, [pack.prompts]);
+
   const categoryIds = useMemo(() => {
     return buildCategoryIds(categories);
   }, [categories]);
@@ -155,6 +159,21 @@ export function App() {
       setActiveCategory(categoryIds[0]);
     }
   }, [activeCategory, categoryIds]);
+
+  useEffect(() => {
+    const validCategoryIds = new Set(categories.map((category) => category.id));
+    const fallbackCategory = categories[0]?.id ?? defaultCategoryId;
+
+    setCustomPrompts((current) => {
+      const next = normalizeCustomPrompts(current, {
+        fallbackCategory,
+        reservedIds: builtInPromptIds,
+        validCategoryIds
+      });
+
+      return customPromptListsEqual(current, next) ? current : next;
+    });
+  }, [builtInPromptIds, categories]);
 
   useEffect(() => {
     localStorage.setItem("saynext.activePackId", activePackId);
@@ -491,6 +510,7 @@ export function App() {
       const categoryIds = new Set(categories.map((category) => category.id));
       const imported = normalizeCustomPrompts(getImportPromptItems(parsed), {
         fallbackCategory: categories[0]?.id ?? defaultCategoryId,
+        reservedIds: builtInPromptIds,
         validCategoryIds: categoryIds
       });
 
@@ -716,58 +736,60 @@ function getImportPromptItems(value: unknown) {
 
 function normalizeCustomPrompts(
   value: unknown,
-  options: { fallbackCategory: string; validCategoryIds?: Set<string> }
+  options: { fallbackCategory: string; reservedIds?: Set<string>; validCategoryIds?: Set<string> }
 ): RescuePrompt[] {
   if (!Array.isArray(value)) return [];
-  const seenIds = new Set<string>();
+  const usedIds = new Set(options.reservedIds ?? []);
+  const prompts: RescuePrompt[] = [];
 
-  return value
-    .filter((item) => {
-      return (
-        item &&
-        typeof item === "object" &&
-        typeof (item as { id?: unknown }).id === "string" &&
-        typeof (item as { title?: unknown }).title === "string" &&
-        typeof (item as { text?: unknown }).text === "string" &&
-        (item as { id: string }).id.trim().length > 0 &&
-        (item as { title: string }).title.trim().length > 0 &&
-        (item as { text: string }).text.trim().length > 0
-      );
-    })
-    .filter((item) => {
-      const id = (item as { id: string }).id;
-      if (seenIds.has(id)) return false;
-      seenIds.add(id);
-      return true;
-    })
-    .map((item) => {
-      const prompt = item as {
-        category?: unknown;
-        id: string;
-        tags?: unknown;
-        text: string;
-        title: string;
-      };
-      const category =
-        typeof prompt.category === "string" &&
-        (!options.validCategoryIds || options.validCategoryIds.has(prompt.category))
-          ? prompt.category
-          : options.fallbackCategory;
+  for (const item of value) {
+    if (
+      !item ||
+      typeof item !== "object" ||
+      typeof (item as { id?: unknown }).id !== "string" ||
+      typeof (item as { title?: unknown }).title !== "string" ||
+      typeof (item as { text?: unknown }).text !== "string"
+    ) {
+      continue;
+    }
 
-      return {
-        category,
-        id: prompt.id.trim(),
-        source: "custom" as const,
-        tags: Array.isArray(prompt.tags)
-          ? prompt.tags
-              .filter((tag: unknown): tag is string => typeof tag === "string")
-              .map((tag) => tag.trim())
-              .filter(Boolean)
-          : [],
-        text: prompt.text.trim(),
-        title: prompt.title.trim()
-      };
+    const rawPrompt = item as {
+      category?: unknown;
+      id: string;
+      tags?: unknown;
+      text: string;
+      title: string;
+    };
+    const requestedId = rawPrompt.id.trim();
+    const title = rawPrompt.title.trim();
+    const text = rawPrompt.text.trim();
+
+    if (!requestedId || !title || !text) continue;
+
+    const category =
+      typeof rawPrompt.category === "string" &&
+      (!options.validCategoryIds || options.validCategoryIds.has(rawPrompt.category))
+        ? rawPrompt.category
+        : options.fallbackCategory;
+    const id = usedIds.has(requestedId) ? createCustomPromptId(usedIds) : requestedId;
+    usedIds.add(id);
+
+    prompts.push({
+      category,
+      id,
+      source: "custom" as const,
+      tags: Array.isArray(rawPrompt.tags)
+        ? rawPrompt.tags
+            .filter((tag: unknown): tag is string => typeof tag === "string")
+            .map((tag) => tag.trim())
+            .filter(Boolean)
+        : [],
+      text,
+      title
     });
+  }
+
+  return prompts;
 }
 
 function mergeCustomPrompts(current: RescuePrompt[], imported: RescuePrompt[]) {
@@ -775,8 +797,29 @@ function mergeCustomPrompts(current: RescuePrompt[], imported: RescuePrompt[]) {
   return [...imported, ...current.filter((prompt) => !importedIds.has(prompt.id))];
 }
 
-function createCustomPromptId() {
-  return `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+function customPromptListsEqual(left: RescuePrompt[], right: RescuePrompt[]) {
+  if (left.length !== right.length) return false;
+
+  return left.every((prompt, index) => {
+    const other = right[index];
+    return (
+      other &&
+      prompt.category === other.category &&
+      prompt.id === other.id &&
+      prompt.text === other.text &&
+      prompt.title === other.title &&
+      prompt.tags.length === other.tags.length &&
+      prompt.tags.every((tag, tagIndex) => tag === other.tags[tagIndex])
+    );
+  });
+}
+
+function createCustomPromptId(existingIds = new Set<string>()) {
+  let id = "";
+  do {
+    id = `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+  } while (existingIds.has(id));
+  return id;
 }
 
 function isTextEditingTarget(target: EventTarget | null) {
