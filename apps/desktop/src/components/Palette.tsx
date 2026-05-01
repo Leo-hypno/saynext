@@ -389,6 +389,12 @@ function categoryName(categories: Category[], categoryId: string, uiCopy: UiCopy
 function languageName(locale: string) {
   if (locale === "zh-TW") return "繁體中文";
   if (locale === "en") return "English";
+  if (locale === "ja") return "日本語";
+  if (locale === "ko") return "한국어";
+  if (locale === "es") return "Español";
+  if (locale === "fr") return "Français";
+  if (locale === "de") return "Deutsch";
+  if (locale === "pt-BR") return "Português do Brasil";
   return locale;
 }
 

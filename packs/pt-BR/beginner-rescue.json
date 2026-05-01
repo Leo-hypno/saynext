@@ -1,0 +1,907 @@
+{
+  "id": "beginner-rescue-pt-br",
+  "name": "Prompts de resgate para iniciantes",
+  "description": "Prompts curtos para quando você trava, não entende ou não sabe o que perguntar à IA.",
+  "locale": "pt-BR",
+  "version": "0.1.0",
+  "author": "SayNext contributors",
+  "categories": [
+    {
+      "id": "start",
+      "name": "Começar"
+    },
+    {
+      "id": "confused",
+      "name": "Não entendi"
+    },
+    {
+      "id": "improve",
+      "name": "Melhorar resposta"
+    },
+    {
+      "id": "refused",
+      "name": "Quando a IA recusa"
+    },
+    {
+      "id": "research",
+      "name": "Pesquisar"
+    },
+    {
+      "id": "planning",
+      "name": "Planejar"
+    },
+    {
+      "id": "execute",
+      "name": "Executar"
+    },
+    {
+      "id": "next",
+      "name": "Próximo passo"
+    },
+    {
+      "id": "review",
+      "name": "Revisar"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "start-i-want",
+      "category": "start",
+      "title": "I want to",
+      "text": "Responda em português do Brasil. I want to... Help me clarify the request first, then ask what information you still need.",
+      "tags": [
+        "beginner",
+        "start",
+        "how to ask"
+      ]
+    },
+    {
+      "id": "start-ask-first",
+      "category": "start",
+      "title": "Ask me first",
+      "text": "Responda em português do Brasil. Ask me up to 3 necessary questions first, then help me do it.",
+      "tags": [
+        "beginner",
+        "clarify",
+        "questions"
+      ]
+    },
+    {
+      "id": "start-clarify-task",
+      "category": "start",
+      "title": "Clarify the task",
+      "text": "Responda em português do Brasil. Turn this idea into a clear task with a goal, deliverable, and first step.",
+      "tags": [
+        "beginner",
+        "task",
+        "organize"
+      ]
+    },
+    {
+      "id": "start-ask-if-unclear",
+      "category": "start",
+      "title": "Ask if unclear",
+      "text": "Responda em português do Brasil. If my request is unclear, ask follow-up questions first instead of guessing what I mean.",
+      "tags": [
+        "beginner",
+        "clarify",
+        "unclear"
+      ]
+    },
+    {
+      "id": "start-goals-limits",
+      "category": "start",
+      "title": "Goals and limits",
+      "text": "Responda em português do Brasil. Help me clarify the goal, constraints, available resources, and success criteria first.",
+      "tags": [
+        "beginner",
+        "scope",
+        "goal"
+      ]
+    },
+    {
+      "id": "start-needed-info",
+      "category": "start",
+      "title": "Needed info",
+      "text": "Responda em português do Brasil. Tell me what information I should provide first so you can help more accurately.",
+      "tags": [
+        "beginner",
+        "info",
+        "context"
+      ]
+    },
+    {
+      "id": "start-rewrite-for-ai",
+      "category": "start",
+      "title": "Rewrite for AI",
+      "text": "Responda em português do Brasil. Rewrite my request into a clear, executable instruction that is suitable for an AI.",
+      "tags": [
+        "beginner",
+        "rewrite",
+        "prompt"
+      ]
+    },
+    {
+      "id": "start-life-use-case",
+      "category": "start",
+      "title": "Life task",
+      "text": "Responda em português do Brasil. I want to use AI for a life or work task. Help me turn it into a clear request first.",
+      "tags": [
+        "beginner",
+        "life",
+        "work"
+      ]
+    },
+    {
+      "id": "start-document-help",
+      "category": "start",
+      "title": "Document start",
+      "text": "Responda em português do Brasil. I have a document or a pile of information. Ask me what it is for first, then suggest how to organize it.",
+      "tags": [
+        "beginner",
+        "document",
+        "organize"
+      ]
+    },
+    {
+      "id": "confused-plain-language",
+      "category": "confused",
+      "title": "Plain language",
+      "text": "Responda em português do Brasil. Explain this in plain language so someone without background knowledge can understand it.",
+      "tags": [
+        "beginner",
+        "plain-language",
+        "confused"
+      ]
+    },
+    {
+      "id": "confused-simpler",
+      "category": "confused",
+      "title": "Simpler",
+      "text": "Responda em português do Brasil. I really do not understand. Explain it again in a simpler way, starting with the key point I should remember.",
+      "tags": [
+        "beginner",
+        "explain",
+        "lost"
+      ]
+    },
+    {
+      "id": "confused-example",
+      "category": "confused",
+      "title": "Example",
+      "text": "Responda em português do Brasil. Use a simple everyday example, then connect it back to the original concept.",
+      "tags": [
+        "beginner",
+        "example",
+        "analogy"
+      ]
+    },
+    {
+      "id": "confused-step-by-step",
+      "category": "confused",
+      "title": "Step by step",
+      "text": "Responda em português do Brasil. Teach me step by step. For each step, explain the purpose before the action.",
+      "tags": [
+        "beginner",
+        "steps",
+        "teach"
+      ]
+    },
+    {
+      "id": "confused-main-point",
+      "category": "confused",
+      "title": "Main point first",
+      "text": "Responda em português do Brasil. Give me the main point in 3 sentences first, then add only the necessary details.",
+      "tags": [
+        "beginner",
+        "summary",
+        "main point"
+      ]
+    },
+    {
+      "id": "confused-young-student",
+      "category": "confused",
+      "title": "Beginner level",
+      "text": "Responda em português do Brasil. Explain this for a complete beginner. Do not assume I already know the background.",
+      "tags": [
+        "beginner",
+        "simple",
+        "newbie"
+      ]
+    },
+    {
+      "id": "confused-no-jargon",
+      "category": "confused",
+      "title": "No jargon",
+      "text": "Responda em português do Brasil. Replace technical terms with plain words. If a term is necessary, explain it first.",
+      "tags": [
+        "beginner",
+        "jargon",
+        "plain words"
+      ]
+    },
+    {
+      "id": "confused-document-summary",
+      "category": "confused",
+      "title": "Document points",
+      "text": "Responda em português do Brasil. Explain this document in plain language, summarize the key points, and mark what I should pay attention to.",
+      "tags": [
+        "beginner",
+        "document",
+        "summary"
+      ]
+    },
+    {
+      "id": "confused-report-terms",
+      "category": "confused",
+      "title": "Report terms",
+      "text": "Responda em português do Brasil. Explain the technical terms and key numbers in this report in everyday language.",
+      "tags": [
+        "beginner",
+        "report",
+        "explain"
+      ]
+    },
+    {
+      "id": "improve-why-recommend",
+      "category": "improve",
+      "title": "What do you recommend",
+      "text": "Responda em português do Brasil. Explain why you made that judgment, then give me your most recommended approach.",
+      "tags": [
+        "beginner",
+        "recommend",
+        "advice"
+      ]
+    },
+    {
+      "id": "improve-rethink",
+      "category": "improve",
+      "title": "Rethink",
+      "text": "Responda em português do Brasil. This answer is not good enough. Recheck the problem, think from another angle, and answer again.",
+      "tags": [
+        "beginner",
+        "retry",
+        "rethink"
+      ]
+    },
+    {
+      "id": "improve-three-options",
+      "category": "improve",
+      "title": "Three options",
+      "text": "Responda em português do Brasil. Give me 3 different approaches and compare their pros and cons.",
+      "tags": [
+        "beginner",
+        "options"
+      ]
+    },
+    {
+      "id": "improve-reasons",
+      "category": "improve",
+      "title": "Explain reasons",
+      "text": "Responda em português do Brasil. Do not just give the conclusion. Explain the reasoning behind it.",
+      "tags": [
+        "beginner",
+        "reasoning"
+      ]
+    },
+    {
+      "id": "improve-check-answer",
+      "category": "improve",
+      "title": "Check answer",
+      "text": "Responda em português do Brasil. Check whether your previous answer has errors, missing pieces, or unreasonable assumptions.",
+      "tags": [
+        "beginner",
+        "check",
+        "error"
+      ]
+    },
+    {
+      "id": "improve-practical",
+      "category": "improve",
+      "title": "More practical",
+      "text": "Responda em português do Brasil. Give me a more practical and actionable answer, and tell me the first step to take.",
+      "tags": [
+        "beginner",
+        "practical",
+        "actionable"
+      ]
+    },
+    {
+      "id": "improve-professional",
+      "category": "improve",
+      "title": "Higher standard",
+      "text": "Responda em português do Brasil. Answer again using a more professional standard, and include the quality points you would check.",
+      "tags": [
+        "beginner",
+        "quality",
+        "professional"
+      ]
+    },
+    {
+      "id": "improve-report-better",
+      "category": "improve",
+      "title": "Better report",
+      "text": "Responda em português do Brasil. Make this report clearer and better structured so readers can understand the key points quickly.",
+      "tags": [
+        "beginner",
+        "report",
+        "writing"
+      ]
+    },
+    {
+      "id": "improve-document-structure",
+      "category": "improve",
+      "title": "Structure it",
+      "text": "Responda em português do Brasil. Reorganize this content so the section order is more logical and the headings are clearer.",
+      "tags": [
+        "beginner",
+        "document",
+        "structure"
+      ]
+    },
+    {
+      "id": "refused-why-find-way",
+      "category": "refused",
+      "title": "Find a way",
+      "text": "Responda em português do Brasil. Explain why you cannot do it, then suggest a safe, practical alternative that gets close to my goal.",
+      "tags": [
+        "beginner",
+        "refusal",
+        "cannot"
+      ]
+    },
+    {
+      "id": "refused-alternative",
+      "category": "refused",
+      "title": "Alternative",
+      "text": "Responda em português do Brasil. If you cannot do it directly, suggest the closest practical alternative.",
+      "tags": [
+        "beginner",
+        "alternative",
+        "workaround"
+      ]
+    },
+    {
+      "id": "refused-small-steps",
+      "category": "refused",
+      "title": "Small steps",
+      "text": "Responda em português do Brasil. Break this into smaller steps that are still possible to do now.",
+      "tags": [
+        "beginner",
+        "steps",
+        "break down"
+      ]
+    },
+    {
+      "id": "refused-limits",
+      "category": "refused",
+      "title": "Explain limits",
+      "text": "Responda em português do Brasil. Tell me what the limitation is and how to reduce its impact.",
+      "tags": [
+        "beginner",
+        "limits"
+      ]
+    },
+    {
+      "id": "refused-partial",
+      "category": "refused",
+      "title": "Do the possible part",
+      "text": "Responda em português do Brasil. If you cannot do the full version, do the parts that are possible.",
+      "tags": [
+        "beginner",
+        "partial"
+      ]
+    },
+    {
+      "id": "refused-safe-workarounds",
+      "category": "refused",
+      "title": "Safe alternatives",
+      "text": "Responda em português do Brasil. Suggest at least 3 legal, safe, and policy-compliant alternatives.",
+      "tags": [
+        "beginner",
+        "safe",
+        "legal"
+      ]
+    },
+    {
+      "id": "refused-helpful-parts",
+      "category": "refused",
+      "title": "What can you help with",
+      "text": "Responda em português do Brasil. First explain which parts you can still help with, then explain what you cannot help with and why.",
+      "tags": [
+        "beginner",
+        "help",
+        "refusal"
+      ]
+    },
+    {
+      "id": "research-experts",
+      "category": "research",
+      "title": "Expert views",
+      "text": "Responda em português do Brasil. Find how professionals or credible sources approach this, what they think, and summarize the key points.",
+      "tags": [
+        "beginner",
+        "research",
+        "expert"
+      ]
+    },
+    {
+      "id": "research-latest-sources",
+      "category": "research",
+      "title": "Latest sources",
+      "text": "Responda em português do Brasil. Find up-to-date information, include source links, and note the dates of the information.",
+      "tags": [
+        "beginner",
+        "sources",
+        "latest"
+      ]
+    },
+    {
+      "id": "research-compare-views",
+      "category": "research",
+      "title": "Compare views",
+      "text": "Responda em português do Brasil. Compare different viewpoints. Do not give me only one answer.",
+      "tags": [
+        "beginner",
+        "compare"
+      ]
+    },
+    {
+      "id": "research-fact-inference",
+      "category": "research",
+      "title": "Facts vs inference",
+      "text": "Responda em português do Brasil. Mark which parts are facts and which parts are your inference.",
+      "tags": [
+        "beginner",
+        "facts"
+      ]
+    },
+    {
+      "id": "research-mainstream-minority",
+      "category": "research",
+      "title": "Mainstream and minority",
+      "text": "Responda em português do Brasil. Summarize the mainstream approach and any credible minority opinions.",
+      "tags": [
+        "beginner",
+        "views"
+      ]
+    },
+    {
+      "id": "research-reliable",
+      "category": "research",
+      "title": "Reliable sources",
+      "text": "Responda em português do Brasil. Prioritize official docs, research, professional organizations, or primary sources instead of general web articles.",
+      "tags": [
+        "beginner",
+        "reliable",
+        "source"
+      ]
+    },
+    {
+      "id": "research-actionable",
+      "category": "research",
+      "title": "Summary and action",
+      "text": "Responda em português do Brasil. Turn the research into key takeaways, risk notes, and actionable recommendations.",
+      "tags": [
+        "beginner",
+        "action",
+        "summary"
+      ]
+    },
+    {
+      "id": "research-travel-options",
+      "category": "research",
+      "title": "Travel research",
+      "text": "Responda em português do Brasil. Help me research this travel destination, including transportation, lodging, attractions, budget, and things to watch out for.",
+      "tags": [
+        "beginner",
+        "travel",
+        "research"
+      ]
+    },
+    {
+      "id": "research-purchase-compare",
+      "category": "research",
+      "title": "Life comparison",
+      "text": "Responda em português do Brasil. Compare these options by price, pros and cons, best fit, and risks to watch for.",
+      "tags": [
+        "beginner",
+        "compare",
+        "life"
+      ]
+    },
+    {
+      "id": "planning-best-plan",
+      "category": "planning",
+      "title": "Best plan",
+      "text": "Responda em português do Brasil. Create a clear, executable best plan. For important decisions, confirm with me using multiple choice questions.",
+      "tags": [
+        "beginner",
+        "plan",
+        "planning"
+      ]
+    },
+    {
+      "id": "planning-goals-risks",
+      "category": "planning",
+      "title": "Goals and risks",
+      "text": "Responda em português do Brasil. List the goal, constraints, risks, and steps first.",
+      "tags": [
+        "beginner",
+        "risk"
+      ]
+    },
+    {
+      "id": "planning-timeframes",
+      "category": "planning",
+      "title": "Timeframes",
+      "text": "Responda em português do Brasil. Split the plan into what I can do today, this week, and later.",
+      "tags": [
+        "beginner",
+        "schedule"
+      ]
+    },
+    {
+      "id": "planning-improve-plan",
+      "category": "planning",
+      "title": "Improve plan",
+      "text": "Responda em português do Brasil. Review and improve this plan by adding missing steps, risks, and checkpoints.",
+      "tags": [
+        "beginner",
+        "improve",
+        "complete"
+      ]
+    },
+    {
+      "id": "planning-milestones",
+      "category": "planning",
+      "title": "Milestones",
+      "text": "Responda em português do Brasil. Break this into clear milestones.",
+      "tags": [
+        "beginner",
+        "milestone"
+      ]
+    },
+    {
+      "id": "planning-failure",
+      "category": "planning",
+      "title": "Likely failure",
+      "text": "Responda em português do Brasil. Point out where this plan is most likely to fail.",
+      "tags": [
+        "beginner",
+        "failure"
+      ]
+    },
+    {
+      "id": "planning-priority",
+      "category": "planning",
+      "title": "Prioritize",
+      "text": "Responda em português do Brasil. Help me prioritize what to do first.",
+      "tags": [
+        "beginner",
+        "priority"
+      ]
+    },
+    {
+      "id": "planning-travel-itinerary",
+      "category": "planning",
+      "title": "Travel plan",
+      "text": "Responda em português do Brasil. Plan a travel itinerary based on days, budget, transportation time, and energy level.",
+      "tags": [
+        "beginner",
+        "travel",
+        "itinerary"
+      ]
+    },
+    {
+      "id": "planning-report-outline",
+      "category": "planning",
+      "title": "Report outline",
+      "text": "Responda em português do Brasil. Create a report outline first, including sections, key points, and what each part should contain.",
+      "tags": [
+        "beginner",
+        "report",
+        "outline"
+      ]
+    },
+    {
+      "id": "planning-life-decision",
+      "category": "planning",
+      "title": "Life decision",
+      "text": "Responda em português do Brasil. Break this life decision into options, conditions, risks, and a recommended approach.",
+      "tags": [
+        "beginner",
+        "decision",
+        "life"
+      ]
+    },
+    {
+      "id": "execute-start",
+      "category": "execute",
+      "title": "Start",
+      "text": "Responda em português do Brasil. Start executing based on the current plan. If you hit an important decision, ask me using multiple choice.",
+      "tags": [
+        "beginner",
+        "execute",
+        "start"
+      ]
+    },
+    {
+      "id": "execute-first-version",
+      "category": "execute",
+      "title": "First version",
+      "text": "Responda em português do Brasil. Create a first version that can be reviewed. Do not aim for perfection yet.",
+      "tags": [
+        "beginner",
+        "draft",
+        "first version"
+      ]
+    },
+    {
+      "id": "execute-one-step",
+      "category": "execute",
+      "title": "One step",
+      "text": "Responda em português do Brasil. Do one step at a time. After each step, ask me whether to continue.",
+      "tags": [
+        "beginner",
+        "steps"
+      ]
+    },
+    {
+      "id": "execute-from-plan",
+      "category": "execute",
+      "title": "Use the plan",
+      "text": "Responda em português do Brasil. Start producing the result based on the plan above.",
+      "tags": [
+        "beginner",
+        "plan"
+      ]
+    },
+    {
+      "id": "execute-usable",
+      "category": "execute",
+      "title": "Usable version",
+      "text": "Responda em português do Brasil. Give me a version I can use directly, not just general direction or principles.",
+      "tags": [
+        "beginner",
+        "usable",
+        "done"
+      ]
+    },
+    {
+      "id": "execute-copyable",
+      "category": "execute",
+      "title": "Copyable format",
+      "text": "Responda em português do Brasil. Format the result so I can copy and use it directly.",
+      "tags": [
+        "beginner",
+        "format"
+      ]
+    },
+    {
+      "id": "execute-do-not-advise",
+      "category": "execute",
+      "title": "Do it",
+      "text": "Responda em português do Brasil. Do not only give advice. Help me complete it directly.",
+      "tags": [
+        "beginner",
+        "complete"
+      ]
+    },
+    {
+      "id": "execute-document-summary",
+      "category": "execute",
+      "title": "Organize document",
+      "text": "Responda em português do Brasil. Turn this content into a summary, key bullet points, and action items.",
+      "tags": [
+        "beginner",
+        "document",
+        "summary"
+      ]
+    },
+    {
+      "id": "execute-report-draft",
+      "category": "execute",
+      "title": "Draft report",
+      "text": "Responda em português do Brasil. Based on the information above, create a complete first draft of the report.",
+      "tags": [
+        "beginner",
+        "report",
+        "draft"
+      ]
+    },
+    {
+      "id": "execute-travel-plan",
+      "category": "execute",
+      "title": "Create itinerary",
+      "text": "Responda em português do Brasil. Create a usable travel itinerary with times, places, transportation, and backup options.",
+      "tags": [
+        "beginner",
+        "travel",
+        "itinerary"
+      ]
+    },
+    {
+      "id": "next-recommend-three",
+      "category": "next",
+      "title": "Recommend next steps",
+      "text": "Responda em português do Brasil. Based on the current state, suggest the 3 most valuable next steps and explain the priority order.",
+      "tags": [
+        "beginner",
+        "next",
+        "priority"
+      ]
+    },
+    {
+      "id": "next-pick-one",
+      "category": "next",
+      "title": "Pick one",
+      "text": "Responda em português do Brasil. Help me decide the single best next step and explain why.",
+      "tags": [
+        "beginner",
+        "next",
+        "decision"
+      ]
+    },
+    {
+      "id": "next-small-action",
+      "category": "next",
+      "title": "Small action",
+      "text": "Responda em português do Brasil. Turn the next step into one action I can finish within 10 minutes.",
+      "tags": [
+        "beginner",
+        "next",
+        "small"
+      ]
+    },
+    {
+      "id": "next-questions",
+      "category": "next",
+      "title": "Ask first",
+      "text": "Responda em português do Brasil. If the next step is not clear yet, ask me up to 3 key questions first.",
+      "tags": [
+        "beginner",
+        "next",
+        "questions"
+      ]
+    },
+    {
+      "id": "next-risks",
+      "category": "next",
+      "title": "Check risks",
+      "text": "Responda em português do Brasil. Before continuing, point out the most likely risks in the next step.",
+      "tags": [
+        "beginner",
+        "next",
+        "risk"
+      ]
+    },
+    {
+      "id": "next-checkpoint",
+      "category": "next",
+      "title": "Checkpoint",
+      "text": "Responda em português do Brasil. Set the next checkpoint: what must be done before we continue.",
+      "tags": [
+        "beginner",
+        "next",
+        "checkpoint"
+      ]
+    },
+    {
+      "id": "next-do-it",
+      "category": "next",
+      "title": "Move forward",
+      "text": "Responda em português do Brasil. Move forward with the next step directly. After finishing, tell me what you did and what is still missing.",
+      "tags": [
+        "beginner",
+        "next",
+        "execute"
+      ]
+    },
+    {
+      "id": "next-full-review",
+      "category": "next",
+      "title": "Full review",
+      "text": "Responda em português do Brasil. Review the current result thoroughly, find problems, risks, and missing pieces, then recommend the next improvements.",
+      "tags": [
+        "beginner",
+        "next",
+        "review"
+      ]
+    },
+    {
+      "id": "review-improve-result",
+      "category": "review",
+      "title": "Review and improve",
+      "text": "Responda em português do Brasil. After finishing, check for problems, fix weak spots, and improve the result until it is more usable.",
+      "tags": [
+        "beginner",
+        "review",
+        "improve"
+      ]
+    },
+    {
+      "id": "review-professional-standard",
+      "category": "review",
+      "title": "Professional review",
+      "text": "Responda em português do Brasil. Review this result using a professional standard.",
+      "tags": [
+        "beginner",
+        "quality"
+      ]
+    },
+    {
+      "id": "review-likely-errors",
+      "category": "review",
+      "title": "Find likely errors",
+      "text": "Responda em português do Brasil. Point out the most likely problems and help me fix them.",
+      "tags": [
+        "beginner",
+        "fix"
+      ]
+    },
+    {
+      "id": "review-missing-conflict",
+      "category": "review",
+      "title": "Missing or unclear",
+      "text": "Responda em português do Brasil. Check for anything missing, contradictory, or unclear.",
+      "tags": [
+        "beginner",
+        "missing"
+      ]
+    },
+    {
+      "id": "review-user-view",
+      "category": "review",
+      "title": "User view",
+      "text": "Responda em português do Brasil. Review this from the user's point of view.",
+      "tags": [
+        "beginner",
+        "user"
+      ]
+    },
+    {
+      "id": "review-simplify",
+      "category": "review",
+      "title": "Simplify",
+      "text": "Responda em português do Brasil. Give me a shorter and easier-to-understand version.",
+      "tags": [
+        "beginner",
+        "simplify"
+      ]
+    },
+    {
+      "id": "review-deliverable",
+      "category": "review",
+      "title": "Ready to deliver",
+      "text": "Responda em português do Brasil. Improve this until it is ready to deliver, and list anything I still need to confirm.",
+      "tags": [
+        "beginner",
+        "deliver",
+        "handoff"
+      ]
+    },
+    {
+      "id": "review-report-reader",
+      "category": "review",
+      "title": "Reader review",
+      "text": "Responda em português do Brasil. Review this document or report from the reader's point of view, and point out what is unclear, too long, or missing evidence.",
+      "tags": [
+        "beginner",
+        "report",
+        "reader"
+      ]
+    },
+    {
+      "id": "review-travel-risk",
+      "category": "review",
+      "title": "Trip check",
+      "text": "Responda em português do Brasil. Check whether this travel plan is too rushed, whether the transportation is realistic, and whether the budget misses anything.",
+      "tags": [
+        "beginner",
+        "travel",
+        "review"
+      ]
+    }
+  ]
+}

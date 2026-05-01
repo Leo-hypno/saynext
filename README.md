@@ -86,13 +86,27 @@ Prompt packs live in `packs/`.
 
 ```text
 packs/
+├── de/
+│   └── beginner-rescue.json
 ├── zh-TW/
 │   └── beginner-rescue.json
-└── en/
+├── en/
+│   └── beginner-rescue.json
+├── es/
+│   └── beginner-rescue.json
+├── fr/
+│   └── beginner-rescue.json
+├── ja/
+│   └── beginner-rescue.json
+├── ko/
+│   └── beginner-rescue.json
+└── pt-BR/
     └── beginner-rescue.json
 ```
 
-Each pack is a simple JSON file, so non-programmers can contribute new languages and better rescue prompts.
+SayNext currently includes prompt packs for English, Traditional Chinese, Japanese, Korean, Spanish, French, German, and Brazilian Portuguese.
+
+Each pack is a simple JSON file, so non-programmers can contribute better translations, new languages, and better rescue prompts.
 
 See [Prompt Pack Schema](docs/prompt-pack-schema.md).
 
@@ -181,6 +195,7 @@ npm run make:icon
 - [x] Prompt pack schema
 - [x] Traditional Chinese beginner rescue pack
 - [x] English beginner rescue pack
+- [x] Common language prompt packs
 - [x] Desktop MVP UI
 - [x] Prompt pack validation
 - [x] Tauri global hotkey wiring

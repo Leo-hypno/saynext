@@ -29,7 +29,13 @@ import {
   recentCategoryId
 } from "./lib/promptView";
 import { getUiCopy } from "./lib/uiCopy";
+import germanPackData from "../../../packs/de/beginner-rescue.json";
 import englishPackData from "../../../packs/en/beginner-rescue.json";
+import spanishPackData from "../../../packs/es/beginner-rescue.json";
+import frenchPackData from "../../../packs/fr/beginner-rescue.json";
+import japanesePackData from "../../../packs/ja/beginner-rescue.json";
+import koreanPackData from "../../../packs/ko/beginner-rescue.json";
+import portugueseBrazilPackData from "../../../packs/pt-BR/beginner-rescue.json";
 import zhTwPackData from "../../../packs/zh-TW/beginner-rescue.json";
 import type { Update } from "@tauri-apps/plugin-updater";
 import type {
@@ -40,7 +46,16 @@ import type {
   UpdateErrorCode
 } from "./types";
 
-const packs = [zhTwPackData, englishPackData] as PromptPack[];
+const packs = [
+  englishPackData,
+  zhTwPackData,
+  japanesePackData,
+  koreanPackData,
+  spanishPackData,
+  frenchPackData,
+  germanPackData,
+  portugueseBrazilPackData
+] as PromptPack[];
 const defaultPackId = "beginner-rescue-en";
 const defaultCategoryId = "start";
 const pointerResumeDelayMs = 700;
@@ -792,6 +807,12 @@ function LanguageChoice({ packs, onSelect }: LanguageChoiceProps) {
 function languageChoiceName(locale: string) {
   if (locale === "zh-TW") return "繁體中文";
   if (locale === "en") return "English";
+  if (locale === "ja") return "日本語";
+  if (locale === "ko") return "한국어";
+  if (locale === "es") return "Español";
+  if (locale === "fr") return "Français";
+  if (locale === "de") return "Deutsch";
+  if (locale === "pt-BR") return "Português do Brasil";
   return locale;
 }
 

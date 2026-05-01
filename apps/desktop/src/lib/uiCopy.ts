@@ -202,5 +202,5 @@ const en: UiCopy = {
 };
 
 export function getUiCopy(locale: string): UiCopy {
-  return locale === "en" ? en : zhTw;
+  return locale === "zh-TW" ? zhTw : en;
 }
