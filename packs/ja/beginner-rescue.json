@@ -1,7 +1,7 @@
 {
   "id": "beginner-rescue-ja",
-  "name": "AI 初心者レスキュープロンプト",
-  "description": "AI との会話で迷ったときに使えるレスキュープロンプト。",
+  "name": "AI初心者のための救援フレーズ",
+  "description": "AIとの会話で迷ったときに、次に使える日本語の短いプロンプト集。",
   "locale": "ja",
   "version": "0.1.0",
   "author": "SayNext contributors",
@@ -20,7 +20,7 @@
     },
     {
       "id": "refused",
-      "name": "断られた時"
+      "name": "AIが断ったとき"
     },
     {
       "id": "research",
@@ -40,867 +40,867 @@
     },
     {
       "id": "review",
-      "name": "確認と改善"
+      "name": "見直し"
     }
   ],
   "prompts": [
     {
       "id": "start-i-want",
       "category": "start",
-      "title": "I want to",
-      "text": "日本語で回答してください。 I want to... Help me clarify the request first, then ask what information you still need.",
+      "title": "やりたいことがある",
+      "text": "私は……したいです。まず要望を整理し、まだ必要な情報を質問してください。",
       "tags": [
-        "beginner",
-        "start",
-        "how to ask"
+        "初心者",
+        "開始",
+        "聞き方"
       ]
     },
     {
       "id": "start-ask-first",
       "category": "start",
-      "title": "Ask me first",
-      "text": "日本語で回答してください。 Ask me up to 3 necessary questions first, then help me do it.",
+      "title": "先に質問して",
+      "text": "先に必要な質問を最大3つまでしてください。そのあとで手伝ってください。",
       "tags": [
-        "beginner",
-        "clarify",
-        "questions"
+        "初心者",
+        "確認",
+        "質問"
       ]
     },
     {
       "id": "start-clarify-task",
       "category": "start",
-      "title": "Clarify the task",
-      "text": "日本語で回答してください。 Turn this idea into a clear task with a goal, deliverable, and first step.",
+      "title": "タスクを整理",
+      "text": "このアイデアを、目標・成果物・最初の一歩がわかる明確なタスクにしてください。",
       "tags": [
-        "beginner",
-        "task",
-        "organize"
+        "初心者",
+        "タスク",
+        "整理"
       ]
     },
     {
       "id": "start-ask-if-unclear",
       "category": "start",
-      "title": "Ask if unclear",
-      "text": "日本語で回答してください。 If my request is unclear, ask follow-up questions first instead of guessing what I mean.",
+      "title": "不明なら質問",
+      "text": "私の依頼があいまいなら、意味を推測せず、先に確認質問をしてください。",
       "tags": [
-        "beginner",
-        "clarify",
-        "unclear"
+        "初心者",
+        "確認",
+        "不明確"
       ]
     },
     {
       "id": "start-goals-limits",
       "category": "start",
-      "title": "Goals and limits",
-      "text": "日本語で回答してください。 Help me clarify the goal, constraints, available resources, and success criteria first.",
+      "title": "目的と制約",
+      "text": "まず目的、制約、使えるリソース、成功基準を整理してください。",
       "tags": [
-        "beginner",
-        "scope",
-        "goal"
+        "初心者",
+        "範囲",
+        "目標"
       ]
     },
     {
       "id": "start-needed-info",
       "category": "start",
-      "title": "Needed info",
-      "text": "日本語で回答してください。 Tell me what information I should provide first so you can help more accurately.",
+      "title": "必要な情報",
+      "text": "より正確に手伝うために、私が最初に提供すべき情報を教えてください。",
       "tags": [
-        "beginner",
-        "info",
-        "context"
+        "初心者",
+        "情報",
+        "文脈"
       ]
     },
     {
       "id": "start-rewrite-for-ai",
       "category": "start",
-      "title": "Rewrite for AI",
-      "text": "日本語で回答してください。 Rewrite my request into a clear, executable instruction that is suitable for an AI.",
+      "title": "AI向けに書き直す",
+      "text": "私の依頼を、AIに渡しやすい明確で実行可能な指示に書き直してください。",
       "tags": [
-        "beginner",
-        "rewrite",
-        "prompt"
+        "初心者",
+        "書き直し",
+        "プロンプト"
       ]
     },
     {
       "id": "start-life-use-case",
       "category": "start",
-      "title": "Life task",
-      "text": "日本語で回答してください。 I want to use AI for a life or work task. Help me turn it into a clear request first.",
+      "title": "生活や仕事の用事",
+      "text": "生活や仕事の用事にAIを使いたいです。まず明確な依頼に直すのを手伝ってください。",
       "tags": [
-        "beginner",
-        "life",
-        "work"
+        "初心者",
+        "生活",
+        "仕事"
       ]
     },
     {
       "id": "start-document-help",
       "category": "start",
-      "title": "Document start",
-      "text": "日本語で回答してください。 I have a document or a pile of information. Ask me what it is for first, then suggest how to organize it.",
+      "title": "資料整理の始め方",
+      "text": "文書または大量の情報があります。まず用途を質問し、そのあと整理方法を提案してください。",
       "tags": [
-        "beginner",
-        "document",
-        "organize"
+        "初心者",
+        "文書",
+        "整理"
       ]
     },
     {
       "id": "confused-plain-language",
       "category": "confused",
-      "title": "Plain language",
-      "text": "日本語で回答してください。 Explain this in plain language so someone without background knowledge can understand it.",
+      "title": "やさしい言葉で",
+      "text": "背景知識がない人にもわかるように、やさしい言葉で説明してください。",
       "tags": [
-        "beginner",
-        "plain-language",
-        "confused"
+        "初心者",
+        "やさしい言葉",
+        "混乱"
       ]
     },
     {
       "id": "confused-simpler",
       "category": "confused",
-      "title": "Simpler",
-      "text": "日本語で回答してください。 I really do not understand. Explain it again in a simpler way, starting with the key point I should remember.",
+      "title": "もっと簡単に",
+      "text": "本当にわかりません。覚えるべき要点から始めて、もっと簡単に説明し直してください。",
       "tags": [
-        "beginner",
-        "explain",
-        "lost"
+        "初心者",
+        "説明",
+        "迷子"
       ]
     },
     {
       "id": "confused-example",
       "category": "confused",
-      "title": "Example",
-      "text": "日本語で回答してください。 Use a simple everyday example, then connect it back to the original concept.",
+      "title": "例を出して",
+      "text": "身近な例で説明してから、元の概念に結びつけてください。",
       "tags": [
-        "beginner",
-        "example",
-        "analogy"
+        "初心者",
+        "例",
+        "たとえ"
       ]
     },
     {
       "id": "confused-step-by-step",
       "category": "confused",
-      "title": "Step by step",
-      "text": "日本語で回答してください。 Teach me step by step. For each step, explain the purpose before the action.",
+      "title": "一歩ずつ",
+      "text": "一歩ずつ教えてください。各ステップでは、作業の前に目的を説明してください。",
       "tags": [
-        "beginner",
-        "steps",
-        "teach"
+        "初心者",
+        "手順",
+        "教える"
       ]
     },
     {
       "id": "confused-main-point",
       "category": "confused",
-      "title": "Main point first",
-      "text": "日本語で回答してください。 Give me the main point in 3 sentences first, then add only the necessary details.",
+      "title": "要点を先に",
+      "text": "まず要点を3文で教えてから、必要な詳細だけ追加してください。",
       "tags": [
-        "beginner",
-        "summary",
-        "main point"
+        "初心者",
+        "要約",
+        "要点"
       ]
     },
     {
       "id": "confused-young-student",
       "category": "confused",
-      "title": "Beginner level",
-      "text": "日本語で回答してください。 Explain this for a complete beginner. Do not assume I already know the background.",
+      "title": "完全初心者向け",
+      "text": "完全な初心者向けに説明してください。背景を知っている前提にしないでください。",
       "tags": [
-        "beginner",
-        "simple",
-        "newbie"
+        "初心者",
+        "簡単",
+        "初心者"
       ]
     },
     {
       "id": "confused-no-jargon",
       "category": "confused",
-      "title": "No jargon",
-      "text": "日本語で回答してください。 Replace technical terms with plain words. If a term is necessary, explain it first.",
+      "title": "専門用語なし",
+      "text": "専門用語を普通の言葉に置き換えてください。必要な用語は先に説明してください。",
       "tags": [
-        "beginner",
-        "jargon",
-        "plain words"
+        "初心者",
+        "専門用語",
+        "普通の言葉"
       ]
     },
     {
       "id": "confused-document-summary",
       "category": "confused",
-      "title": "Document points",
-      "text": "日本語で回答してください。 Explain this document in plain language, summarize the key points, and mark what I should pay attention to.",
+      "title": "文書の要点",
+      "text": "この文書をやさしい言葉で説明し、要点をまとめ、注意すべき点を示してください。",
       "tags": [
-        "beginner",
-        "document",
-        "summary"
+        "初心者",
+        "文書",
+        "要約"
       ]
     },
     {
       "id": "confused-report-terms",
       "category": "confused",
-      "title": "Report terms",
-      "text": "日本語で回答してください。 Explain the technical terms and key numbers in this report in everyday language.",
+      "title": "レポート用語",
+      "text": "このレポートの専門用語と重要な数字を、日常の言葉で説明してください。",
       "tags": [
-        "beginner",
-        "report",
-        "explain"
+        "初心者",
+        "レポート",
+        "説明"
       ]
     },
     {
       "id": "improve-why-recommend",
       "category": "improve",
-      "title": "What do you recommend",
-      "text": "日本語で回答してください。 Explain why you made that judgment, then give me your most recommended approach.",
+      "title": "おすすめは何か",
+      "text": "その判断をした理由を説明し、あなたが最もおすすめする方法を教えてください。",
       "tags": [
-        "beginner",
-        "recommend",
-        "advice"
+        "初心者",
+        "おすすめ",
+        "助言"
       ]
     },
     {
       "id": "improve-rethink",
       "category": "improve",
-      "title": "Rethink",
-      "text": "日本語で回答してください。 This answer is not good enough. Recheck the problem, think from another angle, and answer again.",
+      "title": "考え直して",
+      "text": "この回答はまだ十分ではありません。問題を見直し、別の角度から考えて答え直してください。",
       "tags": [
-        "beginner",
-        "retry",
-        "rethink"
+        "初心者",
+        "再試行",
+        "再考"
       ]
     },
     {
       "id": "improve-three-options",
       "category": "improve",
-      "title": "Three options",
-      "text": "日本語で回答してください。 Give me 3 different approaches and compare their pros and cons.",
+      "title": "3つの選択肢",
+      "text": "3つの異なる方法を出し、それぞれの長所と短所を比較してください。",
       "tags": [
-        "beginner",
-        "options"
+        "初心者",
+        "選択肢"
       ]
     },
     {
       "id": "improve-reasons",
       "category": "improve",
-      "title": "Explain reasons",
-      "text": "日本語で回答してください。 Do not just give the conclusion. Explain the reasoning behind it.",
+      "title": "理由を説明",
+      "text": "結論だけでなく、その理由と考え方を説明してください。",
       "tags": [
-        "beginner",
-        "reasoning"
+        "初心者",
+        "理由"
       ]
     },
     {
       "id": "improve-check-answer",
       "category": "improve",
-      "title": "Check answer",
-      "text": "日本語で回答してください。 Check whether your previous answer has errors, missing pieces, or unreasonable assumptions.",
+      "title": "回答を確認",
+      "text": "前の回答に誤り、不足、不自然な前提がないか確認してください。",
       "tags": [
-        "beginner",
-        "check",
-        "error"
+        "初心者",
+        "確認",
+        "誤り"
       ]
     },
     {
       "id": "improve-practical",
       "category": "improve",
-      "title": "More practical",
-      "text": "日本語で回答してください。 Give me a more practical and actionable answer, and tell me the first step to take.",
+      "title": "もっと実用的に",
+      "text": "もっと実用的で行動に移せる回答にして、最初の一歩も教えてください。",
       "tags": [
-        "beginner",
-        "practical",
-        "actionable"
+        "初心者",
+        "実用的",
+        "実行可能"
       ]
     },
     {
       "id": "improve-professional",
       "category": "improve",
-      "title": "Higher standard",
-      "text": "日本語で回答してください。 Answer again using a more professional standard, and include the quality points you would check.",
+      "title": "高い基準で",
+      "text": "より専門的な基準で答え直し、確認すべき品質ポイントも含めてください。",
       "tags": [
-        "beginner",
-        "quality",
-        "professional"
+        "初心者",
+        "品質",
+        "専門的"
       ]
     },
     {
       "id": "improve-report-better",
       "category": "improve",
-      "title": "Better report",
-      "text": "日本語で回答してください。 Make this report clearer and better structured so readers can understand the key points quickly.",
+      "title": "レポートを改善",
+      "text": "読者が要点をすぐ理解できるよう、このレポートをより明確で構造的にしてください。",
       "tags": [
-        "beginner",
-        "report",
-        "writing"
+        "初心者",
+        "レポート",
+        "文章"
       ]
     },
     {
       "id": "improve-document-structure",
       "category": "improve",
-      "title": "Structure it",
-      "text": "日本語で回答してください。 Reorganize this content so the section order is more logical and the headings are clearer.",
+      "title": "構成を整える",
+      "text": "内容の順序がより論理的で、見出しがよりわかりやすくなるよう再構成してください。",
       "tags": [
-        "beginner",
-        "document",
-        "structure"
+        "初心者",
+        "文書",
+        "構成"
       ]
     },
     {
       "id": "refused-why-find-way",
       "category": "refused",
-      "title": "Find a way",
-      "text": "日本語で回答してください。 Explain why you cannot do it, then suggest a safe, practical alternative that gets close to my goal.",
+      "title": "できる方法を探す",
+      "text": "なぜできないのか説明し、目的に近づける安全で現実的な代替案を提案してください。",
       "tags": [
-        "beginner",
-        "refusal",
-        "cannot"
+        "初心者",
+        "拒否",
+        "不可"
       ]
     },
     {
       "id": "refused-alternative",
       "category": "refused",
-      "title": "Alternative",
-      "text": "日本語で回答してください。 If you cannot do it directly, suggest the closest practical alternative.",
+      "title": "代替案",
+      "text": "直接できない場合は、最も近い現実的な代替案を提案してください。",
       "tags": [
-        "beginner",
-        "alternative",
-        "workaround"
+        "初心者",
+        "代替案",
+        "回避策"
       ]
     },
     {
       "id": "refused-small-steps",
       "category": "refused",
-      "title": "Small steps",
-      "text": "日本語で回答してください。 Break this into smaller steps that are still possible to do now.",
+      "title": "小さく分ける",
+      "text": "今できる範囲で、この依頼を小さなステップに分けてください。",
       "tags": [
-        "beginner",
-        "steps",
-        "break down"
+        "初心者",
+        "手順",
+        "分解"
       ]
     },
     {
       "id": "refused-limits",
       "category": "refused",
-      "title": "Explain limits",
-      "text": "日本語で回答してください。 Tell me what the limitation is and how to reduce its impact.",
+      "title": "制限を説明",
+      "text": "どんな制限があるのか、その影響をどう減らせるのか教えてください。",
       "tags": [
-        "beginner",
-        "limits"
+        "初心者",
+        "制限"
       ]
     },
     {
       "id": "refused-partial",
       "category": "refused",
-      "title": "Do the possible part",
-      "text": "日本語で回答してください。 If you cannot do the full version, do the parts that are possible.",
+      "title": "できる部分だけ",
+      "text": "全部できない場合は、できる部分だけ進めてください。",
       "tags": [
-        "beginner",
-        "partial"
+        "初心者",
+        "一部"
       ]
     },
     {
       "id": "refused-safe-workarounds",
       "category": "refused",
-      "title": "Safe alternatives",
-      "text": "日本語で回答してください。 Suggest at least 3 legal, safe, and policy-compliant alternatives.",
+      "title": "安全な代替案",
+      "text": "合法で安全、かつルールに沿った代替案を少なくとも3つ提案してください。",
       "tags": [
-        "beginner",
-        "safe",
-        "legal"
+        "初心者",
+        "安全",
+        "合法"
       ]
     },
     {
       "id": "refused-helpful-parts",
       "category": "refused",
-      "title": "What can you help with",
-      "text": "日本語で回答してください。 First explain which parts you can still help with, then explain what you cannot help with and why.",
+      "title": "手伝える範囲",
+      "text": "まず手伝える部分を説明し、そのあと手伝えない部分と理由を説明してください。",
       "tags": [
-        "beginner",
-        "help",
-        "refusal"
+        "初心者",
+        "支援",
+        "拒否"
       ]
     },
     {
       "id": "research-experts",
       "category": "research",
-      "title": "Expert views",
-      "text": "日本語で回答してください。 Find how professionals or credible sources approach this, what they think, and summarize the key points.",
+      "title": "専門家の見方",
+      "text": "専門家や信頼できる情報源がこの件をどう扱うか、考え方と要点を調べてまとめてください。",
       "tags": [
-        "beginner",
-        "research",
-        "expert"
+        "初心者",
+        "調査",
+        "専門家"
       ]
     },
     {
       "id": "research-latest-sources",
       "category": "research",
-      "title": "Latest sources",
-      "text": "日本語で回答してください。 Find up-to-date information, include source links, and note the dates of the information.",
+      "title": "最新情報",
+      "text": "最新情報を調べ、リンクを示し、情報の日付も書いてください。",
       "tags": [
-        "beginner",
-        "sources",
-        "latest"
+        "初心者",
+        "出典",
+        "最新"
       ]
     },
     {
       "id": "research-compare-views",
       "category": "research",
-      "title": "Compare views",
-      "text": "日本語で回答してください。 Compare different viewpoints. Do not give me only one answer.",
+      "title": "見方を比較",
+      "text": "異なる見方を比較してください。答えを1つだけにしないでください。",
       "tags": [
-        "beginner",
-        "compare"
+        "初心者",
+        "比較"
       ]
     },
     {
       "id": "research-fact-inference",
       "category": "research",
-      "title": "Facts vs inference",
-      "text": "日本語で回答してください。 Mark which parts are facts and which parts are your inference.",
+      "title": "事実と推測",
+      "text": "どこが事実で、どこがあなたの推測なのか分けて示してください。",
       "tags": [
-        "beginner",
-        "facts"
+        "初心者",
+        "事実"
       ]
     },
     {
       "id": "research-mainstream-minority",
       "category": "research",
-      "title": "Mainstream and minority",
-      "text": "日本語で回答してください。 Summarize the mainstream approach and any credible minority opinions.",
+      "title": "主流と少数意見",
+      "text": "主流の考え方と、信頼できる少数意見があればまとめてください。",
       "tags": [
-        "beginner",
-        "views"
+        "初心者",
+        "見方"
       ]
     },
     {
       "id": "research-reliable",
       "category": "research",
-      "title": "Reliable sources",
-      "text": "日本語で回答してください。 Prioritize official docs, research, professional organizations, or primary sources instead of general web articles.",
+      "title": "信頼できる情報源",
+      "text": "一般記事より、公式ドキュメント、研究、専門団体、一次情報を優先してください。",
       "tags": [
-        "beginner",
-        "reliable",
-        "source"
+        "初心者",
+        "信頼性",
+        "情報源"
       ]
     },
     {
       "id": "research-actionable",
       "category": "research",
-      "title": "Summary and action",
-      "text": "日本語で回答してください。 Turn the research into key takeaways, risk notes, and actionable recommendations.",
+      "title": "要点と行動",
+      "text": "調査結果を、重要ポイント、リスク、実行できる提案に変換してください。",
       "tags": [
-        "beginner",
-        "action",
-        "summary"
+        "初心者",
+        "行動",
+        "要約"
       ]
     },
     {
       "id": "research-travel-options",
       "category": "research",
-      "title": "Travel research",
-      "text": "日本語で回答してください。 Help me research this travel destination, including transportation, lodging, attractions, budget, and things to watch out for.",
+      "title": "旅行を調べる",
+      "text": "この旅行先について、交通、宿泊、見どころ、予算、注意点を調べてください。",
       "tags": [
-        "beginner",
-        "travel",
-        "research"
+        "初心者",
+        "旅行",
+        "調査"
       ]
     },
     {
       "id": "research-purchase-compare",
       "category": "research",
-      "title": "Life comparison",
-      "text": "日本語で回答してください。 Compare these options by price, pros and cons, best fit, and risks to watch for.",
+      "title": "生活の比較",
+      "text": "価格、長所短所、向いている人、注意すべきリスクで比較してください。",
       "tags": [
-        "beginner",
-        "compare",
-        "life"
+        "初心者",
+        "比較",
+        "生活"
       ]
     },
     {
       "id": "planning-best-plan",
       "category": "planning",
-      "title": "Best plan",
-      "text": "日本語で回答してください。 Create a clear, executable best plan. For important decisions, confirm with me using multiple choice questions.",
+      "title": "最善の計画",
+      "text": "明確で実行可能な最善の計画を作ってください。重要な判断は選択肢で確認してください。",
       "tags": [
-        "beginner",
-        "plan",
-        "planning"
+        "初心者",
+        "計画",
+        "計画"
       ]
     },
     {
       "id": "planning-goals-risks",
       "category": "planning",
-      "title": "Goals and risks",
-      "text": "日本語で回答してください。 List the goal, constraints, risks, and steps first.",
+      "title": "目的とリスク",
+      "text": "まず目的、制約、リスク、手順をリストにしてください。",
       "tags": [
-        "beginner",
-        "risk"
+        "初心者",
+        "リスク"
       ]
     },
     {
       "id": "planning-timeframes",
       "category": "planning",
-      "title": "Timeframes",
-      "text": "日本語で回答してください。 Split the plan into what I can do today, this week, and later.",
+      "title": "時間で分ける",
+      "text": "今日できること、今週できること、あとでやることに分けてください。",
       "tags": [
-        "beginner",
-        "schedule"
+        "初心者",
+        "予定"
       ]
     },
     {
       "id": "planning-improve-plan",
       "category": "planning",
-      "title": "Improve plan",
-      "text": "日本語で回答してください。 Review and improve this plan by adding missing steps, risks, and checkpoints.",
+      "title": "計画を改善",
+      "text": "この計画を見直し、不足している手順、リスク、確認ポイントを追加してください。",
       "tags": [
-        "beginner",
-        "improve",
-        "complete"
+        "初心者",
+        "改善",
+        "完成"
       ]
     },
     {
       "id": "planning-milestones",
       "category": "planning",
-      "title": "Milestones",
-      "text": "日本語で回答してください。 Break this into clear milestones.",
+      "title": "節目を作る",
+      "text": "これを明確なマイルストーンに分けてください。",
       "tags": [
-        "beginner",
-        "milestone"
+        "初心者",
+        "節目"
       ]
     },
     {
       "id": "planning-failure",
       "category": "planning",
-      "title": "Likely failure",
-      "text": "日本語で回答してください。 Point out where this plan is most likely to fail.",
+      "title": "失敗しやすい所",
+      "text": "この計画が最も失敗しやすい場所を指摘してください。",
       "tags": [
-        "beginner",
-        "failure"
+        "初心者",
+        "失敗"
       ]
     },
     {
       "id": "planning-priority",
       "category": "planning",
-      "title": "Prioritize",
-      "text": "日本語で回答してください。 Help me prioritize what to do first.",
+      "title": "優先順位",
+      "text": "最初に何をすべきか優先順位をつけてください。",
       "tags": [
-        "beginner",
-        "priority"
+        "初心者",
+        "優先順位"
       ]
     },
     {
       "id": "planning-travel-itinerary",
       "category": "planning",
-      "title": "Travel plan",
-      "text": "日本語で回答してください。 Plan a travel itinerary based on days, budget, transportation time, and energy level.",
+      "title": "旅行計画",
+      "text": "日数、予算、移動時間、体力に合わせて旅行日程を計画してください。",
       "tags": [
-        "beginner",
-        "travel",
-        "itinerary"
+        "初心者",
+        "旅行",
+        "旅程"
       ]
     },
     {
       "id": "planning-report-outline",
       "category": "planning",
-      "title": "Report outline",
-      "text": "日本語で回答してください。 Create a report outline first, including sections, key points, and what each part should contain.",
+      "title": "レポート構成",
+      "text": "まずレポートの構成を作り、各章、要点、入れる内容を示してください。",
       "tags": [
-        "beginner",
-        "report",
-        "outline"
+        "初心者",
+        "レポート",
+        "構成"
       ]
     },
     {
       "id": "planning-life-decision",
       "category": "planning",
-      "title": "Life decision",
-      "text": "日本語で回答してください。 Break this life decision into options, conditions, risks, and a recommended approach.",
+      "title": "生活の判断",
+      "text": "この生活上の判断を、選択肢、条件、リスク、おすすめの進め方に分けてください。",
       "tags": [
-        "beginner",
-        "decision",
-        "life"
+        "初心者",
+        "判断",
+        "生活"
       ]
     },
     {
       "id": "execute-start",
       "category": "execute",
-      "title": "Start",
-      "text": "日本語で回答してください。 Start executing based on the current plan. If you hit an important decision, ask me using multiple choice.",
+      "title": "開始",
+      "text": "現在の計画に基づいて実行を始めてください。重要な判断が出たら選択肢で質問してください。",
       "tags": [
-        "beginner",
-        "execute",
-        "start"
+        "初心者",
+        "実行",
+        "開始"
       ]
     },
     {
       "id": "execute-first-version",
       "category": "execute",
-      "title": "First version",
-      "text": "日本語で回答してください。 Create a first version that can be reviewed. Do not aim for perfection yet.",
+      "title": "初稿",
+      "text": "確認できる初稿を作ってください。まだ完璧を目指さなくて大丈夫です。",
       "tags": [
-        "beginner",
-        "draft",
-        "first version"
+        "初心者",
+        "下書き",
+        "初版"
       ]
     },
     {
       "id": "execute-one-step",
       "category": "execute",
-      "title": "One step",
-      "text": "日本語で回答してください。 Do one step at a time. After each step, ask me whether to continue.",
+      "title": "一歩ずつ実行",
+      "text": "一度に一つのステップだけ進めてください。各ステップ後に続けるか確認してください。",
       "tags": [
-        "beginner",
-        "steps"
+        "初心者",
+        "手順"
       ]
     },
     {
       "id": "execute-from-plan",
       "category": "execute",
-      "title": "Use the plan",
-      "text": "日本語で回答してください。 Start producing the result based on the plan above.",
+      "title": "計画に沿って",
+      "text": "上の計画に基づいて成果物を作り始めてください。",
       "tags": [
-        "beginner",
-        "plan"
+        "初心者",
+        "計画"
       ]
     },
     {
       "id": "execute-usable",
       "category": "execute",
-      "title": "Usable version",
-      "text": "日本語で回答してください。 Give me a version I can use directly, not just general direction or principles.",
+      "title": "そのまま使える版",
+      "text": "一般論や方向性だけでなく、そのまま使える形で出してください。",
       "tags": [
-        "beginner",
-        "usable",
-        "done"
+        "初心者",
+        "使用可能",
+        "完了"
       ]
     },
     {
       "id": "execute-copyable",
       "category": "execute",
-      "title": "Copyable format",
-      "text": "日本語で回答してください。 Format the result so I can copy and use it directly.",
+      "title": "コピーしやすく",
+      "text": "結果をコピーしてそのまま使える形式に整えてください。",
       "tags": [
-        "beginner",
-        "format"
+        "初心者",
+        "形式"
       ]
     },
     {
       "id": "execute-do-not-advise",
       "category": "execute",
-      "title": "Do it",
-      "text": "日本語で回答してください。 Do not only give advice. Help me complete it directly.",
+      "title": "実際にやって",
+      "text": "アドバイスだけで終わらず、実際に完成まで手伝ってください。",
       "tags": [
-        "beginner",
-        "complete"
+        "初心者",
+        "完成"
       ]
     },
     {
       "id": "execute-document-summary",
       "category": "execute",
-      "title": "Organize document",
-      "text": "日本語で回答してください。 Turn this content into a summary, key bullet points, and action items.",
+      "title": "文書を整理",
+      "text": "この内容を、要約、重要ポイント、次にやることに整理してください。",
       "tags": [
-        "beginner",
-        "document",
-        "summary"
+        "初心者",
+        "文書",
+        "要約"
       ]
     },
     {
       "id": "execute-report-draft",
       "category": "execute",
-      "title": "Draft report",
-      "text": "日本語で回答してください。 Based on the information above, create a complete first draft of the report.",
+      "title": "レポート初稿",
+      "text": "上の情報をもとに、レポートの完全な初稿を作ってください。",
       "tags": [
-        "beginner",
-        "report",
-        "draft"
+        "初心者",
+        "レポート",
+        "下書き"
       ]
     },
     {
       "id": "execute-travel-plan",
       "category": "execute",
-      "title": "Create itinerary",
-      "text": "日本語で回答してください。 Create a usable travel itinerary with times, places, transportation, and backup options.",
+      "title": "旅程を作る",
+      "text": "時間、場所、移動手段、代替案を含む実用的な旅程を作ってください。",
       "tags": [
-        "beginner",
-        "travel",
-        "itinerary"
+        "初心者",
+        "旅行",
+        "旅程"
       ]
     },
     {
       "id": "next-recommend-three",
       "category": "next",
-      "title": "Recommend next steps",
-      "text": "日本語で回答してください。 Based on the current state, suggest the 3 most valuable next steps and explain the priority order.",
+      "title": "次の3手",
+      "text": "現在の状況から、最も価値のある次の3ステップを提案し、優先順位を説明してください。",
       "tags": [
-        "beginner",
-        "next",
-        "priority"
+        "初心者",
+        "次",
+        "優先順位"
       ]
     },
     {
       "id": "next-pick-one",
       "category": "next",
-      "title": "Pick one",
-      "text": "日本語で回答してください。 Help me decide the single best next step and explain why.",
+      "title": "1つ選ぶ",
+      "text": "最もよい次の一手を1つ選び、その理由を説明してください。",
       "tags": [
-        "beginner",
-        "next",
-        "decision"
+        "初心者",
+        "次",
+        "判断"
       ]
     },
     {
       "id": "next-small-action",
       "category": "next",
-      "title": "Small action",
-      "text": "日本語で回答してください。 Turn the next step into one action I can finish within 10 minutes.",
+      "title": "10分でできる行動",
+      "text": "次のステップを、10分以内に終えられる1つの行動にしてください。",
       "tags": [
-        "beginner",
-        "next",
-        "small"
+        "初心者",
+        "次",
+        "小さい"
       ]
     },
     {
       "id": "next-questions",
       "category": "next",
-      "title": "Ask first",
-      "text": "日本語で回答してください。 If the next step is not clear yet, ask me up to 3 key questions first.",
+      "title": "先に質問",
+      "text": "次の一手がまだ明確でなければ、重要な質問を最大3つしてください。",
       "tags": [
-        "beginner",
-        "next",
-        "questions"
+        "初心者",
+        "次",
+        "質問"
       ]
     },
     {
       "id": "next-risks",
       "category": "next",
-      "title": "Check risks",
-      "text": "日本語で回答してください。 Before continuing, point out the most likely risks in the next step.",
+      "title": "リスク確認",
+      "text": "続ける前に、次のステップで起こりやすいリスクを指摘してください。",
       "tags": [
-        "beginner",
-        "next",
-        "risk"
+        "初心者",
+        "次",
+        "リスク"
       ]
     },
     {
       "id": "next-checkpoint",
       "category": "next",
-      "title": "Checkpoint",
-      "text": "日本語で回答してください。 Set the next checkpoint: what must be done before we continue.",
+      "title": "確認ポイント",
+      "text": "次の確認ポイントを決めてください。続ける前に何が完了しているべきか示してください。",
       "tags": [
-        "beginner",
-        "next",
-        "checkpoint"
+        "初心者",
+        "次",
+        "確認点"
       ]
     },
     {
       "id": "next-do-it",
       "category": "next",
-      "title": "Move forward",
-      "text": "日本語で回答してください。 Move forward with the next step directly. After finishing, tell me what you did and what is still missing.",
+      "title": "前に進める",
+      "text": "次のステップをそのまま進めてください。終わったら、何をしたか、何がまだ足りないか教えてください。",
       "tags": [
-        "beginner",
-        "next",
-        "execute"
+        "初心者",
+        "次",
+        "実行"
       ]
     },
     {
       "id": "next-full-review",
       "category": "next",
-      "title": "Full review",
-      "text": "日本語で回答してください。 Review the current result thoroughly, find problems, risks, and missing pieces, then recommend the next improvements.",
+      "title": "全体見直し",
+      "text": "現在の成果をしっかり見直し、問題、リスク、不足を見つけ、次の改善案を提案してください。",
       "tags": [
-        "beginner",
-        "next",
-        "review"
+        "初心者",
+        "次",
+        "見直し"
       ]
     },
     {
       "id": "review-improve-result",
       "category": "review",
-      "title": "Review and improve",
-      "text": "日本語で回答してください。 After finishing, check for problems, fix weak spots, and improve the result until it is more usable.",
+      "title": "見直して改善",
+      "text": "完了後に問題を確認し、弱い部分を直し、より使いやすくなるまで改善してください。",
       "tags": [
-        "beginner",
-        "review",
-        "improve"
+        "初心者",
+        "見直し",
+        "改善"
       ]
     },
     {
       "id": "review-professional-standard",
       "category": "review",
-      "title": "Professional review",
-      "text": "日本語で回答してください。 Review this result using a professional standard.",
+      "title": "専門的に確認",
+      "text": "この成果を専門的な基準で確認してください。",
       "tags": [
-        "beginner",
-        "quality"
+        "初心者",
+        "品質"
       ]
     },
     {
       "id": "review-likely-errors",
       "category": "review",
-      "title": "Find likely errors",
-      "text": "日本語で回答してください。 Point out the most likely problems and help me fix them.",
+      "title": "誤りを探す",
+      "text": "起こりやすい問題を指摘し、修正を手伝ってください。",
       "tags": [
-        "beginner",
-        "fix"
+        "初心者",
+        "修正"
       ]
     },
     {
       "id": "review-missing-conflict",
       "category": "review",
-      "title": "Missing or unclear",
-      "text": "日本語で回答してください。 Check for anything missing, contradictory, or unclear.",
+      "title": "不足や不明点",
+      "text": "不足、矛盾、不明確な部分がないか確認してください。",
       "tags": [
-        "beginner",
-        "missing"
+        "初心者",
+        "不足"
       ]
     },
     {
       "id": "review-user-view",
       "category": "review",
-      "title": "User view",
-      "text": "日本語で回答してください。 Review this from the user's point of view.",
+      "title": "利用者目線",
+      "text": "利用者の目線でこれを確認してください。",
       "tags": [
-        "beginner",
-        "user"
+        "初心者",
+        "利用者"
       ]
     },
     {
       "id": "review-simplify",
       "category": "review",
-      "title": "Simplify",
-      "text": "日本語で回答してください。 Give me a shorter and easier-to-understand version.",
+      "title": "短く簡単に",
+      "text": "より短く、理解しやすい版を作ってください。",
       "tags": [
-        "beginner",
-        "simplify"
+        "初心者",
+        "簡潔化"
       ]
     },
     {
       "id": "review-deliverable",
       "category": "review",
-      "title": "Ready to deliver",
-      "text": "日本語で回答してください。 Improve this until it is ready to deliver, and list anything I still need to confirm.",
+      "title": "提出できる状態へ",
+      "text": "提出できる状態まで改善し、まだ確認が必要な点をリストにしてください。",
       "tags": [
-        "beginner",
-        "deliver",
-        "handoff"
+        "初心者",
+        "提出",
+        "引き渡し"
       ]
     },
     {
       "id": "review-report-reader",
       "category": "review",
-      "title": "Reader review",
-      "text": "日本語で回答してください。 Review this document or report from the reader's point of view, and point out what is unclear, too long, or missing evidence.",
+      "title": "読者目線で確認",
+      "text": "この文書やレポートを読者目線で確認し、不明確、長すぎる、根拠不足の点を指摘してください。",
       "tags": [
-        "beginner",
-        "report",
-        "reader"
+        "初心者",
+        "レポート",
+        "読者"
       ]
     },
     {
       "id": "review-travel-risk",
       "category": "review",
-      "title": "Trip check",
-      "text": "日本語で回答してください。 Check whether this travel plan is too rushed, whether the transportation is realistic, and whether the budget misses anything.",
+      "title": "旅行計画チェック",
+      "text": "この旅行計画が詰め込みすぎでないか、移動が現実的か、予算に漏れがないか確認してください。",
       "tags": [
-        "beginner",
-        "travel",
-        "review"
+        "初心者",
+        "旅行",
+        "見直し"
       ]
     }
   ]

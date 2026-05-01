@@ -1,7 +1,7 @@
 {
   "id": "beginner-rescue-ko",
-  "name": "AI 초보자 구조 프롬프트",
-  "description": "AI 대화에서 막혔을 때 사용할 수 있는 짧은 구조 프롬프트입니다.",
+  "name": "AI 초보자를 위한 구조 문장",
+  "description": "AI와 대화하다가 막혔을 때 바로 사용할 수 있는 한국어 프롬프트 모음입니다.",
   "locale": "ko",
   "version": "0.1.0",
   "author": "SayNext contributors",
@@ -12,7 +12,7 @@
     },
     {
       "id": "confused",
-      "name": "이해가 안 돼요"
+      "name": "이해가 안 될 때"
     },
     {
       "id": "improve",
@@ -24,7 +24,7 @@
     },
     {
       "id": "research",
-      "name": "조사"
+      "name": "자료 조사"
     },
     {
       "id": "planning",
@@ -47,860 +47,860 @@
     {
       "id": "start-i-want",
       "category": "start",
-      "title": "I want to",
-      "text": "한국어로 답변해 주세요. I want to... Help me clarify the request first, then ask what information you still need.",
+      "title": "하고 싶은 일",
+      "text": "저는 ……을 하고 싶습니다. 먼저 요청을 명확히 정리하고, 아직 필요한 정보를 질문해 주세요.",
       "tags": [
-        "beginner",
-        "start",
-        "how to ask"
+        "초보자",
+        "시작",
+        "질문법"
       ]
     },
     {
       "id": "start-ask-first",
       "category": "start",
-      "title": "Ask me first",
-      "text": "한국어로 답변해 주세요. Ask me up to 3 necessary questions first, then help me do it.",
+      "title": "먼저 질문해 주세요",
+      "text": "먼저 꼭 필요한 질문을 최대 3개까지 한 뒤 도와주세요.",
       "tags": [
-        "beginner",
-        "clarify",
-        "questions"
+        "초보자",
+        "명확화",
+        "질문"
       ]
     },
     {
       "id": "start-clarify-task",
       "category": "start",
-      "title": "Clarify the task",
-      "text": "한국어로 답변해 주세요. Turn this idea into a clear task with a goal, deliverable, and first step.",
+      "title": "작업 정리",
+      "text": "이 아이디어를 목표, 산출물, 첫 단계가 있는 명확한 작업으로 정리해 주세요.",
       "tags": [
-        "beginner",
-        "task",
-        "organize"
+        "초보자",
+        "작업",
+        "정리"
       ]
     },
     {
       "id": "start-ask-if-unclear",
       "category": "start",
-      "title": "Ask if unclear",
-      "text": "한국어로 답변해 주세요. If my request is unclear, ask follow-up questions first instead of guessing what I mean.",
+      "title": "불명확하면 질문",
+      "text": "제 요청이 불명확하면 뜻을 추측하지 말고 먼저 확인 질문을 해 주세요.",
       "tags": [
-        "beginner",
-        "clarify",
-        "unclear"
+        "초보자",
+        "명확화",
+        "불명확"
       ]
     },
     {
       "id": "start-goals-limits",
       "category": "start",
-      "title": "Goals and limits",
-      "text": "한국어로 답변해 주세요. Help me clarify the goal, constraints, available resources, and success criteria first.",
+      "title": "목표와 제한",
+      "text": "먼저 목표, 제한 조건, 사용할 수 있는 자원, 성공 기준을 정리해 주세요.",
       "tags": [
-        "beginner",
-        "scope",
-        "goal"
+        "초보자",
+        "범위",
+        "목표"
       ]
     },
     {
       "id": "start-needed-info",
       "category": "start",
-      "title": "Needed info",
-      "text": "한국어로 답변해 주세요. Tell me what information I should provide first so you can help more accurately.",
+      "title": "필요한 정보",
+      "text": "더 정확히 도와주려면 제가 먼저 어떤 정보를 제공해야 하는지 알려 주세요.",
       "tags": [
-        "beginner",
-        "info",
-        "context"
+        "초보자",
+        "정보",
+        "맥락"
       ]
     },
     {
       "id": "start-rewrite-for-ai",
       "category": "start",
-      "title": "Rewrite for AI",
-      "text": "한국어로 답변해 주세요. Rewrite my request into a clear, executable instruction that is suitable for an AI.",
+      "title": "AI용 지시로 바꾸기",
+      "text": "제 요청을 AI에게 전달하기 좋은 명확하고 실행 가능한 지시문으로 바꿔 주세요.",
       "tags": [
-        "beginner",
-        "rewrite",
-        "prompt"
+        "초보자",
+        "다시 쓰기",
+        "프롬프트"
       ]
     },
     {
       "id": "start-life-use-case",
       "category": "start",
-      "title": "Life task",
-      "text": "한국어로 답변해 주세요. I want to use AI for a life or work task. Help me turn it into a clear request first.",
+      "title": "생활·업무 작업",
+      "text": "생활이나 업무에 AI를 쓰고 싶습니다. 먼저 명확한 요청으로 바꾸는 것을 도와주세요.",
       "tags": [
-        "beginner",
-        "life",
-        "work"
+        "초보자",
+        "생활",
+        "업무"
       ]
     },
     {
       "id": "start-document-help",
       "category": "start",
-      "title": "Document start",
-      "text": "한국어로 답변해 주세요. I have a document or a pile of information. Ask me what it is for first, then suggest how to organize it.",
+      "title": "문서 시작",
+      "text": "문서나 많은 정보가 있습니다. 먼저 용도를 물어보고, 그다음 정리 방법을 제안해 주세요.",
       "tags": [
-        "beginner",
-        "document",
-        "organize"
+        "초보자",
+        "문서",
+        "정리"
       ]
     },
     {
       "id": "confused-plain-language",
       "category": "confused",
-      "title": "Plain language",
-      "text": "한국어로 답변해 주세요. Explain this in plain language so someone without background knowledge can understand it.",
+      "title": "쉬운 말로",
+      "text": "배경지식이 없는 사람도 이해할 수 있게 쉬운 말로 설명해 주세요.",
       "tags": [
-        "beginner",
-        "plain-language",
-        "confused"
+        "초보자",
+        "쉬운 말",
+        "혼란"
       ]
     },
     {
       "id": "confused-simpler",
       "category": "confused",
-      "title": "Simpler",
-      "text": "한국어로 답변해 주세요. I really do not understand. Explain it again in a simpler way, starting with the key point I should remember.",
+      "title": "더 쉽게",
+      "text": "정말 이해가 안 됩니다. 기억해야 할 핵심부터 시작해서 더 쉽게 다시 설명해 주세요.",
       "tags": [
-        "beginner",
-        "explain",
-        "lost"
+        "초보자",
+        "설명",
+        "막힘"
       ]
     },
     {
       "id": "confused-example",
       "category": "confused",
-      "title": "Example",
-      "text": "한국어로 답변해 주세요. Use a simple everyday example, then connect it back to the original concept.",
+      "title": "예시 들어 설명",
+      "text": "간단한 일상 예시를 든 뒤 원래 개념과 연결해 주세요.",
       "tags": [
-        "beginner",
-        "example",
-        "analogy"
+        "초보자",
+        "예시",
+        "비유"
       ]
     },
     {
       "id": "confused-step-by-step",
       "category": "confused",
-      "title": "Step by step",
-      "text": "한국어로 답변해 주세요. Teach me step by step. For each step, explain the purpose before the action.",
+      "title": "단계별로",
+      "text": "단계별로 가르쳐 주세요. 각 단계마다 행동 전에 목적을 먼저 설명해 주세요.",
       "tags": [
-        "beginner",
-        "steps",
-        "teach"
+        "초보자",
+        "단계",
+        "가르치기"
       ]
     },
     {
       "id": "confused-main-point",
       "category": "confused",
-      "title": "Main point first",
-      "text": "한국어로 답변해 주세요. Give me the main point in 3 sentences first, then add only the necessary details.",
+      "title": "핵심 먼저",
+      "text": "먼저 핵심을 3문장으로 말하고, 필요한 세부사항만 덧붙여 주세요.",
       "tags": [
-        "beginner",
-        "summary",
-        "main point"
+        "초보자",
+        "요약",
+        "핵심"
       ]
     },
     {
       "id": "confused-young-student",
       "category": "confused",
-      "title": "Beginner level",
-      "text": "한국어로 답변해 주세요. Explain this for a complete beginner. Do not assume I already know the background.",
+      "title": "초보자 수준",
+      "text": "완전 초보자에게 설명하듯 말해 주세요. 제가 배경지식을 안다고 가정하지 마세요.",
       "tags": [
-        "beginner",
-        "simple",
-        "newbie"
+        "초보자",
+        "간단함",
+        "초보"
       ]
     },
     {
       "id": "confused-no-jargon",
       "category": "confused",
-      "title": "No jargon",
-      "text": "한국어로 답변해 주세요. Replace technical terms with plain words. If a term is necessary, explain it first.",
+      "title": "전문용어 없이",
+      "text": "전문용어를 쉬운 말로 바꿔 주세요. 꼭 필요한 용어는 먼저 설명해 주세요.",
       "tags": [
-        "beginner",
-        "jargon",
-        "plain words"
+        "초보자",
+        "전문용어",
+        "쉬운 단어"
       ]
     },
     {
       "id": "confused-document-summary",
       "category": "confused",
-      "title": "Document points",
-      "text": "한국어로 답변해 주세요. Explain this document in plain language, summarize the key points, and mark what I should pay attention to.",
+      "title": "문서 핵심",
+      "text": "이 문서를 쉬운 말로 설명하고, 핵심 내용을 요약한 뒤 주의할 점을 표시해 주세요.",
       "tags": [
-        "beginner",
-        "document",
-        "summary"
+        "초보자",
+        "문서",
+        "요약"
       ]
     },
     {
       "id": "confused-report-terms",
       "category": "confused",
-      "title": "Report terms",
-      "text": "한국어로 답변해 주세요. Explain the technical terms and key numbers in this report in everyday language.",
+      "title": "보고서 용어",
+      "text": "이 보고서의 전문용어와 중요한 숫자를 일상적인 말로 설명해 주세요.",
       "tags": [
-        "beginner",
-        "report",
-        "explain"
+        "초보자",
+        "보고서",
+        "설명"
       ]
     },
     {
       "id": "improve-why-recommend",
       "category": "improve",
-      "title": "What do you recommend",
-      "text": "한국어로 답변해 주세요. Explain why you made that judgment, then give me your most recommended approach.",
+      "title": "추천 방법",
+      "text": "그 판단을 한 이유를 설명하고, 가장 추천하는 방법을 알려 주세요.",
       "tags": [
-        "beginner",
-        "recommend",
-        "advice"
+        "초보자",
+        "추천",
+        "조언"
       ]
     },
     {
       "id": "improve-rethink",
       "category": "improve",
-      "title": "Rethink",
-      "text": "한국어로 답변해 주세요. This answer is not good enough. Recheck the problem, think from another angle, and answer again.",
+      "title": "다시 생각하기",
+      "text": "이 답변은 충분하지 않습니다. 문제를 다시 확인하고 다른 관점에서 생각해 다시 답해 주세요.",
       "tags": [
-        "beginner",
-        "retry",
-        "rethink"
+        "초보자",
+        "재시도",
+        "재검토"
       ]
     },
     {
       "id": "improve-three-options",
       "category": "improve",
-      "title": "Three options",
-      "text": "한국어로 답변해 주세요. Give me 3 different approaches and compare their pros and cons.",
+      "title": "세 가지 방법",
+      "text": "서로 다른 방법 3가지를 제시하고 장단점을 비교해 주세요.",
       "tags": [
-        "beginner",
-        "options"
+        "초보자",
+        "선택지"
       ]
     },
     {
       "id": "improve-reasons",
       "category": "improve",
-      "title": "Explain reasons",
-      "text": "한국어로 답변해 주세요. Do not just give the conclusion. Explain the reasoning behind it.",
+      "title": "이유 설명",
+      "text": "결론만 말하지 말고 그 뒤의 reasoning과 근거를 설명해 주세요.",
       "tags": [
-        "beginner",
-        "reasoning"
+        "초보자",
+        "이유"
       ]
     },
     {
       "id": "improve-check-answer",
       "category": "improve",
-      "title": "Check answer",
-      "text": "한국어로 답변해 주세요. Check whether your previous answer has errors, missing pieces, or unreasonable assumptions.",
+      "title": "답변 확인",
+      "text": "이전 답변에 오류, 빠진 부분, 무리한 가정이 없는지 확인해 주세요.",
       "tags": [
-        "beginner",
-        "check",
-        "error"
+        "초보자",
+        "확인",
+        "오류"
       ]
     },
     {
       "id": "improve-practical",
       "category": "improve",
-      "title": "More practical",
-      "text": "한국어로 답변해 주세요. Give me a more practical and actionable answer, and tell me the first step to take.",
+      "title": "더 실용적으로",
+      "text": "더 실용적이고 실행 가능한 답변으로 바꾸고, 첫 번째 행동도 알려 주세요.",
       "tags": [
-        "beginner",
-        "practical",
-        "actionable"
+        "초보자",
+        "실용",
+        "실행 가능"
       ]
     },
     {
       "id": "improve-professional",
       "category": "improve",
-      "title": "Higher standard",
-      "text": "한국어로 답변해 주세요. Answer again using a more professional standard, and include the quality points you would check.",
+      "title": "높은 기준",
+      "text": "더 전문적인 기준으로 다시 답하고, 확인해야 할 품질 기준도 포함해 주세요.",
       "tags": [
-        "beginner",
-        "quality",
-        "professional"
+        "초보자",
+        "품질",
+        "전문성"
       ]
     },
     {
       "id": "improve-report-better",
       "category": "improve",
-      "title": "Better report",
-      "text": "한국어로 답변해 주세요. Make this report clearer and better structured so readers can understand the key points quickly.",
+      "title": "보고서 개선",
+      "text": "독자가 핵심을 빠르게 이해할 수 있도록 이 보고서를 더 명확하고 구조적으로 다듬어 주세요.",
       "tags": [
-        "beginner",
-        "report",
-        "writing"
+        "초보자",
+        "보고서",
+        "글쓰기"
       ]
     },
     {
       "id": "improve-document-structure",
       "category": "improve",
-      "title": "Structure it",
-      "text": "한국어로 답변해 주세요. Reorganize this content so the section order is more logical and the headings are clearer.",
+      "title": "구조 정리",
+      "text": "섹션 순서가 더 논리적이고 제목이 더 명확해지도록 이 내용을 재구성해 주세요.",
       "tags": [
-        "beginner",
-        "document",
-        "structure"
+        "초보자",
+        "문서",
+        "구조"
       ]
     },
     {
       "id": "refused-why-find-way",
       "category": "refused",
-      "title": "Find a way",
-      "text": "한국어로 답변해 주세요. Explain why you cannot do it, then suggest a safe, practical alternative that gets close to my goal.",
+      "title": "방법 찾기",
+      "text": "왜 할 수 없는지 설명한 뒤, 제 목표에 가까운 안전하고 현실적인 대안을 제안해 주세요.",
       "tags": [
-        "beginner",
-        "refusal",
-        "cannot"
+        "초보자",
+        "거절",
+        "불가"
       ]
     },
     {
       "id": "refused-alternative",
       "category": "refused",
-      "title": "Alternative",
-      "text": "한국어로 답변해 주세요. If you cannot do it directly, suggest the closest practical alternative.",
+      "title": "대안 제시",
+      "text": "직접 할 수 없다면 가장 가까운 현실적인 대안을 제안해 주세요.",
       "tags": [
-        "beginner",
-        "alternative",
-        "workaround"
+        "초보자",
+        "대안",
+        "우회 방법"
       ]
     },
     {
       "id": "refused-small-steps",
       "category": "refused",
-      "title": "Small steps",
-      "text": "한국어로 답변해 주세요. Break this into smaller steps that are still possible to do now.",
+      "title": "작게 나누기",
+      "text": "지금 할 수 있는 작은 단계들로 나눠 주세요.",
       "tags": [
-        "beginner",
-        "steps",
-        "break down"
+        "초보자",
+        "단계",
+        "분해"
       ]
     },
     {
       "id": "refused-limits",
       "category": "refused",
-      "title": "Explain limits",
-      "text": "한국어로 답변해 주세요. Tell me what the limitation is and how to reduce its impact.",
+      "title": "제한 설명",
+      "text": "어떤 제한이 있는지, 그 영향을 어떻게 줄일 수 있는지 알려 주세요.",
       "tags": [
-        "beginner",
-        "limits"
+        "초보자",
+        "제한"
       ]
     },
     {
       "id": "refused-partial",
       "category": "refused",
-      "title": "Do the possible part",
-      "text": "한국어로 답변해 주세요. If you cannot do the full version, do the parts that are possible.",
+      "title": "가능한 부분만",
+      "text": "전체를 할 수 없다면 가능한 부분만 진행해 주세요.",
       "tags": [
-        "beginner",
-        "partial"
+        "초보자",
+        "일부"
       ]
     },
     {
       "id": "refused-safe-workarounds",
       "category": "refused",
-      "title": "Safe alternatives",
-      "text": "한국어로 답변해 주세요. Suggest at least 3 legal, safe, and policy-compliant alternatives.",
+      "title": "안전한 대안",
+      "text": "합법적이고 안전하며 정책에 맞는 대안을 최소 3가지 제안해 주세요.",
       "tags": [
-        "beginner",
-        "safe",
-        "legal"
+        "초보자",
+        "안전",
+        "합법"
       ]
     },
     {
       "id": "refused-helpful-parts",
       "category": "refused",
-      "title": "What can you help with",
-      "text": "한국어로 답변해 주세요. First explain which parts you can still help with, then explain what you cannot help with and why.",
+      "title": "도울 수 있는 부분",
+      "text": "먼저 아직 도울 수 있는 부분을 설명하고, 도울 수 없는 부분과 이유를 설명해 주세요.",
       "tags": [
-        "beginner",
-        "help",
-        "refusal"
+        "초보자",
+        "도움",
+        "거절"
       ]
     },
     {
       "id": "research-experts",
       "category": "research",
-      "title": "Expert views",
-      "text": "한국어로 답변해 주세요. Find how professionals or credible sources approach this, what they think, and summarize the key points.",
+      "title": "전문가 관점",
+      "text": "전문가나 신뢰할 수 있는 출처가 이 문제를 어떻게 다루는지 조사하고 핵심을 요약해 주세요.",
       "tags": [
-        "beginner",
-        "research",
-        "expert"
+        "초보자",
+        "조사",
+        "전문가"
       ]
     },
     {
       "id": "research-latest-sources",
       "category": "research",
-      "title": "Latest sources",
-      "text": "한국어로 답변해 주세요. Find up-to-date information, include source links, and note the dates of the information.",
+      "title": "최신 자료",
+      "text": "최신 정보를 찾아 출처 링크와 정보 날짜를 함께 적어 주세요.",
       "tags": [
-        "beginner",
-        "sources",
-        "latest"
+        "초보자",
+        "출처",
+        "최신"
       ]
     },
     {
       "id": "research-compare-views",
       "category": "research",
-      "title": "Compare views",
-      "text": "한국어로 답변해 주세요. Compare different viewpoints. Do not give me only one answer.",
+      "title": "관점 비교",
+      "text": "서로 다른 관점을 비교해 주세요. 한 가지 답만 주지 마세요.",
       "tags": [
-        "beginner",
-        "compare"
+        "초보자",
+        "비교"
       ]
     },
     {
       "id": "research-fact-inference",
       "category": "research",
-      "title": "Facts vs inference",
-      "text": "한국어로 답변해 주세요. Mark which parts are facts and which parts are your inference.",
+      "title": "사실과 추론",
+      "text": "어떤 부분이 사실이고 어떤 부분이 추론인지 구분해 표시해 주세요.",
       "tags": [
-        "beginner",
-        "facts"
+        "초보자",
+        "사실"
       ]
     },
     {
       "id": "research-mainstream-minority",
       "category": "research",
-      "title": "Mainstream and minority",
-      "text": "한국어로 답변해 주세요. Summarize the mainstream approach and any credible minority opinions.",
+      "title": "주류와 소수 의견",
+      "text": "주류 접근법과 신뢰할 만한 소수 의견이 있다면 함께 요약해 주세요.",
       "tags": [
-        "beginner",
-        "views"
+        "초보자",
+        "관점"
       ]
     },
     {
       "id": "research-reliable",
       "category": "research",
-      "title": "Reliable sources",
-      "text": "한국어로 답변해 주세요. Prioritize official docs, research, professional organizations, or primary sources instead of general web articles.",
+      "title": "신뢰할 출처",
+      "text": "일반 웹 글보다 공식 문서, 연구, 전문기관, 1차 출처를 우선해 주세요.",
       "tags": [
-        "beginner",
-        "reliable",
-        "source"
+        "초보자",
+        "신뢰",
+        "자료원"
       ]
     },
     {
       "id": "research-actionable",
       "category": "research",
-      "title": "Summary and action",
-      "text": "한국어로 답변해 주세요. Turn the research into key takeaways, risk notes, and actionable recommendations.",
+      "title": "요약과 행동",
+      "text": "조사 내용을 핵심 요점, 위험 메모, 실행 가능한 추천으로 정리해 주세요.",
       "tags": [
-        "beginner",
-        "action",
-        "summary"
+        "초보자",
+        "행동",
+        "요약"
       ]
     },
     {
       "id": "research-travel-options",
       "category": "research",
-      "title": "Travel research",
-      "text": "한국어로 답변해 주세요. Help me research this travel destination, including transportation, lodging, attractions, budget, and things to watch out for.",
+      "title": "여행 조사",
+      "text": "이 여행지의 교통, 숙박, 볼거리, 예산, 주의할 점을 조사해 주세요.",
       "tags": [
-        "beginner",
-        "travel",
-        "research"
+        "초보자",
+        "여행",
+        "조사"
       ]
     },
     {
       "id": "research-purchase-compare",
       "category": "research",
-      "title": "Life comparison",
-      "text": "한국어로 답변해 주세요. Compare these options by price, pros and cons, best fit, and risks to watch for.",
+      "title": "생활 비교",
+      "text": "가격, 장단점, 적합한 경우, 주의할 위험 기준으로 비교해 주세요.",
       "tags": [
-        "beginner",
-        "compare",
-        "life"
+        "초보자",
+        "비교",
+        "생활"
       ]
     },
     {
       "id": "planning-best-plan",
       "category": "planning",
-      "title": "Best plan",
-      "text": "한국어로 답변해 주세요. Create a clear, executable best plan. For important decisions, confirm with me using multiple choice questions.",
+      "title": "최선의 계획",
+      "text": "명확하고 실행 가능한 최선의 계획을 만들어 주세요. 중요한 결정은 객관식으로 확인해 주세요.",
       "tags": [
-        "beginner",
-        "plan",
-        "planning"
+        "초보자",
+        "계획",
+        "계획"
       ]
     },
     {
       "id": "planning-goals-risks",
       "category": "planning",
-      "title": "Goals and risks",
-      "text": "한국어로 답변해 주세요. List the goal, constraints, risks, and steps first.",
+      "title": "목표와 위험",
+      "text": "먼저 목표, 제한, 위험, 단계를 목록으로 정리해 주세요.",
       "tags": [
-        "beginner",
-        "risk"
+        "초보자",
+        "위험"
       ]
     },
     {
       "id": "planning-timeframes",
       "category": "planning",
-      "title": "Timeframes",
-      "text": "한국어로 답변해 주세요. Split the plan into what I can do today, this week, and later.",
+      "title": "기간별 계획",
+      "text": "오늘 할 일, 이번 주 할 일, 나중에 할 일로 나눠 주세요.",
       "tags": [
-        "beginner",
-        "schedule"
+        "초보자",
+        "일정"
       ]
     },
     {
       "id": "planning-improve-plan",
       "category": "planning",
-      "title": "Improve plan",
-      "text": "한국어로 답변해 주세요. Review and improve this plan by adding missing steps, risks, and checkpoints.",
+      "title": "계획 개선",
+      "text": "이 계획을 검토해 빠진 단계, 위험, 체크포인트를 추가해 주세요.",
       "tags": [
-        "beginner",
-        "improve",
-        "complete"
+        "초보자",
+        "개선",
+        "완성"
       ]
     },
     {
       "id": "planning-milestones",
       "category": "planning",
-      "title": "Milestones",
-      "text": "한국어로 답변해 주세요. Break this into clear milestones.",
+      "title": "마일스톤",
+      "text": "이 일을 명확한 마일스톤으로 나눠 주세요.",
       "tags": [
-        "beginner",
-        "milestone"
+        "초보자",
+        "마일스톤"
       ]
     },
     {
       "id": "planning-failure",
       "category": "planning",
-      "title": "Likely failure",
-      "text": "한국어로 답변해 주세요. Point out where this plan is most likely to fail.",
+      "title": "실패 가능성",
+      "text": "이 계획이 가장 실패하기 쉬운 지점을 짚어 주세요.",
       "tags": [
-        "beginner",
-        "failure"
+        "초보자",
+        "실패"
       ]
     },
     {
       "id": "planning-priority",
       "category": "planning",
-      "title": "Prioritize",
-      "text": "한국어로 답변해 주세요. Help me prioritize what to do first.",
+      "title": "우선순위",
+      "text": "무엇을 먼저 해야 할지 우선순위를 정해 주세요.",
       "tags": [
-        "beginner",
-        "priority"
+        "초보자",
+        "우선순위"
       ]
     },
     {
       "id": "planning-travel-itinerary",
       "category": "planning",
-      "title": "Travel plan",
-      "text": "한국어로 답변해 주세요. Plan a travel itinerary based on days, budget, transportation time, and energy level.",
+      "title": "여행 일정",
+      "text": "일수, 예산, 이동 시간, 체력 수준을 바탕으로 여행 일정을 계획해 주세요.",
       "tags": [
-        "beginner",
-        "travel",
-        "itinerary"
+        "초보자",
+        "여행",
+        "여행 일정"
       ]
     },
     {
       "id": "planning-report-outline",
       "category": "planning",
-      "title": "Report outline",
-      "text": "한국어로 답변해 주세요. Create a report outline first, including sections, key points, and what each part should contain.",
+      "title": "보고서 개요",
+      "text": "먼저 보고서 개요를 만들고 섹션, 핵심 내용, 각 부분에 들어갈 내용을 정리해 주세요.",
       "tags": [
-        "beginner",
-        "report",
-        "outline"
+        "초보자",
+        "보고서",
+        "개요"
       ]
     },
     {
       "id": "planning-life-decision",
       "category": "planning",
-      "title": "Life decision",
-      "text": "한국어로 답변해 주세요. Break this life decision into options, conditions, risks, and a recommended approach.",
+      "title": "생활 결정",
+      "text": "이 생활 속 결정을 선택지, 조건, 위험, 추천 접근법으로 나눠 주세요.",
       "tags": [
-        "beginner",
-        "decision",
-        "life"
+        "초보자",
+        "결정",
+        "생활"
       ]
     },
     {
       "id": "execute-start",
       "category": "execute",
-      "title": "Start",
-      "text": "한국어로 답변해 주세요. Start executing based on the current plan. If you hit an important decision, ask me using multiple choice.",
+      "title": "시작",
+      "text": "현재 계획을 바탕으로 실행을 시작해 주세요. 중요한 결정이 나오면 객관식으로 물어봐 주세요.",
       "tags": [
-        "beginner",
-        "execute",
-        "start"
+        "초보자",
+        "실행",
+        "시작"
       ]
     },
     {
       "id": "execute-first-version",
       "category": "execute",
-      "title": "First version",
-      "text": "한국어로 답변해 주세요. Create a first version that can be reviewed. Do not aim for perfection yet.",
+      "title": "첫 버전",
+      "text": "검토할 수 있는 첫 버전을 만들어 주세요. 아직 완벽할 필요는 없습니다.",
       "tags": [
-        "beginner",
-        "draft",
-        "first version"
+        "초보자",
+        "초안",
+        "첫 버전"
       ]
     },
     {
       "id": "execute-one-step",
       "category": "execute",
-      "title": "One step",
-      "text": "한국어로 답변해 주세요. Do one step at a time. After each step, ask me whether to continue.",
+      "title": "한 단계씩",
+      "text": "한 번에 한 단계씩 진행해 주세요. 각 단계가 끝나면 계속할지 물어봐 주세요.",
       "tags": [
-        "beginner",
-        "steps"
+        "초보자",
+        "단계"
       ]
     },
     {
       "id": "execute-from-plan",
       "category": "execute",
-      "title": "Use the plan",
-      "text": "한국어로 답변해 주세요. Start producing the result based on the plan above.",
+      "title": "계획대로 실행",
+      "text": "위 계획을 바탕으로 결과물을 만들기 시작해 주세요.",
       "tags": [
-        "beginner",
-        "plan"
+        "초보자",
+        "계획"
       ]
     },
     {
       "id": "execute-usable",
       "category": "execute",
-      "title": "Usable version",
-      "text": "한국어로 답변해 주세요. Give me a version I can use directly, not just general direction or principles.",
+      "title": "바로 쓸 수 있게",
+      "text": "일반적인 방향이나 원칙이 아니라 바로 사용할 수 있는 버전으로 주세요.",
       "tags": [
-        "beginner",
-        "usable",
-        "done"
+        "초보자",
+        "사용 가능",
+        "완료"
       ]
     },
     {
       "id": "execute-copyable",
       "category": "execute",
-      "title": "Copyable format",
-      "text": "한국어로 답변해 주세요. Format the result so I can copy and use it directly.",
+      "title": "복사 가능한 형식",
+      "text": "결과를 복사해서 바로 쓸 수 있는 형식으로 정리해 주세요.",
       "tags": [
-        "beginner",
-        "format"
+        "초보자",
+        "형식"
       ]
     },
     {
       "id": "execute-do-not-advise",
       "category": "execute",
-      "title": "Do it",
-      "text": "한국어로 답변해 주세요. Do not only give advice. Help me complete it directly.",
+      "title": "직접 해 주세요",
+      "text": "조언만 하지 말고 직접 완성하도록 도와주세요.",
       "tags": [
-        "beginner",
-        "complete"
+        "초보자",
+        "완성"
       ]
     },
     {
       "id": "execute-document-summary",
       "category": "execute",
-      "title": "Organize document",
-      "text": "한국어로 답변해 주세요. Turn this content into a summary, key bullet points, and action items.",
+      "title": "문서 정리",
+      "text": "이 내용을 요약, 핵심 bullet, 실행 항목으로 바꿔 주세요.",
       "tags": [
-        "beginner",
-        "document",
-        "summary"
+        "초보자",
+        "문서",
+        "요약"
       ]
     },
     {
       "id": "execute-report-draft",
       "category": "execute",
-      "title": "Draft report",
-      "text": "한국어로 답변해 주세요. Based on the information above, create a complete first draft of the report.",
+      "title": "보고서 초안",
+      "text": "위 정보를 바탕으로 완성된 보고서 첫 초안을 작성해 주세요.",
       "tags": [
-        "beginner",
-        "report",
-        "draft"
+        "초보자",
+        "보고서",
+        "초안"
       ]
     },
     {
       "id": "execute-travel-plan",
       "category": "execute",
-      "title": "Create itinerary",
-      "text": "한국어로 답변해 주세요. Create a usable travel itinerary with times, places, transportation, and backup options.",
+      "title": "여행 일정 만들기",
+      "text": "시간, 장소, 교통, 대안을 포함한 실용적인 여행 일정을 만들어 주세요.",
       "tags": [
-        "beginner",
-        "travel",
-        "itinerary"
+        "초보자",
+        "여행",
+        "여행 일정"
       ]
     },
     {
       "id": "next-recommend-three",
       "category": "next",
-      "title": "Recommend next steps",
-      "text": "한국어로 답변해 주세요. Based on the current state, suggest the 3 most valuable next steps and explain the priority order.",
+      "title": "다음 3단계",
+      "text": "현재 상태를 바탕으로 가장 가치 있는 다음 3단계를 제안하고 우선순위를 설명해 주세요.",
       "tags": [
-        "beginner",
-        "next",
-        "priority"
+        "초보자",
+        "다음",
+        "우선순위"
       ]
     },
     {
       "id": "next-pick-one",
       "category": "next",
-      "title": "Pick one",
-      "text": "한국어로 답변해 주세요. Help me decide the single best next step and explain why.",
+      "title": "하나 선택",
+      "text": "가장 좋은 다음 단계 하나를 골라 이유를 설명해 주세요.",
       "tags": [
-        "beginner",
-        "next",
-        "decision"
+        "초보자",
+        "다음",
+        "결정"
       ]
     },
     {
       "id": "next-small-action",
       "category": "next",
-      "title": "Small action",
-      "text": "한국어로 답변해 주세요. Turn the next step into one action I can finish within 10 minutes.",
+      "title": "작은 행동",
+      "text": "다음 단계를 10분 안에 끝낼 수 있는 하나의 행동으로 바꿔 주세요.",
       "tags": [
-        "beginner",
-        "next",
-        "small"
+        "초보자",
+        "다음",
+        "작게"
       ]
     },
     {
       "id": "next-questions",
       "category": "next",
-      "title": "Ask first",
-      "text": "한국어로 답변해 주세요. If the next step is not clear yet, ask me up to 3 key questions first.",
+      "title": "먼저 질문",
+      "text": "다음 단계가 아직 명확하지 않다면 핵심 질문을 최대 3개 먼저 해 주세요.",
       "tags": [
-        "beginner",
-        "next",
-        "questions"
+        "초보자",
+        "다음",
+        "질문"
       ]
     },
     {
       "id": "next-risks",
       "category": "next",
-      "title": "Check risks",
-      "text": "한국어로 답변해 주세요. Before continuing, point out the most likely risks in the next step.",
+      "title": "위험 확인",
+      "text": "계속하기 전에 다음 단계에서 생길 가능성이 큰 위험을 짚어 주세요.",
       "tags": [
-        "beginner",
-        "next",
-        "risk"
+        "초보자",
+        "다음",
+        "위험"
       ]
     },
     {
       "id": "next-checkpoint",
       "category": "next",
-      "title": "Checkpoint",
-      "text": "한국어로 답변해 주세요. Set the next checkpoint: what must be done before we continue.",
+      "title": "체크포인트",
+      "text": "다음 체크포인트를 정해 주세요. 계속하기 전에 무엇이 완료되어야 하는지 알려 주세요.",
       "tags": [
-        "beginner",
-        "next",
-        "checkpoint"
+        "초보자",
+        "다음",
+        "체크포인트"
       ]
     },
     {
       "id": "next-do-it",
       "category": "next",
-      "title": "Move forward",
-      "text": "한국어로 답변해 주세요. Move forward with the next step directly. After finishing, tell me what you did and what is still missing.",
+      "title": "앞으로 진행",
+      "text": "다음 단계를 바로 진행해 주세요. 끝난 뒤 무엇을 했고 무엇이 아직 부족한지 알려 주세요.",
       "tags": [
-        "beginner",
-        "next",
-        "execute"
+        "초보자",
+        "다음",
+        "실행"
       ]
     },
     {
       "id": "next-full-review",
       "category": "next",
-      "title": "Full review",
-      "text": "한국어로 답변해 주세요. Review the current result thoroughly, find problems, risks, and missing pieces, then recommend the next improvements.",
+      "title": "전체 검토",
+      "text": "현재 결과를 꼼꼼히 검토해 문제, 위험, 빠진 부분을 찾고 다음 개선안을 추천해 주세요.",
       "tags": [
-        "beginner",
-        "next",
-        "review"
+        "초보자",
+        "다음",
+        "검토"
       ]
     },
     {
       "id": "review-improve-result",
       "category": "review",
-      "title": "Review and improve",
-      "text": "한국어로 답변해 주세요. After finishing, check for problems, fix weak spots, and improve the result until it is more usable.",
+      "title": "검토와 개선",
+      "text": "완료 후 문제를 확인하고 약한 부분을 고쳐 더 쓸모 있게 개선해 주세요.",
       "tags": [
-        "beginner",
-        "review",
-        "improve"
+        "초보자",
+        "검토",
+        "개선"
       ]
     },
     {
       "id": "review-professional-standard",
       "category": "review",
-      "title": "Professional review",
-      "text": "한국어로 답변해 주세요. Review this result using a professional standard.",
+      "title": "전문 기준 검토",
+      "text": "이 결과를 전문적인 기준으로 검토해 주세요.",
       "tags": [
-        "beginner",
-        "quality"
+        "초보자",
+        "품질"
       ]
     },
     {
       "id": "review-likely-errors",
       "category": "review",
-      "title": "Find likely errors",
-      "text": "한국어로 답변해 주세요. Point out the most likely problems and help me fix them.",
+      "title": "오류 찾기",
+      "text": "가장 가능성 높은 문제를 짚고 수정하도록 도와주세요.",
       "tags": [
-        "beginner",
-        "fix"
+        "초보자",
+        "수정"
       ]
     },
     {
       "id": "review-missing-conflict",
       "category": "review",
-      "title": "Missing or unclear",
-      "text": "한국어로 답변해 주세요. Check for anything missing, contradictory, or unclear.",
+      "title": "빠짐·모순 확인",
+      "text": "빠진 것, 모순된 것, 불명확한 것이 없는지 확인해 주세요.",
       "tags": [
-        "beginner",
-        "missing"
+        "초보자",
+        "누락"
       ]
     },
     {
       "id": "review-user-view",
       "category": "review",
-      "title": "User view",
-      "text": "한국어로 답변해 주세요. Review this from the user's point of view.",
+      "title": "사용자 관점",
+      "text": "사용자 관점에서 이 결과를 검토해 주세요.",
       "tags": [
-        "beginner",
-        "user"
+        "초보자",
+        "사용자"
       ]
     },
     {
       "id": "review-simplify",
       "category": "review",
-      "title": "Simplify",
-      "text": "한국어로 답변해 주세요. Give me a shorter and easier-to-understand version.",
+      "title": "더 간단하게",
+      "text": "더 짧고 이해하기 쉬운 버전으로 만들어 주세요.",
       "tags": [
-        "beginner",
-        "simplify"
+        "초보자",
+        "단순화"
       ]
     },
     {
       "id": "review-deliverable",
       "category": "review",
-      "title": "Ready to deliver",
-      "text": "한국어로 답변해 주세요. Improve this until it is ready to deliver, and list anything I still need to confirm.",
+      "title": "제출 가능한 상태",
+      "text": "제출할 수 있을 때까지 개선하고, 아직 확인해야 할 사항을 목록으로 알려 주세요.",
       "tags": [
-        "beginner",
-        "deliver",
-        "handoff"
+        "초보자",
+        "제출",
+        "전달"
       ]
     },
     {
       "id": "review-report-reader",
       "category": "review",
-      "title": "Reader review",
-      "text": "한국어로 답변해 주세요. Review this document or report from the reader's point of view, and point out what is unclear, too long, or missing evidence.",
+      "title": "독자 관점 검토",
+      "text": "이 문서나 보고서를 독자 관점에서 검토하고 불명확한 부분, 너무 긴 부분, 근거가 부족한 부분을 지적해 주세요.",
       "tags": [
-        "beginner",
-        "report",
-        "reader"
+        "초보자",
+        "보고서",
+        "독자"
       ]
     },
     {
       "id": "review-travel-risk",
       "category": "review",
-      "title": "Trip check",
-      "text": "한국어로 답변해 주세요. Check whether this travel plan is too rushed, whether the transportation is realistic, and whether the budget misses anything.",
+      "title": "여행 계획 점검",
+      "text": "이 여행 계획이 너무 빡빡한지, 이동이 현실적인지, 예산에 빠진 것이 없는지 확인해 주세요.",
       "tags": [
-        "beginner",
-        "travel",
-        "review"
+        "초보자",
+        "여행",
+        "검토"
       ]
     }
   ]

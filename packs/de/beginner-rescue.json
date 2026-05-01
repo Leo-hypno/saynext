@@ -1,18 +1,18 @@
 {
   "id": "beginner-rescue-de",
-  "name": "KI-Rettungsprompts für Einsteiger",
-  "description": "Kurze Prompts für Situationen, in denen du bei der KI-Nutzung feststeckst.",
+  "name": "Hilfssätze für KI-Einsteiger",
+  "description": "Kurze deutsche Prompts, die helfen, ein festgefahrenes Gespräch mit einer KI wieder in Gang zu bringen.",
   "locale": "de",
   "version": "0.1.0",
   "author": "SayNext contributors",
   "categories": [
     {
       "id": "start",
-      "name": "Starten"
+      "name": "Einstieg"
     },
     {
       "id": "confused",
-      "name": "Ich verstehe nicht"
+      "name": "Ich verstehe es nicht"
     },
     {
       "id": "improve",
@@ -20,7 +20,7 @@
     },
     {
       "id": "refused",
-      "name": "Wenn KI ablehnt"
+      "name": "Wenn die KI ablehnt"
     },
     {
       "id": "research",
@@ -40,867 +40,867 @@
     },
     {
       "id": "review",
-      "name": "Prüfen"
+      "name": "Prüfung"
     }
   ],
   "prompts": [
     {
       "id": "start-i-want",
       "category": "start",
-      "title": "I want to",
-      "text": "Antworte auf Deutsch. I want to... Help me clarify the request first, then ask what information you still need.",
+      "title": "Ich möchte etwas tun",
+      "text": "Ich möchte … Hilf mir zuerst, die Anfrage zu klären, und frage dann, welche Informationen dir noch fehlen.",
       "tags": [
-        "beginner",
-        "start",
-        "how to ask"
+        "Einsteiger",
+        "Start",
+        "Fragen stellen"
       ]
     },
     {
       "id": "start-ask-first",
       "category": "start",
-      "title": "Ask me first",
-      "text": "Antworte auf Deutsch. Ask me up to 3 necessary questions first, then help me do it.",
+      "title": "Frag mich zuerst",
+      "text": "Stelle mir zuerst bis zu 3 notwendige Fragen und hilf mir danach bei der Umsetzung.",
       "tags": [
-        "beginner",
-        "clarify",
-        "questions"
+        "Einsteiger",
+        "klären",
+        "Fragen"
       ]
     },
     {
       "id": "start-clarify-task",
       "category": "start",
-      "title": "Clarify the task",
-      "text": "Antworte auf Deutsch. Turn this idea into a clear task with a goal, deliverable, and first step.",
+      "title": "Aufgabe klären",
+      "text": "Formuliere aus dieser Idee eine klare Aufgabe mit Ziel, Ergebnis und erstem Schritt.",
       "tags": [
-        "beginner",
-        "task",
-        "organize"
+        "Einsteiger",
+        "Aufgabe",
+        "organisieren"
       ]
     },
     {
       "id": "start-ask-if-unclear",
       "category": "start",
-      "title": "Ask if unclear",
-      "text": "Antworte auf Deutsch. If my request is unclear, ask follow-up questions first instead of guessing what I mean.",
+      "title": "Nachfragen, wenn unklar",
+      "text": "Wenn meine Anfrage unklar ist, stelle zuerst Rückfragen, statt meine Absicht zu erraten.",
       "tags": [
-        "beginner",
-        "clarify",
-        "unclear"
+        "Einsteiger",
+        "klären",
+        "unklar"
       ]
     },
     {
       "id": "start-goals-limits",
       "category": "start",
-      "title": "Goals and limits",
-      "text": "Antworte auf Deutsch. Help me clarify the goal, constraints, available resources, and success criteria first.",
+      "title": "Ziele und Grenzen",
+      "text": "Hilf mir zuerst, Ziel, Einschränkungen, verfügbare Ressourcen und Erfolgskriterien zu klären.",
       "tags": [
-        "beginner",
-        "scope",
-        "goal"
+        "Einsteiger",
+        "Umfang",
+        "Ziel"
       ]
     },
     {
       "id": "start-needed-info",
       "category": "start",
-      "title": "Needed info",
-      "text": "Antworte auf Deutsch. Tell me what information I should provide first so you can help more accurately.",
+      "title": "Benötigte Infos",
+      "text": "Sag mir, welche Informationen ich zuerst liefern sollte, damit du genauer helfen kannst.",
       "tags": [
-        "beginner",
-        "info",
-        "context"
+        "Einsteiger",
+        "Information",
+        "Kontext"
       ]
     },
     {
       "id": "start-rewrite-for-ai",
       "category": "start",
-      "title": "Rewrite for AI",
-      "text": "Antworte auf Deutsch. Rewrite my request into a clear, executable instruction that is suitable for an AI.",
+      "title": "Für KI umschreiben",
+      "text": "Schreibe meine Anfrage als klare, ausführbare Anweisung um, die für eine KI geeignet ist.",
       "tags": [
-        "beginner",
-        "rewrite",
-        "prompt"
+        "Einsteiger",
+        "umschreiben",
+        "Prompt"
       ]
     },
     {
       "id": "start-life-use-case",
       "category": "start",
-      "title": "Life task",
-      "text": "Antworte auf Deutsch. I want to use AI for a life or work task. Help me turn it into a clear request first.",
+      "title": "Alltags- oder Arbeitsaufgabe",
+      "text": "Ich möchte KI für eine Alltags- oder Arbeitsaufgabe nutzen. Hilf mir zuerst, daraus eine klare Anfrage zu machen.",
       "tags": [
-        "beginner",
-        "life",
-        "work"
+        "Einsteiger",
+        "Alltag",
+        "Arbeit"
       ]
     },
     {
       "id": "start-document-help",
       "category": "start",
-      "title": "Document start",
-      "text": "Antworte auf Deutsch. I have a document or a pile of information. Ask me what it is for first, then suggest how to organize it.",
+      "title": "Dokument starten",
+      "text": "Ich habe ein Dokument oder viele Informationen. Frage zuerst nach dem Zweck und schlage dann vor, wie ich es organisieren kann.",
       "tags": [
-        "beginner",
-        "document",
-        "organize"
+        "Einsteiger",
+        "Dokument",
+        "organisieren"
       ]
     },
     {
       "id": "confused-plain-language",
       "category": "confused",
-      "title": "Plain language",
-      "text": "Antworte auf Deutsch. Explain this in plain language so someone without background knowledge can understand it.",
+      "title": "Einfach erklären",
+      "text": "Erkläre das in einfachen Worten, damit es auch jemand ohne Vorwissen versteht.",
       "tags": [
-        "beginner",
-        "plain-language",
-        "confused"
+        "Einsteiger",
+        "einfache Sprache",
+        "verwirrt"
       ]
     },
     {
       "id": "confused-simpler",
       "category": "confused",
-      "title": "Simpler",
-      "text": "Antworte auf Deutsch. I really do not understand. Explain it again in a simpler way, starting with the key point I should remember.",
+      "title": "Noch einfacher",
+      "text": "Ich verstehe es wirklich nicht. Erkläre es noch einmal einfacher und beginne mit dem wichtigsten Punkt, den ich mir merken sollte.",
       "tags": [
-        "beginner",
-        "explain",
-        "lost"
+        "Einsteiger",
+        "erklären",
+        "ratlos"
       ]
     },
     {
       "id": "confused-example",
       "category": "confused",
-      "title": "Example",
-      "text": "Antworte auf Deutsch. Use a simple everyday example, then connect it back to the original concept.",
+      "title": "Beispiel",
+      "text": "Nutze ein einfaches Alltagsbeispiel und verbinde es danach wieder mit dem ursprünglichen Konzept.",
       "tags": [
-        "beginner",
-        "example",
-        "analogy"
+        "Einsteiger",
+        "Beispiel",
+        "Analogie"
       ]
     },
     {
       "id": "confused-step-by-step",
       "category": "confused",
-      "title": "Step by step",
-      "text": "Antworte auf Deutsch. Teach me step by step. For each step, explain the purpose before the action.",
+      "title": "Schritt für Schritt",
+      "text": "Erkläre es mir Schritt für Schritt. Erkläre bei jedem Schritt zuerst den Zweck und dann die Handlung.",
       "tags": [
-        "beginner",
-        "steps",
-        "teach"
+        "Einsteiger",
+        "Schritte",
+        "lehren"
       ]
     },
     {
       "id": "confused-main-point",
       "category": "confused",
-      "title": "Main point first",
-      "text": "Antworte auf Deutsch. Give me the main point in 3 sentences first, then add only the necessary details.",
+      "title": "Hauptpunkt zuerst",
+      "text": "Gib mir zuerst den Hauptpunkt in 3 Sätzen und ergänze danach nur die nötigen Details.",
       "tags": [
-        "beginner",
-        "summary",
-        "main point"
+        "Einsteiger",
+        "Zusammenfassung",
+        "Hauptpunkt"
       ]
     },
     {
       "id": "confused-young-student",
       "category": "confused",
-      "title": "Beginner level",
-      "text": "Antworte auf Deutsch. Explain this for a complete beginner. Do not assume I already know the background.",
+      "title": "Für Einsteiger",
+      "text": "Erkläre das für eine völlig unerfahrene Person. Setze kein Vorwissen voraus.",
       "tags": [
-        "beginner",
-        "simple",
-        "newbie"
+        "Einsteiger",
+        "einfach",
+        "Neuling"
       ]
     },
     {
       "id": "confused-no-jargon",
       "category": "confused",
-      "title": "No jargon",
-      "text": "Antworte auf Deutsch. Replace technical terms with plain words. If a term is necessary, explain it first.",
+      "title": "Ohne Fachjargon",
+      "text": "Ersetze Fachbegriffe durch einfache Wörter. Wenn ein Begriff nötig ist, erkläre ihn zuerst.",
       "tags": [
-        "beginner",
-        "jargon",
-        "plain words"
+        "Einsteiger",
+        "Fachjargon",
+        "einfache Wörter"
       ]
     },
     {
       "id": "confused-document-summary",
       "category": "confused",
-      "title": "Document points",
-      "text": "Antworte auf Deutsch. Explain this document in plain language, summarize the key points, and mark what I should pay attention to.",
+      "title": "Dokumentpunkte",
+      "text": "Erkläre dieses Dokument in einfachen Worten, fasse die wichtigsten Punkte zusammen und markiere, worauf ich achten sollte.",
       "tags": [
-        "beginner",
-        "document",
-        "summary"
+        "Einsteiger",
+        "Dokument",
+        "Zusammenfassung"
       ]
     },
     {
       "id": "confused-report-terms",
       "category": "confused",
-      "title": "Report terms",
-      "text": "Antworte auf Deutsch. Explain the technical terms and key numbers in this report in everyday language.",
+      "title": "Berichtsbegriffe",
+      "text": "Erkläre die Fachbegriffe und wichtigen Zahlen in diesem Bericht in Alltagssprache.",
       "tags": [
-        "beginner",
-        "report",
-        "explain"
+        "Einsteiger",
+        "Bericht",
+        "erklären"
       ]
     },
     {
       "id": "improve-why-recommend",
       "category": "improve",
-      "title": "What do you recommend",
-      "text": "Antworte auf Deutsch. Explain why you made that judgment, then give me your most recommended approach.",
+      "title": "Was empfiehlst du",
+      "text": "Erkläre, warum du zu diesem Urteil kommst, und gib mir dann deine beste Empfehlung.",
       "tags": [
-        "beginner",
-        "recommend",
-        "advice"
+        "Einsteiger",
+        "empfehlen",
+        "Rat"
       ]
     },
     {
       "id": "improve-rethink",
       "category": "improve",
-      "title": "Rethink",
-      "text": "Antworte auf Deutsch. This answer is not good enough. Recheck the problem, think from another angle, and answer again.",
+      "title": "Neu durchdenken",
+      "text": "Diese Antwort ist noch nicht gut genug. Prüfe das Problem erneut, denke aus einem anderen Blickwinkel und antworte noch einmal.",
       "tags": [
-        "beginner",
-        "retry",
-        "rethink"
+        "Einsteiger",
+        "erneut versuchen",
+        "neu denken"
       ]
     },
     {
       "id": "improve-three-options",
       "category": "improve",
-      "title": "Three options",
-      "text": "Antworte auf Deutsch. Give me 3 different approaches and compare their pros and cons.",
+      "title": "Drei Optionen",
+      "text": "Gib mir 3 verschiedene Vorgehensweisen und vergleiche ihre Vor- und Nachteile.",
       "tags": [
-        "beginner",
-        "options"
+        "Einsteiger",
+        "Optionen"
       ]
     },
     {
       "id": "improve-reasons",
       "category": "improve",
-      "title": "Explain reasons",
-      "text": "Antworte auf Deutsch. Do not just give the conclusion. Explain the reasoning behind it.",
+      "title": "Gründe erklären",
+      "text": "Gib nicht nur die Schlussfolgerung. Erkläre die Begründung dahinter.",
       "tags": [
-        "beginner",
-        "reasoning"
+        "Einsteiger",
+        "Begründung"
       ]
     },
     {
       "id": "improve-check-answer",
       "category": "improve",
-      "title": "Check answer",
-      "text": "Antworte auf Deutsch. Check whether your previous answer has errors, missing pieces, or unreasonable assumptions.",
+      "title": "Antwort prüfen",
+      "text": "Prüfe, ob deine vorherige Antwort Fehler, Lücken oder unrealistische Annahmen enthält.",
       "tags": [
-        "beginner",
-        "check",
-        "error"
+        "Einsteiger",
+        "prüfen",
+        "Fehler"
       ]
     },
     {
       "id": "improve-practical",
       "category": "improve",
-      "title": "More practical",
-      "text": "Antworte auf Deutsch. Give me a more practical and actionable answer, and tell me the first step to take.",
+      "title": "Praktischer",
+      "text": "Gib mir eine praktischere und umsetzbare Antwort und nenne mir den ersten Schritt.",
       "tags": [
-        "beginner",
-        "practical",
-        "actionable"
+        "Einsteiger",
+        "praktisch",
+        "umsetzbar"
       ]
     },
     {
       "id": "improve-professional",
       "category": "improve",
-      "title": "Higher standard",
-      "text": "Antworte auf Deutsch. Answer again using a more professional standard, and include the quality points you would check.",
+      "title": "Höherer Standard",
+      "text": "Antworte noch einmal mit professionellerem Standard und nenne die Qualitätskriterien, die du prüfen würdest.",
       "tags": [
-        "beginner",
-        "quality",
-        "professional"
+        "Einsteiger",
+        "Qualität",
+        "professionell"
       ]
     },
     {
       "id": "improve-report-better",
       "category": "improve",
-      "title": "Better report",
-      "text": "Antworte auf Deutsch. Make this report clearer and better structured so readers can understand the key points quickly.",
+      "title": "Besserer Bericht",
+      "text": "Mache diesen Bericht klarer und besser strukturiert, damit Leser die Kernaussagen schnell verstehen.",
       "tags": [
-        "beginner",
-        "report",
-        "writing"
+        "Einsteiger",
+        "Bericht",
+        "Schreiben"
       ]
     },
     {
       "id": "improve-document-structure",
       "category": "improve",
-      "title": "Structure it",
-      "text": "Antworte auf Deutsch. Reorganize this content so the section order is more logical and the headings are clearer.",
+      "title": "Strukturieren",
+      "text": "Ordne diesen Inhalt neu, sodass die Reihenfolge logischer und die Überschriften klarer sind.",
       "tags": [
-        "beginner",
-        "document",
-        "structure"
+        "Einsteiger",
+        "Dokument",
+        "Struktur"
       ]
     },
     {
       "id": "refused-why-find-way",
       "category": "refused",
-      "title": "Find a way",
-      "text": "Antworte auf Deutsch. Explain why you cannot do it, then suggest a safe, practical alternative that gets close to my goal.",
+      "title": "Einen Weg finden",
+      "text": "Erkläre, warum du es nicht tun kannst, und schlage dann eine sichere, praktische Alternative vor, die meinem Ziel nahekommt.",
       "tags": [
-        "beginner",
-        "refusal",
-        "cannot"
+        "Einsteiger",
+        "Ablehnung",
+        "nicht möglich"
       ]
     },
     {
       "id": "refused-alternative",
       "category": "refused",
       "title": "Alternative",
-      "text": "Antworte auf Deutsch. If you cannot do it directly, suggest the closest practical alternative.",
+      "text": "Wenn du es nicht direkt tun kannst, schlage die nächstliegende praktische Alternative vor.",
       "tags": [
-        "beginner",
-        "alternative",
-        "workaround"
+        "Einsteiger",
+        "Alternative",
+        "Umweg"
       ]
     },
     {
       "id": "refused-small-steps",
       "category": "refused",
-      "title": "Small steps",
-      "text": "Antworte auf Deutsch. Break this into smaller steps that are still possible to do now.",
+      "title": "Kleine Schritte",
+      "text": "Zerlege das in kleinere Schritte, die jetzt noch möglich sind.",
       "tags": [
-        "beginner",
-        "steps",
-        "break down"
+        "Einsteiger",
+        "Schritte",
+        "zerlegen"
       ]
     },
     {
       "id": "refused-limits",
       "category": "refused",
-      "title": "Explain limits",
-      "text": "Antworte auf Deutsch. Tell me what the limitation is and how to reduce its impact.",
+      "title": "Grenzen erklären",
+      "text": "Sag mir, worin die Einschränkung besteht und wie man ihre Wirkung verringern kann.",
       "tags": [
-        "beginner",
-        "limits"
+        "Einsteiger",
+        "Grenzen"
       ]
     },
     {
       "id": "refused-partial",
       "category": "refused",
-      "title": "Do the possible part",
-      "text": "Antworte auf Deutsch. If you cannot do the full version, do the parts that are possible.",
+      "title": "Möglichen Teil tun",
+      "text": "Wenn du nicht alles tun kannst, erledige die Teile, die möglich sind.",
       "tags": [
-        "beginner",
-        "partial"
+        "Einsteiger",
+        "teilweise"
       ]
     },
     {
       "id": "refused-safe-workarounds",
       "category": "refused",
-      "title": "Safe alternatives",
-      "text": "Antworte auf Deutsch. Suggest at least 3 legal, safe, and policy-compliant alternatives.",
+      "title": "Sichere Alternativen",
+      "text": "Schlage mindestens 3 legale, sichere und regelkonforme Alternativen vor.",
       "tags": [
-        "beginner",
-        "safe",
+        "Einsteiger",
+        "sicher",
         "legal"
       ]
     },
     {
       "id": "refused-helpful-parts",
       "category": "refused",
-      "title": "What can you help with",
-      "text": "Antworte auf Deutsch. First explain which parts you can still help with, then explain what you cannot help with and why.",
+      "title": "Wobei kannst du helfen",
+      "text": "Erkläre zuerst, wobei du noch helfen kannst, und danach, wobei nicht und warum.",
       "tags": [
-        "beginner",
-        "help",
-        "refusal"
+        "Einsteiger",
+        "Hilfe",
+        "Ablehnung"
       ]
     },
     {
       "id": "research-experts",
       "category": "research",
-      "title": "Expert views",
-      "text": "Antworte auf Deutsch. Find how professionals or credible sources approach this, what they think, and summarize the key points.",
+      "title": "Expertenansichten",
+      "text": "Recherchiere, wie Fachleute oder glaubwürdige Quellen damit umgehen, was sie denken, und fasse die Kernaussagen zusammen.",
       "tags": [
-        "beginner",
-        "research",
-        "expert"
+        "Einsteiger",
+        "Recherche",
+        "Experte"
       ]
     },
     {
       "id": "research-latest-sources",
       "category": "research",
-      "title": "Latest sources",
-      "text": "Antworte auf Deutsch. Find up-to-date information, include source links, and note the dates of the information.",
+      "title": "Aktuelle Quellen",
+      "text": "Suche aktuelle Informationen, füge Quellenlinks hinzu und nenne die Daten der Informationen.",
       "tags": [
-        "beginner",
-        "sources",
-        "latest"
+        "Einsteiger",
+        "Quellen",
+        "aktuell"
       ]
     },
     {
       "id": "research-compare-views",
       "category": "research",
-      "title": "Compare views",
-      "text": "Antworte auf Deutsch. Compare different viewpoints. Do not give me only one answer.",
+      "title": "Ansichten vergleichen",
+      "text": "Vergleiche unterschiedliche Sichtweisen. Gib mir nicht nur eine Antwort.",
       "tags": [
-        "beginner",
-        "compare"
+        "Einsteiger",
+        "vergleichen"
       ]
     },
     {
       "id": "research-fact-inference",
       "category": "research",
-      "title": "Facts vs inference",
-      "text": "Antworte auf Deutsch. Mark which parts are facts and which parts are your inference.",
+      "title": "Fakten vs. Schlussfolgerung",
+      "text": "Kennzeichne, welche Teile Fakten sind und welche deine Schlussfolgerungen.",
       "tags": [
-        "beginner",
-        "facts"
+        "Einsteiger",
+        "Fakten"
       ]
     },
     {
       "id": "research-mainstream-minority",
       "category": "research",
-      "title": "Mainstream and minority",
-      "text": "Antworte auf Deutsch. Summarize the mainstream approach and any credible minority opinions.",
+      "title": "Mehrheit und Minderheit",
+      "text": "Fasse den vorherrschenden Ansatz und glaubwürdige Minderheitsmeinungen zusammen, falls es sie gibt.",
       "tags": [
-        "beginner",
-        "views"
+        "Einsteiger",
+        "Sichtweisen"
       ]
     },
     {
       "id": "research-reliable",
       "category": "research",
-      "title": "Reliable sources",
-      "text": "Antworte auf Deutsch. Prioritize official docs, research, professional organizations, or primary sources instead of general web articles.",
+      "title": "Verlässliche Quellen",
+      "text": "Bevorzuge offizielle Dokumentation, Forschung, Fachorganisationen oder Primärquellen statt allgemeiner Webartikel.",
       "tags": [
-        "beginner",
-        "reliable",
-        "source"
+        "Einsteiger",
+        "verlässlich",
+        "Quelle"
       ]
     },
     {
       "id": "research-actionable",
       "category": "research",
-      "title": "Summary and action",
-      "text": "Antworte auf Deutsch. Turn the research into key takeaways, risk notes, and actionable recommendations.",
+      "title": "Zusammenfassung und Handlung",
+      "text": "Wandle die Recherche in Kernaussagen, Risikohinweise und umsetzbare Empfehlungen um.",
       "tags": [
-        "beginner",
-        "action",
-        "summary"
+        "Einsteiger",
+        "Handlung",
+        "Zusammenfassung"
       ]
     },
     {
       "id": "research-travel-options",
       "category": "research",
-      "title": "Travel research",
-      "text": "Antworte auf Deutsch. Help me research this travel destination, including transportation, lodging, attractions, budget, and things to watch out for.",
+      "title": "Reise recherchieren",
+      "text": "Hilf mir, dieses Reiseziel zu recherchieren: Verkehr, Unterkunft, Sehenswürdigkeiten, Budget und Dinge, auf die ich achten sollte.",
       "tags": [
-        "beginner",
-        "travel",
-        "research"
+        "Einsteiger",
+        "Reise",
+        "Recherche"
       ]
     },
     {
       "id": "research-purchase-compare",
       "category": "research",
-      "title": "Life comparison",
-      "text": "Antworte auf Deutsch. Compare these options by price, pros and cons, best fit, and risks to watch for.",
+      "title": "Alltagsvergleich",
+      "text": "Vergleiche diese Optionen nach Preis, Vor- und Nachteilen, bester Passung und Risiken, auf die ich achten sollte.",
       "tags": [
-        "beginner",
-        "compare",
-        "life"
+        "Einsteiger",
+        "vergleichen",
+        "Alltag"
       ]
     },
     {
       "id": "planning-best-plan",
       "category": "planning",
-      "title": "Best plan",
-      "text": "Antworte auf Deutsch. Create a clear, executable best plan. For important decisions, confirm with me using multiple choice questions.",
+      "title": "Bester Plan",
+      "text": "Erstelle einen klaren, ausführbaren besten Plan. Bestätige wichtige Entscheidungen mit Multiple-Choice-Fragen.",
       "tags": [
-        "beginner",
-        "plan",
-        "planning"
+        "Einsteiger",
+        "Plan",
+        "Planung"
       ]
     },
     {
       "id": "planning-goals-risks",
       "category": "planning",
-      "title": "Goals and risks",
-      "text": "Antworte auf Deutsch. List the goal, constraints, risks, and steps first.",
+      "title": "Ziele und Risiken",
+      "text": "Liste zuerst Ziel, Einschränkungen, Risiken und Schritte auf.",
       "tags": [
-        "beginner",
-        "risk"
+        "Einsteiger",
+        "Risiko"
       ]
     },
     {
       "id": "planning-timeframes",
       "category": "planning",
-      "title": "Timeframes",
-      "text": "Antworte auf Deutsch. Split the plan into what I can do today, this week, and later.",
+      "title": "Zeitrahmen",
+      "text": "Teile den Plan in Dinge auf, die ich heute, diese Woche und später tun kann.",
       "tags": [
-        "beginner",
-        "schedule"
+        "Einsteiger",
+        "Zeitplan"
       ]
     },
     {
       "id": "planning-improve-plan",
       "category": "planning",
-      "title": "Improve plan",
-      "text": "Antworte auf Deutsch. Review and improve this plan by adding missing steps, risks, and checkpoints.",
+      "title": "Plan verbessern",
+      "text": "Prüfe und verbessere diesen Plan, indem du fehlende Schritte, Risiken und Kontrollpunkte ergänzt.",
       "tags": [
-        "beginner",
-        "improve",
-        "complete"
+        "Einsteiger",
+        "verbessern",
+        "vollständig"
       ]
     },
     {
       "id": "planning-milestones",
       "category": "planning",
-      "title": "Milestones",
-      "text": "Antworte auf Deutsch. Break this into clear milestones.",
+      "title": "Meilensteine",
+      "text": "Teile das in klare Meilensteine auf.",
       "tags": [
-        "beginner",
-        "milestone"
+        "Einsteiger",
+        "Meilenstein"
       ]
     },
     {
       "id": "planning-failure",
       "category": "planning",
-      "title": "Likely failure",
-      "text": "Antworte auf Deutsch. Point out where this plan is most likely to fail.",
+      "title": "Wahrscheinliches Scheitern",
+      "text": "Zeige, wo dieser Plan am ehesten scheitern wird.",
       "tags": [
-        "beginner",
-        "failure"
+        "Einsteiger",
+        "Scheitern"
       ]
     },
     {
       "id": "planning-priority",
       "category": "planning",
-      "title": "Prioritize",
-      "text": "Antworte auf Deutsch. Help me prioritize what to do first.",
+      "title": "Priorisieren",
+      "text": "Hilf mir zu priorisieren, was zuerst getan werden sollte.",
       "tags": [
-        "beginner",
-        "priority"
+        "Einsteiger",
+        "Priorität"
       ]
     },
     {
       "id": "planning-travel-itinerary",
       "category": "planning",
-      "title": "Travel plan",
-      "text": "Antworte auf Deutsch. Plan a travel itinerary based on days, budget, transportation time, and energy level.",
+      "title": "Reiseplan",
+      "text": "Plane eine Reiseroute basierend auf Tagen, Budget, Transportzeiten und Energielevel.",
       "tags": [
-        "beginner",
-        "travel",
-        "itinerary"
+        "Einsteiger",
+        "Reise",
+        "Reiseplan"
       ]
     },
     {
       "id": "planning-report-outline",
       "category": "planning",
-      "title": "Report outline",
-      "text": "Antworte auf Deutsch. Create a report outline first, including sections, key points, and what each part should contain.",
+      "title": "Berichtsgliederung",
+      "text": "Erstelle zuerst eine Berichtsgliederung mit Abschnitten, Kernaussagen und Inhalt jeder Sektion.",
       "tags": [
-        "beginner",
-        "report",
-        "outline"
+        "Einsteiger",
+        "Bericht",
+        "Gliederung"
       ]
     },
     {
       "id": "planning-life-decision",
       "category": "planning",
-      "title": "Life decision",
-      "text": "Antworte auf Deutsch. Break this life decision into options, conditions, risks, and a recommended approach.",
+      "title": "Lebensentscheidung",
+      "text": "Zerlege diese Lebensentscheidung in Optionen, Bedingungen, Risiken und eine empfohlene Vorgehensweise.",
       "tags": [
-        "beginner",
-        "decision",
-        "life"
+        "Einsteiger",
+        "Entscheidung",
+        "Alltag"
       ]
     },
     {
       "id": "execute-start",
       "category": "execute",
-      "title": "Start",
-      "text": "Antworte auf Deutsch. Start executing based on the current plan. If you hit an important decision, ask me using multiple choice.",
+      "title": "Starten",
+      "text": "Beginne auf Basis des aktuellen Plans mit der Umsetzung. Wenn eine wichtige Entscheidung auftaucht, frage mich per Multiple Choice.",
       "tags": [
-        "beginner",
-        "execute",
-        "start"
+        "Einsteiger",
+        "umsetzen",
+        "Start"
       ]
     },
     {
       "id": "execute-first-version",
       "category": "execute",
-      "title": "First version",
-      "text": "Antworte auf Deutsch. Create a first version that can be reviewed. Do not aim for perfection yet.",
+      "title": "Erste Version",
+      "text": "Erstelle eine erste Version, die ich prüfen kann. Strebe noch keine Perfektion an.",
       "tags": [
-        "beginner",
-        "draft",
-        "first version"
+        "Einsteiger",
+        "Entwurf",
+        "erste Version"
       ]
     },
     {
       "id": "execute-one-step",
       "category": "execute",
-      "title": "One step",
-      "text": "Antworte auf Deutsch. Do one step at a time. After each step, ask me whether to continue.",
+      "title": "Ein Schritt",
+      "text": "Mache einen Schritt nach dem anderen. Frage mich nach jedem Schritt, ob wir fortfahren sollen.",
       "tags": [
-        "beginner",
-        "steps"
+        "Einsteiger",
+        "Schritte"
       ]
     },
     {
       "id": "execute-from-plan",
       "category": "execute",
-      "title": "Use the plan",
-      "text": "Antworte auf Deutsch. Start producing the result based on the plan above.",
+      "title": "Plan nutzen",
+      "text": "Beginne damit, das Ergebnis auf Basis des obigen Plans zu erstellen.",
       "tags": [
-        "beginner",
-        "plan"
+        "Einsteiger",
+        "Plan"
       ]
     },
     {
       "id": "execute-usable",
       "category": "execute",
-      "title": "Usable version",
-      "text": "Antworte auf Deutsch. Give me a version I can use directly, not just general direction or principles.",
+      "title": "Nutzbare Version",
+      "text": "Gib mir eine Version, die ich direkt nutzen kann, nicht nur allgemeine Richtung oder Prinzipien.",
       "tags": [
-        "beginner",
-        "usable",
-        "done"
+        "Einsteiger",
+        "nutzbar",
+        "erledigt"
       ]
     },
     {
       "id": "execute-copyable",
       "category": "execute",
-      "title": "Copyable format",
-      "text": "Antworte auf Deutsch. Format the result so I can copy and use it directly.",
+      "title": "Kopierbares Format",
+      "text": "Formatiere das Ergebnis so, dass ich es direkt kopieren und verwenden kann.",
       "tags": [
-        "beginner",
-        "format"
+        "Einsteiger",
+        "Format"
       ]
     },
     {
       "id": "execute-do-not-advise",
       "category": "execute",
-      "title": "Do it",
-      "text": "Antworte auf Deutsch. Do not only give advice. Help me complete it directly.",
+      "title": "Mach es",
+      "text": "Gib nicht nur Ratschläge. Hilf mir, es direkt fertigzustellen.",
       "tags": [
-        "beginner",
-        "complete"
+        "Einsteiger",
+        "vollständig"
       ]
     },
     {
       "id": "execute-document-summary",
       "category": "execute",
-      "title": "Organize document",
-      "text": "Antworte auf Deutsch. Turn this content into a summary, key bullet points, and action items.",
+      "title": "Dokument ordnen",
+      "text": "Wandle diesen Inhalt in Zusammenfassung, Kernpunkte und Aufgaben um.",
       "tags": [
-        "beginner",
-        "document",
-        "summary"
+        "Einsteiger",
+        "Dokument",
+        "Zusammenfassung"
       ]
     },
     {
       "id": "execute-report-draft",
       "category": "execute",
-      "title": "Draft report",
-      "text": "Antworte auf Deutsch. Based on the information above, create a complete first draft of the report.",
+      "title": "Berichtsentwurf",
+      "text": "Erstelle auf Basis der obigen Informationen einen vollständigen ersten Berichtsentwurf.",
       "tags": [
-        "beginner",
-        "report",
-        "draft"
+        "Einsteiger",
+        "Bericht",
+        "Entwurf"
       ]
     },
     {
       "id": "execute-travel-plan",
       "category": "execute",
-      "title": "Create itinerary",
-      "text": "Antworte auf Deutsch. Create a usable travel itinerary with times, places, transportation, and backup options.",
+      "title": "Route erstellen",
+      "text": "Erstelle einen nutzbaren Reiseplan mit Zeiten, Orten, Verkehrsmitteln und Alternativen.",
       "tags": [
-        "beginner",
-        "travel",
-        "itinerary"
+        "Einsteiger",
+        "Reise",
+        "Reiseplan"
       ]
     },
     {
       "id": "next-recommend-three",
       "category": "next",
-      "title": "Recommend next steps",
-      "text": "Antworte auf Deutsch. Based on the current state, suggest the 3 most valuable next steps and explain the priority order.",
+      "title": "Nächste Schritte empfehlen",
+      "text": "Schlage auf Basis des aktuellen Stands die 3 wertvollsten nächsten Schritte vor und erkläre die Priorität.",
       "tags": [
-        "beginner",
-        "next",
-        "priority"
+        "Einsteiger",
+        "nächster Schritt",
+        "Priorität"
       ]
     },
     {
       "id": "next-pick-one",
       "category": "next",
-      "title": "Pick one",
-      "text": "Antworte auf Deutsch. Help me decide the single best next step and explain why.",
+      "title": "Einen auswählen",
+      "text": "Hilf mir, den einen besten nächsten Schritt zu wählen, und erkläre warum.",
       "tags": [
-        "beginner",
-        "next",
-        "decision"
+        "Einsteiger",
+        "nächster Schritt",
+        "Entscheidung"
       ]
     },
     {
       "id": "next-small-action",
       "category": "next",
-      "title": "Small action",
-      "text": "Antworte auf Deutsch. Turn the next step into one action I can finish within 10 minutes.",
+      "title": "Kleine Handlung",
+      "text": "Wandle den nächsten Schritt in eine Handlung um, die ich in 10 Minuten erledigen kann.",
       "tags": [
-        "beginner",
-        "next",
-        "small"
+        "Einsteiger",
+        "nächster Schritt",
+        "klein"
       ]
     },
     {
       "id": "next-questions",
       "category": "next",
-      "title": "Ask first",
-      "text": "Antworte auf Deutsch. If the next step is not clear yet, ask me up to 3 key questions first.",
+      "title": "Zuerst fragen",
+      "text": "Wenn der nächste Schritt noch nicht klar ist, stelle mir zuerst bis zu 3 Schlüsselfragen.",
       "tags": [
-        "beginner",
-        "next",
-        "questions"
+        "Einsteiger",
+        "nächster Schritt",
+        "Fragen"
       ]
     },
     {
       "id": "next-risks",
       "category": "next",
-      "title": "Check risks",
-      "text": "Antworte auf Deutsch. Before continuing, point out the most likely risks in the next step.",
+      "title": "Risiken prüfen",
+      "text": "Bevor wir weitermachen, zeige die wahrscheinlichsten Risiken des nächsten Schritts.",
       "tags": [
-        "beginner",
-        "next",
-        "risk"
+        "Einsteiger",
+        "nächster Schritt",
+        "Risiko"
       ]
     },
     {
       "id": "next-checkpoint",
       "category": "next",
-      "title": "Checkpoint",
-      "text": "Antworte auf Deutsch. Set the next checkpoint: what must be done before we continue.",
+      "title": "Kontrollpunkt",
+      "text": "Lege den nächsten Kontrollpunkt fest: Was muss erledigt sein, bevor wir weitermachen?",
       "tags": [
-        "beginner",
-        "next",
-        "checkpoint"
+        "Einsteiger",
+        "nächster Schritt",
+        "Kontrollpunkt"
       ]
     },
     {
       "id": "next-do-it",
       "category": "next",
-      "title": "Move forward",
-      "text": "Antworte auf Deutsch. Move forward with the next step directly. After finishing, tell me what you did and what is still missing.",
+      "title": "Vorangehen",
+      "text": "Führe den nächsten Schritt direkt aus. Sag mir danach, was du getan hast und was noch fehlt.",
       "tags": [
-        "beginner",
-        "next",
-        "execute"
+        "Einsteiger",
+        "nächster Schritt",
+        "umsetzen"
       ]
     },
     {
       "id": "next-full-review",
       "category": "next",
-      "title": "Full review",
-      "text": "Antworte auf Deutsch. Review the current result thoroughly, find problems, risks, and missing pieces, then recommend the next improvements.",
+      "title": "Vollständige Prüfung",
+      "text": "Prüfe das aktuelle Ergebnis gründlich, finde Probleme, Risiken und Lücken und empfehle die nächsten Verbesserungen.",
       "tags": [
-        "beginner",
-        "next",
-        "review"
+        "Einsteiger",
+        "nächster Schritt",
+        "Prüfung"
       ]
     },
     {
       "id": "review-improve-result",
       "category": "review",
-      "title": "Review and improve",
-      "text": "Antworte auf Deutsch. After finishing, check for problems, fix weak spots, and improve the result until it is more usable.",
+      "title": "Prüfen und verbessern",
+      "text": "Prüfe nach dem Abschluss Probleme, behebe Schwächen und verbessere das Ergebnis, bis es nutzbarer ist.",
       "tags": [
-        "beginner",
-        "review",
-        "improve"
+        "Einsteiger",
+        "Prüfung",
+        "verbessern"
       ]
     },
     {
       "id": "review-professional-standard",
       "category": "review",
-      "title": "Professional review",
-      "text": "Antworte auf Deutsch. Review this result using a professional standard.",
+      "title": "Professionell prüfen",
+      "text": "Prüfe dieses Ergebnis nach professionellem Standard.",
       "tags": [
-        "beginner",
-        "quality"
+        "Einsteiger",
+        "Qualität"
       ]
     },
     {
       "id": "review-likely-errors",
       "category": "review",
-      "title": "Find likely errors",
-      "text": "Antworte auf Deutsch. Point out the most likely problems and help me fix them.",
+      "title": "Wahrscheinliche Fehler finden",
+      "text": "Zeige die wahrscheinlichsten Probleme und hilf mir, sie zu beheben.",
       "tags": [
-        "beginner",
-        "fix"
+        "Einsteiger",
+        "beheben"
       ]
     },
     {
       "id": "review-missing-conflict",
       "category": "review",
-      "title": "Missing or unclear",
-      "text": "Antworte auf Deutsch. Check for anything missing, contradictory, or unclear.",
+      "title": "Fehlend oder unklar",
+      "text": "Prüfe, ob etwas fehlt, widersprüchlich oder unklar ist.",
       "tags": [
-        "beginner",
-        "missing"
+        "Einsteiger",
+        "fehlend"
       ]
     },
     {
       "id": "review-user-view",
       "category": "review",
-      "title": "User view",
-      "text": "Antworte auf Deutsch. Review this from the user's point of view.",
+      "title": "Nutzerperspektive",
+      "text": "Prüfe das aus Sicht der Nutzer.",
       "tags": [
-        "beginner",
-        "user"
+        "Einsteiger",
+        "Nutzer"
       ]
     },
     {
       "id": "review-simplify",
       "category": "review",
-      "title": "Simplify",
-      "text": "Antworte auf Deutsch. Give me a shorter and easier-to-understand version.",
+      "title": "Vereinfachen",
+      "text": "Gib mir eine kürzere und leichter verständliche Version.",
       "tags": [
-        "beginner",
-        "simplify"
+        "Einsteiger",
+        "vereinfachen"
       ]
     },
     {
       "id": "review-deliverable",
       "category": "review",
-      "title": "Ready to deliver",
-      "text": "Antworte auf Deutsch. Improve this until it is ready to deliver, and list anything I still need to confirm.",
+      "title": "Lieferbereit",
+      "text": "Verbessere das so lange, bis es lieferbereit ist, und liste, was ich noch bestätigen muss.",
       "tags": [
-        "beginner",
-        "deliver",
-        "handoff"
+        "Einsteiger",
+        "liefern",
+        "Übergabe"
       ]
     },
     {
       "id": "review-report-reader",
       "category": "review",
-      "title": "Reader review",
-      "text": "Antworte auf Deutsch. Review this document or report from the reader's point of view, and point out what is unclear, too long, or missing evidence.",
+      "title": "Leserprüfung",
+      "text": "Prüfe dieses Dokument oder diesen Bericht aus Sicht der Leser und zeige, was unklar, zu lang oder nicht ausreichend belegt ist.",
       "tags": [
-        "beginner",
-        "report",
-        "reader"
+        "Einsteiger",
+        "Bericht",
+        "Leser"
       ]
     },
     {
       "id": "review-travel-risk",
       "category": "review",
-      "title": "Trip check",
-      "text": "Antworte auf Deutsch. Check whether this travel plan is too rushed, whether the transportation is realistic, and whether the budget misses anything.",
+      "title": "Reisecheck",
+      "text": "Prüfe, ob dieser Reiseplan zu voll ist, ob die Transporte realistisch sind und ob im Budget etwas fehlt.",
       "tags": [
-        "beginner",
-        "travel",
-        "review"
+        "Einsteiger",
+        "Reise",
+        "Prüfung"
       ]
     }
   ]
