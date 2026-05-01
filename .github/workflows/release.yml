@@ -110,7 +110,22 @@ jobs:
           tauriScript: npm run tauri
           tagName: ${{ github.ref_name }}
           releaseName: SayNext ${{ github.ref_name }}
-          releaseBody: See CHANGELOG.md for release notes. macOS builds are Developer ID signed and notarized; Windows builds are not code-signed yet.
+          releaseBody: |
+            ## Download
+
+            Most users only need one of these files:
+
+            | System | Download |
+            | --- | --- |
+            | Mac Apple Silicon | `SayNext-<version>-darwin-aarch64-dmg.dmg` |
+            | Mac Intel | `SayNext-<version>-darwin-x64-dmg.dmg` |
+            | Windows | `SayNext-<version>-windows-x64-nsis-setup.exe` |
+
+            macOS builds are Developer ID signed and notarized. Windows builds are not code-signed yet, so Windows may show a SmartScreen warning.
+
+            Files such as `latest.json`, `.sig`, `.app.tar.gz`, and `.msi` are kept for in-app updates or alternate installer flows. New users can ignore them.
+
+            See CHANGELOG.md for release notes.
           releaseDraft: true
           prerelease: ${{ contains(github.ref_name, '-') }}
           args: ${{ matrix.args }}
