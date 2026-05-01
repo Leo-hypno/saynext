@@ -24,9 +24,9 @@ When ChatGPT, Claude, Gemini, or any AI tool gives a confusing answer, refuses t
 
 | System | Download this file |
 | --- | --- |
-| Mac Apple Silicon | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.4/SayNext-0.1.4-darwin-aarch64-dmg.dmg) |
-| Mac Intel | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.4/SayNext-0.1.4-darwin-x64-dmg.dmg) |
-| Windows | [Download EXE](https://github.com/Leo-hypno/saynext/releases/download/v0.1.4/SayNext-0.1.4-windows-x64-nsis-setup.exe) |
+| Mac Apple Silicon | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.5/SayNext-0.1.5-darwin-aarch64-dmg.dmg) |
+| Mac Intel | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.5/SayNext-0.1.5-darwin-x64-dmg.dmg) |
+| Windows | [Download EXE](https://github.com/Leo-hypno/saynext/releases/download/v0.1.5/SayNext-0.1.5-windows-x64-nsis-setup.exe) |
 
 If Windows blocks the installer, choose "More info" then "Run anyway".
 
@@ -160,7 +160,7 @@ npm run bundle
 Update SayNext's version before a release:
 
 ```bash
-npm run version:set -- 0.1.4
+npm run version:set -- 0.1.5
 ```
 
 Validate prompt packs only:

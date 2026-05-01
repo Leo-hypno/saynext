@@ -4,6 +4,26 @@ All notable changes to SayNext are documented here.
 
 This project follows Semantic Versioning.
 
+## [0.1.5] - 2026-05-01
+
+### Added
+
+- Added first-run onboarding tips and a demo GIF for the GitHub README.
+- Added favorite-first ordering inside regular categories and custom prompts.
+
+### Changed
+
+- Improved custom prompt import safety, editing, category movement, and backup flow.
+- Improved keyboard selection stability when favoriting prompts.
+- Improved localized copy, update errors, and language switching behavior.
+- Improved the GitHub Pages product story and mobile layout polish.
+
+### Fixed
+
+- Fixed Enter handling around onboarding controls.
+- Fixed palette header clipping in compact desktop windows.
+- Fixed update error messages staying in the previous language after switching languages.
+
 ## [0.1.4] - 2026-05-01
 
 ### Added
