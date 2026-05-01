@@ -41,10 +41,11 @@ import type {
 } from "./types";
 
 const packs = [zhTwPackData, englishPackData] as PromptPack[];
-const defaultPackId = "beginner-rescue-zh-tw";
+const defaultPackId = "beginner-rescue-en";
 const defaultCategoryId = "start";
 const pointerResumeDelayMs = 700;
 const copyNoticeDurationMs = 1800;
+const activePackStorageKey = "saynext.activePackId";
 const onboardingDismissedKey = "saynext.onboardingDismissed";
 
 export function App() {
@@ -54,7 +55,10 @@ export function App() {
   const pendingSelectedPromptIdRef = useRef<string | null>(null);
   const pendingUpdateRef = useRef<Update | null>(null);
   const [activePackId, setActivePackId] = useState(() =>
-    readStoredString("saynext.activePackId", defaultPackId)
+    readStoredString(activePackStorageKey, defaultPackId)
+  );
+  const [languageChoiceOpen, setLanguageChoiceOpen] = useState(
+    () => localStorage.getItem(activePackStorageKey) === null
   );
   const [activeCategory, setActiveCategory] = useState(defaultCategoryId);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -196,8 +200,10 @@ export function App() {
   }, [builtInPromptIds, categories]);
 
   useEffect(() => {
-    localStorage.setItem("saynext.activePackId", activePackId);
-  }, [activePackId]);
+    if (!languageChoiceOpen) {
+      localStorage.setItem(activePackStorageKey, activePackId);
+    }
+  }, [activePackId, languageChoiceOpen]);
 
   useEffect(() => {
     localStorage.setItem("saynext.favorites", JSON.stringify([...favorites]));
@@ -262,6 +268,7 @@ export function App() {
         return;
       }
 
+      if (languageChoiceOpen) return;
       if (settingsOpen || customPromptDialogOpen || deletePromptId) return;
 
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
@@ -348,6 +355,7 @@ export function App() {
     customPromptDialogOpen,
     deletePromptId,
     enableKeyboardMode,
+    languageChoiceOpen,
     selectedIndex,
     settingsOpen,
     visiblePrompts
@@ -415,6 +423,12 @@ export function App() {
     setActivePackId(packId);
     const nextPack = packs.find((candidate) => candidate.id === packId);
     setActiveCategory(nextPack?.categories[0]?.id ?? defaultCategoryId);
+  }
+
+  function handleInitialLanguageSelect(packId: string) {
+    handlePackChange(packId);
+    localStorage.setItem(activePackStorageKey, packId);
+    setLanguageChoiceOpen(false);
   }
 
   function handleCategoryChange(categoryId: string) {
@@ -634,40 +648,51 @@ export function App() {
 
   return (
     <div className="appShell" data-theme={themeMode}>
-      <Palette
-        activeCategory={activeCategory}
-        activePackId={pack.id}
-        categories={categories}
-        copiedPromptId={copiedPromptId}
-        copyNotice={copyNotice}
-        favorites={favorites}
-        keyboardMode={keyboardMode}
-        onboardingVisible={onboardingVisible}
-        recentCount={recentPromptCount}
-        onCategoryChange={handleCategoryChange}
-        onCopy={handleCopy}
-        onCustomPromptCreate={handleCustomPromptCreate}
-        onCustomPromptDelete={handleCustomPromptDelete}
-        onCustomPromptEdit={handleCustomPromptEdit}
-        onCustomPromptMove={handleCustomPromptMove}
-        onFavoriteToggle={handleFavoriteToggle}
-        onOnboardingDismiss={handleOnboardingDismiss}
-        onSettingsOpen={() => setSettingsOpen(true)}
-        onPackChange={handlePackChange}
-        onPointerActivity={handlePointerActivity}
-        onSelectedIndexChange={setSelectedIndex}
-        paletteFocusRequest={paletteFocusRequest}
-        packs={packs.map((candidate) => ({
-          id: candidate.id,
-          locale: candidate.locale,
-          name: candidate.name
-        }))}
-        prompts={visiblePrompts}
-        selectedIndex={selectedIndex}
-        shortcutLabel={platform.shortcutLabel}
-        uiCopy={uiCopy}
-      />
-      {settingsOpen ? (
+      {languageChoiceOpen ? (
+        <LanguageChoice
+          packs={packs.map((candidate) => ({
+            id: candidate.id,
+            locale: candidate.locale,
+            name: candidate.name
+          }))}
+          onSelect={handleInitialLanguageSelect}
+        />
+      ) : (
+        <Palette
+          activeCategory={activeCategory}
+          activePackId={pack.id}
+          categories={categories}
+          copiedPromptId={copiedPromptId}
+          copyNotice={copyNotice}
+          favorites={favorites}
+          keyboardMode={keyboardMode}
+          onboardingVisible={onboardingVisible}
+          recentCount={recentPromptCount}
+          onCategoryChange={handleCategoryChange}
+          onCopy={handleCopy}
+          onCustomPromptCreate={handleCustomPromptCreate}
+          onCustomPromptDelete={handleCustomPromptDelete}
+          onCustomPromptEdit={handleCustomPromptEdit}
+          onCustomPromptMove={handleCustomPromptMove}
+          onFavoriteToggle={handleFavoriteToggle}
+          onOnboardingDismiss={handleOnboardingDismiss}
+          onSettingsOpen={() => setSettingsOpen(true)}
+          onPackChange={handlePackChange}
+          onPointerActivity={handlePointerActivity}
+          onSelectedIndexChange={setSelectedIndex}
+          paletteFocusRequest={paletteFocusRequest}
+          packs={packs.map((candidate) => ({
+            id: candidate.id,
+            locale: candidate.locale,
+            name: candidate.name
+          }))}
+          prompts={visiblePrompts}
+          selectedIndex={selectedIndex}
+          shortcutLabel={platform.shortcutLabel}
+          uiCopy={uiCopy}
+        />
+      )}
+      {!languageChoiceOpen && settingsOpen ? (
         <SettingsPanel
           autostartStatus={autostartStatus}
           themeMode={themeMode}
@@ -688,7 +713,7 @@ export function App() {
           uiCopy={uiCopy}
         />
       ) : null}
-      {deletePromptId ? (
+      {!languageChoiceOpen && deletePromptId ? (
         <ConfirmDialog
           body={uiCopy.deleteCustomPromptBody(
             customPrompts.find((prompt) => prompt.id === deletePromptId)?.title ??
@@ -702,7 +727,7 @@ export function App() {
           onConfirm={confirmCustomPromptDelete}
         />
       ) : null}
-      {customPromptDialogOpen ? (
+      {!languageChoiceOpen && customPromptDialogOpen ? (
         <CustomPromptDialog
           categories={categories}
           defaultCategory={customPromptDefaultCategory}
@@ -723,6 +748,52 @@ type CopyNotice = {
   kind: "success" | "error";
   text: string;
 };
+
+type LanguageChoiceProps = {
+  packs: Array<{
+    id: string;
+    locale: string;
+    name: string;
+  }>;
+  onSelect: (packId: string) => void;
+};
+
+function LanguageChoice({ packs, onSelect }: LanguageChoiceProps) {
+  const orderedPacks = [...packs].sort((left, right) => {
+    if (left.locale === "en") return -1;
+    if (right.locale === "en") return 1;
+    return 0;
+  });
+
+  return (
+    <section className="languageChoice" aria-labelledby="language-choice-title">
+      <p className="eyebrow">SAYNEXT</p>
+      <h1 id="language-choice-title">Choose your language</h1>
+      <p className="languageChoiceLead">選擇語言後，就會進入 SayNext。</p>
+      <div className="languageChoiceGrid">
+        {orderedPacks.map((pack) => (
+          <button
+            autoFocus={pack.locale === "en"}
+            className={pack.locale === "en" ? "recommended" : ""}
+            key={pack.id}
+            onClick={() => onSelect(pack.id)}
+            type="button"
+          >
+            <span>{languageChoiceName(pack.locale)}</span>
+            <strong>{pack.name}</strong>
+            {pack.locale === "en" ? <em>Default</em> : null}
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function languageChoiceName(locale: string) {
+  if (locale === "zh-TW") return "繁體中文";
+  if (locale === "en") return "English";
+  return locale;
+}
 
 function readStoredString(key: string, fallback: string) {
   return localStorage.getItem(key) ?? fallback;
