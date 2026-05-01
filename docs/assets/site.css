@@ -337,6 +337,7 @@ h1 {
 
 .downloadSection,
 .demoSection,
+.beliefSection,
 .storySection,
 .librarySection,
 .flowSection,
@@ -347,6 +348,7 @@ h1 {
 }
 
 .sectionIntro,
+.beliefInner,
 .storyIntro,
 .storyGrid,
 .downloadGroups,
@@ -371,6 +373,7 @@ h2 {
 }
 
 .sectionIntro p,
+.beliefInner p,
 .storyCard p,
 .privacySection li,
 .caseGrid p,
@@ -378,6 +381,35 @@ h2 {
   color: var(--muted);
   font-size: 17px;
   line-height: 1.7;
+}
+
+.beliefSection {
+  background: #ffffff;
+}
+
+.beliefInner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: 32px;
+  align-items: end;
+  padding: 42px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #f8fbff, #ffffff);
+  box-shadow: 0 22px 70px rgba(23, 32, 51, 0.08);
+}
+
+.beliefInner .eyebrow {
+  margin-bottom: 12px;
+}
+
+.beliefInner h2 {
+  margin-bottom: 0;
+}
+
+.beliefInner p:last-child {
+  margin-bottom: 0;
+  font-size: 19px;
 }
 
 .storySection {
@@ -736,6 +768,7 @@ footer a {
 
   .downloadSection,
   .demoSection,
+  .beliefSection,
   .storySection,
   .librarySection,
   .flowSection,
@@ -746,6 +779,7 @@ footer a {
   }
 
   .sectionIntro,
+  .beliefInner,
   .storyIntro,
   .storyGrid,
   .downloadGroups,
@@ -763,6 +797,7 @@ footer a {
 
   .downloadGroups,
   .storyGrid,
+  .beliefInner,
   .libraryGrid,
   .steps,
   .caseGrid,
@@ -778,6 +813,7 @@ footer a {
 @media (max-width: 560px) {
   .downloadSection,
   .demoSection,
+  .beliefSection,
   .storySection,
   .librarySection,
   .flowSection,
@@ -789,6 +825,7 @@ footer a {
   }
 
   .sectionIntro,
+  .beliefInner,
   .storyIntro,
   .storyGrid,
   .downloadGroups,
@@ -840,6 +877,10 @@ footer a {
   .storyIntro h2 {
     font-size: 28px;
     line-height: 1.18;
+  }
+
+  .beliefInner {
+    padding: 24px;
   }
 
   .storyCard {
