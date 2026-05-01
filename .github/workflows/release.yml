@@ -117,9 +117,9 @@ jobs:
 
             | System | Download |
             | --- | --- |
-            | Mac Apple Silicon | `SayNext-<version>-darwin-aarch64-dmg.dmg` |
-            | Mac Intel | `SayNext-<version>-darwin-x64-dmg.dmg` |
-            | Windows | `SayNext-<version>-windows-x64-nsis-setup.exe` |
+            | Mac Apple Silicon | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/${{ github.ref_name }}/SayNext-<version>-darwin-aarch64-dmg.dmg) |
+            | Mac Intel | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/${{ github.ref_name }}/SayNext-<version>-darwin-x64-dmg.dmg) |
+            | Windows | [Download EXE](https://github.com/Leo-hypno/saynext/releases/download/${{ github.ref_name }}/SayNext-<version>-windows-x64-nsis-setup.exe) |
 
             macOS builds are Developer ID signed and notarized. Windows builds are not code-signed yet, so Windows may show a SmartScreen warning.
 

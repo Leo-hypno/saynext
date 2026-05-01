@@ -22,9 +22,9 @@ When ChatGPT, Claude, Gemini, or any AI tool gives a confusing answer, refuses t
 
 | System | Download this file |
 | --- | --- |
-| Mac Apple Silicon | `SayNext-0.1.4-darwin-aarch64-dmg.dmg` |
-| Mac Intel | `SayNext-0.1.4-darwin-x64-dmg.dmg` |
-| Windows | `SayNext-0.1.4-windows-x64-nsis-setup.exe` |
+| Mac Apple Silicon | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.4/SayNext-0.1.4-darwin-aarch64-dmg.dmg) |
+| Mac Intel | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.4/SayNext-0.1.4-darwin-x64-dmg.dmg) |
+| Windows | [Download EXE](https://github.com/Leo-hypno/saynext/releases/download/v0.1.4/SayNext-0.1.4-windows-x64-nsis-setup.exe) |
 
 If Windows blocks the installer, choose "More info" then "Run anyway".
 
