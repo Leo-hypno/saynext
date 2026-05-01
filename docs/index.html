@@ -8,6 +8,14 @@
       name="description"
       content="SayNext 是一個開源桌面小工具，幫助 AI 新手在卡住時找到下一句可以問的話。"
     />
+    <meta property="og:title" content="SayNext | AI 下一句提示工具" />
+    <meta
+      property="og:description"
+      content="一個開源桌面小工具，幫助 AI 新手降低「下一句要怎麼回」的摩擦。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://leo-hypno.github.io/saynext/assets/saynext-main-dark.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="./assets/site.css" />
   </head>
   <body>
@@ -17,6 +25,7 @@
         <span>SayNext</span>
       </a>
       <nav>
+        <a href="#belief" data-i18n="navBelief">理念</a>
         <a href="#download" data-i18n="navDownload">下載</a>
         <a href="#flow" data-i18n="navFlow">流程</a>
         <a href="#open-source" data-i18n="navOpenSource">開源</a>
@@ -71,7 +80,7 @@
         </div>
       </section>
 
-      <section class="beliefSection" aria-labelledby="belief-title">
+      <section id="belief" class="beliefSection" aria-labelledby="belief-title">
         <div class="beliefInner">
           <p class="eyebrow">Belief</p>
           <h2 id="belief-title" data-i18n="beliefTitle">AI 負責生成，人負責判斷。</h2>
@@ -107,6 +116,11 @@
           <p class="eyebrow">Download</p>
           <h2 id="download-title" data-i18n="downloadTitle">選擇你的系統</h2>
           <p data-i18n="downloadLead">大多數使用者只需要下載下面其中一個檔案。</p>
+        </div>
+        <div class="downloadTrust" aria-label="下載資訊">
+          <span data-i18n="downloadTrustLatest">最新版 v0.1.7</span>
+          <span data-i18n="downloadTrustMac">macOS 已簽章與公證</span>
+          <span data-i18n="downloadTrustPrivacy">離線優先，不追蹤</span>
         </div>
         <div class="downloadGroups">
           <article class="downloadPlatform">
@@ -168,6 +182,11 @@
         </div>
         <p class="downloadHelp" data-i18n="downloadHelp">
           不確定 Mac 是哪一種？近年的 M1-M5 系列晶片請選 Apple Silicon；較舊的 Intel Mac 請選 Mac Intel。
+        </p>
+        <p class="downloadHelp downloadReleaseLink">
+          <a href="https://github.com/Leo-hypno/saynext/releases/latest" target="_blank" rel="noopener noreferrer" data-i18n="downloadReleaseLink">
+            查看所有版本與其他安裝檔
+          </a>
         </p>
       </section>
 
@@ -294,7 +313,7 @@
         <div class="sectionIntro">
           <p class="eyebrow">Open source</p>
           <h2 id="opensource-title" data-i18n="openSourceTitle">你不會寫程式，也能貢獻</h2>
-          <p data-i18n="openSourceLead">SayNext 的提示詞包是簡單 JSON。你可以新增語言、改善句子、補充生活情境，讓更多人第一次使用 AI 時不要放棄。</p>
+          <p data-i18n="openSourceLead">SayNext 的提示詞包是簡單 JSON。你可以新增語言、改善句子、補充生活情境，讓更多人能持續用 AI 做出成果。</p>
         </div>
         <div class="heroActions">
           <a class="primaryButton" href="https://github.com/Leo-hypno/saynext" target="_blank" rel="noopener noreferrer">Star on GitHub</a>
@@ -315,6 +334,7 @@
           pageTitle: "SayNext | AI 下一句提示工具",
           pageDescription: "SayNext 是一個開源桌面小工具，幫助 AI 新手在卡住時找到下一句可以問的話。",
           navLabel: "主導覽",
+          navBelief: "理念",
           navDownload: "下載",
           navFlow: "流程",
           navOpenSource: "開源",
@@ -336,6 +356,9 @@
           storyAfter: "一個能貼上的下一句，會讓使用者保留判斷、追問和推進成果的動作。",
           downloadTitle: "選擇你的系統",
           downloadLead: "大多數使用者只需要下載下面其中一個檔案。",
+          downloadTrustLatest: "最新版 v0.1.7",
+          downloadTrustMac: "macOS 已簽章與公證",
+          downloadTrustPrivacy: "離線優先，不追蹤",
           appleDownloadTitle: "Apple 電腦",
           appleDownloadLead: "先看你的 Mac 是 M 系列晶片，還是較舊的 Intel 處理器。",
           windowsDownloadTitle: "Windows 電腦",
@@ -347,6 +370,7 @@
           intelNote: "Intel 處理器 Mac",
           windowsNote: "Windows 10 / 11",
           downloadHelp: "不確定 Mac 是哪一種？近年的 M1-M5 系列晶片請選 Apple Silicon；較舊的 Intel Mac 請選 Mac Intel。",
+          downloadReleaseLink: "查看所有版本與其他安裝檔",
           demoTitle: "打開、選一句、貼到 AI。",
           demoLead: "SayNext 的核心不是管理很多文字，而是在使用者卡住時給他一個可以立刻貼上的下一句。",
           libraryTitle: "把「不知道怎麼問」變成可以直接用的句子",
@@ -388,7 +412,7 @@
           privacyTracking: "不追蹤使用者",
           privacyJson: "提示詞以本機 JSON pack 維護",
           openSourceTitle: "你不會寫程式，也能貢獻",
-          openSourceLead: "SayNext 的提示詞包是簡單 JSON。你可以新增語言、改善句子、補充生活情境，讓更多人第一次使用 AI 時不要放棄。",
+          openSourceLead: "SayNext 的提示詞包是簡單 JSON。你可以新增語言、改善句子、補充生活情境，讓更多人能持續用 AI 做出成果。",
           promptPackIssue: "貢獻 Prompt Pack",
           contributing: "查看貢獻指南"
         },
@@ -396,6 +420,7 @@
           pageTitle: "SayNext | The next prompt when AI gets stuck",
           pageDescription: "SayNext is an open-source desktop palette that helps AI beginners find the next useful thing to ask.",
           navLabel: "Main navigation",
+          navBelief: "Belief",
           navDownload: "Download",
           navFlow: "Flow",
           navOpenSource: "Open source",
@@ -417,6 +442,9 @@
           storyAfter: "One copyable next line helps people keep judging, asking, and moving the result forward.",
           downloadTitle: "Choose your system",
           downloadLead: "Most users only need one of the files below.",
+          downloadTrustLatest: "Latest v0.1.7",
+          downloadTrustMac: "macOS signed and notarized",
+          downloadTrustPrivacy: "Offline-first, no tracking",
           appleDownloadTitle: "Apple computers",
           appleDownloadLead: "Choose by whether your Mac uses an M-series chip or an older Intel processor.",
           windowsDownloadTitle: "Windows computers",
@@ -428,6 +456,7 @@
           intelNote: "Intel-based Macs",
           windowsNote: "Windows 10 / 11",
           downloadHelp: "Not sure which Mac you have? Newer M1-M5 Macs use Apple Silicon. Older Intel Macs use Mac Intel.",
+          downloadReleaseLink: "View all versions and installer files",
           demoTitle: "Open it, choose one line, paste into AI.",
           demoLead: "SayNext is not about managing a giant text library. It gives people one useful next line at the moment they get stuck.",
           libraryTitle: "Turn “I do not know what to ask” into ready-to-use prompts",
@@ -464,9 +493,9 @@
           caseCodexTitle: "Codex collaboration",
           caseCodexBody: "Clarify the request, ask AI to plan, execute, check, and improve the result step by step.",
           privacyTitle: "Quiet, offline, and no account pressure",
-          privacyApi: "No AI API key required",
-          privacyAccount: "No account required",
-          privacyTracking: "No user tracking",
+          privacyApi: "AI API key free",
+          privacyAccount: "Account-free",
+          privacyTracking: "Tracking-free",
           privacyJson: "Prompts are maintained as local JSON packs",
           openSourceTitle: "You can contribute even if you do not write code",
           openSourceLead: "SayNext prompt packs are simple JSON. You can add languages, improve prompts, and contribute real-life use cases so more people do not give up on AI.",
@@ -477,6 +506,7 @@
           pageTitle: "SayNext | AI が止まった時の次の一言",
           pageDescription: "SayNext は、AI 初心者が会話で迷った時に次に聞ける一文を見つけるためのオープンソースのデスクトップツールです。",
           navLabel: "メインナビゲーション",
+          navBelief: "考え方",
           navDownload: "ダウンロード",
           navFlow: "使い方",
           navOpenSource: "オープンソース",
@@ -498,6 +528,9 @@
           storyAfter: "コピーできる次の一文が、人の判断、質問、成果の前進を続けやすくします。",
           downloadTitle: "あなたの環境を選ぶ",
           downloadLead: "ほとんどのユーザーは、下のファイルのうち1つだけをダウンロードすれば十分です。",
+          downloadTrustLatest: "最新版 v0.1.7",
+          downloadTrustMac: "macOS 署名・公証済み",
+          downloadTrustPrivacy: "オフライン優先、追跡なし",
           appleDownloadTitle: "Apple コンピュータ",
           appleDownloadLead: "Mac が M シリーズチップか、古い Intel プロセッサかで選んでください。",
           windowsDownloadTitle: "Windows コンピュータ",
@@ -509,6 +542,7 @@
           intelNote: "Intel 搭載 Mac",
           windowsNote: "Windows 10 / 11",
           downloadHelp: "Mac の種類がわからない場合、最近の M1-M5 Mac は Apple Silicon、古い Intel 搭載 Mac は Mac Intel を選んでください。",
+          downloadReleaseLink: "すべてのバージョンとインストーラーを見る",
           demoTitle: "開いて、一文を選び、AI に貼り付ける。",
           demoLead: "SayNext は大量の文章を管理するためのものではありません。ユーザーが詰まった瞬間に、すぐ使える次の一文を渡します。",
           libraryTitle: "「何を聞けばいいかわからない」を、そのまま使える一文に",
@@ -545,8 +579,8 @@
           caseCodexTitle: "Codex との協作",
           caseCodexBody: "要望を明確にし、計画、実行、確認、改善を段階的に進めます。",
           privacyTitle: "静かで、オフライン優先。アカウントの負担もありません。",
-          privacyApi: "AI API key は不要",
-          privacyAccount: "アカウント作成は不要",
+          privacyApi: "AI API key フリー",
+          privacyAccount: "アカウントフリー",
           privacyTracking: "ユーザー追跡なし",
           privacyJson: "プロンプトはローカル JSON pack で管理",
           openSourceTitle: "コードを書けなくても貢献できます",
