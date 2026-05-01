@@ -13,6 +13,22 @@ export function buildCategoryIds(categories: Category[]) {
   ];
 }
 
+function sortFavoritesFirst(prompts: RescuePrompt[], favorites: Set<string>) {
+  return prompts
+    .map((prompt, index) => ({ prompt, index }))
+    .sort((left, right) => {
+      const leftFavorite = favorites.has(left.prompt.id);
+      const rightFavorite = favorites.has(right.prompt.id);
+
+      if (leftFavorite === rightFavorite) {
+        return left.index - right.index;
+      }
+
+      return leftFavorite ? -1 : 1;
+    })
+    .map(({ prompt }) => prompt);
+}
+
 export function getVisiblePrompts({
   activeCategory,
   categories,
@@ -37,9 +53,15 @@ export function getVisiblePrompts({
   }
 
   if (activeCategory === customCategoryId) {
-    return prompts.filter((prompt) => prompt.source === "custom");
+    return sortFavoritesFirst(
+      prompts.filter((prompt) => prompt.source === "custom"),
+      favorites
+    );
   }
 
   const fallbackCategory = categories[0]?.id ?? "";
-  return prompts.filter((prompt) => prompt.category === (activeCategory || fallbackCategory));
+  return sortFavoritesFirst(
+    prompts.filter((prompt) => prompt.category === (activeCategory || fallbackCategory)),
+    favorites
+  );
 }
