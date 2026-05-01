@@ -385,7 +385,7 @@ export function App() {
     try {
       await copyText(prompt.text);
       setCopiedPromptId(prompt.id);
-      setCopyNotice({ kind: "success", text: `已複製：${prompt.title}` });
+      setCopyNotice({ kind: "success", text: uiCopy.noticeCopied(prompt.title) });
       setRecentIds((ids) => {
         if (activeCategory === recentCategoryId && ids.includes(prompt.id)) {
           return ids;
@@ -398,7 +398,7 @@ export function App() {
       }, copyNoticeDurationMs);
     } catch {
       setCopiedPromptId(null);
-      setCopyNotice({ kind: "error", text: "複製失敗，請再試一次。" });
+      setCopyNotice({ kind: "error", text: uiCopy.noticeCopyFailed });
       copyTimerRef.current = window.setTimeout(() => setCopyNotice(null), 2200);
     }
   }
@@ -602,7 +602,7 @@ export function App() {
       setUpdateStatus("available");
     } catch {
       setUpdateStatus("error");
-      setUpdateError("目前無法檢查更新。請確認網路連線，或稍後再試。");
+      setUpdateError(uiCopy.settingsUpdateCheckFailed);
     }
   }
 
@@ -622,7 +622,7 @@ export function App() {
       setUpdateStatus("restarting");
     } catch {
       setUpdateStatus("error");
-      setUpdateError("更新安裝失敗。請重新檢查更新，或到 GitHub 下載最新版本。");
+      setUpdateError(uiCopy.settingsUpdateInstallFailed);
     }
   }
 

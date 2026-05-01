@@ -64,6 +64,8 @@ export type UiCopy = {
   onboardingStepPaste: string;
   onboardingTitle: string;
   noticeAdded: (title: string) => string;
+  noticeCopied: (title: string) => string;
+  noticeCopyFailed: string;
   noticeDeleted: (title: string) => string;
   noticeFavoriteAdded: (title: string) => string;
   noticeFavoriteRemoved: (title: string) => string;
@@ -101,10 +103,12 @@ export type UiCopy = {
   settingsUpdateButtonCheck: string;
   settingsUpdateButtonInstall: string;
   settingsUpdateChecking: string;
+  settingsUpdateCheckFailed: string;
   settingsUpdateDescription: string;
   settingsUpdateDownloading: string;
   settingsUpdateDownloadingPercent: (percent: number) => string;
   settingsUpdateError: string;
+  settingsUpdateInstallFailed: string;
   settingsUpdateNotAvailable: string;
   settingsUpdateRestarting: string;
   settingsUpdateTitle: string;
