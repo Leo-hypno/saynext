@@ -20,9 +20,9 @@ Most users only need one installer:
 
 | System | One-click download |
 | --- | --- |
-| Mac Apple Silicon | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-aarch64-dmg.dmg) |
-| Mac Intel | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-x64-dmg.dmg) |
-| Windows | [Download EXE](https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-windows-x64-nsis-setup.exe) |
+| Mac Apple Silicon | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.8/SayNext-0.1.8-darwin-aarch64-dmg.dmg) |
+| Mac Intel | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/v0.1.8/SayNext-0.1.8-darwin-x64-dmg.dmg) |
+| Windows | [Download EXE](https://github.com/Leo-hypno/saynext/releases/download/v0.1.8/SayNext-0.1.8-windows-x64-nsis-setup.exe) |
 
 [Open the latest release page](https://github.com/Leo-hypno/saynext/releases/latest) if you need checksums, MSI, updater files, or older versions.
 
@@ -201,7 +201,7 @@ npm run bundle
 Update SayNext's version before a release:
 
 ```bash
-npm run version:set -- 0.1.7
+npm run version:set -- 0.1.8
 ```
 
 Validate prompt packs only:

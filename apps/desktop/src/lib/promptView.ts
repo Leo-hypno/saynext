@@ -4,13 +4,18 @@ export const recentCategoryId = "recent";
 export const favoritesCategoryId = "favorites";
 export const customCategoryId = "custom";
 
-export function buildCategoryIds(categories: Category[]) {
-  return [
-    ...categories.map((category) => category.id),
-    recentCategoryId,
-    favoritesCategoryId,
-    customCategoryId
-  ];
+export function buildCategoryIds(topLevelCategoryIds: string[] = [], fallbackCategoryId?: string) {
+  const ids = new Set(topLevelCategoryIds);
+
+  if (ids.size === 0 && fallbackCategoryId) {
+    ids.add(fallbackCategoryId);
+  }
+
+  ids.add(recentCategoryId);
+  ids.add(favoritesCategoryId);
+  ids.add(customCategoryId);
+
+  return [...ids];
 }
 
 function sortFavoritesFirst(prompts: RescuePrompt[], favorites: Set<string>) {
@@ -32,12 +37,14 @@ function sortFavoritesFirst(prompts: RescuePrompt[], favorites: Set<string>) {
 export function getVisiblePrompts({
   activeCategory,
   categories,
+  categoryGroups = {},
   favorites,
   prompts,
   recentIds
 }: {
   activeCategory: string;
   categories: Category[];
+  categoryGroups?: Record<string, string[]>;
   favorites: Set<string>;
   prompts: RescuePrompt[];
   recentIds: string[];
@@ -55,6 +62,14 @@ export function getVisiblePrompts({
   if (activeCategory === customCategoryId) {
     return sortFavoritesFirst(
       prompts.filter((prompt) => prompt.source === "custom"),
+      favorites
+    );
+  }
+
+  const groupCategoryIds = categoryGroups[activeCategory];
+  if (groupCategoryIds?.length) {
+    return sortFavoritesFirst(
+      prompts.filter((prompt) => groupCategoryIds.includes(prompt.category)),
       favorites
     );
   }

@@ -32,6 +32,18 @@ export type UiCopy = {
   categoryFavorites: string;
   categoryRecent: string;
   categoryRecentEmpty: string;
+  tabConfused: string;
+  tabExecute: string;
+  tabImprove: string;
+  tabResearchPlanning: string;
+  tabReview: string;
+  tabStart: string;
+  tabConfusedHint: string;
+  tabExecuteHint: string;
+  tabImproveHint: string;
+  tabResearchPlanningHint: string;
+  tabReviewHint: string;
+  tabStartHint: string;
   close: string;
   confirm: string;
   delete: string;

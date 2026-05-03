@@ -53,7 +53,7 @@
         <div class="heroShade" aria-hidden="true"></div>
         <div class="heroContent">
           <div class="heroMeta" aria-label="產品狀態">
-            <span>v0.1.7</span>
+            <span>v0.1.8</span>
             <span>macOS + Windows</span>
             <span>Offline-first</span>
           </div>
@@ -118,7 +118,7 @@
           <p data-i18n="downloadLead">大多數使用者只需要下載下面其中一個檔案。</p>
         </div>
         <div class="downloadTrust" aria-label="下載資訊">
-          <span data-i18n="downloadTrustLatest">最新版 v0.1.7</span>
+          <span data-i18n="downloadTrustLatest">最新版 v0.1.8</span>
           <span data-i18n="downloadTrustMac">macOS 已簽章與公證</span>
           <span data-i18n="downloadTrustPrivacy">離線優先，不追蹤</span>
         </div>
@@ -132,7 +132,7 @@
             <div class="downloadOptions">
               <a
                 class="downloadCard"
-                href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-aarch64-dmg.dmg"
+                href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.8/SayNext-0.1.8-darwin-aarch64-dmg.dmg"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -145,7 +145,7 @@
               </a>
               <a
                 class="downloadCard"
-                href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-darwin-x64-dmg.dmg"
+                href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.8/SayNext-0.1.8-darwin-x64-dmg.dmg"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -167,7 +167,7 @@
             <div class="downloadOptions">
               <a
                 class="downloadCard"
-                href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.7/SayNext-0.1.7-windows-x64-nsis-setup.exe"
+                href="https://github.com/Leo-hypno/saynext/releases/download/v0.1.8/SayNext-0.1.8-windows-x64-nsis-setup.exe"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -356,7 +356,7 @@
           storyAfter: "一個能貼上的下一句，會讓使用者保留判斷、追問和推進成果的動作。",
           downloadTitle: "選擇你的系統",
           downloadLead: "大多數使用者只需要下載下面其中一個檔案。",
-          downloadTrustLatest: "最新版 v0.1.7",
+          downloadTrustLatest: "最新版 v0.1.8",
           downloadTrustMac: "macOS 已簽章與公證",
           downloadTrustPrivacy: "離線優先，不追蹤",
           appleDownloadTitle: "Apple 電腦",
@@ -442,7 +442,7 @@
           storyAfter: "One copyable next line helps people keep judging, asking, and moving the result forward.",
           downloadTitle: "Choose your system",
           downloadLead: "Most users only need one of the files below.",
-          downloadTrustLatest: "Latest v0.1.7",
+          downloadTrustLatest: "Latest v0.1.8",
           downloadTrustMac: "macOS signed and notarized",
           downloadTrustPrivacy: "Offline-first, no tracking",
           appleDownloadTitle: "Apple computers",
@@ -528,7 +528,7 @@
           storyAfter: "コピーできる次の一文が、人の判断、質問、成果の前進を続けやすくします。",
           downloadTitle: "あなたの環境を選ぶ",
           downloadLead: "ほとんどのユーザーは、下のファイルのうち1つだけをダウンロードすれば十分です。",
-          downloadTrustLatest: "最新版 v0.1.7",
+          downloadTrustLatest: "最新版 v0.1.8",
           downloadTrustMac: "macOS 署名・公証済み",
           downloadTrustPrivacy: "オフライン優先、追跡なし",
           appleDownloadTitle: "Apple コンピュータ",
@@ -595,13 +595,17 @@
         ja: { html: "ja", label: "あ" },
         zh: { html: "zh-Hant", label: "中" }
       };
-      const preferredLanguage =
-        localStorage.getItem("saynext.siteLanguage") ||
-        (navigator.language && navigator.language.toLowerCase().startsWith("zh")
+      const supportedLanguages = Object.keys(translations);
+      const storedLanguage = localStorage.getItem("saynext.siteLanguage");
+      const browserLanguage =
+        navigator.language && navigator.language.toLowerCase().startsWith("zh")
           ? "zh"
           : navigator.language && navigator.language.toLowerCase().startsWith("ja")
             ? "ja"
-            : "en");
+            : "en";
+      const preferredLanguage = supportedLanguages.includes(storedLanguage ?? "")
+        ? storedLanguage
+        : browserLanguage;
       const languageMenu = document.querySelector("[data-language-menu]");
       const currentLanguage = document.querySelector("[data-language-current]");
       const languageOptions = document.querySelectorAll("[data-language-option]");
@@ -622,6 +626,14 @@
         }
         if (currentLanguage) {
           currentLanguage.textContent = meta.label;
+        }
+        const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+        const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+        if (ogTitleMeta) {
+          ogTitleMeta.setAttribute("content", dictionary.pageTitle);
+        }
+        if (ogDescriptionMeta) {
+          ogDescriptionMeta.setAttribute("content", dictionary.pageDescription);
         }
         for (const option of languageOptions) {
           option.classList.toggle("active", option.dataset.languageOption === language);

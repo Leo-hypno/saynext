@@ -1,6 +1,6 @@
 [package]
 name = "saynext"
-version = "0.1.7"
+version = "0.1.8"
 description = "Open-source desktop palette that helps you ask AI the next better question."
 authors = ["SayNext contributors"]
 license = "MIT"

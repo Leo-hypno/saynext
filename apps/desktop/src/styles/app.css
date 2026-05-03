@@ -386,6 +386,7 @@ h1 {
   display: inline-flex;
   flex: 0 0 auto;
   font-size: 13px;
+  font-weight: 600;
   gap: 5px;
   height: 28px;
   padding: 0 9px;
@@ -396,6 +397,7 @@ h1 {
   border-color: #c7dcff;
   color: #1557b0;
   font-weight: 700;
+  box-shadow: inset 0 0 0 1px rgba(20, 93, 176, 0.18);
 }
 
 .categoryTabs button:hover {

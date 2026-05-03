@@ -17,6 +17,11 @@ import type { Category, RescuePrompt, UiCopy } from "../types";
 type PaletteProps = {
   activePackId: string;
   categories: Category[];
+  surfaceCategories: Array<{
+    id: string;
+    name: string;
+    hint: string;
+  }>;
   packs: Array<{
     id: string;
     locale: string;
@@ -54,6 +59,7 @@ type PaletteProps = {
 export function Palette({
   activePackId,
   categories,
+  surfaceCategories,
   packs,
   prompts,
   activeCategory,
@@ -251,12 +257,12 @@ export function Palette({
       </nav>
 
       <nav className="categoryTabs" aria-label="Prompt categories">
-        {categories.map((category) => (
+        {surfaceCategories.map((category) => (
           <button
             className={activeCategory === category.id ? "active" : ""}
             key={category.id}
             onClick={() => onCategoryChange(category.id)}
-            title={category.name}
+            title={category.hint}
             type="button"
           >
             {category.name}

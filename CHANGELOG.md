@@ -4,6 +4,27 @@ All notable changes to SayNext are documented here.
 
 This project follows Semantic Versioning.
 
+## [0.1.8] - 2026-05-04
+
+### Added
+
+- Added full localization for website and app settings entry points, including English-first first-run language selection behavior.
+- Added onboarding hints and clearer language around "beginner AI rescue" scenarios.
+- Added support for richer custom prompt workflows: move/edit within categories, favorite-first ordering in custom sections, and safer import/export handling.
+
+### Changed
+
+- Refined UI layout for a compact startup experience and improved first-run discoverability of the latest installer.
+- Optimized desktop palette interaction details (prompt selection, keyboard behavior, and favorites flow).
+- Added clearer GitHub landing page messaging, updated screenshots/demo references, and improved section clarity.
+
+### Fixed
+
+- Prevented keyboard selection drift after favoriting prompts and ensured selection tracks the same prompt after reorder.
+- Fixed language-switch regressions for update/copy related status messages.
+- Added explicit safeguards against prompt ID collisions when importing custom packs.
+- Removed hard-coded English copy leakage in localized update/error flows.
+
 ## [0.1.7] - 2026-05-01
 
 ### Changed

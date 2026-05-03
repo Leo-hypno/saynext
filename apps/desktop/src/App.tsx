@@ -62,18 +62,43 @@ const pointerResumeDelayMs = 700;
 const copyNoticeDurationMs = 1800;
 const activePackStorageKey = "saynext.activePackId";
 const onboardingDismissedKey = "saynext.onboardingDismissed";
+const surfaceCategoryOrder = [
+  "start",
+  "confused",
+  "improve",
+  "research-planning",
+  "execute",
+  "review"
+];
+
+type SurfaceCategoryGroup = {
+  categoryIds: string[];
+  id: string;
+  name: string;
+  hint: string;
+};
 
 export function App() {
+  const isPackAvailable = useCallback((packId: string) => {
+    return packs.some((pack) => pack.id === packId);
+  }, []);
+
   const copyTimerRef = useRef<number | undefined>(undefined);
   const noticeTimerRef = useRef<number | undefined>(undefined);
   const lastKeyboardNavigationRef = useRef(0);
   const pendingSelectedPromptIdRef = useRef<string | null>(null);
   const pendingUpdateRef = useRef<Update | null>(null);
   const [activePackId, setActivePackId] = useState(() =>
-    readStoredString(activePackStorageKey, defaultPackId)
+    (() => {
+      const storedPackId = readStoredString(activePackStorageKey, defaultPackId);
+      return packs.some((pack) => pack.id === storedPackId) ? storedPackId : defaultPackId;
+    })()
   );
   const [languageChoiceOpen, setLanguageChoiceOpen] = useState(
-    () => localStorage.getItem(activePackStorageKey) === null
+    () => {
+      const storedPackId = localStorage.getItem(activePackStorageKey);
+      return storedPackId === null || !packs.some((pack) => pack.id === storedPackId);
+    }
   );
   const [activeCategory, setActiveCategory] = useState(defaultCategoryId);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -108,7 +133,12 @@ export function App() {
   const platform = useMemo(getPlatformMeta, []);
 
   const pack = useMemo(
-    () => packs.find((candidate) => candidate.id === activePackId) ?? packs[0],
+    () => {
+      if (isPackAvailable(activePackId)) {
+        return packs.find((candidate) => candidate.id === activePackId) ?? packs[0];
+      }
+      return packs[0];
+    },
     [activePackId]
   );
   const uiCopy = useMemo(() => getUiCopy(pack.locale), [pack.locale]);
@@ -116,6 +146,66 @@ export function App() {
   const categories = useMemo(() => {
     return pack.categories;
   }, [pack.categories]);
+
+  const surfaceCategories = useMemo(() => {
+    const groups: SurfaceCategoryGroup[] = [
+      {
+        id: "start",
+        name: uiCopy.tabStart,
+        categoryIds: ["start"],
+        hint: uiCopy.tabStartHint
+      },
+      {
+        id: "confused",
+        name: uiCopy.tabConfused,
+        categoryIds: ["confused"],
+        hint: uiCopy.tabConfusedHint
+      },
+      {
+        id: "improve",
+        name: uiCopy.tabImprove,
+        categoryIds: ["improve", "refused"],
+        hint: uiCopy.tabImproveHint
+      },
+      {
+        id: "research-planning",
+        name: uiCopy.tabResearchPlanning,
+        categoryIds: ["research", "planning"],
+        hint: uiCopy.tabResearchPlanningHint
+      },
+      {
+        id: "execute",
+        name: uiCopy.tabExecute,
+        categoryIds: ["execute", "next"],
+        hint: uiCopy.tabExecuteHint
+      },
+      {
+        id: "review",
+        name: uiCopy.tabReview,
+        categoryIds: ["review"],
+        hint: uiCopy.tabReviewHint
+      }
+    ];
+
+    return groups
+      .map((group) => {
+        const categoryIds = group.categoryIds.filter((categoryId) =>
+          categories.some((category) => category.id === categoryId)
+        );
+        return categoryIds.length === 0 ? null : { ...group, categoryIds };
+      })
+      .filter((group): group is SurfaceCategoryGroup => group !== null);
+  }, [categories, uiCopy]);
+
+  const surfaceCategoryGroupMap = useMemo(
+    () => Object.fromEntries(surfaceCategories.map((category) => [category.id, category.categoryIds])),
+    [surfaceCategories]
+  );
+
+  const surfaceCategoryIds = useMemo(
+    () => surfaceCategories.map((category) => category.id),
+    [surfaceCategories]
+  );
 
   const prompts = useMemo(
     () => [
@@ -130,24 +220,30 @@ export function App() {
   }, [pack.prompts]);
 
   const categoryIds = useMemo(() => {
-    return buildCategoryIds(categories);
-  }, [categories]);
+    const fallbackCategory = categories[0]?.id || defaultCategoryId;
+    return buildCategoryIds(surfaceCategoryIds, fallbackCategory);
+  }, [categories, surfaceCategoryIds]);
 
   const customPromptDefaultCategory = useMemo(() => {
+    if (surfaceCategoryGroupMap[activeCategory]?.length) {
+      return surfaceCategoryGroupMap[activeCategory][0];
+    }
+
     return categories.some((category) => category.id === activeCategory)
       ? activeCategory
       : categories[0]?.id ?? defaultCategoryId;
-  }, [activeCategory, categories]);
+  }, [activeCategory, categories, surfaceCategoryGroupMap]);
 
   const visiblePrompts = useMemo(() => {
     return getVisiblePrompts({
       activeCategory,
+      categoryGroups: surfaceCategoryGroupMap,
       categories,
       favorites,
       prompts,
       recentIds
     });
-  }, [activeCategory, categories, favorites, prompts, recentIds]);
+  }, [activeCategory, categories, favorites, prompts, recentIds, surfaceCategoryGroupMap]);
 
   const recentPromptCount = useMemo(() => {
     return recentIds.filter((id) => prompts.some((prompt) => prompt.id === id)).length;
@@ -437,7 +533,13 @@ export function App() {
 
     setActivePackId(packId);
     const nextPack = packs.find((candidate) => candidate.id === packId);
-    setActiveCategory(nextPack?.categories[0]?.id ?? defaultCategoryId);
+    const fallbackCategory = nextPack?.categories?.[0]?.id ?? defaultCategoryId;
+    const nextPackCategoryIds = new Set(nextPack?.categories?.map((category) => category.id) ?? []);
+    const nextActiveCategory =
+      surfaceCategoryOrder.find((categoryId) => nextPackCategoryIds.has(categoryId)) ??
+      fallbackCategory;
+
+    setActiveCategory(nextActiveCategory);
   }
 
   function handleInitialLanguageSelect(packId: string) {
@@ -677,6 +779,7 @@ export function App() {
           activeCategory={activeCategory}
           activePackId={pack.id}
           categories={categories}
+          surfaceCategories={surfaceCategories}
           copiedPromptId={copiedPromptId}
           copyNotice={copyNotice}
           favorites={favorites}
