@@ -113,17 +113,16 @@ jobs:
           releaseBody: |
             ## Download
 
-            Most users only need one of these files:
+            Most users should download SayNext from the website:
 
-            | System | Download |
-            | --- | --- |
-            | Mac Apple Silicon | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/${{ github.ref_name }}/SayNext-<version>-darwin-aarch64-dmg.dmg) |
-            | Mac Intel | [Download DMG](https://github.com/Leo-hypno/saynext/releases/download/${{ github.ref_name }}/SayNext-<version>-darwin-x64-dmg.dmg) |
-            | Windows | [Download EXE](https://github.com/Leo-hypno/saynext/releases/download/${{ github.ref_name }}/SayNext-<version>-windows-x64-nsis-setup.exe) |
+            https://leo-hypno.github.io/saynext/#download
+
+            The release assets below are kept for direct installer downloads, in-app updates,
+            and alternate installer flows.
 
             macOS builds are Developer ID signed and notarized. Windows builds are not code-signed yet, so Windows may show a SmartScreen warning.
 
-            Files such as `latest.json`, `.sig`, `.app.tar.gz`, and `.msi` are kept for in-app updates or alternate installer flows. New users can ignore them.
+            New users can ignore files such as `latest.json`, `.sig`, `.app.tar.gz`, and `.msi`.
 
             See CHANGELOG.md for release notes.
           releaseDraft: true

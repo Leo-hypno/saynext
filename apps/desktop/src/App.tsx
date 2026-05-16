@@ -94,6 +94,12 @@ const reservedCustomCategoryIds = new Set([
   favoritesCategoryId,
   customCategoryId
 ]);
+const customPromptCategoryAliases = new Map([
+  ["refused", "improve"],
+  ["planning", "research"],
+  ["research-planning", "research"],
+  ["next", "execute"]
+]);
 
 type SurfaceCategoryGroup = {
   categoryIds: string[];
@@ -269,6 +275,33 @@ export function App() {
     () => Object.fromEntries(surfaceCategories.map((category) => [category.id, category.categoryIds])),
     [surfaceCategories]
   );
+  const builtInPlacementCategories = useMemo(
+    () =>
+      surfaceCategories
+        .filter((category) => category.kind === "core")
+        .map((category) => ({
+          id: category.categoryIds[0] ?? category.id,
+          name: category.name
+        })),
+    [surfaceCategories]
+  );
+  const categoryDisplayLookup = useMemo(() => {
+    const displayCategories = surfaceCategories
+      .filter((category) => category.kind === "core")
+      .flatMap((category) =>
+        category.categoryIds.map((categoryId) => ({
+          id: categoryId,
+          name: category.name
+        }))
+      );
+    const displayedIds = new Set(displayCategories.map((category) => category.id));
+
+    return [
+      ...displayCategories,
+      ...builtInCategories.filter((category) => !displayedIds.has(category.id)),
+      ...customCategoryLookup
+    ];
+  }, [builtInCategories, customCategoryLookup, surfaceCategories]);
   const surfaceCategoryIds = useMemo(
     () => surfaceCategories.map((category) => category.id),
     [surfaceCategories]
@@ -1058,8 +1091,8 @@ export function App() {
           activeCategory={activeCategory}
           activePackId={pack.id}
           allCustomCategories={customCategoryLookup}
-          builtInCategories={builtInCategories}
-          categories={categoryLookup}
+          builtInCategories={builtInPlacementCategories}
+          categories={categoryDisplayLookup}
           customCategories={currentLocaleCustomCategories}
           surfaceCategories={surfaceCategories}
           copiedPromptId={copiedPromptId}
@@ -1149,7 +1182,7 @@ export function App() {
       ) : null}
       {!languageChoiceOpen && customPromptDialogOpen ? (
         <CustomPromptDialog
-          builtInCategories={builtInCategories}
+          builtInCategories={builtInPlacementCategories}
           customCategories={customCategoryLookup}
           defaultCategory={customPromptDefaultCategory}
           editingPrompt={editingCustomPrompt}
@@ -1373,11 +1406,12 @@ function normalizeCustomPrompts(
         : options.fallbackLocale;
     const requestedCategory =
       typeof rawPrompt.category === "string" ? rawPrompt.category : options.fallbackCategory;
-    const categoryLocale = options.customCategoryLocales?.get(requestedCategory);
+    const normalizedCategory = normalizeCustomPromptCategory(requestedCategory);
+    const categoryLocale = options.customCategoryLocales?.get(normalizedCategory);
     const category =
-      (!options.validCategoryIds || options.validCategoryIds.has(requestedCategory)) &&
+      (!options.validCategoryIds || options.validCategoryIds.has(normalizedCategory)) &&
       (!categoryLocale || categoryLocale === locale)
-        ? requestedCategory
+        ? normalizedCategory
         : options.fallbackCategory;
     const id = usedIds.has(requestedId) ? createCustomPromptId(usedIds) : requestedId;
     usedIds.add(id);
@@ -1399,6 +1433,10 @@ function normalizeCustomPrompts(
   }
 
   return prompts;
+}
+
+function normalizeCustomPromptCategory(category: string) {
+  return customPromptCategoryAliases.get(category) ?? category;
 }
 
 function mergeCustomPrompts(current: RescuePrompt[], imported: RescuePrompt[]) {

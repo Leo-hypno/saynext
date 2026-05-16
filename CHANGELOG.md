@@ -4,6 +4,13 @@ All notable changes to SayNext are documented here.
 
 This project follows Semantic Versioning.
 
+## [0.2.1] - 2026-05-16
+
+### Fixed
+
+- Kept custom-prompt placement controls aligned with the 6 core rescue contexts instead of exposing internal prompt-pack categories.
+- Migrated legacy custom-prompt placement from internal pack categories back to their core context buckets.
+
 ## [0.2.0] - 2026-05-16
 
 ### Added
