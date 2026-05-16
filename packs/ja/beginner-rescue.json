@@ -616,6 +616,18 @@
       ]
     },
     {
+      "id": "planning-stress-test-strategy",
+      "category": "planning",
+      "title": "戦略を検証",
+      "text": "この戦略が信頼できるか確認してください。重要な抜け、リスク、不合理な前提をすべて見つけ、修正案を出し、新しい戦略に明らかな重大な抜けがなくなるまで再確認してください。",
+      "tags": [
+        "初心者",
+        "戦略",
+        "リスク",
+        "改善"
+      ]
+    },
+    {
       "id": "execute-start",
       "category": "execute",
       "title": "開始",

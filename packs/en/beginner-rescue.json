@@ -75,6 +75,7 @@
     { "id": "planning-travel-itinerary", "category": "planning", "title": "Travel plan", "text": "Plan a travel itinerary based on days, budget, transportation time, and energy level.", "tags": ["beginner", "travel", "itinerary"] },
     { "id": "planning-report-outline", "category": "planning", "title": "Report outline", "text": "Create a report outline first, including sections, key points, and what each part should contain.", "tags": ["beginner", "report", "outline"] },
     { "id": "planning-life-decision", "category": "planning", "title": "Life decision", "text": "Break this life decision into options, conditions, risks, and a recommended approach.", "tags": ["beginner", "decision", "life"] },
+    { "id": "planning-stress-test-strategy", "category": "planning", "title": "Stress-test strategy", "text": "Check whether this strategy is reliable: find all important gaps, risks, and unreasonable assumptions, suggest fixes, then review the new strategy again until there are no obvious major gaps.", "tags": ["beginner", "strategy", "risk", "improve"] },
 
     { "id": "execute-start", "category": "execute", "title": "Start", "text": "Start executing based on the current plan. If you hit an important decision, ask me using multiple choice.", "tags": ["beginner", "execute", "start"] },
     { "id": "execute-first-version", "category": "execute", "title": "First version", "text": "Create a first version that can be reviewed. Do not aim for perfection yet.", "tags": ["beginner", "draft", "first version"] },

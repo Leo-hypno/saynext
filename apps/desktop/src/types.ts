@@ -3,9 +3,15 @@ export type Category = {
   name: string;
 };
 
+export type CustomCategory = Category & {
+  createdAt: string;
+  locale: string;
+};
+
 export type RescuePrompt = {
   id: string;
   category: string;
+  locale?: string;
   source?: "built-in" | "custom";
   title: string;
   text: string;
@@ -28,7 +34,10 @@ export type UiCopy = {
   appEyebrow: string;
   appTitle: string;
   cancel: string;
+  categoryBuiltInGroup: string;
+  categoryCreateOption: string;
   categoryCustom: string;
+  categoryCustomGroup: string;
   categoryFavorites: string;
   categoryRecent: string;
   categoryRecentEmpty: string;
@@ -47,15 +56,22 @@ export type UiCopy = {
   close: string;
   confirm: string;
   delete: string;
+  deleteCustomCategory: string;
+  deleteCustomCategoryBody: (title: string, promptCount: number) => string;
   deleteCustomPrompt: string;
   deleteCustomPromptBody: (title: string) => string;
+  editCustomCategory: string;
   editCustomPrompt: string;
   customPromptBadge: string;
   favorite: string;
   emptyCategoryCopy: string;
   emptyCategoryTitle: string;
+  emptyCustomCategoryCopy: string;
+  emptyCustomCategoryTitle: string;
   emptyCustomCopy: string;
   emptyCustomTitle: string;
+  errorCategoryDuplicate: string;
+  errorCategoryRequired: string;
   emptyFavoritesCopy: string;
   emptyFavoritesTitle: string;
   emptyRecentCopy: string;
@@ -65,12 +81,17 @@ export type UiCopy = {
   footerFavorite: string;
   footerJump: string;
   footerSelect: string;
+  labelCategoryName: string;
   labelContent: string;
+  labelManageCategory: string;
   labelPlacement: string;
   labelTags: string;
   labelTitle: string;
   language: string;
+  manageCustomCategories: string;
+  manageCustomCategoriesDescription: string;
   myPromptsEyebrow: string;
+  newCustomCategory: string;
   newCustomPrompt: string;
   onboardingDismiss: string;
   onboardingStepCopy: string;
@@ -78,6 +99,9 @@ export type UiCopy = {
   onboardingStepPaste: string;
   onboardingTitle: string;
   noticeAdded: (title: string) => string;
+  noticeCategoryAdded: (title: string) => string;
+  noticeCategoryDeleted: (title: string) => string;
+  noticeCategoryUpdated: (title: string) => string;
   noticeCopied: (title: string) => string;
   noticeCopyFailed: string;
   noticeDeleted: (title: string) => string;
@@ -87,6 +111,7 @@ export type UiCopy = {
   noticeImported: (count: number) => string;
   noticeImportFailed: string;
   noticeExported: (count: number) => string;
+  placeholderCategoryName: string;
   placeholderContent: string;
   placeholderTags: string;
   placeholderTitle: string;

@@ -75,6 +75,7 @@
     { "id": "planning-travel-itinerary", "category": "planning", "title": "旅遊行程", "text": "請幫我規劃旅遊行程，依照天數、預算、交通時間和體力安排。", "tags": ["beginner", "travel", "itinerary"] },
     { "id": "planning-report-outline", "category": "planning", "title": "報告大綱", "text": "請先幫我做一份報告大綱，包含章節、重點和每段要放的內容。", "tags": ["beginner", "report", "outline"] },
     { "id": "planning-life-decision", "category": "planning", "title": "生活決策", "text": "請幫我把這個生活決策拆成選項、條件、風險和推薦做法。", "tags": ["beginner", "decision", "life"] },
+    { "id": "planning-stress-test-strategy", "category": "planning", "title": "壓力測試策略", "text": "請檢查這個策略是否可靠：找出所有重要漏洞、風險和不合理假設，提出修正方案，並反覆檢查新策略，直到沒有明顯重大漏洞為止。", "tags": ["beginner", "strategy", "risk", "improve"] },
 
     { "id": "execute-start", "category": "execute", "title": "開始執行", "text": "請依照目前計畫開始執行；若遇到關鍵決策，先用選擇題問我。", "tags": ["beginner", "execute", "開始"] },
     { "id": "execute-first-version", "category": "execute", "title": "先做第一版", "text": "請先做出可以檢查的第一版，不要一開始就追求完美。", "tags": ["beginner", "draft", "第一版"] },

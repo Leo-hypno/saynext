@@ -11,17 +11,23 @@ import {
   Star,
   Trash2
 } from "lucide-react";
+import { buildCategorySections } from "../lib/customCategories";
 import { customCategoryId, favoritesCategoryId, recentCategoryId } from "../lib/promptView";
-import type { Category, RescuePrompt, UiCopy } from "../types";
+import type { Category, CustomCategory, RescuePrompt, UiCopy } from "../types";
 
 type PaletteProps = {
   activePackId: string;
+  allCustomCategories: CustomCategory[];
+  builtInCategories: Category[];
   categories: Category[];
+  customCategories: CustomCategory[];
   surfaceCategories: Array<{
     id: string;
+    kind: "core" | "custom";
     name: string;
     hint: string;
   }>;
+  managedCustomCategoryId: string | null;
   packs: Array<{
     id: string;
     locale: string;
@@ -40,11 +46,15 @@ type PaletteProps = {
   recentCount: number;
   selectedIndex: number;
   onCategoryChange: (category: string) => void;
+  onCustomCategoryCreate: () => void;
+  onCustomCategoryDelete: (categoryId: string) => void;
+  onCustomCategoryEdit: (categoryId: string) => void;
   onCopy: (prompt: RescuePrompt) => void;
   onCustomPromptCreate: () => void;
   onCustomPromptDelete: (promptId: string) => void;
   onCustomPromptEdit: (prompt: RescuePrompt) => void;
   onCustomPromptMove: (promptId: string, category: string) => void;
+  onManagedCustomCategoryChange: (categoryId: string) => void;
   onFavoriteToggle: (promptId: string) => void;
   onOnboardingDismiss: () => void;
   onSettingsOpen: () => void;
@@ -58,8 +68,12 @@ type PaletteProps = {
 
 export function Palette({
   activePackId,
+  allCustomCategories,
+  builtInCategories,
   categories,
+  customCategories,
   surfaceCategories,
+  managedCustomCategoryId,
   packs,
   prompts,
   activeCategory,
@@ -71,11 +85,15 @@ export function Palette({
   recentCount,
   selectedIndex,
   onCategoryChange,
+  onCustomCategoryCreate,
+  onCustomCategoryDelete,
+  onCustomCategoryEdit,
   onCopy,
   onCustomPromptCreate,
   onCustomPromptDelete,
   onCustomPromptEdit,
   onCustomPromptMove,
+  onManagedCustomCategoryChange,
   onFavoriteToggle,
   onOnboardingDismiss,
   onSettingsOpen,
@@ -88,6 +106,10 @@ export function Palette({
 }: PaletteProps) {
   const paletteRef = useRef<HTMLElement | null>(null);
   const languageMenuRef = useRef<HTMLDetailsElement | null>(null);
+  const categorySections = buildCategorySections(builtInCategories, customCategories);
+  const builtInSurfaceCategories = surfaceCategories.filter((category) => category.kind === "core");
+  const customSurfaceCategories = surfaceCategories.filter((category) => category.kind === "custom");
+  const canManageCustomCategory = managedCustomCategoryId !== null;
 
   useEffect(() => {
     paletteRef.current?.focus();
@@ -139,6 +161,38 @@ export function Palette({
     document.addEventListener("mousedown", closeLanguageMenu);
     return () => document.removeEventListener("mousedown", closeLanguageMenu);
   }, []);
+
+  function categorySectionsForPrompt(prompt: RescuePrompt) {
+    const promptLocale = prompt.locale ?? activeLocale(activePackId, packs);
+    return buildCategorySections(
+      builtInCategories,
+      allCustomCategories.filter((category) => category.locale === promptLocale)
+    );
+  }
+
+  function renderCategoryOptions(prompt: RescuePrompt) {
+    const promptCategorySections = categorySectionsForPrompt(prompt);
+    return (
+      <>
+        <optgroup label={uiCopy.categoryBuiltInGroup}>
+          {promptCategorySections.builtIn.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </optgroup>
+        {promptCategorySections.custom.length > 0 ? (
+          <optgroup label={uiCopy.categoryCustomGroup}>
+            {promptCategorySections.custom.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </optgroup>
+        ) : null}
+      </>
+    );
+  }
 
   return (
     <main
@@ -257,7 +311,7 @@ export function Palette({
       </nav>
 
       <nav className="categoryTabs" aria-label="Prompt categories">
-        {surfaceCategories.map((category) => (
+        {builtInSurfaceCategories.map((category) => (
           <button
             className={activeCategory === category.id ? "active" : ""}
             key={category.id}
@@ -268,13 +322,82 @@ export function Palette({
             {category.name}
           </button>
         ))}
+        {customSurfaceCategories.length > 0 ? (
+          <>
+            <span className="categoryDivider" aria-hidden="true">
+              {uiCopy.categoryCustomGroup}
+            </span>
+            {customSurfaceCategories.map((category) => (
+              <button
+                className={`customCategoryTab ${activeCategory === category.id ? "active" : ""}`}
+                key={category.id}
+                onClick={() => onCategoryChange(category.id)}
+                title={category.hint}
+                type="button"
+              >
+                {category.name}
+              </button>
+            ))}
+          </>
+        ) : null}
       </nav>
+
+      {activeCategory === customCategoryId ? (
+        <section className="categoryManager" aria-label={uiCopy.manageCustomCategories}>
+          <div>
+            <strong>{uiCopy.manageCustomCategories}</strong>
+            <p>{uiCopy.manageCustomCategoriesDescription}</p>
+          </div>
+          <div className="categoryManagerActions">
+            <button className="compactButton" onClick={onCustomCategoryCreate} type="button">
+              <Plus size={15} />
+              {uiCopy.newCustomCategory}
+            </button>
+            <select
+              aria-label={uiCopy.labelManageCategory}
+              className="rowCategorySelect categoryManagerSelect"
+              disabled={customCategories.length === 0}
+              onChange={(event) => onManagedCustomCategoryChange(event.target.value)}
+              value={managedCustomCategoryId ?? ""}
+            >
+              <option value="" disabled>
+                {uiCopy.labelManageCategory}
+              </option>
+              {customCategories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+            <button
+              className="iconButton rowAction"
+              disabled={!canManageCustomCategory}
+              onClick={() => managedCustomCategoryId && onCustomCategoryEdit(managedCustomCategoryId)}
+              title={uiCopy.editCustomCategory}
+              type="button"
+            >
+              <Pencil size={15} />
+            </button>
+            <button
+              className="iconButton rowAction danger"
+              disabled={!canManageCustomCategory}
+              onClick={() =>
+                managedCustomCategoryId && onCustomCategoryDelete(managedCustomCategoryId)
+              }
+              title={uiCopy.deleteCustomCategory}
+              type="button"
+            >
+              <Trash2 size={15} />
+            </button>
+          </div>
+        </section>
+      ) : null}
 
       <section className="promptList" aria-label="Rescue prompts" role="listbox">
         {prompts.length === 0 ? (
           <div className="emptyState">
-            <p>{emptyStateTitle(activeCategory, uiCopy)}</p>
-            <span>{emptyStateCopy(activeCategory, uiCopy)}</span>
+            <p>{emptyStateTitle(activeCategory, customCategories, uiCopy)}</p>
+            <span>{emptyStateCopy(activeCategory, customCategories, uiCopy)}</span>
           </div>
         ) : (
           prompts.map((prompt, index) => (
@@ -328,11 +451,7 @@ export function Palette({
                       title={uiCopy.labelPlacement}
                       value={prompt.category}
                     >
-                      {categories.map((category) => (
-                        <option key={category.id} value={category.id}>
-                          {category.name}
-                        </option>
-                      ))}
+                      {renderCategoryOptions(prompt)}
                     </select>
                     <button
                       className="iconButton rowAction"
@@ -408,16 +527,30 @@ function activeLocale(activePackId: string, packs: PaletteProps["packs"]) {
   return packs.find((pack) => pack.id === activePackId)?.locale ?? "";
 }
 
-function emptyStateCopy(activeCategory: string, uiCopy: UiCopy) {
+function emptyStateCopy(
+  activeCategory: string,
+  customCategories: CustomCategory[],
+  uiCopy: UiCopy
+) {
   if (activeCategory === recentCategoryId) return uiCopy.emptyRecentCopy;
   if (activeCategory === favoritesCategoryId) return uiCopy.emptyFavoritesCopy;
   if (activeCategory === customCategoryId) return uiCopy.emptyCustomCopy;
+  if (customCategories.some((category) => category.id === activeCategory)) {
+    return uiCopy.emptyCustomCategoryCopy;
+  }
   return uiCopy.emptyCategoryCopy;
 }
 
-function emptyStateTitle(activeCategory: string, uiCopy: UiCopy) {
+function emptyStateTitle(
+  activeCategory: string,
+  customCategories: CustomCategory[],
+  uiCopy: UiCopy
+) {
   if (activeCategory === recentCategoryId) return uiCopy.emptyRecentTitle;
   if (activeCategory === favoritesCategoryId) return uiCopy.emptyFavoritesTitle;
   if (activeCategory === customCategoryId) return uiCopy.emptyCustomTitle;
+  if (customCategories.some((category) => category.id === activeCategory)) {
+    return uiCopy.emptyCustomCategoryTitle;
+  }
   return uiCopy.emptyCategoryTitle;
 }

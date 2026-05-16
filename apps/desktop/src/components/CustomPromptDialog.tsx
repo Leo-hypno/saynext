@@ -1,24 +1,44 @@
 import { Save, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { Category, CustomPromptDraft, RescuePrompt, UiCopy } from "../types";
+import {
+  buildCategorySections,
+  createCategoryOptionValue
+} from "../lib/customCategories";
+import type {
+  Category,
+  CustomCategory,
+  CustomPromptDraft,
+  RescuePrompt,
+  UiCopy
+} from "../types";
 
 type CustomPromptDialogProps = {
-  categories: Category[];
+  builtInCategories: Category[];
+  customCategories: CustomCategory[];
   defaultCategory: string;
   editingPrompt: RescuePrompt | null;
+  locale: string;
+  selectedCategoryId: string | null;
   uiCopy: UiCopy;
+  onCreateCategoryRequest: () => void;
   onClose: () => void;
   onSave: (draft: CustomPromptDraft) => void;
 };
 
 export function CustomPromptDialog({
-  categories,
+  builtInCategories,
+  customCategories,
   defaultCategory,
   editingPrompt,
+  locale,
+  selectedCategoryId,
   uiCopy,
+  onCreateCategoryRequest,
   onClose,
   onSave
 }: CustomPromptDialogProps) {
+  const localeCustomCategories = customCategories.filter((category) => category.locale === locale);
+  const categories = [...builtInCategories, ...localeCustomCategories];
   const [draft, setDraft] = useState<CustomPromptDraft>(() => createEmptyDraft(defaultCategory));
 
   useEffect(() => {
@@ -31,19 +51,39 @@ export function CustomPromptDialog({
         ? editingPrompt.category
         : safeDefaultCategory;
 
-    setDraft(
-      editingPrompt
-        ? {
-            category: editingCategory,
-            tags: editingPrompt.tags.join(", "),
-            text: editingPrompt.text,
-            title: editingPrompt.title
-          }
-        : createEmptyDraft(safeDefaultCategory)
-    );
-  }, [categories, defaultCategory, editingPrompt]);
+    if (editingPrompt) {
+      setDraft({
+        category: editingCategory,
+        tags: editingPrompt.tags.join(", "),
+        text: editingPrompt.text,
+        title: editingPrompt.title
+      });
+      return;
+    }
+
+    setDraft(createEmptyDraft(safeDefaultCategory));
+  }, [defaultCategory, editingPrompt]);
+
+  useEffect(() => {
+    const categoryIds = new Set(categories.map((category) => category.id));
+    setDraft((current) => {
+      if (selectedCategoryId && categoryIds.has(selectedCategoryId)) {
+        return { ...current, category: selectedCategoryId };
+      }
+
+      if (categoryIds.has(current.category)) {
+        return current;
+      }
+
+      const safeDefaultCategory = categoryIds.has(defaultCategory)
+        ? defaultCategory
+        : categories[0]?.id ?? defaultCategory;
+      return { ...current, category: safeDefaultCategory };
+    });
+  }, [categories, defaultCategory, selectedCategoryId]);
 
   const canSave = draft.title.trim().length > 0 && draft.text.trim().length > 0;
+  const categorySections = buildCategorySections(builtInCategories, localeCustomCategories);
 
   return (
     <div className="settingsOverlay" role="presentation" onClick={onClose}>
@@ -97,14 +137,34 @@ export function CustomPromptDialog({
           <label>
             <span>{uiCopy.labelPlacement}</span>
             <select
-              onChange={(event) => setDraft({ ...draft, category: event.target.value })}
+              onChange={(event) => {
+                if (event.target.value === createCategoryOptionValue) {
+                  onCreateCategoryRequest();
+                  event.target.value = draft.category;
+                  return;
+                }
+
+                setDraft({ ...draft, category: event.target.value });
+              }}
               value={draft.category}
             >
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
+              <optgroup label={uiCopy.categoryBuiltInGroup}>
+                {categorySections.builtIn.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </optgroup>
+              {categorySections.custom.length > 0 ? (
+                <optgroup label={uiCopy.categoryCustomGroup}>
+                  {categorySections.custom.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </optgroup>
+              ) : null}
+              <option value={createCategoryOptionValue}>{uiCopy.categoryCreateOption}</option>
             </select>
           </label>
 

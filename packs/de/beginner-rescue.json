@@ -616,6 +616,18 @@
       ]
     },
     {
+      "id": "planning-stress-test-strategy",
+      "category": "planning",
+      "title": "Strategie prüfen",
+      "text": "Prüfe, ob diese Strategie zuverlässig ist: Finde alle wichtigen Lücken, Risiken und unbegründeten Annahmen, schlage Korrekturen vor und prüfe die neue Strategie erneut, bis keine offensichtlichen großen Lücken mehr bestehen.",
+      "tags": [
+        "Einsteiger",
+        "Strategie",
+        "Risiko",
+        "Verbesserung"
+      ]
+    },
+    {
       "id": "execute-start",
       "category": "execute",
       "title": "Starten",

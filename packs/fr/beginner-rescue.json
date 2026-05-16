@@ -616,6 +616,18 @@
       ]
     },
     {
+      "id": "planning-stress-test-strategy",
+      "category": "planning",
+      "title": "Tester la stratégie",
+      "text": "Vérifie si cette stratégie est fiable : trouve toutes les lacunes, risques et hypothèses déraisonnables importants, propose des corrections, puis réexamine la nouvelle stratégie jusqu'à ce qu'il ne reste plus de lacune majeure évidente.",
+      "tags": [
+        "débutant",
+        "stratégie",
+        "risque",
+        "améliorer"
+      ]
+    },
+    {
       "id": "execute-start",
       "category": "execute",
       "title": "Commencer",

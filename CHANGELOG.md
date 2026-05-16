@@ -4,6 +4,24 @@ All notable changes to SayNext are documented here.
 
 This project follows Semantic Versioning.
 
+## [0.2.0] - 2026-05-16
+
+### Added
+
+- Added personal custom categories for user-created prompts, shown after the built-in rescue context tabs.
+- Added category creation from the custom prompt editor, plus category rename/delete management from My Prompts.
+- Added a new "stress-test strategy" planning prompt across all beginner rescue packs.
+
+### Changed
+
+- Extended custom prompt import/export to preserve custom categories and locale-aware prompt placement.
+- Kept Recent, Favorites, and My Prompts as personal shortcut views while keeping custom category tabs locale-specific.
+
+### Fixed
+
+- Added migration safeguards for custom category ID collisions, reserved category IDs, and cross-locale category assignments.
+- Preserved custom prompt placement when importing, restarting, or deleting custom categories.
+
 ## [0.1.8] - 2026-05-04
 
 ### Added

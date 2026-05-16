@@ -616,6 +616,18 @@
       ]
     },
     {
+      "id": "planning-stress-test-strategy",
+      "category": "planning",
+      "title": "Testar estratégia",
+      "text": "Verifique se esta estratégia é confiável: encontre todas as lacunas, riscos e suposições pouco razoáveis importantes, sugira correções e revise a nova estratégia até que não restem lacunas graves evidentes.",
+      "tags": [
+        "iniciante",
+        "estratégia",
+        "risco",
+        "melhorar"
+      ]
+    },
+    {
       "id": "execute-start",
       "category": "execute",
       "title": "Começar",

@@ -405,6 +405,54 @@ h1 {
   border-color: #d9e0ea;
 }
 
+.categoryDivider {
+  align-items: center;
+  color: #6b7280;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 0 4px 0 8px;
+  text-transform: uppercase;
+}
+
+.customCategoryTab {
+  border-style: dashed;
+}
+
+.categoryManager {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  padding: 0 16px 10px;
+}
+
+.categoryManager strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.categoryManager p {
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.categoryManagerActions {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.categoryManagerSelect {
+  max-width: 150px;
+}
+
 .promptList {
   display: flex;
   flex: 1;
@@ -851,6 +899,20 @@ kbd {
   .onboardingPanel ol {
     display: grid;
   }
+
+  .categoryManager {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .categoryManagerActions {
+    width: 100%;
+  }
+
+  .categoryManagerSelect {
+    flex: 1;
+    max-width: none;
+  }
 }
 
 @media (max-width: 560px) {
@@ -875,6 +937,10 @@ kbd {
 
 .customPromptPanel {
   width: min(520px, calc(100vw - 32px));
+}
+
+.categoryPanel {
+  width: min(420px, calc(100vw - 32px));
 }
 
 .confirmPanel {
@@ -936,6 +1002,13 @@ kbd {
   padding-top: 2px;
 }
 
+.fieldError {
+  color: #c7352f;
+  font-size: 13px;
+  font-weight: 700;
+  margin: -4px 0 0;
+}
+
 .copyNotice.success {
   color: #14853d;
 }
@@ -976,6 +1049,7 @@ kbd {
 
 :root[data-theme="dark"] .shortcut,
 :root[data-theme="dark"] .languageMenu summary,
+:root[data-theme="dark"] .categoryManager,
 :root[data-theme="dark"] .onboardingPanel,
 :root[data-theme="dark"] .personalTabs button,
 :root[data-theme="dark"] .categoryTabs button {
@@ -1045,8 +1119,15 @@ kbd {
 
 :root[data-theme="dark"] .promptBody p,
 :root[data-theme="dark"] .emptyState p,
+:root[data-theme="dark"] .categoryManager strong,
 :root[data-theme="dark"] .onboardingPanel strong {
   color: #f5f7fa;
+}
+
+:root[data-theme="dark"] .categoryDivider,
+:root[data-theme="dark"] .categoryManager p,
+:root[data-theme="dark"] .fieldError {
+  color: #98a2b3;
 }
 
 :root[data-theme="dark"] .iconButton:hover {
@@ -1055,6 +1136,10 @@ kbd {
 
 :root[data-theme="dark"] .rowAction.danger:hover {
   background: #41272a;
+  color: #ff928b;
+}
+
+:root[data-theme="dark"] .fieldError {
   color: #ff928b;
 }
 

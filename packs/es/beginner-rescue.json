@@ -616,6 +616,18 @@
       ]
     },
     {
+      "id": "planning-stress-test-strategy",
+      "category": "planning",
+      "title": "Probar estrategia",
+      "text": "Comprueba si esta estrategia es confiable: encuentra todas las brechas, riesgos y suposiciones poco razonables importantes, sugiere correcciones y vuelve a revisar la nueva estrategia hasta que no queden brechas graves evidentes.",
+      "tags": [
+        "principiante",
+        "estrategia",
+        "riesgo",
+        "mejorar"
+      ]
+    },
+    {
       "id": "execute-start",
       "category": "execute",
       "title": "Empezar",

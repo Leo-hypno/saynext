@@ -36,32 +36,38 @@ function sortFavoritesFirst(prompts: RescuePrompt[], favorites: Set<string>) {
 
 export function getVisiblePrompts({
   activeCategory,
+  allCustomPrompts,
   categories,
   categoryGroups = {},
   favorites,
+  personalPrompts,
   prompts,
   recentIds
 }: {
   activeCategory: string;
+  allCustomPrompts?: RescuePrompt[];
   categories: Category[];
   categoryGroups?: Record<string, string[]>;
   favorites: Set<string>;
+  personalPrompts?: RescuePrompt[];
   prompts: RescuePrompt[];
   recentIds: string[];
 }) {
+  const shortcutPrompts = personalPrompts ?? prompts;
+
   if (activeCategory === recentCategoryId) {
     return recentIds
-      .map((id) => prompts.find((prompt) => prompt.id === id))
+      .map((id) => shortcutPrompts.find((prompt) => prompt.id === id))
       .filter((prompt): prompt is RescuePrompt => Boolean(prompt));
   }
 
   if (activeCategory === favoritesCategoryId) {
-    return prompts.filter((prompt) => favorites.has(prompt.id));
+    return shortcutPrompts.filter((prompt) => favorites.has(prompt.id));
   }
 
   if (activeCategory === customCategoryId) {
     return sortFavoritesFirst(
-      prompts.filter((prompt) => prompt.source === "custom"),
+      allCustomPrompts ?? prompts.filter((prompt) => prompt.source === "custom"),
       favorites
     );
   }

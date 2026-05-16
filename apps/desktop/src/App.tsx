@@ -1,8 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ConfirmDialog } from "./components/ConfirmDialog";
+import { CustomCategoryDialog } from "./components/CustomCategoryDialog";
 import { CustomPromptDialog } from "./components/CustomPromptDialog";
 import { Palette } from "./components/Palette";
 import { SettingsPanel } from "./components/SettingsPanel";
+import {
+  createCustomCategory,
+  customCategoriesEqual,
+  mergeCustomCategoriesForImport,
+  normalizeCustomCategoriesWithRemap
+} from "./lib/customCategories";
 import {
   getAutostartStatus,
   setAutostartEnabled,
@@ -25,6 +32,7 @@ import {
 import {
   buildCategoryIds,
   customCategoryId,
+  favoritesCategoryId,
   getVisiblePrompts,
   recentCategoryId
 } from "./lib/promptView";
@@ -39,6 +47,8 @@ import portugueseBrazilPackData from "../../../packs/pt-BR/beginner-rescue.json"
 import zhTwPackData from "../../../packs/zh-TW/beginner-rescue.json";
 import type { Update } from "@tauri-apps/plugin-updater";
 import type {
+  Category,
+  CustomCategory,
   CustomPromptDraft,
   PromptPack,
   RescuePrompt,
@@ -61,6 +71,8 @@ const defaultCategoryId = "start";
 const pointerResumeDelayMs = 700;
 const copyNoticeDurationMs = 1800;
 const activePackStorageKey = "saynext.activePackId";
+const customCategoriesStorageKey = "saynext.customCategories";
+const customPromptsStorageKey = "saynext.customPrompts";
 const onboardingDismissedKey = "saynext.onboardingDismissed";
 const surfaceCategoryOrder = [
   "start",
@@ -70,12 +82,25 @@ const surfaceCategoryOrder = [
   "execute",
   "review"
 ];
+const allBuiltInCategoryIds = new Set(
+  packs.flatMap((pack) => pack.categories.map((category) => category.id))
+);
+const allBuiltInPromptIds = new Set(
+  packs.flatMap((pack) => pack.prompts.map((prompt) => prompt.id))
+);
+const reservedCustomCategoryIds = new Set([
+  ...allBuiltInCategoryIds,
+  recentCategoryId,
+  favoritesCategoryId,
+  customCategoryId
+]);
 
 type SurfaceCategoryGroup = {
   categoryIds: string[];
-  id: string;
-  name: string;
   hint: string;
+  id: string;
+  kind: "core" | "custom";
+  name: string;
 };
 
 export function App() {
@@ -88,18 +113,23 @@ export function App() {
   const lastKeyboardNavigationRef = useRef(0);
   const pendingSelectedPromptIdRef = useRef<string | null>(null);
   const pendingUpdateRef = useRef<Update | null>(null);
+  const initialStoredCustomDataRef = useRef<{
+    categories: CustomCategory[];
+    prompts: RescuePrompt[];
+  } | null>(null);
+  if (initialStoredCustomDataRef.current === null) {
+    initialStoredCustomDataRef.current = readStoredCustomData(getStoredPackLocale());
+  }
   const [activePackId, setActivePackId] = useState(() =>
     (() => {
       const storedPackId = readStoredString(activePackStorageKey, defaultPackId);
       return packs.some((pack) => pack.id === storedPackId) ? storedPackId : defaultPackId;
     })()
   );
-  const [languageChoiceOpen, setLanguageChoiceOpen] = useState(
-    () => {
-      const storedPackId = localStorage.getItem(activePackStorageKey);
-      return storedPackId === null || !packs.some((pack) => pack.id === storedPackId);
-    }
-  );
+  const [languageChoiceOpen, setLanguageChoiceOpen] = useState(() => {
+    const storedPackId = localStorage.getItem(activePackStorageKey);
+    return storedPackId === null || !packs.some((pack) => pack.id === storedPackId);
+  });
   const [activeCategory, setActiveCategory] = useState(defaultCategoryId);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [keyboardMode, setKeyboardMode] = useState(false);
@@ -108,11 +138,20 @@ export function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [customPromptDialogOpen, setCustomPromptDialogOpen] = useState(false);
   const [editingCustomPrompt, setEditingCustomPrompt] = useState<RescuePrompt | null>(null);
+  const [customCategoryDialogOpen, setCustomCategoryDialogOpen] = useState(false);
+  const [editingCustomCategory, setEditingCustomCategory] = useState<CustomCategory | null>(null);
+  const [managedCustomCategoryId, setManagedCustomCategoryId] = useState<string | null>(null);
   const [deletePromptId, setDeletePromptId] = useState<string | null>(null);
-  const [paletteFocusRequest, setPaletteFocusRequest] = useState(0);
-  const [themeMode, setThemeMode] = useState<ThemeMode>(
-    () => readStoredThemeMode("saynext.themeMode")
+  const [deleteCustomCategoryId, setDeleteCustomCategoryId] = useState<string | null>(null);
+  const [categoryDialogSource, setCategoryDialogSource] = useState<"manager" | "prompt" | null>(
+    null
   );
+  const [categoryDialogLocale, setCategoryDialogLocale] = useState<string | null>(null);
+  const [promptDialogSelectedCategoryId, setPromptDialogSelectedCategoryId] = useState<
+    string | null
+  >(null);
+  const [paletteFocusRequest, setPaletteFocusRequest] = useState(0);
+  const [themeMode, setThemeMode] = useState<ThemeMode>(() => readStoredThemeMode("saynext.themeMode"));
   const [autostartStatus, setAutostartStatus] = useState<AutostartStatus>("checking");
   const [updateStatus, setUpdateStatus] = useState<UpdateStatus>("idle");
   const [updateInfo, setUpdateInfo] = useState<UpdateInfo | null>(null);
@@ -124,130 +163,183 @@ export function App() {
   const [recentIds, setRecentIds] = useState<string[]>(
     () => readStoredStringArray("saynext.recentIds")
   );
-  const [customPrompts, setCustomPrompts] = useState<RescuePrompt[]>(
-    () => readStoredCustomPrompts("saynext.customPrompts")
+  const [customCategories, setCustomCategories] = useState<CustomCategory[]>(() =>
+    initialStoredCustomDataRef.current?.categories ?? []
+  );
+  const [customPrompts, setCustomPrompts] = useState<RescuePrompt[]>(() =>
+    initialStoredCustomDataRef.current?.prompts ?? []
   );
   const [onboardingVisible, setOnboardingVisible] = useState(
     () => localStorage.getItem(onboardingDismissedKey) !== "true"
   );
   const platform = useMemo(getPlatformMeta, []);
 
-  const pack = useMemo(
-    () => {
-      if (isPackAvailable(activePackId)) {
-        return packs.find((candidate) => candidate.id === activePackId) ?? packs[0];
-      }
-      return packs[0];
-    },
-    [activePackId]
-  );
+  const pack = useMemo(() => {
+    if (isPackAvailable(activePackId)) {
+      return packs.find((candidate) => candidate.id === activePackId) ?? packs[0];
+    }
+    return packs[0];
+  }, [activePackId, isPackAvailable]);
   const uiCopy = useMemo(() => getUiCopy(pack.locale), [pack.locale]);
 
-  const categories = useMemo(() => {
-    return pack.categories;
-  }, [pack.categories]);
+  const builtInCategories = useMemo(() => pack.categories, [pack.categories]);
+  const customCategoryLookup = useMemo(
+    () => [...customCategories].sort((left, right) => left.createdAt.localeCompare(right.createdAt)),
+    [customCategories]
+  );
+  const currentLocaleCustomCategories = useMemo(
+    () =>
+      customCategoryLookup
+        .filter((category) => category.locale === pack.locale)
+        .sort((left, right) => left.createdAt.localeCompare(right.createdAt)),
+    [customCategoryLookup, pack.locale]
+  );
+  const categoryLookup = useMemo(
+    () => [...builtInCategories, ...customCategoryLookup],
+    [builtInCategories, customCategoryLookup]
+  );
 
   const surfaceCategories = useMemo(() => {
-    const groups: SurfaceCategoryGroup[] = [
+    const coreGroups: SurfaceCategoryGroup[] = [
       {
-        id: "start",
-        name: uiCopy.tabStart,
         categoryIds: ["start"],
-        hint: uiCopy.tabStartHint
+        hint: uiCopy.tabStartHint,
+        id: "start",
+        kind: "core",
+        name: uiCopy.tabStart
       },
       {
-        id: "confused",
-        name: uiCopy.tabConfused,
         categoryIds: ["confused"],
-        hint: uiCopy.tabConfusedHint
+        hint: uiCopy.tabConfusedHint,
+        id: "confused",
+        kind: "core",
+        name: uiCopy.tabConfused
       },
       {
-        id: "improve",
-        name: uiCopy.tabImprove,
         categoryIds: ["improve", "refused"],
-        hint: uiCopy.tabImproveHint
+        hint: uiCopy.tabImproveHint,
+        id: "improve",
+        kind: "core",
+        name: uiCopy.tabImprove
       },
       {
-        id: "research-planning",
-        name: uiCopy.tabResearchPlanning,
         categoryIds: ["research", "planning"],
-        hint: uiCopy.tabResearchPlanningHint
+        hint: uiCopy.tabResearchPlanningHint,
+        id: "research-planning",
+        kind: "core",
+        name: uiCopy.tabResearchPlanning
       },
       {
-        id: "execute",
-        name: uiCopy.tabExecute,
         categoryIds: ["execute", "next"],
-        hint: uiCopy.tabExecuteHint
+        hint: uiCopy.tabExecuteHint,
+        id: "execute",
+        kind: "core",
+        name: uiCopy.tabExecute
       },
       {
-        id: "review",
-        name: uiCopy.tabReview,
         categoryIds: ["review"],
-        hint: uiCopy.tabReviewHint
+        hint: uiCopy.tabReviewHint,
+        id: "review",
+        kind: "core",
+        name: uiCopy.tabReview
       }
     ];
 
-    return groups
+    const builtInSurfaceCategories = coreGroups
       .map((group) => {
         const categoryIds = group.categoryIds.filter((categoryId) =>
-          categories.some((category) => category.id === categoryId)
+          builtInCategories.some((category) => category.id === categoryId)
         );
         return categoryIds.length === 0 ? null : { ...group, categoryIds };
       })
       .filter((group): group is SurfaceCategoryGroup => group !== null);
-  }, [categories, uiCopy]);
+
+    const customSurfaceCategories = currentLocaleCustomCategories.map((category) => ({
+      categoryIds: [category.id],
+      hint: uiCopy.manageCustomCategoriesDescription,
+      id: category.id,
+      kind: "custom" as const,
+      name: category.name
+    }));
+
+    return [...builtInSurfaceCategories, ...customSurfaceCategories];
+  }, [builtInCategories, currentLocaleCustomCategories, uiCopy]);
 
   const surfaceCategoryGroupMap = useMemo(
     () => Object.fromEntries(surfaceCategories.map((category) => [category.id, category.categoryIds])),
     [surfaceCategories]
   );
-
   const surfaceCategoryIds = useMemo(
     () => surfaceCategories.map((category) => category.id),
     [surfaceCategories]
   );
 
+  const visibleCustomPrompts = useMemo(
+    () => customPrompts.filter((prompt) => prompt.locale === pack.locale),
+    [customPrompts, pack.locale]
+  );
+  const customPromptLocale = editingCustomPrompt?.locale ?? pack.locale;
+  const dialogCustomCategories = useMemo(
+    () => customCategoryLookup.filter((category) => category.locale === customPromptLocale),
+    [customCategoryLookup, customPromptLocale]
+  );
+  const customCategoryLocales = useMemo(
+    () => new Map(customCategoryLookup.map((category) => [category.id, category.locale])),
+    [customCategoryLookup]
+  );
+  const localizedBuiltInPrompts = useMemo(
+    () => pack.prompts.map((prompt) => ({ ...prompt, source: "built-in" as const })),
+    [pack.prompts]
+  );
   const prompts = useMemo(
-    () => [
-      ...pack.prompts.map((prompt) => ({ ...prompt, source: "built-in" as const })),
-      ...customPrompts
-    ],
-    [customPrompts, pack.prompts]
+    () => [...localizedBuiltInPrompts, ...visibleCustomPrompts],
+    [localizedBuiltInPrompts, visibleCustomPrompts]
+  );
+  const personalPrompts = useMemo(
+    () => [...localizedBuiltInPrompts, ...customPrompts],
+    [customPrompts, localizedBuiltInPrompts]
   );
 
-  const builtInPromptIds = useMemo(() => {
-    return new Set(pack.prompts.map((prompt) => prompt.id));
-  }, [pack.prompts]);
-
   const categoryIds = useMemo(() => {
-    const fallbackCategory = categories[0]?.id || defaultCategoryId;
+    const fallbackCategory = builtInCategories[0]?.id || defaultCategoryId;
     return buildCategoryIds(surfaceCategoryIds, fallbackCategory);
-  }, [categories, surfaceCategoryIds]);
+  }, [builtInCategories, surfaceCategoryIds]);
 
   const customPromptDefaultCategory = useMemo(() => {
     if (surfaceCategoryGroupMap[activeCategory]?.length) {
       return surfaceCategoryGroupMap[activeCategory][0];
     }
 
-    return categories.some((category) => category.id === activeCategory)
+    return categoryLookup.some((category) => category.id === activeCategory)
       ? activeCategory
-      : categories[0]?.id ?? defaultCategoryId;
-  }, [activeCategory, categories, surfaceCategoryGroupMap]);
+      : builtInCategories[0]?.id ?? defaultCategoryId;
+  }, [activeCategory, builtInCategories, categoryLookup, surfaceCategoryGroupMap]);
 
   const visiblePrompts = useMemo(() => {
     return getVisiblePrompts({
       activeCategory,
+      allCustomPrompts: customPrompts,
       categoryGroups: surfaceCategoryGroupMap,
-      categories,
+      categories: builtInCategories,
       favorites,
+      personalPrompts,
       prompts,
       recentIds
     });
-  }, [activeCategory, categories, favorites, prompts, recentIds, surfaceCategoryGroupMap]);
+  }, [
+    activeCategory,
+    builtInCategories,
+    customPrompts,
+    favorites,
+    personalPrompts,
+    prompts,
+    recentIds,
+    surfaceCategoryGroupMap
+  ]);
 
   const recentPromptCount = useMemo(() => {
-    return recentIds.filter((id) => prompts.some((prompt) => prompt.id === id)).length;
-  }, [prompts, recentIds]);
+    return recentIds.filter((id) => personalPrompts.some((prompt) => prompt.id === id)).length;
+  }, [personalPrompts, recentIds]);
 
   const enableKeyboardMode = useCallback(() => {
     lastKeyboardNavigationRef.current = Date.now();
@@ -296,19 +388,38 @@ export function App() {
   }, [activeCategory, categoryIds]);
 
   useEffect(() => {
-    const validCategoryIds = new Set(categories.map((category) => category.id));
-    const fallbackCategory = categories[0]?.id ?? defaultCategoryId;
+    const { categories: normalized, categoryIdMap } = normalizeCustomCategoriesWithRemap(
+      customCategories,
+      pack.locale,
+      { reservedIds: reservedCustomCategoryIds }
+    );
+    if (!customCategoriesEqual(customCategories, normalized)) {
+      setCustomCategories(normalized);
+    }
+    if (hasCategoryIdRemap(categoryIdMap)) {
+      setCustomPrompts((current) => remapCustomPromptCategories(current, categoryIdMap));
+    }
+  }, [customCategories, pack.locale]);
+
+  useEffect(() => {
+    const validCategoryIds = new Set([
+      ...allBuiltInCategoryIds,
+      ...customCategories.map((category) => category.id)
+    ]);
+    const fallbackCategory = builtInCategories[0]?.id ?? defaultCategoryId;
 
     setCustomPrompts((current) => {
       const next = normalizeCustomPrompts(current, {
         fallbackCategory,
-        reservedIds: builtInPromptIds,
+        fallbackLocale: pack.locale,
+        customCategoryLocales,
+        reservedIds: allBuiltInPromptIds,
         validCategoryIds
       });
 
       return customPromptListsEqual(current, next) ? current : next;
     });
-  }, [builtInPromptIds, categories]);
+  }, [builtInCategories, customCategories, customCategoryLocales, pack.locale]);
 
   useEffect(() => {
     if (!languageChoiceOpen) {
@@ -325,13 +436,30 @@ export function App() {
   }, [recentIds]);
 
   useEffect(() => {
-    localStorage.setItem("saynext.customPrompts", JSON.stringify(customPrompts));
+    localStorage.setItem(customCategoriesStorageKey, JSON.stringify(customCategories));
+  }, [customCategories]);
+
+  useEffect(() => {
+    localStorage.setItem(customPromptsStorageKey, JSON.stringify(customPrompts));
   }, [customPrompts]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = themeMode;
     localStorage.setItem("saynext.themeMode", themeMode);
   }, [themeMode]);
+
+  useEffect(() => {
+    if (currentLocaleCustomCategories.length === 0) {
+      if (managedCustomCategoryId !== null) {
+        setManagedCustomCategoryId(null);
+      }
+      return;
+    }
+
+    if (!currentLocaleCustomCategories.some((category) => category.id === managedCustomCategoryId)) {
+      setManagedCustomCategoryId(currentLocaleCustomCategories[0].id);
+    }
+  }, [currentLocaleCustomCategories, managedCustomCategoryId]);
 
   useEffect(() => {
     void getAutostartStatus().then(setAutostartStatus);
@@ -359,9 +487,18 @@ export function App() {
           return;
         }
 
+        if (customCategoryDialogOpen) {
+          closeCustomCategoryDialog();
+          return;
+        }
+
         if (customPromptDialogOpen) {
-          setCustomPromptDialogOpen(false);
-          setEditingCustomPrompt(null);
+          closeCustomPromptDialog();
+          return;
+        }
+
+        if (deleteCustomCategoryId) {
+          setDeleteCustomCategoryId(null);
           return;
         }
 
@@ -380,7 +517,15 @@ export function App() {
       }
 
       if (languageChoiceOpen) return;
-      if (settingsOpen || customPromptDialogOpen || deletePromptId) return;
+      if (
+        settingsOpen ||
+        customPromptDialogOpen ||
+        customCategoryDialogOpen ||
+        deletePromptId ||
+        deleteCustomCategoryId
+      ) {
+        return;
+      }
 
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
         if (isTextEditingTarget(event.target)) return;
@@ -391,8 +536,7 @@ export function App() {
           if (categoryIds.length === 0) return current;
           const currentIndex = Math.max(categoryIds.indexOf(current), 0);
           const direction = event.key === "ArrowRight" ? 1 : -1;
-          const nextIndex =
-            (currentIndex + direction + categoryIds.length) % categoryIds.length;
+          const nextIndex = (currentIndex + direction + categoryIds.length) % categoryIds.length;
           return categoryIds[nextIndex];
         });
       }
@@ -411,28 +555,19 @@ export function App() {
         setSelectedIndex((index) => Math.max(index - 1, 0));
       }
 
-      if (
-        (event.key === "Home" || event.key === "End") &&
-        !isTextEditingTarget(event.target)
-      ) {
+      if ((event.key === "Home" || event.key === "End") && !isTextEditingTarget(event.target)) {
         event.preventDefault();
         enableKeyboardMode();
         setSelectedIndex(event.key === "Home" ? 0 : Math.max(visiblePrompts.length - 1, 0));
       }
 
-      if (
-        (event.key === "PageDown" || event.key === "PageUp") &&
-        !isTextEditingTarget(event.target)
-      ) {
+      if ((event.key === "PageDown" || event.key === "PageUp") && !isTextEditingTarget(event.target)) {
         event.preventDefault();
         enableKeyboardMode();
         setSelectedIndex((index) => {
           if (visiblePrompts.length === 0) return 0;
           const direction = event.key === "PageDown" ? 1 : -1;
-          return Math.min(
-            Math.max(index + direction * 5, 0),
-            visiblePrompts.length - 1
-          );
+          return Math.min(Math.max(index + direction * 5, 0), visiblePrompts.length - 1);
         });
       }
 
@@ -463,7 +598,9 @@ export function App() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [
     categoryIds,
+    customCategoryDialogOpen,
     customPromptDialogOpen,
+    deleteCustomCategoryId,
     deletePromptId,
     enableKeyboardMode,
     languageChoiceOpen,
@@ -496,6 +633,26 @@ export function App() {
     noticeTimerRef.current = window.setTimeout(() => {
       setCopyNotice(null);
     }, duration);
+  }
+
+  function closeCustomPromptDialog() {
+    setCustomPromptDialogOpen(false);
+    setEditingCustomPrompt(null);
+    setPromptDialogSelectedCategoryId(null);
+  }
+
+  function openCustomCategoryDialog(source: "manager" | "prompt", category?: CustomCategory | null) {
+    setCategoryDialogSource(source);
+    setEditingCustomCategory(category ?? null);
+    setCategoryDialogLocale(category?.locale ?? (source === "prompt" ? customPromptLocale : pack.locale));
+    setCustomCategoryDialogOpen(true);
+  }
+
+  function closeCustomCategoryDialog() {
+    setCustomCategoryDialogOpen(false);
+    setEditingCustomCategory(null);
+    setCategoryDialogSource(null);
+    setCategoryDialogLocale(null);
   }
 
   async function handleCopy(prompt: RescuePrompt) {
@@ -560,16 +717,21 @@ export function App() {
 
   function handleCustomPromptCreate() {
     setEditingCustomPrompt(null);
+    setPromptDialogSelectedCategoryId(null);
     setCustomPromptDialogOpen(true);
   }
 
   function handleCustomPromptEdit(prompt: RescuePrompt) {
     setEditingCustomPrompt(prompt);
+    setPromptDialogSelectedCategoryId(null);
     setCustomPromptDialogOpen(true);
   }
 
   function handleCustomPromptMove(promptId: string, category: string) {
-    if (!categories.some((candidate) => candidate.id === category)) return;
+    if (!categoryLookup.some((candidate) => candidate.id === category)) return;
+    const targetCustomCategory = customCategoryLookup.find((candidate) => candidate.id === category);
+    const promptLocale = customPrompts.find((prompt) => prompt.id === promptId)?.locale ?? pack.locale;
+    if (targetCustomCategory && targetCustomCategory.locale !== promptLocale) return;
 
     const promptTitle =
       customPrompts.find((prompt) => prompt.id === promptId)?.title ?? uiCopy.categoryCustom;
@@ -614,7 +776,14 @@ export function App() {
       setCustomPrompts((prompts) =>
         prompts.map((prompt) =>
           prompt.id === editingCustomPrompt.id
-            ? { ...prompt, category: draft.category || customCategoryId, tags, text, title }
+            ? {
+                ...prompt,
+                category: draft.category || customCategoryId,
+                locale: editingCustomPrompt.locale ?? pack.locale,
+                tags,
+                text,
+                title
+              }
             : prompt
         )
       );
@@ -624,6 +793,7 @@ export function App() {
         {
           category: draft.category || customCategoryId,
           id: createCustomPromptId(),
+          locale: pack.locale,
           source: "custom",
           tags,
           text,
@@ -635,22 +805,99 @@ export function App() {
       showNotice({ kind: "success", text: uiCopy.noticeAdded(title) });
     }
 
-    setCustomPromptDialogOpen(false);
-    setEditingCustomPrompt(null);
+    closeCustomPromptDialog();
+  }
+
+  function handleCustomCategoryCreate() {
+    openCustomCategoryDialog("manager");
+  }
+
+  function handleCustomCategoryCreateFromPromptDialog() {
+    openCustomCategoryDialog("prompt");
+  }
+
+  function handleCustomCategoryEdit(categoryId: string) {
+    const category = customCategories.find((candidate) => candidate.id === categoryId);
+    if (!category) return;
+    openCustomCategoryDialog("manager", category);
+  }
+
+  function handleCustomCategoryDelete(categoryId: string) {
+    setDeleteCustomCategoryId(categoryId);
+  }
+
+  function handleCustomCategorySave(name: string) {
+    if (editingCustomCategory) {
+      setCustomCategories((current) =>
+        current.map((category) =>
+          category.id === editingCustomCategory.id ? { ...category, name } : category
+        )
+      );
+      setManagedCustomCategoryId(editingCustomCategory.id);
+      showNotice({ kind: "success", text: uiCopy.noticeCategoryUpdated(name) });
+      closeCustomCategoryDialog();
+      return;
+    }
+
+    const createdCategory = createCustomCategory(
+      name,
+      categoryDialogLocale ?? pack.locale,
+      new Set(customCategories.map((category) => category.id))
+    );
+    setCustomCategories((current) => [...current, createdCategory]);
+    setManagedCustomCategoryId(createdCategory.id);
+    if (categoryDialogSource === "prompt") {
+      setPromptDialogSelectedCategoryId(createdCategory.id);
+    } else {
+      setActiveCategory(createdCategory.id);
+    }
+    showNotice({ kind: "success", text: uiCopy.noticeCategoryAdded(createdCategory.name) });
+    closeCustomCategoryDialog();
+  }
+
+  function confirmCustomCategoryDelete() {
+    if (!deleteCustomCategoryId) return;
+
+    const categoryId = deleteCustomCategoryId;
+    const category = customCategories.find((candidate) => candidate.id === categoryId);
+    if (!category) {
+      setDeleteCustomCategoryId(null);
+      return;
+    }
+
+    const fallbackCategory = builtInCategories[0]?.id ?? defaultCategoryId;
+    setDeleteCustomCategoryId(null);
+    setCustomCategories((current) => current.filter((candidate) => candidate.id !== categoryId));
+    setCustomPrompts((current) =>
+      current.map((prompt) =>
+        prompt.category === categoryId ? { ...prompt, category: fallbackCategory } : prompt
+      )
+    );
+    setActiveCategory(customCategoryId);
+    setManagedCustomCategoryId(null);
+    setPromptDialogSelectedCategoryId(null);
+    showNotice({ kind: "success", text: uiCopy.noticeCategoryDeleted(category.name) });
   }
 
   function handleCustomPromptsExport() {
     const data = {
       app: "SayNext",
+      categories: customCategories.map(({ createdAt, id, locale, name }) => ({
+        createdAt,
+        id,
+        locale,
+        name
+      })),
       exportedAt: new Date().toISOString(),
-      version: 1,
-      prompts: customPrompts.map(({ category, id, tags, text, title }) => ({
+      prompts: customPrompts.map(({ category, id, locale, tags, text, title }) => ({
         category,
         id,
+        locale,
         tags,
         text,
         title
-      }))
+      })),
+      version: 2
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -667,21 +914,49 @@ export function App() {
   async function handleCustomPromptsImport(file: File) {
     try {
       const parsed = JSON.parse(await file.text()) as unknown;
-      const categoryIds = new Set(categories.map((category) => category.id));
-      const imported = normalizeCustomPrompts(getImportPromptItems(parsed), {
-        fallbackCategory: categories[0]?.id ?? defaultCategoryId,
-        reservedIds: builtInPromptIds,
-        validCategoryIds: categoryIds
+      const {
+        categories: importedCategories,
+        categoryIdMap: normalizedImportedCategoryIdMap
+      } = normalizeCustomCategoriesWithRemap(getImportCategoryItems(parsed), pack.locale, {
+        reservedIds: reservedCustomCategoryIds
+      });
+      const { categories: mergedCategories, importedCategoryIdMap } =
+        mergeCustomCategoriesForImport(customCategories, importedCategories);
+      const validCategoryIds = new Set([
+        ...allBuiltInCategoryIds,
+        ...mergedCategories.map((category) => category.id)
+      ]);
+      const rawImportedPrompts = remapRawPromptCategoryIds(
+        remapRawPromptCategoryIds(getImportPromptItems(parsed), normalizedImportedCategoryIdMap),
+        importedCategoryIdMap
+      );
+      const normalizedImportedPrompts = normalizeCustomPrompts(rawImportedPrompts, {
+        fallbackCategory: builtInCategories[0]?.id ?? defaultCategoryId,
+        fallbackLocale: pack.locale,
+        customCategoryLocales: new Map(
+          mergedCategories.map((category) => [category.id, category.locale])
+        ),
+        reservedIds: allBuiltInPromptIds,
+        validCategoryIds
       });
 
-      if (imported.length === 0) {
+      if (importedCategories.length === 0 && normalizedImportedPrompts.length === 0) {
         showNotice({ kind: "error", text: uiCopy.noticeImportFailed });
         return;
       }
 
-      setCustomPrompts((current) => mergeCustomPrompts(current, imported));
+      if (importedCategories.length > 0) {
+        setCustomCategories(mergedCategories);
+      }
+      if (normalizedImportedPrompts.length > 0) {
+        setCustomPrompts((current) => mergeCustomPrompts(current, normalizedImportedPrompts));
+      }
+
       setActiveCategory(customCategoryId);
-      showNotice({ kind: "success", text: uiCopy.noticeImported(imported.length) });
+      showNotice({
+        kind: "success",
+        text: uiCopy.noticeImported(normalizedImportedPrompts.length)
+      });
     } catch {
       showNotice({ kind: "error", text: uiCopy.noticeImportFailed });
     }
@@ -689,7 +964,7 @@ export function App() {
 
   function handleFavoriteToggle(promptId: string) {
     const promptTitle =
-      prompts.find((prompt) => prompt.id === promptId)?.title ?? uiCopy.categoryFavorites;
+      personalPrompts.find((prompt) => prompt.id === promptId)?.title ?? uiCopy.categoryFavorites;
     const wasFavorite = favorites.has(promptId);
 
     pendingSelectedPromptIdRef.current = promptId;
@@ -763,6 +1038,10 @@ export function App() {
     }
   }
 
+  const deleteCustomCategoryPromptCount = deleteCustomCategoryId
+    ? customPrompts.filter((prompt) => prompt.category === deleteCustomCategoryId).length
+    : 0;
+
   return (
     <div className="appShell" data-theme={themeMode}>
       {languageChoiceOpen ? (
@@ -778,21 +1057,29 @@ export function App() {
         <Palette
           activeCategory={activeCategory}
           activePackId={pack.id}
-          categories={categories}
+          allCustomCategories={customCategoryLookup}
+          builtInCategories={builtInCategories}
+          categories={categoryLookup}
+          customCategories={currentLocaleCustomCategories}
           surfaceCategories={surfaceCategories}
           copiedPromptId={copiedPromptId}
           copyNotice={copyNotice}
           favorites={favorites}
           keyboardMode={keyboardMode}
+          managedCustomCategoryId={managedCustomCategoryId}
           onboardingVisible={onboardingVisible}
           recentCount={recentPromptCount}
           onCategoryChange={handleCategoryChange}
           onCopy={handleCopy}
+          onCustomCategoryCreate={handleCustomCategoryCreate}
+          onCustomCategoryDelete={handleCustomCategoryDelete}
+          onCustomCategoryEdit={handleCustomCategoryEdit}
           onCustomPromptCreate={handleCustomPromptCreate}
           onCustomPromptDelete={handleCustomPromptDelete}
           onCustomPromptEdit={handleCustomPromptEdit}
           onCustomPromptMove={handleCustomPromptMove}
           onFavoriteToggle={handleFavoriteToggle}
+          onManagedCustomCategoryChange={setManagedCustomCategoryId}
           onOnboardingDismiss={handleOnboardingDismiss}
           onSettingsOpen={() => setSettingsOpen(true)}
           onPackChange={handlePackChange}
@@ -837,25 +1124,51 @@ export function App() {
             customPrompts.find((prompt) => prompt.id === deletePromptId)?.title ??
               uiCopy.categoryCustom
           )}
-          confirmLabel={uiCopy.delete}
-          title={uiCopy.deleteCustomPrompt}
           cancelLabel={uiCopy.cancel}
           confirmEyebrow={uiCopy.confirm}
+          confirmLabel={uiCopy.delete}
+          title={uiCopy.deleteCustomPrompt}
           onCancel={() => setDeletePromptId(null)}
           onConfirm={confirmCustomPromptDelete}
         />
       ) : null}
+      {!languageChoiceOpen && deleteCustomCategoryId ? (
+        <ConfirmDialog
+          body={uiCopy.deleteCustomCategoryBody(
+            customCategories.find((category) => category.id === deleteCustomCategoryId)?.name ??
+              uiCopy.categoryCustom,
+            deleteCustomCategoryPromptCount
+          )}
+          cancelLabel={uiCopy.cancel}
+          confirmEyebrow={uiCopy.confirm}
+          confirmLabel={uiCopy.delete}
+          title={uiCopy.deleteCustomCategory}
+          onCancel={() => setDeleteCustomCategoryId(null)}
+          onConfirm={confirmCustomCategoryDelete}
+        />
+      ) : null}
       {!languageChoiceOpen && customPromptDialogOpen ? (
         <CustomPromptDialog
-          categories={categories}
+          builtInCategories={builtInCategories}
+          customCategories={customCategoryLookup}
           defaultCategory={customPromptDefaultCategory}
           editingPrompt={editingCustomPrompt}
+          locale={customPromptLocale}
+          selectedCategoryId={promptDialogSelectedCategoryId}
           uiCopy={uiCopy}
-          onClose={() => {
-            setCustomPromptDialogOpen(false);
-            setEditingCustomPrompt(null);
-          }}
+          onCreateCategoryRequest={handleCustomCategoryCreateFromPromptDialog}
+          onClose={closeCustomPromptDialog}
           onSave={handleCustomPromptSave}
+        />
+      ) : null}
+      {!languageChoiceOpen && customCategoryDialogOpen ? (
+        <CustomCategoryDialog
+          categories={dialogCustomCategories}
+          editingCategory={editingCustomCategory}
+          locale={categoryDialogLocale ?? pack.locale}
+          uiCopy={uiCopy}
+          onClose={closeCustomCategoryDialog}
+          onSave={handleCustomCategorySave}
         />
       ) : null}
     </div>
@@ -939,12 +1252,45 @@ function readStoredThemeMode(key: string): ThemeMode {
   return value === "light" || value === "dark" || value === "system" ? value : "system";
 }
 
-function readStoredCustomPrompts(key: string): RescuePrompt[] {
+function getStoredPackLocale() {
+  const storedPackId = readStoredString(activePackStorageKey, defaultPackId);
+  return packs.find((pack) => pack.id === storedPackId)?.locale ?? packs[0].locale;
+}
+
+function readStoredCustomData(fallbackLocale: string) {
+  const {
+    categories,
+    categoryIdMap
+  } = readStoredCustomCategoriesWithRemap(customCategoriesStorageKey, fallbackLocale);
+  const validCategoryIds = new Set([
+    ...allBuiltInCategoryIds,
+    ...categories.map((category) => category.id)
+  ]);
+  const customCategoryLocales = new Map(categories.map((category) => [category.id, category.locale]));
+  const rawPrompts = readStoredJsonArray(customPromptsStorageKey);
+  const remappedPrompts = remapRawPromptCategoryIds(rawPrompts, categoryIdMap);
+  const prompts = normalizeCustomPrompts(remappedPrompts, {
+    fallbackCategory: defaultCategoryId,
+    fallbackLocale,
+    customCategoryLocales,
+    reservedIds: allBuiltInPromptIds,
+    validCategoryIds
+  });
+
+  return { categories, prompts };
+}
+
+function readStoredCustomCategoriesWithRemap(key: string, fallbackLocale: string) {
   try {
     const value = JSON.parse(localStorage.getItem(key) ?? "[]");
-    return normalizeCustomPrompts(value, { fallbackCategory: defaultCategoryId });
+    return normalizeCustomCategoriesWithRemap(value, fallbackLocale, {
+      reservedIds: reservedCustomCategoryIds
+    });
   } catch {
-    return [];
+    return {
+      categories: [],
+      categoryIdMap: new Map<string, string>()
+    };
   }
 }
 
@@ -961,9 +1307,36 @@ function getImportPromptItems(value: unknown) {
   return [];
 }
 
+function readStoredJsonArray(key: string) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) ?? "[]");
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+}
+
+function getImportCategoryItems(value: unknown) {
+  if (
+    value &&
+    typeof value === "object" &&
+    "categories" in value &&
+    Array.isArray((value as { categories?: unknown }).categories)
+  ) {
+    return (value as { categories: unknown[] }).categories;
+  }
+  return [];
+}
+
 function normalizeCustomPrompts(
   value: unknown,
-  options: { fallbackCategory: string; reservedIds?: Set<string>; validCategoryIds?: Set<string> }
+  options: {
+    fallbackCategory: string;
+    fallbackLocale: string;
+    customCategoryLocales?: Map<string, string>;
+    reservedIds?: Set<string>;
+    validCategoryIds?: Set<string>;
+  }
 ): RescuePrompt[] {
   if (!Array.isArray(value)) return [];
   const usedIds = new Set(options.reservedIds ?? []);
@@ -983,6 +1356,7 @@ function normalizeCustomPrompts(
     const rawPrompt = item as {
       category?: unknown;
       id: string;
+      locale?: unknown;
       tags?: unknown;
       text: string;
       title: string;
@@ -993,10 +1367,17 @@ function normalizeCustomPrompts(
 
     if (!requestedId || !title || !text) continue;
 
+    const locale =
+      typeof rawPrompt.locale === "string" && rawPrompt.locale.trim().length > 0
+        ? rawPrompt.locale.trim()
+        : options.fallbackLocale;
+    const requestedCategory =
+      typeof rawPrompt.category === "string" ? rawPrompt.category : options.fallbackCategory;
+    const categoryLocale = options.customCategoryLocales?.get(requestedCategory);
     const category =
-      typeof rawPrompt.category === "string" &&
-      (!options.validCategoryIds || options.validCategoryIds.has(rawPrompt.category))
-        ? rawPrompt.category
+      (!options.validCategoryIds || options.validCategoryIds.has(requestedCategory)) &&
+      (!categoryLocale || categoryLocale === locale)
+        ? requestedCategory
         : options.fallbackCategory;
     const id = usedIds.has(requestedId) ? createCustomPromptId(usedIds) : requestedId;
     usedIds.add(id);
@@ -1004,6 +1385,7 @@ function normalizeCustomPrompts(
     prompts.push({
       category,
       id,
+      locale,
       source: "custom" as const,
       tags: Array.isArray(rawPrompt.tags)
         ? rawPrompt.tags
@@ -1024,6 +1406,54 @@ function mergeCustomPrompts(current: RescuePrompt[], imported: RescuePrompt[]) {
   return [...imported, ...current.filter((prompt) => !importedIds.has(prompt.id))];
 }
 
+function remapRawPromptCategoryIds(
+  value: unknown[],
+  categoryIdMap: Map<string, string>
+) {
+  if (categoryIdMap.size === 0) return value;
+
+  return value.map((item) => {
+    if (!item || typeof item !== "object") return item;
+    const rawPrompt = item as { category?: unknown };
+    if (
+      typeof rawPrompt.category === "string" &&
+      categoryIdMap.has(rawPrompt.category)
+    ) {
+      return {
+        ...rawPrompt,
+        category: categoryIdMap.get(rawPrompt.category)
+      };
+    }
+    return item;
+  });
+}
+
+function remapCustomPromptCategories(
+  prompts: RescuePrompt[],
+  categoryIdMap: Map<string, string>
+) {
+  if (!hasCategoryIdRemap(categoryIdMap)) return prompts;
+
+  let changed = false;
+  const next = prompts.map((prompt) => {
+    const nextCategory = categoryIdMap.get(prompt.category);
+    if (!nextCategory || nextCategory === prompt.category) {
+      return prompt;
+    }
+    changed = true;
+    return { ...prompt, category: nextCategory };
+  });
+
+  return changed ? next : prompts;
+}
+
+function hasCategoryIdRemap(categoryIdMap: Map<string, string>) {
+  for (const [from, to] of categoryIdMap) {
+    if (from !== to) return true;
+  }
+  return false;
+}
+
 function customPromptListsEqual(left: RescuePrompt[], right: RescuePrompt[]) {
   if (left.length !== right.length) return false;
 
@@ -1033,6 +1463,7 @@ function customPromptListsEqual(left: RescuePrompt[], right: RescuePrompt[]) {
       other &&
       prompt.category === other.category &&
       prompt.id === other.id &&
+      prompt.locale === other.locale &&
       prompt.text === other.text &&
       prompt.title === other.title &&
       prompt.tags.length === other.tags.length &&

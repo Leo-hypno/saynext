@@ -616,6 +616,18 @@
       ]
     },
     {
+      "id": "planning-stress-test-strategy",
+      "category": "planning",
+      "title": "전략 검증",
+      "text": "이 전략이 신뢰할 수 있는지 확인해 주세요. 중요한 허점, 위험, 비합리적인 가정을 모두 찾고 수정안을 제안한 뒤, 명백한 중대한 허점이 없어질 때까지 새 전략을 다시 검토해 주세요.",
+      "tags": [
+        "초보자",
+        "전략",
+        "위험",
+        "개선"
+      ]
+    },
+    {
       "id": "execute-start",
       "category": "execute",
       "title": "시작",
